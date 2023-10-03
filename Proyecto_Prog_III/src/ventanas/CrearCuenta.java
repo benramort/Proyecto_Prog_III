@@ -8,7 +8,7 @@ public class CrearCuenta extends JFrame {
 	public CrearCuenta(){
 		//Formato ventana
 		setTitle("Crear cuenta de usuario");
-		setSize(400, 300);
+		setSize(400, 450);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(new BorderLayout());
@@ -23,7 +23,7 @@ public class CrearCuenta extends JFrame {
 
 		//Formato contenedores
 		pSuperior.setBackground(Color.DARK_GRAY);
-		pCentral.setLayout(new BoxLayout(pCentral, BoxLayout.Y_AXIS));	
+		pCentral.setLayout(new BoxLayout(pCentral, BoxLayout.Y_AXIS));
 		pNombre.setLayout(new FlowLayout());
 		pContrasena.setLayout(new FlowLayout());
 		pContrasena2.setLayout(new FlowLayout());
