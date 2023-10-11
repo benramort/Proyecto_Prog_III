@@ -12,6 +12,8 @@ public class CrearCuenta extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
+
+	
 	public CrearCuenta(){
 		//Formato ventana
 		setTitle("Crear cuenta de usuario");
@@ -32,10 +34,7 @@ public class CrearCuenta extends JFrame {
 		//Formato contenedores
 		pSuperior.setBackground(Color.DARK_GRAY);
 		pCentral.setLayout(new BoxLayout(pCentral, BoxLayout.Y_AXIS));
-		pNombre.setLayout(new FlowLayout());
-		pCorreo.setLayout(new FlowLayout());
-		pContrasena.setLayout(new FlowLayout());
-		pContrasena2.setLayout(new FlowLayout());
+		pCentral.add(Box.createVerticalGlue());
 		pNombre.setMaximumSize(new Dimension(400, 800));
 		pCorreo.setMaximumSize(new Dimension(400, 800));
 		pContrasena.setMaximumSize(new Dimension(400, 800));
@@ -45,7 +44,7 @@ public class CrearCuenta extends JFrame {
 		JLabel lPrincipal = new JLabel("Crear nueva cuenta de usuario");
 		JLabel lNombre = new JLabel("Nombre de usuario:");
 		JLabel lCorreo = new JLabel("Correo electrónico:");
-		JLabel lContrasena = new JLabel("Contraseña:");
+		JLabel lContrasena = new JLabel("Contraseña:             ");
 		JLabel lContrasena2 = new JLabel("Repetir contraseña:");
 		JTextField tfNombre = new JTextField(15);
 		JTextField tfCorreo = new JTextField(15);
