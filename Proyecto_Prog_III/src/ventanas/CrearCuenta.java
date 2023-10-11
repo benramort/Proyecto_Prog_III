@@ -32,16 +32,23 @@ public class CrearCuenta extends JFrame {
 		JPanel pBoton = new JPanel();
 
 		//Formato contenedores
+		this.getContentPane().setBackground(new Color(0, 0, 0));
+		pSuperior.setLayout(new BorderLayout());
 		pSuperior.setBackground(Color.DARK_GRAY);
 		pCentral.setLayout(new BoxLayout(pCentral, BoxLayout.Y_AXIS));
 		pCentral.add(Box.createVerticalGlue());
-		pNombre.setMaximumSize(new Dimension(400, 800));
-		pCorreo.setMaximumSize(new Dimension(400, 800));
-		pContrasena.setMaximumSize(new Dimension(400, 800));
+		pCentral.setMinimumSize(new Dimension(1000, 1000));
+		pNombre.setMaximumSize(new Dimension(400, 700));
+		pNombre.setMinimumSize(new Dimension(400, 700));
+		pCorreo.setMaximumSize(new Dimension(400, 700));
+		pCorreo.setMinimumSize(new Dimension(400, 700));
+		pContrasena.setMaximumSize(new Dimension(400, 700));
+		pContrasena.setMinimumSize(new Dimension(400, 00));
 		pBoton.setLayout(new FlowLayout());
 		
 		//Crear componentes
-		JLabel lPrincipal = new JLabel("Crear nueva cuenta de usuario");
+		JLabel lTitulo = new JLabel("Universal Collection Cards");
+		JLabel lCrearCuenta = new JLabel("Crear nueva cuenta de usuario");
 		JLabel lNombre = new JLabel("Nombre de usuario:");
 		JLabel lCorreo = new JLabel("Correo electrónico:");
 		JLabel lContrasena = new JLabel("Contraseña:             ");
@@ -54,8 +61,12 @@ public class CrearCuenta extends JFrame {
 		JCheckBox cbMostrarContrasena = new JCheckBox("Mostrar contraseña");
 		
 		//Formato componentes
-		lPrincipal.setFont(new Font("Arial" ,Font.BOLD, 25));
-		lPrincipal.setForeground(Color.WHITE);
+		lTitulo.setFont(new Font("Arial", Font.BOLD, 25));
+		lTitulo.setForeground(Color.WHITE);
+		lTitulo.setHorizontalAlignment(JLabel.CENTER);
+		lCrearCuenta.setFont(new Font("Arial" ,Font.ITALIC, 22));
+		lCrearCuenta.setForeground(Color.WHITE);
+		lCrearCuenta.setHorizontalAlignment(JLabel.CENTER);
 		lNombre.setFont(new Font("Arial", Font.BOLD, 15));
 		lCorreo.setFont(new Font("Arial", Font.BOLD, 15));
 		lContrasena.setFont(new Font("Arial", Font.BOLD, 15));
@@ -66,7 +77,8 @@ public class CrearCuenta extends JFrame {
 		getContentPane().add(pSuperior, BorderLayout.NORTH);
 		getContentPane().add(pCentral, BorderLayout.CENTER);
 		getContentPane().add(pBoton, BorderLayout.SOUTH);
-		pSuperior.add(lPrincipal);
+		pSuperior.add(lCrearCuenta, BorderLayout.SOUTH);
+		pSuperior.add(lTitulo, BorderLayout.NORTH);
 		pCentral.add(pNombre);
 		pCentral.add(pCorreo);
 		pCentral.add(pContrasena);
