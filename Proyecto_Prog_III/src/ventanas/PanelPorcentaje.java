@@ -2,6 +2,7 @@ package ventanas;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -20,17 +21,29 @@ public class PanelPorcentaje extends JPanel{
 	private Graphics2D graficos;
 	private int anchura;
 	private int altura;
+	private Color color = Color.BLACK;
+	private int porcentaje;
 	
 	public PanelPorcentaje(double porcentaje, int anchura, int altura) {
 		if (porcentaje > 100) {
-			this.grados = 360;
+			this.porcentaje = (int) Math.round(porcentaje);
 		} else {
-			calcularGrados(porcentaje);
+			this.porcentaje = (int) Math.round(porcentaje);
 		}
+		calcularGrados(porcentaje);
 		buffer = new BufferedImage(anchura, altura, BufferedImage.TYPE_4BYTE_ABGR);
 		graficos = buffer.createGraphics();
 		this.altura = altura;
 		this.anchura = anchura;
+	}
+	
+	public PanelPorcentaje(double porcentaje, int anchura, int altura, Color color) {
+		this(porcentaje, anchura, altura);
+		this.color = color;
+	}
+	
+	public void setPorcentaje(int porcentaje) {
+		
 	}
 	
 	private void calcularGrados(double porcentaje) {
@@ -48,15 +61,26 @@ public class PanelPorcentaje extends JPanel{
 	
 	public void dibujar() {
 		graficos.setStroke(new BasicStroke(3));
-		graficos.setColor(Color.BLACK);
+		graficos.setColor(color);
 		graficos.drawRect(0, 0, anchura, altura);
-		System.out.println(grados);
+		System.out.println("Porcentaje:"+porcentaje);
 		int anchuraArco = 200;
 		graficos.fillArc(anchura/2-anchuraArco/2, altura/2-anchuraArco/2, anchuraArco, anchuraArco, 90, -grados);
 		graficos.setColor(getBackground());
 		anchuraArco = (int) (anchuraArco *0.65);
 		graficos.fillArc(anchura/2-anchuraArco/2, altura/2-anchuraArco/2, anchuraArco, anchuraArco, 0, 360);
-		graficos.setColor(Color.BLACK);
+		graficos.setColor(color);
+		graficos.setFont(new Font("Arial", Font.BOLD, 50));
+		String str = porcentaje + "%";
+		if (str.length() == 2) {
+			graficos.drawString(str, anchura/2-35, altura/2+17);
+		} else {
+			graficos.drawString(str, anchura/2-45, altura/2+17);
+		}
+		
+//		graficos.setColor(Color.RED);
+//		graficos.drawOval(anchura/2-10, anchura/2-10, 20, 20);
+		
 	}
 	
 	
