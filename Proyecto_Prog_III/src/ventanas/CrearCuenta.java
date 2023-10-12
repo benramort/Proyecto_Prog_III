@@ -2,8 +2,7 @@ package ventanas;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
+import java.awt.image.*;
 
 public class CrearCuenta extends JFrame {
 
@@ -18,6 +17,9 @@ public class CrearCuenta extends JFrame {
 	public CrearCuenta(JFrame ventanaAnterior){
 		//Formato ventana
 		setTitle("Crear cuenta de usuario");
+		setSize(400, 350);
+		setLocationRelativeTo(ventanaAnterior);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(400, 450);
 		setLocationRelativeTo(ventanaAnterior);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
