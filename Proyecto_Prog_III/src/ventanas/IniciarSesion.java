@@ -16,6 +16,7 @@ public class IniciarSesion extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final Color c = new Color(84,241,255);
 	
 	public static void main(String[] args) {
 		new IniciarSesion();//En la versión final hacerlo con invokelater
@@ -43,6 +44,12 @@ public class IniciarSesion extends JFrame {
 		
 		//Formato de contenedores
 //		pInferior.setOpaque(false);
+		pInferior.setBackground(c);
+		pUsuarioContrasena.setOpaque(false);
+		pBotonera.setOpaque(false);
+		pTexto.setOpaque(false);
+		pCampos.setOpaque(false);
+		pInferiorBox.setOpaque(false);
 		
 		//Crear componentes
 		JLabel lUsuario = new JLabel("Usuario:");
@@ -91,7 +98,7 @@ public class IniciarSesion extends JFrame {
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						new CrearCuenta();
+						new CrearCuenta(IniciarSesion.this);
 					}
 				});
 				dispose();

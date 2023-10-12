@@ -11,14 +11,15 @@ public class CrearCuenta extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final Color c = new Color(84,241,255);
 
 
 	
-	public CrearCuenta(){
+	public CrearCuenta(JFrame ventanaAnterior){
 		//Formato ventana
 		setTitle("Crear cuenta de usuario");
 		setSize(400, 450);
-		setLocationRelativeTo(null);
+		setLocationRelativeTo(ventanaAnterior);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(new BorderLayout());
 		
@@ -32,7 +33,7 @@ public class CrearCuenta extends JFrame {
 		JPanel pBoton = new JPanel();
 
 		//Formato contenedores
-		pSuperior.setBackground(Color.DARK_GRAY);
+		pSuperior.setBackground(c);
 		pCentral.setLayout(new BoxLayout(pCentral, BoxLayout.Y_AXIS));
 		pCentral.add(Box.createVerticalGlue());
 		pNombre.setMaximumSize(new Dimension(400, 800));
@@ -90,7 +91,7 @@ public class CrearCuenta extends JFrame {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				new CrearCuenta();				
+				new CrearCuenta(null);				
 			}
 		});
 
