@@ -18,10 +18,15 @@ public class Tienda extends JFrame{
 		///Crear Contenedores
 		JPanel pSuperior = new JPanel();
 		JPanel pMonedas = new JPanel();
+		JPanel pCentro = new JPanel();
+		JScrollPane sc = new JScrollPane(pCentro);
 		
 		///Formato Contenedores
 		pSuperior.setLayout(new BorderLayout());
 		pMonedas.setLayout(new FlowLayout((FlowLayout.RIGHT)));
+		sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		sc.setBorder(null);
+		
 		///Crear Componentes
 		JButton btHome = new JButton("HOME");
 		JLabel lMonedas = new JLabel("XXXXXXXXXX");
@@ -39,7 +44,7 @@ public class Tienda extends JFrame{
 		pMonedas.add(lMonedas);
 		pMonedas.add(lImagenMonedas);
 		
-		getContentPane().add( new JScrollPane(  ), BorderLayout.CENTER );
+		getContentPane().add(sc, BorderLayout.CENTER );
 		
 		
 		setVisible(true);
