@@ -44,9 +44,13 @@ public class Album extends JFrame {
 		pMonedas.setLayout(new FlowLayout((FlowLayout.RIGHT)));
 		Border bordePanelIzquierdo = BorderFactory.createLineBorder(Color.BLACK);
 		pIzquierdo.setBorder(bordePanelIzquierdo);
-		pPorcentaje.setLayout(new BoxLayout(pPorcentaje, BoxLayout.X_AXIS));
-		pPorcentaje.add(Box.createHorizontalGlue());
+//		pPorcentaje.setLayout(new BoxLayout(pPorcentaje, BoxLayout.X_AXIS));
+//		pPorcentaje.add(Box.createHorizontalGlue());
 		pPorcentaje2.setLayout(new FlowLayout(FlowLayout.CENTER));
+		pPorcentaje2.setPreferredSize(new Dimension(100,100));
+		pPorcentaje.setBackground(Color.RED);
+		pPorcentaje2.setBackground(Color.BLUE);
+		pPorcentaje.setPreferredSize(new Dimension(300,300));
 		//Crear componentes
 		JButton bIdle = new JButton();
 		JButton bMercado = new JButton();
@@ -110,7 +114,8 @@ public class Album extends JFrame {
 		pCartas.add(spCartas);
 		pMonedas.add(lMonedas);
 		pMonedas.add(lImagenMonedas);
-		pIzquierdo.add(pPorcentaje, BorderLayout.CENTER);
+		pIzquierdo.add(pPorcentaje2, BorderLayout.CENTER);
+		pPorcentaje2.add(pPorcentaje);
 		
 		
 		
