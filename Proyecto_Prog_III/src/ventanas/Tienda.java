@@ -3,6 +3,7 @@ package ventanas;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.*;
@@ -11,7 +12,7 @@ public class Tienda extends JFrame{
 	
 	public Tienda() {
 		///Formato Ventana
-		setSize(500,500);
+		setSize(1300,700);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setTitle("Universal Card Collection");
 		
@@ -37,6 +38,7 @@ public class Tienda extends JFrame{
 		JButton btHome = new JButton("HOME");
 		JLabel lMonedas = new JLabel("XXXXXXXXXX");
 		JLabel lImagenMonedas = new JLabel();
+		JLabel lImagenMonedas2 = new JLabel();
 		JLabel lNombreSobre = new JLabel("Megasobre");
 		JLabel lPrecioSobre = new JLabel("50.000");
 		JLabel lImagenSobre = new JLabel(new ImageIcon("img/yoshi.png"));
@@ -44,8 +46,13 @@ public class Tienda extends JFrame{
 		
 		ImageIcon imagen7 = new ImageIcon(getClass().getResource("/moneda.png"));
 		ImageIcon imagenMoneda = new ImageIcon(imagen7.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+		ImageIcon imagenMoneda2 = new ImageIcon(imagen7.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT));
 		///Formato componentes
 		lImagenMonedas.setIcon(imagenMoneda);
+		lImagenMonedas2.setIcon(imagenMoneda2);
+		Font fuenteNombre = new Font("Arial",Font.BOLD, 32);
+		lNombreSobre.setFont(fuenteNombre);
+		lPrecioSobre.setFont(fuenteNombre);
 		
 		///Añadir componentes a contenedores
 		pSuperior.add(btHome, BorderLayout.WEST);
@@ -55,7 +62,7 @@ public class Tienda extends JFrame{
 		pMonedas.add(lImagenMonedas);
 		pNombreSobre.add(lNombreSobre);
 		pPrecioSobre.add(lPrecioSobre);
-		pPrecioSobre.add(lImagenMonedas);
+		pPrecioSobre.add(lImagenMonedas2);
 		pSobre.add(pNombreSobre,BorderLayout.NORTH);
 		pSobre.add(lImagenSobre, BorderLayout.CENTER);
 		pSobre.add(pPrecioSobre,BorderLayout.SOUTH);
