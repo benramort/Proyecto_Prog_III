@@ -3,8 +3,11 @@ package ventanas;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -17,6 +20,7 @@ public class Album extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	
+	
 	public Album(JFrame ventanaAnterior) {
 		//Formato ventana
 		setTitle("Universal Cards Collection");
@@ -27,14 +31,22 @@ public class Album extends JFrame {
 		
 		//Crear contenedores
 		JPanel pIzquierdo = new JPanel();
+		JPanel pDerecho = new JPanel();
 		JPanel pCartas = new JPanel();
 		JPanel pBotones = new JPanel();
+		JPanel pMonedas = new JPanel();
+		PanelPorcentaje pPorcentaje = new PanelPorcentaje(78, 300, 300, Color.BLACK);
+		JPanel pPorcentaje2 = new JPanel();
 		//Formato contenedores
 		pIzquierdo.setLayout(new BorderLayout());
 		pBotones.setLayout(new GridLayout(2, 3));
-		
+		pDerecho.setLayout(new BorderLayout());
+		pMonedas.setLayout(new FlowLayout((FlowLayout.RIGHT)));
 		Border bordePanelIzquierdo = BorderFactory.createLineBorder(Color.BLACK);
 		pIzquierdo.setBorder(bordePanelIzquierdo);
+		pPorcentaje.setLayout(new BoxLayout(pPorcentaje, BoxLayout.X_AXIS));
+		pPorcentaje.add(Box.createHorizontalGlue());
+		pPorcentaje2.setLayout(new FlowLayout(FlowLayout.CENTER));
 		//Crear componentes
 		JButton bIdle = new JButton();
 		JButton bMercado = new JButton();
@@ -42,6 +54,9 @@ public class Album extends JFrame {
 		JButton bAjustes = new JButton();
 		JButton bSalir = new JButton();
 		JButton bBuscar = new JButton();
+		JScrollPane spCartas = new JScrollPane();
+		JLabel lMonedas = new JLabel("XXXXXXXXXX");
+		JLabel lImagenMonedas = new JLabel();
 		
 		ImageIcon imagen = new ImageIcon(getClass().getResource("/idle.png"));
 		ImageIcon imagenIdle = new ImageIcon(imagen.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
@@ -61,8 +76,12 @@ public class Album extends JFrame {
 		ImageIcon imagen6 = new ImageIcon(getClass().getResource("/salir.png"));
 		ImageIcon imagenSalir = new ImageIcon(imagen6.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
 		
+		ImageIcon imagen7 = new ImageIcon(getClass().getResource("/moneda.png"));
+		ImageIcon imagenMoneda = new ImageIcon(imagen7.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+		
 		
 		//Formato componentes
+		lImagenMonedas.setIcon(imagenMoneda);
 		bIdle.setIcon(imagenIdle);
 		bAjustes.setIcon(imagenAjustes);
 		bBuscar.setIcon(imagenLupa);
@@ -75,9 +94,10 @@ public class Album extends JFrame {
 		bAjustes.setPreferredSize(new Dimension(150,  100));
 		bSalir.setPreferredSize(new Dimension(150,  100));
 		bBuscar.setPreferredSize(new Dimension(150,  100));
+		
 		//Añadir componentes a contenedores
 		this.getContentPane().add(pIzquierdo, BorderLayout.WEST);
-		this.getContentPane().add(pCartas, BorderLayout.CENTER);
+		this.getContentPane().add(pDerecho, BorderLayout.CENTER);
 		pIzquierdo.add(pBotones, BorderLayout.SOUTH);
 		pBotones.add(bIdle);
 		pBotones.add(bMercado);
@@ -85,6 +105,14 @@ public class Album extends JFrame {
 		pBotones.add(bBuscar);
 		pBotones.add(bAjustes);
 		pBotones.add(bSalir);
+		pDerecho.add(pMonedas, BorderLayout.NORTH);
+		pDerecho.add(pCartas, BorderLayout.CENTER);
+		pCartas.add(spCartas);
+		pMonedas.add(lMonedas);
+		pMonedas.add(lImagenMonedas);
+		pIzquierdo.add(pPorcentaje, BorderLayout.CENTER);
+		
+		
 		
 		setVisible(true);
 	}

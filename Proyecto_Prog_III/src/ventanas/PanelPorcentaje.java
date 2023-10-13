@@ -67,7 +67,7 @@ public class PanelPorcentaje extends JPanel{
 	public void dibujar() {
 		graficos.setStroke(new BasicStroke(3));
 		graficos.setColor(color);
-		graficos.drawRect(0, 0, anchura, altura);
+		//graficos.drawRect(0, 0, anchura, altura);
 		System.out.println("Porcentaje:"+porcentaje);
 		int anchuraArco = 200;
 		graficos.fillArc(anchura/2-anchuraArco/2, altura/2-anchuraArco/2, anchuraArco, anchuraArco, 90, -grados);
