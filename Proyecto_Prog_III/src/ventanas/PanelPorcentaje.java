@@ -43,7 +43,12 @@ public class PanelPorcentaje extends JPanel{
 	}
 	
 	public void setPorcentaje(int porcentaje) {
-		
+		if (porcentaje > 100) {
+			this.porcentaje = (int) Math.round(porcentaje);
+		} else {
+			this.porcentaje = (int) Math.round(porcentaje);
+		}
+		calcularGrados(porcentaje); 
 	}
 	
 	private void calcularGrados(double porcentaje) {
