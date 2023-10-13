@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-public class PanelPorcentaje extends JPanel{
+public class PanelPorcentaje extends JPanel{  //TODO caso en el qe sea 100%
 
 	/**
 	 * 
