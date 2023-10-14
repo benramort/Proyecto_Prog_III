@@ -5,11 +5,16 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 
 import comportamientos.Carta;
 
@@ -33,7 +38,9 @@ public class VentanaPrueba extends JFrame {
 		System.out.println("Hoila");
 
 		PanelCarta p = new PanelCarta(carta);
-		add(p, BorderLayout.CENTER);
+		JPanel p2 = new JPanel();
+		p2.add(p);
+		add(p2, BorderLayout.CENTER);
 		p.setBackground(Color.BLUE);
 		
 		JButton bt = new JButton("Mostrar stats");
@@ -58,6 +65,22 @@ public class VentanaPrueba extends JFrame {
 				} else {
 					p.mostrarStats(true);
 				}
+			}
+			
+		});
+		
+		p.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				PanelCarta p = (PanelCarta) e.getSource();
+				p.mostrarStats(true);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				PanelCarta p = (PanelCarta) e.getSource();
+				p.mostrarStats(false);
 			}
 			
 		});

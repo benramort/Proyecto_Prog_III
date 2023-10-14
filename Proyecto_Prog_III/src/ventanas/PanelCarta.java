@@ -28,6 +28,8 @@ public class PanelCarta extends JPanel{
 		lp = new JLayeredPane();
 		lp.setPreferredSize(new Dimension(228,328));
 		add(lp);
+		setPreferredSize(new Dimension(235,335));
+		setOpaque(false);
 		
 		ImageIcon imagen = new ImageIcon(carta.getRecursoGrafico().getImage().getScaledInstance(ANCHO_FOTO, ALTO_FOTO, Image.SCALE_DEFAULT));
 		
@@ -96,9 +98,11 @@ public class PanelCarta extends JPanel{
 		pProgressBar.add(Box.createVerticalStrut(3));
 		pProgressBar.add(pbRecuperacion);
 		
+		mostrarStats(false);
+		
 	}
 	
-	public void mostrarStats(boolean flag) {
+	public void mostrarStats(boolean flag) { //TODO Mostrar saga
 		pInferior.setVisible(flag);
 		lp.repaint();
 		mostrandoStats = flag;
