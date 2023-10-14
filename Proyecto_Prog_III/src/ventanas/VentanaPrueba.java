@@ -17,8 +17,9 @@ public class VentanaPrueba extends JFrame {
 	}
 	
 	public VentanaPrueba() {
-		setSize(1000,1000);
+		setSize(500,500);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setLocationRelativeTo(null);
 		
 //		PanelPorcentaje p = new PanelPorcentaje(78, 300, 300, Color.BLACK);
 //		p.setBackground(Color.CYAN);

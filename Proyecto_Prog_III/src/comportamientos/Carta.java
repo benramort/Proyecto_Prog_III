@@ -9,9 +9,9 @@ public class Carta {
 	String nombre;
 	ImageIcon recursoGrafico;
 	
-	int monedasPorMinuto = 50;
+	int monedasPorMinuto = 100;
 	int resistencia = 50;
-	int recuperacion = 50;
+	int recuperacion = 25;
 	
 	
 	public Carta(String nombre) {
@@ -29,6 +29,10 @@ public class Carta {
 
 	public int getMonedasPorMinuto() {
 		return monedasPorMinuto;
+	}
+	
+	public int getResistencia() {
+		return resistencia;
 	}
 
 	public int getRecuperacion() {
