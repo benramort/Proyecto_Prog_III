@@ -60,27 +60,27 @@ public class PanelCarta extends JPanel{
 		pProgressBar.setOpaque(false);
 		pProgressBar.setPreferredSize(new Dimension(110,50));
 		
-		lGeneracion.setToolTipText("Generación");
-		lResistencia.setToolTipText("Resistencia");
-		lRecuperacion.setToolTipText("Recuperación");
+//		lGeneracion.setToolTipText("Generación");
+//		lResistencia.setToolTipText("Resistencia");
+//		lRecuperacion.setToolTipText("Recuperación");
 		
 		pbGeneracion.setOpaque(false);
 		pbGeneracion.setValue(carta.getMonedasPorMinuto());
 		pbGeneracion.setForeground(Color.YELLOW);
 		pbGeneracion.setBorderPainted(false);
-		pbGeneracion.setToolTipText("Generación");
+//		pbGeneracion.setToolTipText("Generación");
 		
 		pbResistencia.setOpaque(false);
 		pbResistencia.setValue(carta.getResistencia());
 		pbResistencia.setForeground(Color.YELLOW);
 		pbResistencia.setBorderPainted(false);
-		pbResistencia.setToolTipText("Resistencia");
+//		pbResistencia.setToolTipText("Resistencia");
 		
 		pbRecuperacion.setOpaque(false);
 		pbRecuperacion.setValue(carta.getRecuperacion());
 		pbRecuperacion.setForeground(Color.YELLOW);
 		pbRecuperacion.setBorderPainted(false);
-		pbRecuperacion.setToolTipText("Recuperación");
+//		pbRecuperacion.setToolTipText("Recuperación");
 		
 		
 		lp.add(pInferior, Integer.valueOf(1));
