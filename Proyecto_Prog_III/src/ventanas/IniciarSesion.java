@@ -16,7 +16,7 @@ public class IniciarSesion extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final Color c = new Color(84,241,255);
+	private static final Color c = new Color(42,215,245);
 	
 	public static void main(String[] args) {
 		new IniciarSesion();//En la versión final hacerlo con invokelater
@@ -25,7 +25,7 @@ public class IniciarSesion extends JFrame {
 	public IniciarSesion() {
 		//Formato ventana
 		setTitle("Iniciar sesión");
-		setSize(500, 300);
+		setSize(1000, 700);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE); //Por qué exit on close??
 //		getContentPane().setBackground(Color.WHITE);
@@ -58,6 +58,7 @@ public class IniciarSesion extends JFrame {
 		JPasswordField pfContrasena = new JPasswordField(15);
 		JButton btIniciarSesion = new JButton("Iniciar sesión");
 		JButton btNuevaCuenta = new JButton("Crear cuenta");
+		JLabel lLogo = new JLabel(new ImageIcon("img/logo.png"));
 		
 		//Formato componentes
 		Font fuente = new Font("Arial", Font.BOLD, 15);
@@ -88,6 +89,8 @@ public class IniciarSesion extends JFrame {
 		pCampos.add(pfContrasena);
 		pBotonera.add(btIniciarSesion);
 		pBotonera.add(btNuevaCuenta);
+		add(lLogo, BorderLayout.CENTER);
+		
 		
 		
 		//Configurar escuchadores
