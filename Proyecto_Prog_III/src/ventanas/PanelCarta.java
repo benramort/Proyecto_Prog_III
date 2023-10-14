@@ -17,11 +17,15 @@ public class PanelCarta extends JPanel{
 	public static final int ALTO_FOTO = 328;
 	
 	Carta carta;
+	boolean mostrandoStats = true;
+	JPanel pInferior;
+	JLayeredPane lp;
+	
 	
 	public PanelCarta(Carta carta) {
 		this.carta = carta;
 //		
-		JLayeredPane lp = new JLayeredPane();
+		lp = new JLayeredPane();
 		lp.setPreferredSize(new Dimension(228,328));
 		add(lp);
 		
@@ -32,7 +36,7 @@ public class PanelCarta extends JPanel{
 		
 		lp.add(lImagen, Integer.valueOf(0));
 		
-		JPanel pInferior = new JPanel();
+		pInferior = new JPanel();
 		JPanel pTexto = new JPanel();
 		pTexto.setLayout(new BoxLayout(pTexto, BoxLayout.Y_AXIS));
 		JPanel pProgressBar = new JPanel();
@@ -92,6 +96,16 @@ public class PanelCarta extends JPanel{
 		pProgressBar.add(Box.createVerticalStrut(3));
 		pProgressBar.add(pbRecuperacion);
 		
+	}
+	
+	public void mostrarStats(boolean flag) {
+		pInferior.setVisible(flag);
+		lp.repaint();
+		mostrandoStats = flag;
+	}
+	
+	public boolean isMostrandoStats() {
+		return mostrandoStats;
 	}
 	
 	
