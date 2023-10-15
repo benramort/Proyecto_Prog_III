@@ -15,10 +15,13 @@ public class PanelCarta extends JPanel{
 	private static final long serialVersionUID = 1L;
 	public static final int ANCHO_FOTO = 228;
 	public static final int ALTO_FOTO = 328;
+	public static final int ANCHO_SAGA = 91;
+	public static final int ALTO_SAGA = 39;
 	
 	Carta carta;
 	boolean mostrandoStats = true;
 	JPanel pInferior;
+	JLabel lSaga;
 	JLayeredPane lp;
 	
 	
@@ -52,6 +55,9 @@ public class PanelCarta extends JPanel{
 		JProgressBar pbResistencia = new InvertedProgressBar(0, 100);
 		JProgressBar pbRecuperacion = new InvertedProgressBar(0, 100);
 		
+		ImageIcon logoSaga = new ImageIcon(carta.getSaga().getRecursoGrafico().getImage().getScaledInstance(ANCHO_SAGA, ALTO_SAGA, Image.SCALE_DEFAULT));
+		lSaga = new JLabel(logoSaga);
+		
 		pInferior.setBounds(70, 260, ANCHO_FOTO-80, 70);
 //		pInferior.setSize(new Dimension(ANCHO_FOTO-80, 70));
 //		pInferior.setBackground(Color.GREEN);
@@ -82,6 +88,7 @@ public class PanelCarta extends JPanel{
 		pbRecuperacion.setBorderPainted(false);
 //		pbRecuperacion.setToolTipText("Recuperación");
 		
+		lSaga.setBounds(130, 2, ANCHO_SAGA, ALTO_SAGA);
 		
 		lp.add(pInferior, Integer.valueOf(1));
 		pInferior.add(pTexto);
@@ -98,12 +105,15 @@ public class PanelCarta extends JPanel{
 		pProgressBar.add(Box.createVerticalStrut(3));
 		pProgressBar.add(pbRecuperacion);
 		
+		lp.add(lSaga, Integer.valueOf(1));
+		
 		mostrarStats(false);
 		
 	}
 	
-	public void mostrarStats(boolean flag) { //TODO Mostrar saga
+	public void mostrarStats(boolean flag) { 
 		pInferior.setVisible(flag);
+		lSaga.setVisible(flag);
 		lp.repaint();
 		mostrandoStats = flag;
 	}

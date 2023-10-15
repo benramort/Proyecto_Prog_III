@@ -6,7 +6,9 @@ import javax.swing.ImageIcon;
 
 public class Carta {
 	
-	String nombre;
+	String nombreInterno;
+	String nombreVisible;
+	Saga saga;
 	ImageIcon recursoGrafico;
 	
 	int monedasPorMinuto = 100;
@@ -14,17 +16,31 @@ public class Carta {
 	int recuperacion = 25;
 	
 	
-	public Carta(String nombre) {
-		this.nombre = nombre;
-		this.recursoGrafico = new ImageIcon("img/"+nombre+".png");
+	public Carta(String nombreInterno, String nombreVisible, Saga saga) {
+		this.nombreInterno = nombreInterno;
+		this.nombreVisible = nombreVisible;
+		this.saga = saga;
+		this.recursoGrafico = new ImageIcon("img/"+nombreInterno+".png");
+	}
+	
+	public Carta(String nombre, Saga saga) {
+		this(nombre, nombre, saga);
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getNombreInterno() {
+		return nombreInterno;
+	}
+	
+	public String getNombreVisible() {
+		return nombreVisible;
 	}
 
 	public ImageIcon getRecursoGrafico() {
 		return recursoGrafico;
+	}
+	
+	public Saga getSaga() {
+		return saga;
 	}
 
 	public int getMonedasPorMinuto() {

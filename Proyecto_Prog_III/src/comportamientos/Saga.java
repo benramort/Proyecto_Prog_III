@@ -18,4 +18,15 @@ public class Saga {
 		this(nombre,nombre);
 	}
 
+	public String getNombreInterno() {
+		return nombreInterno;
+	}
+
+	public String getNombreVisible() {
+		return nombreVisible;
+	}
+
+	public ImageIcon getRecursoGrafico() {
+		return recursoGrafico;
+	}
 }
