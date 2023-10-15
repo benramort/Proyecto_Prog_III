@@ -22,7 +22,6 @@ public class CrearCuenta extends JFrame {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(400, 450);
 		setLocationRelativeTo(ventanaAnterior);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(new BorderLayout());
 		
 		//Crear contenedores

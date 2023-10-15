@@ -5,17 +5,21 @@ import javax.swing.*;
 
 public class Mercado extends JFrame {
 	
+	private static final long serialVersionUID = 1L;
+
 	public Mercado(JFrame ventanaAnterior) {
 		//Formato ventana
 		setTitle("Mercado");
 		setSize(1000,1000);
 		setLocationRelativeTo(ventanaAnterior);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.getContentPane().setLayout(new BorderLayout());
 		
 		//Crear contenedores
 		JPanel pIzquierdo = new JPanel();
-		JPanel pSuperior = new JPanel();
+		JPanel pDerecho = new JPanel();
+		JPanel pIzqSuperior = new JPanel();
+		JPanel pDerSuperior = new JPanel();
 		JPanel pCentral = new JPanel();
 		JPanel pInferior = new JPanel();
 		JPanel pBotonHome = new JPanel();
@@ -30,9 +34,12 @@ public class Mercado extends JFrame {
 		pIzquierdo.setLayout(new BorderLayout());
 		pBotonHome.setLayout(new BorderLayout());
 		
-		pSuperior.setBackground(Color.blue);
-		pSuperior.setLayout(new BoxLayout(pSuperior, BoxLayout.Y_AXIS));
-		pSuperior.add(Box.createVerticalGlue());
+		pDerecho.setLayout(new BorderLayout());
+		pDerSuperior.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		
+		
+		pIzqSuperior.setLayout(new BoxLayout(pIzqSuperior, BoxLayout.Y_AXIS));
+		pIzqSuperior.add(Box.createVerticalGlue());
 		
 		
 		pPrecio1.setMaximumSize(new Dimension(400, 800));
@@ -45,61 +52,60 @@ public class Mercado extends JFrame {
 		pCentral.add(Box.createVerticalGlue());
 		
 		pBotonHome.setLayout(new FlowLayout(FlowLayout.LEFT));
-		pMonedas.setLayout(new FlowLayout(FlowLayout.LEFT));
-		
 		pInferior.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
 		//Crear componentes
-		
-			//Componentes pSuperior
-		JButton BotonHome = new JButton("HOME");
-		JLabel CantidadMonedas = new JLabel("XXXX");
-		JLabel Monedas = new JLabel("Monedas");
-		
-			//Componentes pCentral
-		JTextField buscar = new JTextField(1);
-		JLabel PrecioMin = new JLabel("Precio mínimo");
-		JSpinner selPrecioMin = new JSpinner();
-		JLabel PrecioMax = new JLabel("Precio máximo");
-		JSpinner selPrecioMax = new JSpinner();
-		JLabel Saga = new JLabel("Saga");
-		JComboBox selSaga = new JComboBox();
-		
-			//Botón de abajo
+		JButton bBotonHome = new JButton("ÁLBUM");
+		JLabel lMonedas = new JLabel("XXXXXXXXXX");
+		JLabel lImagenMonedas = new JLabel();
+		JTextField tfBuscar = new JTextField(1);
+		JLabel lPrecioMin = new JLabel("Precio mínimo");
+		JSpinner spSelPrecioMin = new JSpinner();
+		JLabel lPrecioMax = new JLabel("Precio máximo");
+		JSpinner spSelPrecioMax = new JSpinner();
+		JLabel lSaga = new JLabel("Saga");
+		JComboBox cbSelSaga = new JComboBox();
 		JButton botonVender = new JButton("Vender");
 		
+		ImageIcon imagen1 = new ImageIcon(getClass().getResource("/moneda.png"));
+		ImageIcon imagenMoneda = new ImageIcon(imagen1.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 		//Formato componentes
-		buscar.setMaximumSize(new Dimension(100,100));
-		selPrecioMin.setPreferredSize(new Dimension(100, 25));
-		selPrecioMax.setPreferredSize(new Dimension(100, 25));
+		lImagenMonedas.setIcon(imagenMoneda);
+		tfBuscar.setMaximumSize(new Dimension(100,100));
+		spSelPrecioMin.setPreferredSize(new Dimension(100, 25));
+		spSelPrecioMax.setPreferredSize(new Dimension(100, 25));
 		botonVender.setPreferredSize(new Dimension(150,70));
-		BotonHome.setPreferredSize(new Dimension(100,30));
+		bBotonHome.setPreferredSize(new Dimension(100,30));
+		cbSelSaga.setMinimumSize(new Dimension(200, 200));
 		
 		//Añadir componentes a contenedores
 		getContentPane().add(pIzquierdo,BorderLayout.WEST);
+		getContentPane().add(pDerecho, BorderLayout.CENTER);
 		
-		pIzquierdo.add(pSuperior,BorderLayout.NORTH);
+		pDerecho.add(pDerSuperior, BorderLayout.NORTH);
+		pDerSuperior.add(pMonedas);
+		pMonedas.add(lMonedas);
+		pMonedas.add(lImagenMonedas);
+		
+		pIzquierdo.add(pIzqSuperior,BorderLayout.NORTH);
 		pIzquierdo.add(pCentral,BorderLayout.CENTER);
 		pIzquierdo.add(pInferior, BorderLayout.SOUTH);
 		
-		pSuperior.add(pBotonHome, BorderLayout.WEST);
-		pSuperior.add(pMonedas);
+		pIzqSuperior.add(pBotonHome, BorderLayout.WEST);
 		
-		pBotonHome.add(BotonHome);
-		pMonedas.add(CantidadMonedas);
-		pMonedas.add(Monedas);
+		pBotonHome.add(bBotonHome);
 		
-		pCentral.add(buscar);
+		pCentral.add(tfBuscar);
 		pCentral.add(pPrecio1);
 		pCentral.add(pPrecio2);
 		pCentral.add(pSaga);
 		
-		pPrecio1.add(PrecioMin);
-		pPrecio1.add(selPrecioMin);
-		pPrecio2.add(PrecioMax);
-		pPrecio2.add(selPrecioMax);
-		pSaga.add(Saga);
-		pSaga.add(selSaga);
+		pPrecio1.add(lPrecioMin);
+		pPrecio1.add(spSelPrecioMin);
+		pPrecio2.add(lPrecioMax);
+		pPrecio2.add(spSelPrecioMax);
+		pSaga.add(lSaga);
+		pSaga.add(cbSelSaga);
 		
 		pInferior.add(botonVender);
 		
@@ -108,7 +114,15 @@ public class Mercado extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		new Mercado(null);
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				new Mercado(null);
+				
+			}
+		});
+		
 	}
 	
 }

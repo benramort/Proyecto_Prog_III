@@ -26,7 +26,7 @@ public class Album extends JFrame {
 		setTitle("Universal Cards Collection");
 		setSize(1000, 1000);
 		setLocationRelativeTo(null);
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(new BorderLayout());
 		
 		//Crear contenedores
@@ -35,7 +35,7 @@ public class Album extends JFrame {
 		JPanel pCartas = new JPanel();
 		JPanel pBotones = new JPanel();
 		JPanel pMonedas = new JPanel();
-		PanelPorcentaje pPorcentaje = new PanelPorcentaje(78, 300, 300, Color.BLACK);
+		PanelPorcentaje pPorcentaje = new PanelPorcentaje(25, 300, 300, Color.BLACK);
 		JPanel pPorcentaje2 = new JPanel();
 		JPanel pPorcentaje3 = new JPanel();
 		//Formato contenedores
