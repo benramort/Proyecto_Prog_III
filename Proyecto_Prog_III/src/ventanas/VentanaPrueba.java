@@ -17,6 +17,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import comportamientos.Carta;
+import comportamientos.Saga;
 
 public class VentanaPrueba extends JFrame {
 	
@@ -34,7 +35,7 @@ public class VentanaPrueba extends JFrame {
 //		add(p, BorderLayout.CENTER);
 //		p.setPorcentaje(30);
 		
-		Carta carta = new Carta("yoshi");
+		Carta carta = new Carta("yoshi",new Saga("SuperMario"));
 		System.out.println("Hoila");
 
 		PanelCarta p = new PanelCarta(carta);
