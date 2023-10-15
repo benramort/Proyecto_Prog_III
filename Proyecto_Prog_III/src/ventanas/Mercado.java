@@ -2,6 +2,9 @@ package ventanas;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.Border;
+
+import comportamientos.Saga;
 
 public class Mercado extends JFrame {
 	
@@ -22,17 +25,22 @@ public class Mercado extends JFrame {
 		JPanel pDerSuperior = new JPanel();
 		JPanel pCentral = new JPanel();
 		JPanel pInferior = new JPanel();
-		JPanel pBotonHome = new JPanel();
+		JPanel pBotonAlbum = new JPanel();
 		JPanel pMonedas = new JPanel();
 		JPanel pPrecio1 = new JPanel();
 		JPanel pPrecio2 = new JPanel();
 		JPanel pSaga = new JPanel();
-		JPanel pBotonVender = new JPanel();
-		
-		
+
 		//Formato contenedores
+		Border bordePanelIzquierdo = BorderFactory.createLineBorder(Color.BLACK);
+		pIzquierdo.setBorder(bordePanelIzquierdo);
+		pIzquierdo.setPreferredSize(new Dimension(300, 1000));
+		
+		pCentral.setBackground(Color.BLUE);
+		pInferior.setBackground(Color.RED);
+		
 		pIzquierdo.setLayout(new BorderLayout());
-		pBotonHome.setLayout(new BorderLayout());
+		pBotonAlbum.setLayout(new BorderLayout());
 		
 		pDerecho.setLayout(new BorderLayout());
 		pDerSuperior.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -51,7 +59,7 @@ public class Mercado extends JFrame {
 		pCentral.setLayout(new BoxLayout(pCentral, BoxLayout.Y_AXIS));
 		pCentral.add(Box.createVerticalGlue());
 		
-		pBotonHome.setLayout(new FlowLayout(FlowLayout.LEFT));
+		pBotonAlbum.setLayout(new FlowLayout(FlowLayout.LEFT));
 		pInferior.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
 		//Crear componentes
@@ -64,7 +72,7 @@ public class Mercado extends JFrame {
 		JLabel lPrecioMax = new JLabel("Precio máximo");
 		JSpinner spSelPrecioMax = new JSpinner();
 		JLabel lSaga = new JLabel("Saga");
-		JComboBox cbSelSaga = new JComboBox();
+		JComboBox<Saga> cbSelSaga = new JComboBox<>();
 		JButton botonVender = new JButton("Vender");
 		
 		ImageIcon imagen1 = new ImageIcon(getClass().getResource("/moneda.png"));
@@ -91,9 +99,9 @@ public class Mercado extends JFrame {
 		pIzquierdo.add(pCentral,BorderLayout.CENTER);
 		pIzquierdo.add(pInferior, BorderLayout.SOUTH);
 		
-		pIzqSuperior.add(pBotonHome, BorderLayout.WEST);
+		pIzqSuperior.add(pBotonAlbum, BorderLayout.WEST);
 		
-		pBotonHome.add(bBotonHome);
+		pBotonAlbum.add(bBotonHome);
 		
 		pCentral.add(tfBuscar);
 		pCentral.add(pPrecio1);
