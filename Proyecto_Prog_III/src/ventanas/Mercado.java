@@ -1,6 +1,8 @@
 package ventanas;
 
 import java.awt.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.event.ChangeListener;
@@ -69,7 +71,10 @@ public class Mercado extends JFrame {
 		JLabel lPrecioMax = new JLabel("Precio máximo:");
 		JSpinner spSelPrecioMax = new JSpinner();
 		JLabel lSaga = new JLabel("Saga");
-		JComboBox<Saga> cbSelSaga = new JComboBox<>();
+		ArrayList<Saga> lSagas = new ArrayList<Saga>();
+		lSagas.add(new Saga("Super Mario"));
+		lSagas.add(new Saga("God of War"));
+		JComboBox<Saga> cbSelSaga = new JComboBox(lSagas.toArray());
 		JButton botonVender = new JButton("Vender");
 		
 		ImageIcon imagen1 = new ImageIcon(getClass().getResource("/moneda.png"));
@@ -85,6 +90,8 @@ public class Mercado extends JFrame {
 		botonVender.setPreferredSize(new Dimension(150,70));
 		bBotonHome.setPreferredSize(new Dimension(100,30));
 		cbSelSaga.setMinimumSize(new Dimension(200, 200));
+
+		
 		
 		//Añadir componentes a contenedores
 		getContentPane().add(pIzquierdo,BorderLayout.WEST);
