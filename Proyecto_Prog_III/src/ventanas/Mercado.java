@@ -3,12 +3,14 @@ package ventanas;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.event.ChangeListener;
 
 import comportamientos.Saga;
 
 public class Mercado extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
+	
 
 	public Mercado(JFrame ventanaAnterior) {
 		//Formato ventana
@@ -36,8 +38,6 @@ public class Mercado extends JFrame {
 		pIzquierdo.setBorder(bordePanelIzquierdo);
 		pIzquierdo.setPreferredSize(new Dimension(300, 1000));
 		
-		pCentral.setBackground(Color.BLUE);
-		pInferior.setBackground(Color.RED);
 		
 		pIzquierdo.setLayout(new BorderLayout());
 		pBotonAlbum.setLayout(new BorderLayout());
@@ -45,16 +45,13 @@ public class Mercado extends JFrame {
 		pDerecho.setLayout(new BorderLayout());
 		pDerSuperior.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		
-		
 		pIzqSuperior.setLayout(new BoxLayout(pIzqSuperior, BoxLayout.Y_AXIS));
-		pIzqSuperior.add(Box.createVerticalGlue());
-		
-		
+
 		pPrecio1.setMaximumSize(new Dimension(400, 800));
-		pPrecio1.setLayout(new FlowLayout(FlowLayout.LEFT));
+		pPrecio1.setLayout(new FlowLayout(FlowLayout.CENTER));
 		pPrecio2.setMaximumSize(new Dimension(400, 800));
-		pPrecio2.setLayout(new FlowLayout(FlowLayout.LEFT));
-		pSaga.setLayout(new FlowLayout(FlowLayout.LEFT));
+		pPrecio2.setLayout(new FlowLayout(FlowLayout.CENTER));
+		pSaga.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
 		pCentral.setLayout(new BoxLayout(pCentral, BoxLayout.Y_AXIS));
 		pCentral.add(Box.createVerticalGlue());
@@ -66,10 +63,10 @@ public class Mercado extends JFrame {
 		JButton bBotonHome = new JButton("ÁLBUM");
 		JLabel lMonedas = new JLabel("XXXXXXXXXX");
 		JLabel lImagenMonedas = new JLabel();
-		JTextField tfBuscar = new JTextField(1);
-		JLabel lPrecioMin = new JLabel("Precio mínimo");
+		JTextField tfBuscar = new JTextField("Buscar:");
+		JLabel lPrecioMin = new JLabel("Precio mínimo: ");
 		JSpinner spSelPrecioMin = new JSpinner();
-		JLabel lPrecioMax = new JLabel("Precio máximo");
+		JLabel lPrecioMax = new JLabel("Precio máximo:");
 		JSpinner spSelPrecioMax = new JSpinner();
 		JLabel lSaga = new JLabel("Saga");
 		JComboBox<Saga> cbSelSaga = new JComboBox<>();
@@ -77,11 +74,14 @@ public class Mercado extends JFrame {
 		
 		ImageIcon imagen1 = new ImageIcon(getClass().getResource("/moneda.png"));
 		ImageIcon imagenMoneda = new ImageIcon(imagen1.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+		
 		//Formato componentes
 		lImagenMonedas.setIcon(imagenMoneda);
-		tfBuscar.setMaximumSize(new Dimension(100,100));
+		tfBuscar.setMaximumSize(new Dimension(200,100));
 		spSelPrecioMin.setPreferredSize(new Dimension(100, 25));
 		spSelPrecioMax.setPreferredSize(new Dimension(100, 25));
+		spSelPrecioMin.setModel(new SpinnerNumberModel(0, 0, 999999999, 100));
+		spSelPrecioMax.setModel(new SpinnerNumberModel(0, 0, 999999999, 100));
 		botonVender.setPreferredSize(new Dimension(150,70));
 		bBotonHome.setPreferredSize(new Dimension(100,30));
 		cbSelSaga.setMinimumSize(new Dimension(200, 200));
@@ -104,6 +104,7 @@ public class Mercado extends JFrame {
 		pBotonAlbum.add(bBotonHome);
 		
 		pCentral.add(tfBuscar);
+		pCentral.add(Box.createVerticalStrut(10));
 		pCentral.add(pPrecio1);
 		pCentral.add(pPrecio2);
 		pCentral.add(pSaga);
