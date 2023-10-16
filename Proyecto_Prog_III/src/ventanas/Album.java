@@ -7,10 +7,18 @@ import java.awt.FlowLayout;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.*;
 import javax.swing.border.*;
+
+import comportamientos.Carta;
+import comportamientos.Saga;
 
 
 public class Album extends JFrame {
@@ -24,7 +32,7 @@ public class Album extends JFrame {
 	public Album(JFrame ventanaAnterior) {
 		//Formato ventana
 		setTitle("Universal Cards Collection");
-		setSize(1000, 1000);
+		setSize(1500, 1000);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(new BorderLayout());
@@ -32,12 +40,13 @@ public class Album extends JFrame {
 		//Crear contenedores
 		JPanel pIzquierdo = new JPanel();
 		JPanel pDerecho = new JPanel();
-		JPanel pCartas = new JPanel();
+		JPanel pCartas = new JPanel(new GridLayout(0, 4));
 		JPanel pBotones = new JPanel();
 		JPanel pMonedas = new JPanel();
 		PanelPorcentaje pPorcentaje = new PanelPorcentaje(100, 300, 300, Color.BLACK);
 		JPanel pPorcentaje2 = new JPanel();
 		JPanel pPorcentaje3 = new JPanel();
+		
 		//Formato contenedores
 		pIzquierdo.setLayout(new BorderLayout());
 		pBotones.setLayout(new GridLayout(2, 3));
@@ -99,6 +108,9 @@ public class Album extends JFrame {
 		bAjustes.setPreferredSize(new Dimension(150,  100));
 		bSalir.setPreferredSize(new Dimension(150,  100));
 		bBuscar.setPreferredSize(new Dimension(150,  100));
+		spCartas.setViewportView(pCartas);
+		spCartas.setBorder(null);
+		spCartas.getVerticalScrollBar().setUnitIncrement(15);
 		
 		//Añadir componentes a contenedores
 		this.getContentPane().add(pIzquierdo, BorderLayout.WEST);
@@ -111,8 +123,8 @@ public class Album extends JFrame {
 		pBotones.add(bAjustes);
 		pBotones.add(bSalir);
 		pDerecho.add(pMonedas, BorderLayout.NORTH);
-		pDerecho.add(pCartas, BorderLayout.CENTER);
-		pCartas.add(spCartas);
+		pDerecho.add(spCartas, BorderLayout.CENTER);
+//		pCartas.add(spCartas);
 		pMonedas.add(lMonedas);
 		pMonedas.add(lImagenMonedas);
 		pIzquierdo.add(pPorcentaje3, BorderLayout.CENTER);
@@ -120,6 +132,58 @@ public class Album extends JFrame {
 		pPorcentaje3.add(pPorcentaje2);
 		pPorcentaje2.add(pPorcentaje);
 		pPorcentaje3.add(Box.createVerticalGlue());
+		
+		
+		//Configurar escuchadores
+		MouseListener hoverCartas = new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				PanelCarta p = (PanelCarta) e.getSource();
+				p.mostrarStats(true);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				PanelCarta p = (PanelCarta) e.getSource();
+				p.mostrarStats(false);
+			}
+		};
+		
+		pCartas.addComponentListener(new ComponentAdapter() {
+
+			@Override
+			public void componentResized(ComponentEvent e) {
+				GridLayout gl = (GridLayout) pCartas.getLayout();
+				System.out.println(spCartas.getWidth());
+				if (spCartas.getWidth() < 500) {
+					gl.setColumns(1);
+				} else if (spCartas.getWidth() < 800) {
+					gl.setColumns(2);
+				} else if (spCartas.getWidth() < 1000) {
+					gl.setColumns(3);
+				} else if (spCartas.getWidth() < 1200) {
+					gl.setColumns(4);
+				} else {
+					gl.setColumns(5);
+				}
+				Album.this.revalidate();
+			}
+			
+			
+			
+		});
+		
+		//Gestion de cartas
+		
+		Carta carta = new Carta("yoshi",new Saga("SuperMario"));
+		for (int i=0;i<20;i++) {
+			PanelCarta p = new PanelCarta(carta);
+			p.addMouseListener(hoverCartas);
+			pCartas.add(p);
+		}
+		
+		
+		
 		
 
 		
