@@ -52,7 +52,7 @@ public class PanelPorcentaje extends JPanel{  //TODO caso en el qe sea 100%
 	}
 	
 	private void calcularGrados(double porcentaje) {
-		System.out.println("Porcentaje:" +  porcentaje);
+//		System.out.println("Porcentaje:" +  porcentaje);
 		grados = (int) (porcentaje * 360 / 100);
 	}
 
@@ -61,14 +61,14 @@ public class PanelPorcentaje extends JPanel{  //TODO caso en el qe sea 100%
 		super.paint(g);
 		dibujar();
 		((Graphics2D) g).drawImage(buffer, null, 0, 0);
-		System.out.println("Pintado");
+//		System.out.println("Pintado");
 	}
 	
 	public void dibujar() {
 		graficos.setStroke(new BasicStroke(3));
 		graficos.setColor(color);
 		//graficos.drawRect(0, 0, anchura, altura);
-		System.out.println("Porcentaje:"+porcentaje);
+//		System.out.println("Porcentaje:"+porcentaje);
 		int anchuraArco = 200;
 		graficos.fillArc(anchura/2-anchuraArco/2, altura/2-anchuraArco/2, anchuraArco, anchuraArco, 90, -grados);
 		graficos.setColor(getBackground());
