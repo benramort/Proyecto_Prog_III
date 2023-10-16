@@ -35,7 +35,7 @@ public class Album extends JFrame {
 		JPanel pCartas = new JPanel();
 		JPanel pBotones = new JPanel();
 		JPanel pMonedas = new JPanel();
-		PanelPorcentaje pPorcentaje = new PanelPorcentaje(25, 300, 300, Color.BLACK);
+		PanelPorcentaje pPorcentaje = new PanelPorcentaje(100, 300, 300, Color.BLACK);
 		JPanel pPorcentaje2 = new JPanel();
 		JPanel pPorcentaje3 = new JPanel();
 		//Formato contenedores
