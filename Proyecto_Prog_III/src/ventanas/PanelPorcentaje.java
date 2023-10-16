@@ -22,7 +22,7 @@ private Graphics2D graficos;
 private int anchura;
 private int altura;
 private Color color = Color.BLACK;
-private Color color2 = Color.YELLOW;
+private Color color2 = new Color(255, 200, 10);
 private int porcentaje;
 
 public PanelPorcentaje(double porcentaje, int anchura, int altura) {
