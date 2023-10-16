@@ -12,7 +12,7 @@ public class Tienda extends JFrame{
 	
 	public Tienda() {
 		///Formato Ventana
-		setSize(1300,700);
+		setSize(1500,1000);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setTitle("Universal Card Collection");
 		
@@ -35,7 +35,7 @@ public class Tienda extends JFrame{
 		pPrecioSobre.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
 		///Crear Componentes
-		JButton btHome = new JButton("HOME");
+		JButton btHome = new JButton("áLBUM");
 		JLabel lMonedas = new JLabel("XXXXXXXXXX");
 		JLabel lImagenMonedas = new JLabel();
 		JLabel lImagenMonedas2 = new JLabel();
