@@ -17,7 +17,7 @@ public class Mercado extends JFrame {
 	public Mercado(JFrame ventanaAnterior) {
 		//Formato ventana
 		setTitle("Mercado");
-		setSize(1000,1000);
+		setSize(1500,1000);
 		setLocationRelativeTo(ventanaAnterior);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.getContentPane().setLayout(new BorderLayout());
