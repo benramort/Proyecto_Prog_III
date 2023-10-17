@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
@@ -30,9 +31,11 @@ public class Album extends JFrame {
 	
 	
 	public Album(JFrame ventanaAnterior) {
+		double escala = 1;
+		
 		//Formato ventana
 		setTitle("Universal Cards Collection");
-		setSize(1500, 1000);
+		setSize((int) (1500/escala), (int) (1000/escala));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(new BorderLayout());
@@ -154,7 +157,7 @@ public class Album extends JFrame {
 			@Override
 			public void componentResized(ComponentEvent e) {
 				GridLayout gl = (GridLayout) pCartas.getLayout();
-				System.out.println(spCartas.getWidth());
+//				System.out.println(spCartas.getWidth());
 				if (spCartas.getWidth() < 500) {
 					gl.setColumns(1);
 				} else if (spCartas.getWidth() < 800) {
@@ -190,6 +193,8 @@ public class Album extends JFrame {
 		
 		
 		setVisible(true);
+		
+		System.out.println(Toolkit.getDefaultToolkit().getScreenResolution());
 	}
 	
 	public static void main(String[] args) {
