@@ -29,7 +29,7 @@ public class VentanaPrueba extends JFrame {
 	
 	public VentanaPrueba() {
 		
-//		lookAndFill();
+		lookAndFill();
 		
 		
 		setSize(500,500);

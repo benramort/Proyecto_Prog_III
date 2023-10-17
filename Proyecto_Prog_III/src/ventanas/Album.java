@@ -17,6 +17,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 import comportamientos.Carta;
 import comportamientos.Saga;
@@ -204,7 +205,17 @@ public class Album extends JFrame {
 			public void run() {
 				new Album(null);
 				
+//				try {
+//					UIManager.setLookAndFeel(new NimbusLookAndFeel());
+//				} catch (UnsupportedLookAndFeelException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+				
 			}
+			
+			
+			
 		});
 	}
 }
