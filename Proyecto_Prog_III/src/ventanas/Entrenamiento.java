@@ -1,6 +1,7 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
@@ -27,10 +28,18 @@ public class Entrenamiento extends JFrame{
 		JPanel pBotonClear = new JPanel();
 		JPanel pTextos = new JPanel();
 		JPanel pBarraProgreso = new JPanel();
+		JPanel pCartas = new JPanel();
+		JPanel boxLayoutCartasH = new JPanel();
+		JPanel boxLayoutCartasV = new JPanel();
+		JPanel pBotonAlbum = new JPanel();
 		//Formato contenedores
 		pInferior.setLayout(new BorderLayout());
 		pTextos.setLayout(new FlowLayout(FlowLayout.CENTER));
 		pCentral.setLayout(new BorderLayout());
+		pCartas.setLayout(new FlowLayout(FlowLayout.CENTER));
+		boxLayoutCartasH.setLayout(new BoxLayout(boxLayoutCartasH, BoxLayout.X_AXIS));
+		boxLayoutCartasV.setLayout(new BoxLayout(boxLayoutCartasV, BoxLayout.Y_AXIS));
+		pBotonAlbum.setLayout(new FlowLayout(FlowLayout.LEFT));
 		//Creacion componentes
 		JButton bAlbum = new JButton("ÁLBUM");
 		JLabel lMonedasGeneradas = new JLabel("Monedas generadas: " );
@@ -43,8 +52,12 @@ public class Entrenamiento extends JFrame{
 		JProgressBar pbProgreso = new JProgressBar(0, 100);
 		ImageIcon imagen = new ImageIcon(getClass().getResource("/moneda.png"));
 		ImageIcon imagenMoneda = new ImageIcon(imagen.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+		CartaEntrenando carta1 = new CartaEntrenando();
+		CartaEntrenando carta2 = new CartaEntrenando();
+		CartaEntrenando carta3 = new CartaEntrenando();
 		//Formato componentes
 		pbProgreso.setPreferredSize(new Dimension(1000, 30));
+		bAlbum.setPreferredSize(new Dimension(90, 30));
 		//Añadir componentes a contenedores
 		this.getContentPane().add(pInferior, BorderLayout.SOUTH);
 		this.getContentPane().add(pCentral, BorderLayout.CENTER);
@@ -62,6 +75,18 @@ public class Entrenamiento extends JFrame{
 		lImagenMonedasPorMinuto.setIcon(imagenMoneda);
 		pBarraProgreso.add(pbProgreso);
 		pCentral.add(pBarraProgreso, BorderLayout.SOUTH);
+		pCentral.add(pCartas, BorderLayout.CENTER);		
+		pCartas.add(boxLayoutCartasV);
+		pCartas.add(boxLayoutCartasH);
+		boxLayoutCartasH.add(carta1);
+		boxLayoutCartasH.add(Box.createHorizontalStrut(50));
+		boxLayoutCartasH.add(carta2);
+		boxLayoutCartasH.add(Box.createHorizontalStrut(50));
+		boxLayoutCartasH.add(carta3);
+		pCartas.add(Box.createVerticalStrut(900));
+		boxLayoutCartasV.add(boxLayoutCartasH);
+		pBotonAlbum.add(bAlbum);
+		pCentral.add(pBotonAlbum, BorderLayout.NORTH);
 		
 		setVisible(true);
 		

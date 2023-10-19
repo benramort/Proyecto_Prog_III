@@ -2,6 +2,7 @@ package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
@@ -24,6 +25,7 @@ public class Tienda extends JFrame{
 		JPanel pSobre = new JPanel();
 		JPanel pNombreSobre = new JPanel();
 		JPanel pPrecioSobre = new JPanel();
+		JPanel pBotonHome = new JPanel();
 		
 		///Formato Contenedores
 		pSuperior.setLayout(new BorderLayout());
@@ -35,7 +37,7 @@ public class Tienda extends JFrame{
 		pPrecioSobre.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
 		///Crear Componentes
-		JButton btHome = new JButton("áLBUM");
+		JButton btHome = new JButton("ÁLBUM");
 		JLabel lMonedas = new JLabel("XXXXXXXXXX");
 		JLabel lImagenMonedas = new JLabel();
 		JLabel lImagenMonedas2 = new JLabel();
@@ -53,9 +55,11 @@ public class Tienda extends JFrame{
 		Font fuenteNombre = new Font("Arial",Font.BOLD, 32);
 		lNombreSobre.setFont(fuenteNombre);
 		lPrecioSobre.setFont(fuenteNombre);
+		btHome.setPreferredSize(new Dimension(90, 40));
 		
 		///Añadir componentes a contenedores
-		pSuperior.add(btHome, BorderLayout.WEST);
+		pSuperior.add(pBotonHome, BorderLayout.WEST);
+		pBotonHome.add(btHome);
 		pSuperior.add(pMonedas, BorderLayout.EAST);
 		add(pSuperior, BorderLayout.NORTH);
 		pMonedas.add(lMonedas);
