@@ -1,4 +1,4 @@
-package ventanas;
+	package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,6 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 import comportamientos.Carta;
 import comportamientos.Saga;
@@ -26,6 +28,10 @@ public class VentanaPrueba extends JFrame {
 	}
 	
 	public VentanaPrueba() {
+		
+		lookAndFill();
+		
+		
 		setSize(500,500);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -87,6 +93,18 @@ public class VentanaPrueba extends JFrame {
 		});
 		
 		setVisible(true);
+		
+	}
+	
+	public void lookAndFill() {
+		try {
+		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		        if ("Nimbus".equals(info.getName())) {
+		            UIManager.setLookAndFeel(info.getClassName());
+		            return;
+		        }
+		    }
+		} catch (Exception e) {} // Si no está disponible nimbus, no se hace nada
 	}
 
 }
