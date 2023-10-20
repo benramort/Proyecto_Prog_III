@@ -2,6 +2,8 @@ package ventanas;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.*;
 
 public class CrearCuenta extends JFrame {
@@ -86,16 +88,44 @@ public class CrearCuenta extends JFrame {
 
 		
 		setVisible(true);
-	}
-	
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
+		
+		bCrearCuenta.addActionListener(new ActionListener() {
+			
 			@Override
-			public void run() {
-				new CrearCuenta(null);				
+			public void actionPerformed(ActionEvent e) {
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						new Album(CrearCuenta.this);				
+					}
+				});
+				dispose();
 			}
 		});
+		char caracter = pfContrasena.getEchoChar();
+
+		cbMostrarContrasena.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(cbMostrarContrasena.isSelected()) {
+					pfContrasena.setEchoChar((char)0);
+					pfContrasena2.setEchoChar((char)0);
+					pfContrasena.requestFocus();
+					pfContrasena2.requestFocus();
+				} else {
+					pfContrasena.setEchoChar(caracter);
+					pfContrasena2.setEchoChar(caracter);
+				}
+				
+			}
+		});
+	}
+	
+
+	
+
 
 	}
 	
-}
+

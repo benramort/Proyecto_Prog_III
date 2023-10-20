@@ -22,7 +22,15 @@ public class IniciarSesion extends JFrame {
 	
 	public static void main(String[] args) {
 		searchLookAndFeel();
-		new IniciarSesion();//En la versión final hacerlo con invokelater
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				new IniciarSesion();
+				
+			}
+		});
+		
 	}
 	
 	private static void searchLookAndFeel() {
@@ -54,7 +62,7 @@ public class IniciarSesion extends JFrame {
 		JPanel pUsuarioContrasena = new JPanel();
 		pInferiorBox.setLayout(new BoxLayout(pInferiorBox, BoxLayout.Y_AXIS));
 		JPanel pBotonera = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
-		
+		JPanel pCheckBox = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JPanel pTexto = new JPanel();
 		pTexto.setLayout(new BoxLayout(pTexto, BoxLayout.Y_AXIS));
 		JPanel pCampos = new JPanel();
@@ -68,7 +76,7 @@ public class IniciarSesion extends JFrame {
 		pTexto.setOpaque(false);
 		pCampos.setOpaque(false);
 		pInferiorBox.setOpaque(false);
-		
+		pCheckBox.setBackground(c);
 		//Crear componentes
 		JLabel lUsuario = new JLabel("Usuario:");
 		JTextField tfUsuario = new JTextField(15);
@@ -77,17 +85,19 @@ public class IniciarSesion extends JFrame {
 		JButton btIniciarSesion = new JButton("Iniciar sesión");
 		JButton btNuevaCuenta = new JButton("Crear cuenta");
 		JLabel lLogo = new JLabel(new ImageIcon("img/logo.png"));
-		
+		JCheckBox cbMostrarContrasena = new JCheckBox("Mostrar contraseña");
 		//Formato componentes
 		Font fuente = new Font("Arial", Font.BOLD, 15);
 		lUsuario.setFont(fuente);
 		lContrasena.setFont(fuente);
+		cbMostrarContrasena.setBackground(c);
 		
 		
 		//Añadir componentes a contenedores
 		add(pInferior, BorderLayout.SOUTH);
 		pInferior.add(pInferiorBox);
 		pInferiorBox.add(pUsuarioContrasena);
+		pInferiorBox.add(pCheckBox);
 		pInferiorBox.add(pBotonera);
 		
 //		pInferiorBox.add(pUsuario);
@@ -107,6 +117,7 @@ public class IniciarSesion extends JFrame {
 		pCampos.add(pfContrasena);
 		pBotonera.add(btIniciarSesion);
 		pBotonera.add(btNuevaCuenta);
+		pCheckBox.add(cbMostrarContrasena);
 		add(lLogo, BorderLayout.CENTER);
 		
 		
@@ -122,7 +133,37 @@ public class IniciarSesion extends JFrame {
 						new CrearCuenta(IniciarSesion.this);
 					}
 				});
-//				dispose();
+				dispose();
+			}
+		});
+		
+		btIniciarSesion.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SwingUtilities.invokeLater(new Runnable() {
+					
+					@Override
+					public void run() {
+						new Album(IniciarSesion.this);
+					}
+				});
+				dispose();
+			}
+		});
+		char caracter = pfContrasena.getEchoChar();
+
+		cbMostrarContrasena.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(cbMostrarContrasena.isSelected()) {
+					pfContrasena.setEchoChar((char)0);
+					pfContrasena.requestFocus();
+				} else {
+					pfContrasena.setEchoChar(caracter);
+				}
+				
 			}
 		});
 		
