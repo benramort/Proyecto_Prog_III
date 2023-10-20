@@ -57,7 +57,7 @@ public class Entrenamiento extends JFrame{
 		CartaEntrenando carta3 = new CartaEntrenando();
 		//Formato componentes
 		pbProgreso.setPreferredSize(new Dimension(1000, 30));
-		bAlbum.setPreferredSize(new Dimension(90, 30));
+		bAlbum.setPreferredSize(new Dimension(90, 40));
 		//Añadir componentes a contenedores
 		this.getContentPane().add(pInferior, BorderLayout.SOUTH);
 		this.getContentPane().add(pCentral, BorderLayout.CENTER);
@@ -93,14 +93,14 @@ public class Entrenamiento extends JFrame{
 	}
 	
 	
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				new Entrenamiento(null);
-				
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		SwingUtilities.invokeLater(new Runnable() {
+//			
+//			@Override
+//			public void run() {
+//				new Entrenamiento(null);
+//				
+//			}
+//		});
+//	}
 }

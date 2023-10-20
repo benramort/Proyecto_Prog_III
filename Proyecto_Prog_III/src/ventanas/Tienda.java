@@ -10,12 +10,17 @@ import java.awt.Image;
 import javax.swing.*;
 
 public class Tienda extends JFrame{
-	
-	public Tienda() {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public Tienda(JFrame ventanaAnterior) {
 		///Formato Ventana
 		setSize(1500,1000);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setTitle("Universal Card Collection");
+		setLocationRelativeTo(ventanaAnterior);
 		
 		///Crear Contenedores
 		JPanel pSuperior = new JPanel();
@@ -79,14 +84,14 @@ public class Tienda extends JFrame{
 		setVisible(true);
 	}
 	
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				new Tienda();
-				
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		SwingUtilities.invokeLater(new Runnable() {
+//			
+//			@Override
+//			public void run() {
+//				new Tienda(null);
+//				
+//			}
+//		});
+//	}
 }
