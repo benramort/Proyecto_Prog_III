@@ -29,29 +29,32 @@ public class VentanaPrueba extends JFrame {
 	
 	public VentanaPrueba() {
 		
-		lookAndFill();
+//		lookAndFill();
 		
 		
-		setSize(500,500);
+		setSize(1500,1000);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
+	
+		CartaEntrenando prueba = new CartaEntrenando();
+		this.getContentPane().add(prueba, BorderLayout.CENTER);
 		
 //		PanelPorcentaje p = new PanelPorcentaje(78, 300, 300, Color.BLACK);
 //		p.setBackground(Color.CYAN);
 //		add(p, BorderLayout.CENTER);
 //		p.setPorcentaje(30);
 		
-		Carta carta = new Carta("yoshi",new Saga("SuperMario"));
-		System.out.println("Hoila");
-
-		PanelCarta p = new PanelCarta(carta);
-		JPanel p2 = new JPanel();
-		p2.add(p);
-		add(p2, BorderLayout.CENTER);
-		p.setBackground(Color.BLUE);
-		
-		JButton bt = new JButton("Mostrar stats");
-		add(bt, BorderLayout.SOUTH);
+//		Carta carta = new Carta("yoshi",new Saga("SuperMario"));
+//		System.out.println("Hoila");
+//
+//		PanelCarta p = new PanelCarta(carta);
+//		JPanel p2 = new JPanel();
+//		p2.add(p);
+//		add(p2, BorderLayout.CENTER);
+//		p.setBackground(Color.BLUE);
+//		
+//		JButton bt = new JButton("Mostrar stats");
+//		add(bt, BorderLayout.SOUTH);
 		
 //		JLayeredPane lp = new JLayeredPane();
 //		
@@ -63,48 +66,48 @@ public class VentanaPrueba extends JFrame {
 //		lp.setOpaque(true);
 //		l.setBounds(0, 0, 100, 100);
 		
-		bt.addActionListener(new ActionListener()  {
+//		bt.addActionListener(new ActionListener()  {
+//
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				if (p.isMostrandoStats() == true) {
+//					p.mostrarStats(false);
+//				} else {
+//					p.mostrarStats(true);
+//				}
+//			}
+//			
+//		});
+//		
+//		p.addMouseListener(new MouseAdapter() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (p.isMostrandoStats() == true) {
-					p.mostrarStats(false);
-				} else {
-					p.mostrarStats(true);
-				}
-			}
-			
-		});
-		
-		p.addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				PanelCarta p = (PanelCarta) e.getSource();
-				p.mostrarStats(true);
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				PanelCarta p = (PanelCarta) e.getSource();
-				p.mostrarStats(false);
-			}
-			
-		});
+//			@Override
+//			public void mouseEntered(MouseEvent e) {
+//				PanelCarta p = (PanelCarta) e.getSource();
+//				p.mostrarStats(true);
+//			}
+//
+//			@Override
+//			public void mouseExited(MouseEvent e) {
+//				PanelCarta p = (PanelCarta) e.getSource();
+//				p.mostrarStats(false);
+//			}
+//			
+//		});
 		
 		setVisible(true);
 		
 	}
 	
-	public void lookAndFill() {
-		try {
-		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-		        if ("Nimbus".equals(info.getName())) {
-		            UIManager.setLookAndFeel(info.getClassName());
-		            return;
-		        }
-		    }
-		} catch (Exception e) {} // Si no está disponible nimbus, no se hace nada
-	}
+//	public void lookAndFill() {
+//		try {
+//		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+//		        if ("Nimbus".equals(info.getName())) {
+//		            UIManager.setLookAndFeel(info.getClassName());
+//		            return;
+//		        }
+//		    }
+//		} catch (Exception e) {} // Si no está disponible nimbus, no se hace nada
+//	}
 
 }

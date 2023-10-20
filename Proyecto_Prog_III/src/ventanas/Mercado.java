@@ -90,7 +90,7 @@ public class Mercado extends JFrame {
 		botonVender.setPreferredSize(new Dimension(150,70));
 		bBotonHome.setPreferredSize(new Dimension(100,30));
 		cbSelSaga.setMinimumSize(new Dimension(200, 200));
-
+		bBotonHome.setPreferredSize(new Dimension(90, 40));
 		
 		
 		//Añadir componentes a contenedores
@@ -129,16 +129,16 @@ public class Mercado extends JFrame {
 		setVisible(true);
 	}
 	
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				new Mercado(null);
-				
-			}
-		});
-		
-	}
+//	public static void main(String[] args) {
+//		SwingUtilities.invokeLater(new Runnable() {
+//			
+//			@Override
+//			public void run() {
+//				new Mercado(null);
+//				
+//			}
+//		});
+//		
+//	}
 	
 }

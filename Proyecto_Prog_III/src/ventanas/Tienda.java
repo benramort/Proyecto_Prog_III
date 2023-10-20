@@ -2,6 +2,7 @@ package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
@@ -9,12 +10,17 @@ import java.awt.Image;
 import javax.swing.*;
 
 public class Tienda extends JFrame{
-	
-	public Tienda() {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public Tienda(JFrame ventanaAnterior) {
 		///Formato Ventana
 		setSize(1500,1000);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setTitle("Universal Card Collection");
+		setLocationRelativeTo(ventanaAnterior);
 		
 		///Crear Contenedores
 		JPanel pSuperior = new JPanel();
@@ -24,6 +30,7 @@ public class Tienda extends JFrame{
 		JPanel pSobre = new JPanel();
 		JPanel pNombreSobre = new JPanel();
 		JPanel pPrecioSobre = new JPanel();
+		JPanel pBotonHome = new JPanel();
 		
 		///Formato Contenedores
 		pSuperior.setLayout(new BorderLayout());
@@ -35,7 +42,7 @@ public class Tienda extends JFrame{
 		pPrecioSobre.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
 		///Crear Componentes
-		JButton btHome = new JButton("áLBUM");
+		JButton btHome = new JButton("ÁLBUM");
 		JLabel lMonedas = new JLabel("XXXXXXXXXX");
 		JLabel lImagenMonedas = new JLabel();
 		JLabel lImagenMonedas2 = new JLabel();
@@ -53,9 +60,11 @@ public class Tienda extends JFrame{
 		Font fuenteNombre = new Font("Arial",Font.BOLD, 32);
 		lNombreSobre.setFont(fuenteNombre);
 		lPrecioSobre.setFont(fuenteNombre);
+		btHome.setPreferredSize(new Dimension(90, 40));
 		
 		///Añadir componentes a contenedores
-		pSuperior.add(btHome, BorderLayout.WEST);
+		pSuperior.add(pBotonHome, BorderLayout.WEST);
+		pBotonHome.add(btHome);
 		pSuperior.add(pMonedas, BorderLayout.EAST);
 		add(pSuperior, BorderLayout.NORTH);
 		pMonedas.add(lMonedas);
@@ -75,14 +84,14 @@ public class Tienda extends JFrame{
 		setVisible(true);
 	}
 	
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				new Tienda();
-				
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		SwingUtilities.invokeLater(new Runnable() {
+//			
+//			@Override
+//			public void run() {
+//				new Tienda(null);
+//				
+//			}
+//		});
+//	}
 }
