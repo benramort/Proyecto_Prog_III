@@ -32,7 +32,7 @@ public class IniciarSesion extends JFrame {
 //		}
 		try {
 		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-		        if ("Windows".equals(info.getName())) {
+		        if ("Nimbus".equals(info.getName())) {
 		            UIManager.setLookAndFeel(info.getClassName());
 		            return;
 		        }

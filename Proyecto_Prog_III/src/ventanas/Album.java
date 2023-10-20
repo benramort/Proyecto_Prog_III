@@ -205,12 +205,12 @@ public class Album extends JFrame {
 			public void run() {
 				new Album(null);
 				
-//				try {
-//					UIManager.setLookAndFeel(new NimbusLookAndFeel());
-//				} catch (UnsupportedLookAndFeelException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
+				try {
+					UIManager.setLookAndFeel(new NimbusLookAndFeel());
+				} catch (UnsupportedLookAndFeelException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 			}
 			
