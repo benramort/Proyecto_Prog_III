@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -89,6 +91,15 @@ public class Entrenamiento extends JFrame{
 		pCentral.add(pBotonAlbum, BorderLayout.NORTH);
 		
 		setVisible(true);
+		
+		bAlbum.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+						dispose();
+						
+			}
+		});
 		
 	}
 	
