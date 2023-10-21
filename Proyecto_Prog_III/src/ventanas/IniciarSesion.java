@@ -2,7 +2,6 @@ package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -10,7 +9,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 public class IniciarSesion extends JFrame {
 
@@ -33,20 +31,20 @@ public class IniciarSesion extends JFrame {
 		
 	}
 	
-	private static void searchLookAndFeel() {
+//	private static void searchLookAndFeel() {
 //		LookAndFeelInfo[] lfs = UIManager.getInstalledLookAndFeels();
 //		for (LookAndFeelInfo lf : lfs) {
 //			System.out.println(lf.getName());
 //		}
-		try {
-		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-		        if ("Nimbus".equals(info.getName())) {
-		            UIManager.setLookAndFeel(info.getClassName());
-		            return;
-		        }
-		    }
-		} catch (Exception e) {} // Si no está disponible nimbus, no se hace nada
-	}
+//		try {
+//		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+//		        if ("Nimbus".equals(info.getName())) {
+//		            UIManager.setLookAndFeel(info.getClassName());
+//		            return;
+//		        }
+//		    }
+//		} catch (Exception e) {} // Si no está disponible nimbus, no se hace nada
+//	}
 
 	public IniciarSesion() {
 		//Formato ventana
