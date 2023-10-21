@@ -4,21 +4,21 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-
 import javax.swing.*;
 import javax.swing.border.*;
-
 import comportamientos.Carta;
 import comportamientos.Saga;
+
 
 
 public class Album extends JFrame {
@@ -30,9 +30,11 @@ public class Album extends JFrame {
 	
 	
 	public Album(JFrame ventanaAnterior) {
+		double escala = 1;
+		
 		//Formato ventana
 		setTitle("Universal Cards Collection");
-		setSize(1500, 1000);
+		setSize((int) (1500/escala), (int) (1000/escala));
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(new BorderLayout());
@@ -154,7 +156,7 @@ public class Album extends JFrame {
 			@Override
 			public void componentResized(ComponentEvent e) {
 				GridLayout gl = (GridLayout) pCartas.getLayout();
-				System.out.println(spCartas.getWidth());
+//				System.out.println(spCartas.getWidth());
 				if (spCartas.getWidth() < 500) {
 					gl.setColumns(1);
 				} else if (spCartas.getWidth() < 800) {
@@ -183,23 +185,92 @@ public class Album extends JFrame {
 		}
 		
 		
-		
-		
-
-		
-		
-		
 		setVisible(true);
-	}
+		
+		System.out.println(Toolkit.getDefaultToolkit().getScreenResolution());
 	
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
+		bIdle.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					SwingUtilities.invokeLater(new Runnable() {
+						
+						@Override
+						public void run() {
+							new Entrenamiento(Album.this);
+						}
+					});
+				}
+		});
+		
+		bMercado.addActionListener(new ActionListener() {
 			
 			@Override
-			public void run() {
-				new Album(null);
-				
+
+			public void actionPerformed(ActionEvent e) {
+				SwingUtilities.invokeLater(new Runnable() {
+					
+					@Override
+					public void run() {
+						new Mercado(Album.this);
+					}
+				});
 			}
 		});
+		
+		bTienda.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SwingUtilities.invokeLater(new Runnable() {
+					
+					@Override
+					public void run() {
+						new Tienda(Album.this);
+					}
+				});
+			}
+		});
+		
+		bSalir.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SwingUtilities.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						int resp = JOptionPane.showConfirmDialog( Album.this, "¿Seguro que quieres salir?", "Salir", JOptionPane.YES_NO_OPTION );
+						if (resp==JOptionPane.OK_OPTION) {
+							Album.this.dispose();
+						}
+						
+					}
+				});
+			}
+		});
+		
+		
 	}
+	
+//	public static void main(String[] args) {
+//		SwingUtilities.invokeLater(new Runnable() {
+//			
+//			@Override
+//			public void run() {
+//				new Album(null);
+//				
+//				try {
+//					UIManager.setLookAndFeel(new NimbusLookAndFeel());
+//				} catch (UnsupportedLookAndFeelException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				
+//			}
+//			
+//			
+//			
+//		});
+//	}
+
 }
