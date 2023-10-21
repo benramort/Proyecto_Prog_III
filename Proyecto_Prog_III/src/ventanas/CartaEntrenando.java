@@ -33,7 +33,8 @@ public class CartaEntrenando extends JPanel{
 		this.add(pPrincipal);
 		pPrincipal.add(pCarta);
 		pPrincipal.add(Box.createVerticalStrut(20));
-		pPrincipal.add(pbStamina);		
+		pPrincipal.add(pbStamina);
+		setOpaque(false);
 		
 	}
 

@@ -40,6 +40,11 @@ public class Entrenamiento extends JFrame{
 		boxLayoutCartasH.setLayout(new BoxLayout(boxLayoutCartasH, BoxLayout.X_AXIS));
 		boxLayoutCartasV.setLayout(new BoxLayout(boxLayoutCartasV, BoxLayout.Y_AXIS));
 		pBotonAlbum.setLayout(new FlowLayout(FlowLayout.LEFT));
+		boxLayoutCartasH.setMaximumSize(new Dimension(1000,1000));
+		boxLayoutCartasV.setOpaque(true);
+		boxLayoutCartasV.setBackground(Color.BLUE);
+//		boxLayoutCartasH.setOpaque(false);
+		boxLayoutCartasH.setBackground(Color.RED);
 		//Creacion componentes
 		JButton bAlbum = new JButton("ÁLBUM");
 		JLabel lMonedasGeneradas = new JLabel("Monedas generadas: " );
@@ -77,13 +82,14 @@ public class Entrenamiento extends JFrame{
 		pCentral.add(pBarraProgreso, BorderLayout.SOUTH);
 		pCentral.add(pCartas, BorderLayout.CENTER);		
 		pCartas.add(boxLayoutCartasV);
-		pCartas.add(boxLayoutCartasH);
+		boxLayoutCartasV.add(Box.createHorizontalGlue());
+//		boxLayoutCartasV.setBackground(Color.BLUE);
 		boxLayoutCartasH.add(carta1);
 		boxLayoutCartasH.add(Box.createHorizontalStrut(50));
 		boxLayoutCartasH.add(carta2);
 		boxLayoutCartasH.add(Box.createHorizontalStrut(50));
 		boxLayoutCartasH.add(carta3);
-		pCartas.add(Box.createVerticalStrut(900));
+//		pCartas.add(Box.createVerticalStrut(900));
 		boxLayoutCartasV.add(boxLayoutCartasH);
 		pBotonAlbum.add(bAlbum);
 		pCentral.add(pBotonAlbum, BorderLayout.NORTH);

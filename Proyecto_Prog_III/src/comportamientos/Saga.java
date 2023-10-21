@@ -29,4 +29,6 @@ public class Saga {
 	public ImageIcon getRecursoGrafico() {
 		return recursoGrafico;
 	}
+
+	
 }
