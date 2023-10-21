@@ -35,7 +35,7 @@ public class Tienda extends JFrame{
 		pPrecioSobre.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
 		///Crear Componentes
-		JButton btHome = new JButton("áLBUM");
+		JButton btHome = new JButton("ÁLBUM");
 		JLabel lMonedas = new JLabel("XXXXXXXXXX");
 		JLabel lImagenMonedas = new JLabel();
 		JLabel lImagenMonedas2 = new JLabel();
