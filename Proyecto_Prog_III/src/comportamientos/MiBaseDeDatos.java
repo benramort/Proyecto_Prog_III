@@ -10,6 +10,8 @@ import java.util.TreeSet;
 public class MiBaseDeDatos {
 	
 	public static TreeSet<Carta> modeloCartas = new TreeSet<>();
+	public static TreeSet<Usuario> usuarios = new TreeSet<>();
+	
 	
 	public static Usuario cargarUsuario() {
 		return new Usuario();
@@ -36,8 +38,25 @@ public class MiBaseDeDatos {
 		}
 	}
 	
+	public static void cargarUsuarios() {
+		try (Scanner scanner = new Scanner(new FileInputStream("data/usuarios.csv"))) {
+			while (scanner.hasNextLine()) {
+				String linea = scanner.nextLine();
+				try {
+					Usuario u = Usuario.deLinea(linea);
+					usuarios.add(u);
+				} catch (NumberFormatException ex) {
+					ex.printStackTrace();
+				}
+			}
+		} catch (FileNotFoundException ex) {
+			ex.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] args) {
 		cargarModeloCartas();
+		cargarUsuarios();
 		for (Carta c: modeloCartas) {
 			System.out.println(c);
 		}
