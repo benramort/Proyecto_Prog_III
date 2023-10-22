@@ -51,6 +51,12 @@ public class Album extends JFrame {
 		PanelPorcentaje pPorcentaje = new PanelPorcentaje(100, 300, 300, Color.BLACK);
 		JPanel pPorcentaje2 = new JPanel();
 		JPanel pPorcentaje3 = new JPanel();
+		JPanel pBuscar = new JPanel();
+		JPanel pPrecioMin = new JPanel();
+		JPanel pPrecioMax = new JPanel();
+		JPanel pSaga = new JPanel();
+		JPanel pBuscarSuperior = new JPanel();
+		JPanel pBotonCerrarFiltros = new JPanel();
 		
 		//Formato contenedores
 		pIzquierdo.setLayout(new BorderLayout());
@@ -63,7 +69,17 @@ public class Album extends JFrame {
 		pPorcentaje2.setMaximumSize(new Dimension(300,300));
 		pPorcentaje.setPreferredSize(new Dimension(300,300));
 		pPorcentaje3.setLayout(new BoxLayout(pPorcentaje3, BoxLayout.Y_AXIS));
-		
+
+		pBotonCerrarFiltros.setLayout(new FlowLayout(FlowLayout.CENTER));
+		Border bordePanelBuscarBorder = BorderFactory.createLineBorder(Color.BLACK);
+		pBuscar.setBorder(bordePanelBuscarBorder);
+		pBuscar.setLayout(new BoxLayout(pBuscar, BoxLayout.Y_AXIS));
+		pBuscarSuperior.setLayout(new BorderLayout());
+		pPrecioMin.setMaximumSize(new Dimension(400, 800));
+		pPrecioMin.setLayout(new FlowLayout(FlowLayout.CENTER));
+		pPrecioMax.setMaximumSize(new Dimension(400, 800));
+		pPrecioMax.setLayout(new FlowLayout(FlowLayout.CENTER));
+		pSaga.setLayout(new FlowLayout(FlowLayout.CENTER));
 
 
 		//Crear componentes
@@ -98,6 +114,14 @@ public class Album extends JFrame {
 		ImageIcon imagen7 = new ImageIcon(getClass().getResource("/moneda.png"));
 		ImageIcon imagenMoneda = new ImageIcon(imagen7.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 		
+		JTextField tfBuscar = new JTextField("Buscar:");
+		JLabel lPrecioMin = new JLabel("Precio mínimo: ");
+		JSpinner spSelPrecioMin = new JSpinner();
+		JLabel lPrecioMax = new JLabel("Precio máximo:");
+		JSpinner spSelPrecioMax = new JSpinner();
+		JLabel lSaga = new JLabel("Saga");
+		JComboBox<Saga> cbSelSaga = new JComboBox<Saga>();
+		JLabel lCerrarFiltros = new JLabel("X");
 		
 		//Formato componentes
 		lImagenMonedas.setIcon(imagenMoneda);
@@ -116,6 +140,13 @@ public class Album extends JFrame {
 		spCartas.setViewportView(pCartas);
 		spCartas.setBorder(null);
 		spCartas.getVerticalScrollBar().setUnitIncrement(15);
+		
+		tfBuscar.setMaximumSize(new Dimension(200, 100));
+		spSelPrecioMin.setPreferredSize(new Dimension(100, 25));
+		spSelPrecioMax.setPreferredSize(new Dimension(100, 25));
+		spSelPrecioMin.setModel(new SpinnerNumberModel(0, 0, 999999999, 100));
+		spSelPrecioMax.setModel(new SpinnerNumberModel(0, 0, 999999999, 100));
+		cbSelSaga.setMinimumSize(new Dimension(200, 200));
 		
 		//Añadir componentes a contenedores
 		this.getContentPane().add(pIzquierdo, BorderLayout.WEST);
@@ -137,6 +168,27 @@ public class Album extends JFrame {
 		pPorcentaje3.add(pPorcentaje2);
 		pPorcentaje2.add(pPorcentaje);
 		pPorcentaje3.add(Box.createVerticalGlue());
+		
+		
+		pBuscar.add(pBuscarSuperior);
+		pBuscar.add(tfBuscar);
+		pBuscar.add(Box.createVerticalStrut(20));
+		pBuscar.add(pPrecioMin);
+		pBuscar.add(Box.createVerticalStrut(10));
+		pBuscar.add(pPrecioMax);
+		pBuscar.add(Box.createVerticalStrut(10));
+		pBuscar.add(pSaga);
+		pBuscarSuperior.add(pBotonCerrarFiltros, BorderLayout.EAST);
+		pBotonCerrarFiltros.add(lCerrarFiltros);
+		pPrecioMin.add(lPrecioMin);
+		pPrecioMin.add(spSelPrecioMin);
+		pPrecioMax.add(lPrecioMax);
+		pPrecioMax.add(spSelPrecioMax);
+		pSaga.add(lSaga);
+		pSaga.add(cbSelSaga);
+		
+		pPorcentaje2.add(pBuscar);
+		pBuscar.setVisible(false);
 		
 		
 		//Configurar escuchadores
@@ -256,6 +308,38 @@ public class Album extends JFrame {
 						
 					}
 				});
+			}
+		});
+		
+		bBuscar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				pPorcentaje.setVisible(false);
+				pBuscar.setVisible(true);
+				
+			}
+		});
+		
+		lCerrarFiltros.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				pBotonCerrarFiltros.setBackground(Color.WHITE);
+				lCerrarFiltros.setForeground(Color.BLACK);
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				pBotonCerrarFiltros.setBackground(Color.RED);
+				lCerrarFiltros.setForeground(Color.WHITE);				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				pBuscar.setVisible(false);
+				pPorcentaje.setVisible(true);
+				
 			}
 		});
 		
