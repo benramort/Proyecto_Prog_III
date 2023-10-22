@@ -2,7 +2,7 @@ package comportamientos;
 
 import java.util.TreeMap;
 
-public class Usuario {
+public class Usuario{
 	
 	//Igual hace falta un id
 	private String nombre;
@@ -12,6 +12,16 @@ public class Usuario {
 	
 	public Usuario() {
 		
+	}
+	
+	public Usuario(String nombre, String contrasena) {
+		this.nombre = nombre;
+		this.contrasena = contrasena;
+		monedas = 0;
+		cartas = new TreeMap<>();
+		for (Carta c: MiBaseDeDatos.modeloCartas) {
+			cartas.put(c, 0);
+		}
 	}
 	
 	public Usuario(String nombre, String contrasena, int monedas) {
@@ -45,12 +55,14 @@ public class Usuario {
 	}
 
 	public TreeMap<Carta, Integer> getCartas() {
-		
 		return cartas;
 	}
 	
-	
-	
+	public static Usuario deLinea(String s) {
+		String[] tokens = s.split(";");
+		return new Usuario(tokens[0],tokens[1],Integer.parseInt(tokens[2]));
+		
+	}
 	
 	
 	

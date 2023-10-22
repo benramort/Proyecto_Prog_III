@@ -31,7 +31,7 @@ public class PanelCarta extends JPanel{
 		lp = new JLayeredPane();
 		lp.setPreferredSize(new Dimension(228,328));
 		add(lp);
-		setPreferredSize(new Dimension(235,335));
+		setMaximumSize(new Dimension(235,335));
 		setOpaque(false);
 		
 		ImageIcon imagen = new ImageIcon(carta.getRecursoGrafico().getImage().getScaledInstance(ANCHO_FOTO, ALTO_FOTO, Image.SCALE_DEFAULT));

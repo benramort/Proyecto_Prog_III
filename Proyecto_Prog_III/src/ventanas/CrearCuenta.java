@@ -1,6 +1,9 @@
 package ventanas;
 
 import javax.swing.*;
+
+import comportamientos.Usuario;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -96,7 +99,7 @@ public class CrearCuenta extends JFrame {
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						new Album(CrearCuenta.this);				
+						new Album(CrearCuenta.this, new Usuario("Beñat","contraseña"));				
 					}
 				});
 				dispose();
