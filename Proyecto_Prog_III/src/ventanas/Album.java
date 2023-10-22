@@ -17,7 +17,9 @@ import java.awt.event.MouseListener;
 import javax.swing.*;
 import javax.swing.border.*;
 import comportamientos.Carta;
+import comportamientos.MiBaseDeDatos;
 import comportamientos.Saga;
+import comportamientos.Usuario;
 
 
 
@@ -26,11 +28,13 @@ public class Album extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
+	private Usuario usuario;
 	
 	
-	public Album(JFrame ventanaAnterior) {
+	public Album(JFrame ventanaAnterior, Usuario usuario) {
 		double escala = 1;
+		this.usuario = usuario;
 		
 		//Formato ventana
 		setTitle("Universal Cards Collection");
@@ -43,6 +47,7 @@ public class Album extends JFrame {
 		JPanel pIzquierdo = new JPanel();
 		JPanel pDerecho = new JPanel();
 		JPanel pCartas = new JPanel(new GridLayout(0, 4));
+		//TODO espacio vertical de cartas
 		JPanel pBotones = new JPanel();
 		JPanel pMonedas = new JPanel();
 		PanelPorcentaje pPorcentaje = new PanelPorcentaje(100, 300, 300, Color.BLACK);
@@ -228,12 +233,22 @@ public class Album extends JFrame {
 		});
 		
 		//Gestion de cartas
-		
-		Carta carta = new Carta("yoshi",new Saga("SuperMario"));
-		for (int i=0;i<20;i++) {
-			PanelCarta p = new PanelCarta(carta);
-			p.addMouseListener(hoverCartas);
-			pCartas.add(p);
+		 
+		for (Carta c: usuario.getCartas().keySet()) {
+			if (usuario.getCartas().get(c) != 0) {
+				PanelCarta p = new PanelCarta(c);
+				p.addMouseListener(hoverCartas);
+				pCartas.add(p);
+				p.setMaximumSize(getMaximumSize());
+				p.setOpaque(true);
+				p.setBackground(Color.RED);
+				System.out.println("Cargada carta "+c.getId());
+			} else {
+				PanelCarta p = new PanelCarta(new Carta("yoshi", new Saga("SuperMario")));
+				p.addMouseListener(hoverCartas);
+				pCartas.add(p);
+				System.out.println("Cargada carta "+c.getId());
+			}
 		}
 		
 		
@@ -336,25 +351,26 @@ public class Album extends JFrame {
 		
 	}
 	
-//	public static void main(String[] args) {
-//		SwingUtilities.invokeLater(new Runnable() {
-//			
-//			@Override
-//			public void run() {
-//				new Album(null);
-//				
-//				try {
-//					UIManager.setLookAndFeel(new NimbusLookAndFeel());
-//				} catch (UnsupportedLookAndFeelException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				
-//			}
-//			
-//			
-//			
-//		});
-//	}
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				MiBaseDeDatos.cargarModeloCartas();
+				Usuario usuario = new Usuario("Beñat","contrasena");
+				usuario.getCartas().put(new Carta(1), 1);
+				usuario.getCartas().put(new Carta(5), 2);
+				usuario.getCartas().put(new Carta(6), 1);
+				new Album(null, usuario);
+				for (Carta c: usuario.getCartas().keySet()) {
+					System.out.println(c.toString() + usuario.getCartas().get(c));
+				}
+				
+			}
+			
+			
+			
+		});
+	}
 
 }
