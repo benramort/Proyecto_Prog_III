@@ -73,10 +73,10 @@ public class Mercado extends JFrame {
 		JLabel lPrecioMax = new JLabel("Precio máximo:");
 		JSpinner spSelPrecioMax = new JSpinner();
 		JLabel lSaga = new JLabel("Saga");
-		ArrayList<Saga> lSagas = new ArrayList<Saga>();
-		lSagas.add(new Saga("Super Mario"));
-		lSagas.add(new Saga("God of War"));
-		JComboBox<Saga> cbSelSaga = new JComboBox(lSagas.toArray());
+//		ArrayList<Saga> lSagas = new ArrayList<Saga>();
+//		lSagas.add(new Saga("Super Mario"));
+//		lSagas.add(new Saga("God of War"));
+		JComboBox<Saga> cbSelSaga = new JComboBox<Saga>();
 		JButton botonVender = new JButton("Vender");
 		
 		ImageIcon imagen1 = new ImageIcon(getClass().getResource("/moneda.png"));
