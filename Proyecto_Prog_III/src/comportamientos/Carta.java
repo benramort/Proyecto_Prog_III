@@ -19,6 +19,10 @@ public class Carta implements Comparable<Carta>{
 	
 	
 	
+	public Carta(int id) {
+		this.id = id;
+	}
+	
 	public Carta(int id, String nombreInterno, String nombreVisible, Saga saga,
 			int monedasPorMinuto, int resistencia, int recuperacion) {
 		this.nombreInterno = nombreInterno;

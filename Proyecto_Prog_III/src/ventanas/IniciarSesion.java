@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import comportamientos.Usuario;
+
 public class IniciarSesion extends JFrame {
 
 	/**
@@ -143,7 +145,7 @@ public class IniciarSesion extends JFrame {
 					
 					@Override
 					public void run() {
-						new Album(IniciarSesion.this);
+						new Album(IniciarSesion.this, new Usuario("Beñat","contraseña"));
 					}
 				});
 				dispose();
