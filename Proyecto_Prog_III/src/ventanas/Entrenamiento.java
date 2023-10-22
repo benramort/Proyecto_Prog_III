@@ -123,7 +123,7 @@ public class Entrenamiento extends JFrame{
 						
 						for(int i = 0; i <= 100; i++) {
 							try {
-								Thread.sleep(1000);
+								Thread.sleep(100);
 							} catch (InterruptedException e1) {
 								
 							}
@@ -142,6 +142,67 @@ public class Entrenamiento extends JFrame{
 					}
 		});
 				hiloBarraProgresoThread.start();
+				
+				Thread hiloBarraStamina = new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						for(int i = 100; i >= 0; i--) {
+							try {
+								Thread.sleep(100);
+							} catch (InterruptedException e2) {
+								
+							}
+							int valor = i;
+							
+							carta1.pbStamina.setValue(valor);
+									
+								}
+							
+						}
+				});
+				hiloBarraStamina.start();
+				
+				Thread hiloBarraStamina2 = new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						for(int i = 100; i >= 0; i--) {
+							try {
+								Thread.sleep(1000);
+							} catch (InterruptedException e2) {
+								
+							}
+							int valor = i;
+							
+							carta2.pbStamina.setValue(valor);
+									
+								}
+							
+						}
+				});
+				hiloBarraStamina2.start();
+				
+				Thread hiloBarraStamina3 = new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						for(int i = 100; i >= 0; i--) {
+							try {
+								Thread.sleep(500);
+							} catch (InterruptedException e2) {
+								
+							}
+							int valor = i;
+							
+							carta3.pbStamina.setValue(valor);
+									
+								}
+						}
+						
+					
+				});
+				hiloBarraStamina3.start();
 	}
 	
 	
