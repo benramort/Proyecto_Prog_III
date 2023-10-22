@@ -28,7 +28,7 @@ public class CartaEntrenando extends JPanel{
 		JProgressBar pbStamina = new JProgressBar(0, 100);
 		//Formato componentes
 		pbStamina.setPreferredSize(new Dimension(250, 30));
-		
+		pbStamina.setStringPainted(true);
 		//Añadir componentes a contenedores
 		this.add(pPrincipal);
 		pPrincipal.add(pCarta);

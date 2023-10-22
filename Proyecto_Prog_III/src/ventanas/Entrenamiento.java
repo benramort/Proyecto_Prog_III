@@ -20,7 +20,7 @@ public class Entrenamiento extends JFrame{
 	public Entrenamiento(JFrame ventanaAnterior) {
 		//Formato ventana
 		setTitle("Entrenamiento");
-		setSize(1500, 1000);
+		setSize(1200, 650);
 		setLocationRelativeTo(null);
 		this.getContentPane().setLayout(new BorderLayout());
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -31,22 +31,22 @@ public class Entrenamiento extends JFrame{
 		JPanel pTextos = new JPanel();
 		JPanel pBarraProgreso = new JPanel();
 		JPanel pCartas = new JPanel();
-		JPanel boxLayoutCartasH = new JPanel();
+		JPanel flowLayoutCartasH = new JPanel();
 		JPanel boxLayoutCartasV = new JPanel();
 		JPanel pBotonAlbum = new JPanel();
+		JPanel pBotonEntrenar = new JPanel();
 		//Formato contenedores
 		pInferior.setLayout(new BorderLayout());
 		pTextos.setLayout(new FlowLayout(FlowLayout.CENTER));
 		pCentral.setLayout(new BorderLayout());
 		pCartas.setLayout(new FlowLayout(FlowLayout.CENTER));
-		boxLayoutCartasH.setLayout(new BoxLayout(boxLayoutCartasH, BoxLayout.X_AXIS));
+		pBotonEntrenar.setLayout(new FlowLayout(FlowLayout.CENTER));
+		flowLayoutCartasH.setLayout(new FlowLayout(FlowLayout.CENTER));
 		boxLayoutCartasV.setLayout(new BoxLayout(boxLayoutCartasV, BoxLayout.Y_AXIS));
 		pBotonAlbum.setLayout(new FlowLayout(FlowLayout.LEFT));
-		boxLayoutCartasH.setMaximumSize(new Dimension(1000,1000));
+		flowLayoutCartasH.setMaximumSize(new Dimension(1000,1000));
 		boxLayoutCartasV.setOpaque(true);
-		boxLayoutCartasV.setBackground(Color.BLUE);
 //		boxLayoutCartasH.setOpaque(false);
-		boxLayoutCartasH.setBackground(Color.RED);
 		//Creacion componentes
 		JButton bAlbum = new JButton("ÁLBUM");
 		JLabel lMonedasGeneradas = new JLabel("Monedas generadas: " );
@@ -62,9 +62,12 @@ public class Entrenamiento extends JFrame{
 		CartaEntrenando carta1 = new CartaEntrenando();
 		CartaEntrenando carta2 = new CartaEntrenando();
 		CartaEntrenando carta3 = new CartaEntrenando();
+		JButton bEntrenar = new JButton("ENTRENAR");
 		//Formato componentes
 		pbProgreso.setPreferredSize(new Dimension(1000, 30));
 		bAlbum.setPreferredSize(new Dimension(90, 40));
+		pbProgreso.setStringPainted(true);
+		bEntrenar.setPreferredSize(new Dimension(150, 50));
 		//Añadir componentes a contenedores
 		this.getContentPane().add(pInferior, BorderLayout.SOUTH);
 		this.getContentPane().add(pCentral, BorderLayout.CENTER);
@@ -80,19 +83,20 @@ public class Entrenamiento extends JFrame{
 		pTextos.add(lMonedasPorMinuto2);
 		pTextos.add(lImagenMonedasPorMinuto);
 		lImagenMonedasPorMinuto.setIcon(imagenMoneda);
-		pBarraProgreso.add(pbProgreso);
-		pCentral.add(pBarraProgreso, BorderLayout.SOUTH);
 		pCentral.add(pCartas, BorderLayout.CENTER);		
 		pCartas.add(boxLayoutCartasV);
-		boxLayoutCartasV.add(Box.createHorizontalGlue());
+//		boxLayoutCartasV.add(Box.createVerticalGlue());
 //		boxLayoutCartasV.setBackground(Color.BLUE);
-		boxLayoutCartasH.add(carta1);
-		boxLayoutCartasH.add(Box.createHorizontalStrut(50));
-		boxLayoutCartasH.add(carta2);
-		boxLayoutCartasH.add(Box.createHorizontalStrut(50));
-		boxLayoutCartasH.add(carta3);
-//		pCartas.add(Box.createVerticalStrut(900));
-		boxLayoutCartasV.add(boxLayoutCartasH);
+		flowLayoutCartasH.add(carta1);
+		flowLayoutCartasH.add(Box.createHorizontalStrut(50));
+		flowLayoutCartasH.add(carta2);
+		flowLayoutCartasH.add(Box.createHorizontalStrut(50));
+		flowLayoutCartasH.add(carta3);
+		pBarraProgreso.add(pbProgreso);
+		pBotonEntrenar.add(bEntrenar);
+		boxLayoutCartasV.add(flowLayoutCartasH);
+		boxLayoutCartasV.add(pBarraProgreso);
+		boxLayoutCartasV.add(pBotonEntrenar);
 		pBotonAlbum.add(bAlbum);
 		pCentral.add(pBotonAlbum, BorderLayout.NORTH);
 		
@@ -107,6 +111,37 @@ public class Entrenamiento extends JFrame{
 			}
 		});
 		
+		bEntrenar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Thread hiloBarraProgresoThread = new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						bEntrenar.setEnabled(false);
+						
+						for(int i = 0; i <= 100; i++) {
+							try {
+								Thread.sleep(1000);
+							} catch (InterruptedException e1) {
+								
+							}
+							int valor = i;
+						
+							SwingUtilities.invokeLater(new Runnable() {
+								
+								@Override
+								public void run() {
+									pbProgreso.setValue(valor);
+									
+								}
+							});
+						}
+						bEntrenar.setEnabled(true);
+					}
+		});
+				hiloBarraProgresoThread.start();
 	}
 	
 	
@@ -120,4 +155,7 @@ public class Entrenamiento extends JFrame{
 //			}
 //		});
 //	}
+		});
+	}
 }
+	

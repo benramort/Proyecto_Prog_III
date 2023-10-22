@@ -311,11 +311,11 @@ public class Album extends JFrame {
 			}
 		});
 		
-		lCerrarFiltros.addMouseListener(new MouseAdapter() {
+		pBotonCerrarFiltros.addMouseListener(new MouseAdapter() {
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
-				pBotonCerrarFiltros.setBackground(Color.WHITE);
+				pBotonCerrarFiltros.setBackground(new Color(238, 238, 238));
 				lCerrarFiltros.setForeground(Color.BLACK);
 			}
 			
