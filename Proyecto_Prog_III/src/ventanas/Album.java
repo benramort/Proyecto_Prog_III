@@ -34,6 +34,7 @@ public class Album extends JFrame {
 	
 	public Album(JFrame ventanaAnterior, Usuario usuario) {
 		double escala = 1;
+		this.usuario = usuario;
 		
 		//Formato ventana
 		setTitle("Universal Cards Collection");
@@ -46,6 +47,7 @@ public class Album extends JFrame {
 		JPanel pIzquierdo = new JPanel();
 		JPanel pDerecho = new JPanel();
 		JPanel pCartas = new JPanel(new GridLayout(0, 4));
+		//TODO espacio vertical de cartas
 		JPanel pBotones = new JPanel();
 		JPanel pMonedas = new JPanel();
 		PanelPorcentaje pPorcentaje = new PanelPorcentaje(100, 300, 300, Color.BLACK);
@@ -237,6 +239,9 @@ public class Album extends JFrame {
 				PanelCarta p = new PanelCarta(c);
 				p.addMouseListener(hoverCartas);
 				pCartas.add(p);
+				p.setMaximumSize(getMaximumSize());
+				p.setOpaque(true);
+				p.setBackground(Color.RED);
 				System.out.println("Cargada carta "+c.getId());
 			} else {
 				PanelCarta p = new PanelCarta(new Carta("yoshi", new Saga("SuperMario")));
