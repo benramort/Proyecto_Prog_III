@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import comportamientos.Carta;
+import comportamientos.MiBaseDeDatos;
 import comportamientos.Usuario;
 
 public class IniciarSesion extends JFrame {
@@ -145,7 +147,15 @@ public class IniciarSesion extends JFrame {
 					
 					@Override
 					public void run() {
-						new Album(IniciarSesion.this, new Usuario("Beñat","contraseña"));
+						MiBaseDeDatos.cargarModeloCartas();
+						Usuario usuario = new Usuario("Beñat","contrasena");
+						usuario.getCartas().put(new Carta(1), 1);
+						usuario.getCartas().put(new Carta(5), 2);
+						usuario.getCartas().put(new Carta(6), 1);
+						new Album(IniciarSesion.this, usuario);
+						for (Carta c: usuario.getCartas().keySet()) {
+							System.out.println(c.toString() + usuario.getCartas().get(c));
+						}
 					}
 				});
 				dispose();

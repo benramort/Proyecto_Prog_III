@@ -36,8 +36,8 @@ public class VentanaPrueba extends JFrame {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 	
-		CartaEntrenando prueba = new CartaEntrenando();
-		this.getContentPane().add(prueba, BorderLayout.CENTER);
+//		CartaEntrenando prueba = new CartaEntrenando();
+//		this.getContentPane().add(prueba, BorderLayout.CENTER);
 		
 //		PanelPorcentaje p = new PanelPorcentaje(78, 300, 300, Color.BLACK);
 //		p.setBackground(Color.CYAN);

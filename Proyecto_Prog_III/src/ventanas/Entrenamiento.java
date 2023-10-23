@@ -123,7 +123,7 @@ public class Entrenamiento extends JFrame{
 						
 						for(int i = 0; i <= 100; i++) {
 							try {
-								Thread.sleep(100);
+								Thread.sleep(((carta1.getCarta().getMonedasPorMinuto()/60) + (carta2.getCarta().getMonedasPorMinuto()/60) + (carta3.getCarta().getMonedasPorMinuto()/60))*1000);
 							} catch (InterruptedException e1) {
 								
 							}

@@ -16,6 +16,7 @@ public class CartaEntrenando extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
 	public JProgressBar pbStamina = new JProgressBar(0, 100);
+	public Carta carta = new Carta("mario", new Saga("SuperMario"));
 	
 	public CartaEntrenando() {
 		//Formato Panel
@@ -26,7 +27,7 @@ public class CartaEntrenando extends JPanel{
 		//Formato contenedores
 		pPrincipal.setLayout(new BoxLayout(pPrincipal, BoxLayout.Y_AXIS));
 		//Creacion componentes
-		PanelCarta pCarta = new PanelCarta(new Carta("yoshi",new Saga("SuperMario")));
+		PanelCarta pCarta = new PanelCarta(carta);
 		
 		//Formato componentes
 		pbStamina.setPreferredSize(new Dimension(250, 30));
@@ -43,5 +44,9 @@ public class CartaEntrenando extends JPanel{
 	public JProgressBar getPBStamina() {
 		return pbStamina;
 	}
-
+	
+	public Carta getCarta() {
+		return carta;
+	}
+	
 }

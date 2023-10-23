@@ -367,9 +367,7 @@ public class Album extends JFrame {
 				}
 				
 			}
-			
-			
-			
+		
 		});
 	}
 

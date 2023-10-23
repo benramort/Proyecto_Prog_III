@@ -2,6 +2,8 @@ package ventanas;
 
 import javax.swing.*;
 
+import comportamientos.Carta;
+import comportamientos.MiBaseDeDatos;
 import comportamientos.Usuario;
 
 import java.awt.*;
@@ -99,7 +101,15 @@ public class CrearCuenta extends JFrame {
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						new Album(CrearCuenta.this, new Usuario("Beñat","contraseña"));				
+						MiBaseDeDatos.cargarModeloCartas();
+						Usuario usuario = new Usuario("Beñat","contrasena");
+						usuario.getCartas().put(new Carta(1), 1);
+						usuario.getCartas().put(new Carta(5), 2);
+						usuario.getCartas().put(new Carta(6), 1);
+						new Album(null, usuario);
+						for (Carta c: usuario.getCartas().keySet()) {
+							System.out.println(c.toString() + usuario.getCartas().get(c));
+						}				
 					}
 				});
 				dispose();
