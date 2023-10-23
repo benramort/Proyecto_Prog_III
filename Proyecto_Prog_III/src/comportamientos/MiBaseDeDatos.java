@@ -7,12 +7,16 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class MiBaseDeDatos {
 	
-	public static TreeSet<Carta> modeloCartas = new TreeSet<>();
-	public static TreeSet<Usuario> usuarios = new TreeSet<>();
+	private static Logger logger = Logger.getLogger(MiBaseDeDatos.class.getName());
 	
+	public static TreeSet<Carta> modeloCartas = new TreeSet<>();
+	public static TreeSet<Usuario> usuarios = new TreeSet<>();	
 	
 	public static Usuario cargarUsuario() {
 		return new Usuario();
@@ -34,8 +38,8 @@ public class MiBaseDeDatos {
 				}
 			}
 		} catch (FileNotFoundException ex) {
-			ex.printStackTrace();
-			//TODO usar el logger
+//			ex.printStackTrace();
+			logger.severe("No se han podido cargar las cartas modelo");
 		}
 	}
 	
@@ -51,11 +55,28 @@ public class MiBaseDeDatos {
 				}
 			}
 		} catch (FileNotFoundException ex) {
-			ex.printStackTrace();
+			logger.warning("No se han podido cargar los usuarios");
 		}
 	}
 	
+	public static void configurarLogger() {
+		try (FileInputStream is = new FileInputStream("data/logger.properties")) {
+			LogManager.getLogManager().readConfiguration(is);
+		} catch (FileNotFoundException ex) {
+			logger.info("No se ha encontrado la configuracion del logger. Usando configuracion por defercto");
+			ex.printStackTrace();
+		} catch (IOException ex) {
+			logger.info("No se ha podido cargar el fichero de configuración del logger. Usando configuración por defecto");
+		}
+		logger.fine("El logger se ha configurado correctamente");
+//		logger.warning("Pruebarññ");
+		//TODO guardar usuario/información del sistema en el logger
+		//TODO qué es el mensaje raro del logger (sun.awt.windows.WToolkit <clinit>)
+		
+	}
+	
 	public static void main(String[] args) {
+		configurarLogger();
 		cargarModeloCartas();
 		cargarUsuarios();
 		for (Carta c: modeloCartas) {
