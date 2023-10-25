@@ -1,0 +1,10 @@
+oct 23, 2023 9:11:06 P. M. comportamientos.MiBaseDeDatos configurarLogger
+WARNING: Pruebar
+oct 23, 2023 9:12:05 P. M. comportamientos.MiBaseDeDatos configurarLogger
+WARNING: Pruebarññ
+oct 23, 2023 9:13:28 P. M. comportamientos.MiBaseDeDatos configurarLogger
+WARNING: Pruebarññ
+oct 23, 2023 9:15:24 P. M. comportamientos.MiBaseDeDatos cargarModeloCartas
+SEVERE: No se han podido cargar las cartas modelo
+oct 23, 2023 9:15:24 P. M. comportamientos.MiBaseDeDatos cargarUsuarios
+WARNING: No se han podido cargar los usuarios
