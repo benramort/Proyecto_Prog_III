@@ -3,6 +3,7 @@ package comportamientos;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.TreeMap;
@@ -10,8 +11,8 @@ import java.util.TreeSet;
 
 public class MiBaseDeDatos {
 	
-	public static TreeSet<Carta> modeloCartas = new TreeSet<>();
-	public static TreeSet<Usuario> usuarios = new TreeSet<>();
+	public static List<Carta> modeloCartas = new ArrayList<>();
+	public static TreeSet<Usuario> usuarios = new TreeSet<>(); //Esto tiene sentido que sea un list
 	
 	
 	public static Usuario cargarUsuario() {
@@ -33,6 +34,7 @@ public class MiBaseDeDatos {
 					ex.printStackTrace();
 				}
 			}
+			modeloCartas.sort(null);
 		} catch (FileNotFoundException ex) {
 			ex.printStackTrace();
 			//TODO usar el logger
