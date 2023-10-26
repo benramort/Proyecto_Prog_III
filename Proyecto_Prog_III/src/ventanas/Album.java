@@ -361,6 +361,7 @@ public class Album extends JFrame {
 				usuario.getCartas().put(new Carta(1), 1);
 				usuario.getCartas().put(new Carta(5), 2);
 				usuario.getCartas().put(new Carta(6), 1);
+				usuario.getCartas().put(new Carta(4), 3);
 				new Album(null, usuario);
 				for (Carta c: usuario.getCartas().keySet()) {
 					System.out.println(c.toString() + usuario.getCartas().get(c));
