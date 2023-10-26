@@ -8,11 +8,19 @@ import java.util.List;
 public class RegistroTemporal {
 	
 	Carta[] cartas;
+	int[] stamina;
 	double bonificacion;
 	ZonedDateTime fechaHora;
 	
-	public RegistroTemporal(Carta carta1, Carta carta2, Carta carta3, int bonificacion, ZonedDateTime fechaHora) {
+	public RegistroTemporal(Carta carta1, Carta carta2, Carta carta3, double bonificacion, ZonedDateTime fechaHora) {
 		cartas = new Carta[] {carta1, carta2, carta2};
+		this.bonificacion = bonificacion;
+		this.fechaHora = fechaHora;
+	}
+	
+	public RegistroTemporal(int carta1, int stamina1, int carta2, int stamina2, int carta3, int stamina3, double bonificacion, ZonedDateTime fechaHora) {
+		recuperarCartas(carta1, carta2, carta3);
+		stamina = new int[] {stamina1, stamina2, stamina3};
 		this.bonificacion = bonificacion;
 		this.fechaHora = fechaHora;
 	}

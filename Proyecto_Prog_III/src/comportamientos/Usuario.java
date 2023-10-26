@@ -10,6 +10,7 @@ public class Usuario{
 	private String contrasena;
 	private int monedas;
 	private Map<Carta,Integer> cartas; //Las cartas se ordenan naturalmente, y se almacena el número de cartas que tiene ese usuario. Si no tiene esa carta hay que añadirla con 0
+	private RegistroTemporal registroTemporal;
 	
 	public Usuario() {
 		
@@ -62,9 +63,7 @@ public class Usuario{
 	public static Usuario deLinea(String s) {
 		String[] tokens = s.split(";");
 		return new Usuario(tokens[0],tokens[1],Integer.parseInt(tokens[2]));
-		
 	}
-	
 	
 	
 
