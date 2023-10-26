@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.logging.LogManager;
@@ -16,7 +17,7 @@ public class MiBaseDeDatos {
 	
 
 	public static List<Carta> modeloCartas = new ArrayList<>();
-	public static TreeSet<Usuario> usuarios = new TreeSet<>(); //Esto tiene sentido que sea un list
+	public static Set<Usuario> usuarios = new TreeSet<Usuario>(); //Esto tiene sentido que sea un list
 
 	private static Logger logger = Logger.getLogger(MiBaseDeDatos.class.getName());
 	
