@@ -50,7 +50,7 @@ public class Entrenamiento extends JFrame{
 		JButton bAlbum = new JButton("ÁLBUM");
 		JLabel lMonedasGeneradas = new JLabel("Monedas generadas: " );
 		JLabel lMonedasGeneradas2 = new JLabel("XXXXXX");
-		JLabel lMonedasPorMinuto = new JLabel("Monedas/minuto: " );
+		JLabel lMonedasPorMinuto = new JLabel("Monedas/segundo: " );
 		JLabel lMonedasPorMinuto2 = new JLabel("XXXXXX" );
 		JLabel lImagenMonedasGeneradas = new JLabel();
 		JLabel lImagenMonedasPorMinuto = new JLabel();
