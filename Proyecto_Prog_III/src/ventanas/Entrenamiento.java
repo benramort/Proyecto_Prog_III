@@ -115,7 +115,7 @@ public class Entrenamiento extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Thread hiloBarraProgresoThread = new Thread(new Runnable() {
+				Thread hiloBarraProgreso = new Thread(new Runnable() {
 					
 					@Override
 					public void run() {
@@ -123,86 +123,53 @@ public class Entrenamiento extends JFrame{
 						
 						for(int i = 0; i <= 100; i++) {
 							try {
-								Thread.sleep(((carta1.getCarta().getMonedasPorMinuto()/60) + (carta2.getCarta().getMonedasPorMinuto()/60) + (carta3.getCarta().getMonedasPorMinuto()/60))*1000);
-							} catch (InterruptedException e1) {
+								if(carta1.pbStamina.getValue() == 0) {
+									Thread.sleep(((carta2.getCarta().getMonedasPorMinuto()/60) + (carta3.getCarta().getMonedasPorMinuto()/60))*1000);									
+								} else if (carta2.pbStamina.getValue() == 0) {
+									Thread.sleep(((carta1.getCarta().getMonedasPorMinuto()/60) + (carta3.getCarta().getMonedasPorMinuto()/60))*1000);
+								} else if(carta3.pbStamina.getValue() == 0) {
+									Thread.sleep(((carta2.getCarta().getMonedasPorMinuto()/60) + (carta1.getCarta().getMonedasPorMinuto()/60))*1000);
+								} else if(carta1.pbStamina.getValue() == 0 && carta2.pbStamina.getValue() == 0) {
+									Thread.sleep(((carta3.getCarta().getMonedasPorMinuto()/60))*1000);
+								} else if(carta1.pbStamina.getValue() == 0 && carta3.pbStamina.getValue() == 0) {
+									Thread.sleep(((carta2.getCarta().getMonedasPorMinuto()/60))*1000);
+								} else if(carta2.pbStamina.getValue() == 0 && carta3.pbStamina.getValue() == 0) {
+									Thread.sleep(((carta1.getCarta().getMonedasPorMinuto()/60))*1000);
+								} else if(carta1.pbStamina.getValue() != 0 && carta2.pbStamina.getValue() != 0 && carta3.pbStamina.getValue() != 0 ) {
+									Thread.sleep(((carta1.getCarta().getMonedasPorMinuto()/60) + (carta2.getCarta().getMonedasPorMinuto()/60) + (carta3.getCarta().getMonedasPorMinuto()/60))*1000);
+								}
 								
+							} catch (InterruptedException e1) {
+								break;
 							}
 							int valor = i;
+							int valor2 = 100-i;
 						
 							SwingUtilities.invokeLater(new Runnable() {
 								
 								@Override
 								public void run() {
 									pbProgreso.setValue(valor);
+									carta1.pbStamina.setValue(valor2);
+									carta2.pbStamina.setValue(valor2);
+									carta3.pbStamina.setValue(valor2);
 									
 								}
 							});
 						}
-						bEntrenar.setEnabled(true);
+						
+						if(pbProgreso.getValue() == 100) {
+							bEntrenar.setEnabled(true);							
+						}
 					}
 		});
-				hiloBarraProgresoThread.start();
+				hiloBarraProgreso.start();
 				
-				Thread hiloBarraStamina = new Thread(new Runnable() {
-					
-					@Override
-					public void run() {
-						for(int i = 100; i >= 0; i--) {
-							try {
-								Thread.sleep(100);
-							} catch (InterruptedException e2) {
-								
-							}
-							int valor = i;
-							
-							carta1.pbStamina.setValue(valor);
-									
-								}
-							
-						}
-				});
-				hiloBarraStamina.start();
 				
-				Thread hiloBarraStamina2 = new Thread(new Runnable() {
-					
-					@Override
-					public void run() {
-						for(int i = 100; i >= 0; i--) {
-							try {
-								Thread.sleep(1000);
-							} catch (InterruptedException e2) {
-								
-							}
-							int valor = i;
-							
-							carta2.pbStamina.setValue(valor);
-									
-								}
-							
-						}
-				});
-				hiloBarraStamina2.start();
 				
-				Thread hiloBarraStamina3 = new Thread(new Runnable() {
-					
-					@Override
-					public void run() {
-						for(int i = 100; i >= 0; i--) {
-							try {
-								Thread.sleep(500);
-							} catch (InterruptedException e2) {
-								
-							}
-							int valor = i;
-							
-							carta3.pbStamina.setValue(valor);
-									
-								}
-						}
-						
-					
-				});
-				hiloBarraStamina3.start();
+	
+				
+
 	}
 	
 	

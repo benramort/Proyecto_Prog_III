@@ -18,10 +18,10 @@ public class MiBaseDeDatos {
 		return new Usuario();
 	}
 	
-//	public static List<Venta> cargarMercado() {
+ //	public static List<Venta> cargarMercado() {
 //		
 //	}
-	
+
 	public static void cargarModeloCartas() {
 		try (Scanner scanner = new Scanner(new FileInputStream("data/modeloCartas.csv"))) {
 			while (scanner.hasNextLine()) {

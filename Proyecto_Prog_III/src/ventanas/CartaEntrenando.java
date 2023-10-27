@@ -41,10 +41,6 @@ public class CartaEntrenando extends JPanel{
 		
 	}
 	
-	public JProgressBar getPBStamina() {
-		return pbStamina;
-	}
-	
 	public Carta getCarta() {
 		return carta;
 	}
