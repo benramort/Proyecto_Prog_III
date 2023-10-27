@@ -1,5 +1,6 @@
 package comportamientos;
 
+import java.util.Map;
 import java.util.TreeMap;
 
 public class Usuario{
@@ -8,7 +9,8 @@ public class Usuario{
 	private String nombre;
 	private String contrasena;
 	private int monedas;
-	private TreeMap<Carta,Integer> cartas; //Las cartas se ordenan naturalmente, y se almacena el número de cartas que tiene ese usuario. Si no tiene esa carta hay que añadirla con 0
+	private Map<Carta,Integer> cartas; //Las cartas se ordenan naturalmente, y se almacena el número de cartas que tiene ese usuario. Si no tiene esa carta hay que añadirla con 0
+	private RegistroTemporal registroTemporal;
 	
 	public Usuario() {
 		
@@ -18,8 +20,8 @@ public class Usuario{
 		this.nombre = nombre;
 		this.contrasena = contrasena;
 		monedas = 0;
-		cartas = new TreeMap<>();
-		for (Carta c: MiBaseDeDatos.modeloCartas) {
+		cartas = new TreeMap<Carta, Integer>();
+		for (Carta c: Ficheros.modeloCartas) {
 			cartas.put(c, 0);
 		}
 	}
@@ -54,16 +56,14 @@ public class Usuario{
 		this.monedas = monedas;
 	}
 
-	public TreeMap<Carta, Integer> getCartas() {
+	public Map<Carta, Integer> getCartas() {
 		return cartas;
 	}
 	
 	public static Usuario deLinea(String s) {
 		String[] tokens = s.split(";");
 		return new Usuario(tokens[0],tokens[1],Integer.parseInt(tokens[2]));
-		
 	}
-	
 	
 	
 
