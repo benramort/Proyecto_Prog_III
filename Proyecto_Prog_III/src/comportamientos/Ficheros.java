@@ -13,13 +13,13 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-public class MiBaseDeDatos {
+public class Ficheros {
 	
 
 	public static List<Carta> modeloCartas = new ArrayList<>();
 	public static Set<Usuario> usuarios = new TreeSet<Usuario>(); //Esto tiene sentido que sea un list
 
-	private static Logger logger = Logger.getLogger(MiBaseDeDatos.class.getName());
+	private static Logger logger = Logger.getLogger(Ficheros.class.getName());
 	
 	public static Usuario cargarUsuario() {
 		return new Usuario();
@@ -29,7 +29,7 @@ public class MiBaseDeDatos {
 //		
 //	}
 	
-	public static void cargarModeloCartas() {
+	public void cargarModeloCartas() {
 		try (Scanner scanner = new Scanner(new FileInputStream("data/modeloCartas.csv"))) {
 			while (scanner.hasNextLine()) {
 				String linea = scanner.nextLine();
@@ -47,7 +47,7 @@ public class MiBaseDeDatos {
 		}
 	}
 	
-	public static void cargarUsuarios() {
+	public void cargarUsuarios() {
 		try (Scanner scanner = new Scanner(new FileInputStream("data/usuarios.csv"))) {
 			while (scanner.hasNextLine()) {
 				String linea = scanner.nextLine();
@@ -63,7 +63,7 @@ public class MiBaseDeDatos {
 		}
 	}
 	
-	public static void configurarLogger() {
+	public void configurarLogger() {
 		try (FileInputStream is = new FileInputStream("data/logger.properties")) {
 			LogManager.getLogManager().readConfiguration(is);
 		} catch (FileNotFoundException ex) {
@@ -80,9 +80,10 @@ public class MiBaseDeDatos {
 	}
 	
 	public static void main(String[] args) {
-		configurarLogger();
-		cargarModeloCartas();
-		cargarUsuarios();
+		Ficheros f = new Ficheros();
+		f.configurarLogger();
+		f.cargarModeloCartas();
+		f.cargarUsuarios();
 		for (Carta c: modeloCartas) {
 			System.out.println(c);
 		}

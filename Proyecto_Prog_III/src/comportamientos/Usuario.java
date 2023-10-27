@@ -20,7 +20,7 @@ public class Usuario{
 		this.contrasena = contrasena;
 		monedas = 0;
 		cartas = new TreeMap<Carta, Integer>();
-		for (Carta c: MiBaseDeDatos.modeloCartas) {
+		for (Carta c: Ficheros.modeloCartas) {
 			cartas.put(c, 0);
 		}
 	}

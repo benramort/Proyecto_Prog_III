@@ -17,7 +17,7 @@ import java.awt.event.MouseListener;
 import javax.swing.*;
 import javax.swing.border.*;
 import comportamientos.Carta;
-import comportamientos.MiBaseDeDatos;
+import comportamientos.Ficheros;
 import comportamientos.Saga;
 import comportamientos.Usuario;
 
@@ -356,7 +356,8 @@ public class Album extends JFrame {
 			
 			@Override
 			public void run() {
-				MiBaseDeDatos.cargarModeloCartas();
+				Ficheros f = new Ficheros();
+				f.cargarModeloCartas();
 				Usuario usuario = new Usuario("Beñat","contrasena");
 				usuario.getCartas().put(new Carta(1), 1);
 				usuario.getCartas().put(new Carta(5), 2);
