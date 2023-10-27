@@ -27,8 +27,7 @@ public class RegistroTemporal {
 	
 	private void recuperarCartas(int cod1, int cod2, int cod3) {
 		cartas = new Carta[3];
-		Ficheros f = new Ficheros();
-		for (Carta c: f.modeloCartas) {
+		for (Carta c: MiBaseDeDatos.modeloCartas) {
 			if (c.getId() == cod1) {
 				cartas[0] = c;
 			} else if (c.getId() == cod2) {
@@ -48,8 +47,7 @@ public class RegistroTemporal {
 	
 	public static void main(String[] args) {
 		RegistroTemporal r1 = new RegistroTemporal(null, null, null, 0, null);
-		Ficheros f = new Ficheros();
-		f.cargarModeloCartas();
+		MiBaseDeDatos.cargarModeloCartas();
 		r1.recuperarCartas(2,1,4);
 	}
 
