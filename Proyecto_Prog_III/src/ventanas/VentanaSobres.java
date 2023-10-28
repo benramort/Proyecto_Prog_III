@@ -49,14 +49,14 @@ public class VentanaSobres extends JFrame{
 	}
 
 
-public static void main(String[] args) {
-	SwingUtilities.invokeLater(new Runnable() {
-		
-		@Override
-		public void run() {
-			new VentanaSobres (null);
-			
-		}
-	});
-}
+//public static void main(String[] args) {
+//	SwingUtilities.invokeLater(new Runnable() {
+//		
+//		@Override
+//		public void run() {
+//			new VentanaSobres (null);
+//			
+//		}
+//	});
+//}
 }
