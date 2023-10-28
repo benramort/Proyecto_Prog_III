@@ -17,9 +17,9 @@ public class VentanaSobres extends JFrame{
 	private static final long serialVersionUID = 1L;
 	public VentanaSobres (JFrame ventanaAnterior) {
 		List<String> nombres = new ArrayList<String>();
-		nombres .add("img/mario.png");
-		nombres .add("img/kratos.png");
-		nombres .add("img/luigi.png");
+//		nombres .add("img/mario.png");
+//		nombres .add("img/kratos.png");
+//		nombres .add("img/luigi.png");
 		
 		///Formato Ventana
 		setSize(1500,1000);
@@ -45,6 +45,7 @@ public class VentanaSobres extends JFrame{
 			
 			
 		}
+		 
 		setVisible(true);
 	}
 
