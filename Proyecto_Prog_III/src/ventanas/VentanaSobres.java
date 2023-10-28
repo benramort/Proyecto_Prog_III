@@ -3,18 +3,12 @@ package ventanas;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
-
-import comportamientos.Carta;
-import comportamientos.Usuario;
 
 public class VentanaSobres extends JFrame{
 	/**
@@ -22,7 +16,6 @@ public class VentanaSobres extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	public VentanaSobres (JFrame ventanaAnterior) {
-		Random numeroAleatorio = new Random();
 		List<String> nombres = new ArrayList<String>();
 		nombres .add("img/mario.png");
 		nombres .add("img/kratos.png");
@@ -48,22 +41,22 @@ public class VentanaSobres extends JFrame{
 			//Formato Contenedores
 			pCarta.setLayout(new BorderLayout());
 			//Añadir componentes a contenedores
-			Carta c = new Carta(numeroAleatorio.nextInt(5));
 			pCarta.add(lImagenSobre, BorderLayout.CENTER);
 			
 			
 		}
+		setVisible(true);
 	}
 
 
-//public static void main(String[] args) {
-//	SwingUtilities.invokeLater(new Runnable() {
-//		
-//		@Override
-//		public void run() {
-//			new VentanaSobres (null);
-//			
-//		}
-//	});
-//}
+public static void main(String[] args) {
+	SwingUtilities.invokeLater(new Runnable() {
+		
+		@Override
+		public void run() {
+			new VentanaSobres (null);
+			
+		}
+	});
+}
 }
