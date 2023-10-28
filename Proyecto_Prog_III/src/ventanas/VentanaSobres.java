@@ -41,7 +41,7 @@ public class VentanaSobres extends JFrame{
 			pCarta.setLayout(new BorderLayout());
 			//Añadir componentes a contenedores
 			pCarta.add(lImagenSobre, BorderLayout.CENTER);
-			
+			pCentro.add(pCarta);
 		}
 		
 		getContentPane().add(sc, BorderLayout.CENTER );
