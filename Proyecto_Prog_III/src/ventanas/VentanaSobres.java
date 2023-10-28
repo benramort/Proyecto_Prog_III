@@ -17,13 +17,17 @@ public class VentanaSobres extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public VentanaSobres (JFrame ventanaAnterior) {
+	
+	Datos datos;
+	
+	public VentanaSobres (JFrame ventanaAnterior, Datos datos) {
 		Random r = new Random();
 		///Formato Ventana
-		setSize(800,450);
+		setSize(800,430);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setTitle("Universal Card Collection");
 		setLocationRelativeTo(ventanaAnterior);
+		setResizable(false);
 		//Crear Contenedores
 		JPanel pCentro = new JPanel();
 		JPanel pCerrar = new JPanel();
@@ -34,8 +38,6 @@ public class VentanaSobres extends JFrame{
 		///Añadir componentes a contenedores
 		setIconImage(logoPequeño.getImage());
 		pCerrar.add(cerrar);
-		
-		Datos datos = new Ficheros();
 		
 		
 		for (int i = 0; i < 3; i++) {
@@ -50,7 +52,6 @@ public class VentanaSobres extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				
 			}
 		});
 	

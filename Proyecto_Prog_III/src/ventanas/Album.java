@@ -33,10 +33,12 @@ public class Album extends JFrame {
 	private Datos datos;
 	
 	
+	
 	public Album(JFrame ventanaAnterior, Usuario usuario, Datos datos) {
 		double escala = 1;
 		this.usuario = usuario;
 		this.datos = datos;
+		int cartasObtenidas = 0;
 		
 		//Formato ventana
 		setTitle("Universal Cards Collection");
@@ -48,11 +50,11 @@ public class Album extends JFrame {
 		//Crear contenedores
 		JPanel pIzquierdo = new JPanel();
 		JPanel pDerecho = new JPanel();
-		JPanel pCartas = new JPanel(new GridLayout(0, 4));
+		JPanel pCartas = new JPanel(new GridLayout(0, 4, 0, 0));
 		//TODO espacio vertical de cartas
 		JPanel pBotones = new JPanel();
 		JPanel pMonedas = new JPanel();
-		PanelPorcentaje pPorcentaje = new PanelPorcentaje(100, 300, 300, Color.BLACK);
+		PanelPorcentaje pPorcentaje = new PanelPorcentaje(0, 300, 300, Color.BLACK);
 		JPanel pPorcentaje2 = new JPanel();
 		JPanel pPorcentaje3 = new JPanel();
 		JPanel pBuscar = new JPanel();
@@ -94,7 +96,7 @@ public class Album extends JFrame {
 		JButton bSalir = new JButton();
 		JButton bBuscar = new JButton();
 		JScrollPane spCartas = new JScrollPane();
-		JLabel lMonedas = new JLabel("XXXXXXXXXX");
+		JLabel lMonedas = new JLabel(String.valueOf(usuario.getMonedas())); //TODO cambiar cuando se cierra el modo idle
 		JLabel lImagenMonedas = new JLabel();
 		
 		ImageIcon imagen = new ImageIcon(getClass().getResource("/idle.png"));
@@ -213,7 +215,7 @@ public class Album extends JFrame {
 			}
 		};
 		
-		pCartas.addComponentListener(new ComponentAdapter() {
+		spCartas.addComponentListener(new ComponentAdapter() {
 
 			@Override
 			public void componentResized(ComponentEvent e) {
@@ -244,10 +246,11 @@ public class Album extends JFrame {
 				PanelCarta p = new PanelCarta(c);
 				p.addMouseListener(hoverCartas);
 				pCartas.add(p);
-				p.setMaximumSize(getMaximumSize());
+				p.setPreferredSize(new Dimension(235, 335)); //TODO espacio vertical
 				p.setOpaque(true);
 				p.setBackground(Color.RED);
 				System.out.println("Cargada carta "+c.getId());
+				cartasObtenidas++;
 			} else {
 				PanelCarta p = new PanelCarta(new Carta("yoshi", new Saga("SuperMario")));
 				p.addMouseListener(hoverCartas);
@@ -255,6 +258,7 @@ public class Album extends JFrame {
 				System.out.println("Cargada carta "+c.getId());
 			}
 		}
+		pPorcentaje.setPorcentaje((int) (cartasObtenidas/(double) usuario.getCartas().size()*100));
 		
 		
 		setVisible(true);
@@ -298,7 +302,7 @@ public class Album extends JFrame {
 					
 					@Override
 					public void run() {
-						new Tienda(Album.this);
+						new Tienda(Album.this, usuario, datos);
 					}
 				});
 			}

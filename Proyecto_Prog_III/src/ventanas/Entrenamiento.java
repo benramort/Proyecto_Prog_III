@@ -37,6 +37,7 @@ public class Entrenamiento extends JFrame{
 		JPanel pBotonClear = new JPanel();
 		JPanel pTextos = new JPanel();
 		JPanel pCartas = new JPanel();
+		JPanel blCentro = new JPanel();
 		JPanel flowLayoutCartasH = new JPanel();
 		JPanel boxLayoutCartasV = new JPanel();
 		JPanel pBotonAlbum = new JPanel();
@@ -45,14 +46,19 @@ public class Entrenamiento extends JFrame{
 		pInferior.setLayout(new BorderLayout());
 		pTextos.setLayout(new FlowLayout(FlowLayout.CENTER));
 		pCentral.setLayout(new BorderLayout());
+		pCentral.setMaximumSize(new Dimension(100000,500));
 		pCartas.setLayout(new FlowLayout(FlowLayout.CENTER));
 		pBotonEntrenar.setLayout(new FlowLayout(FlowLayout.CENTER));
 		flowLayoutCartasH.setLayout(new FlowLayout(FlowLayout.CENTER));
+//		flowLayoutCartasH.setOpaque(true);
+//		flowLayoutCartasH.setBackground(Color.BLUE);
 		boxLayoutCartasV.setLayout(new BoxLayout(boxLayoutCartasV, BoxLayout.Y_AXIS));
 		pBotonAlbum.setLayout(new FlowLayout(FlowLayout.LEFT));
+//		pBotonAlbum.setMaximumSize(new Dimension(10000,50));
 		flowLayoutCartasH.setMaximumSize(new Dimension(1000,1000));
 		boxLayoutCartasV.setOpaque(true);
 //		boxLayoutCartasH.setOpaque(false);
+		blCentro.setLayout(new BoxLayout(blCentro, BoxLayout.Y_AXIS));
 		//Creacion componentes
 		JButton bAlbum = new JButton("ÁLBUM");
 		JLabel lMonedasGeneradas = new JLabel("Monedas generadas: " );
@@ -76,7 +82,10 @@ public class Entrenamiento extends JFrame{
 		//Añadir componentes a contenedores
 		setIconImage(logoPequeño.getImage());
 		this.getContentPane().add(pInferior, BorderLayout.SOUTH);
-		this.getContentPane().add(pCentral, BorderLayout.CENTER);
+		this.getContentPane().add(blCentro, BorderLayout.CENTER);
+		blCentro.add(Box.createVerticalGlue());
+		blCentro.add(pCentral);
+		blCentro.add(Box.createVerticalGlue());
 		pInferior.add(pBotonClear, BorderLayout.EAST);
 		pBotonClear.add(bClear);
 		pInferior.add(pTextos, BorderLayout.CENTER);
@@ -89,7 +98,7 @@ public class Entrenamiento extends JFrame{
 		pTextos.add(lMonedasPorMinuto2);
 		pTextos.add(lImagenMonedasPorMinuto);
 		lImagenMonedasPorMinuto.setIcon(imagenMoneda);
-		pCentral.add(pCartas, BorderLayout.CENTER);		
+		pCentral.add(pCartas);		
 		pCartas.add(boxLayoutCartasV);
 //		boxLayoutCartasV.add(Box.createVerticalGlue());
 //		boxLayoutCartasV.setBackground(Color.BLUE);
@@ -102,7 +111,7 @@ public class Entrenamiento extends JFrame{
 		boxLayoutCartasV.add(flowLayoutCartasH);
 		boxLayoutCartasV.add(pBotonEntrenar);
 		pBotonAlbum.add(bAlbum);
-		pCentral.add(pBotonAlbum, BorderLayout.NORTH);
+		add(pBotonAlbum, BorderLayout.NORTH);
 		
 		setVisible(true);
 		

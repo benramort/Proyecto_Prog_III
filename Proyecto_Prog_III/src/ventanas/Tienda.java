@@ -13,14 +13,20 @@ import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
+
+import comportamientos.Datos;
+import comportamientos.Usuario;
 public class Tienda extends JFrame {
 
 		/**
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
+		
+		Datos datos;
+		Usuario usuario;
 
-		public Tienda (JFrame ventanaAnterior) {
+		public Tienda (JFrame ventanaAnterior, Usuario usuario, Datos datos) {
 			List<String> nombres = new ArrayList<String>();
 			nombres.add("Megasobre");
 			nombres.add("Sobre Ultimate");
@@ -42,14 +48,18 @@ public class Tienda extends JFrame {
 			JPanel pSuperior = new JPanel();
 			JPanel pMonedas = new JPanel();
 			JPanel pCentro = new JPanel();
-			JScrollPane sc = new JScrollPane(pCentro);
+			
 			JPanel pBotonHome = new JPanel();
+			JPanel blCentro = new JPanel();
+			JScrollPane sc = new JScrollPane(blCentro);
 			
 			///Formato Contenedores
 			pSuperior.setLayout(new BorderLayout());
 			pMonedas.setLayout(new FlowLayout((FlowLayout.RIGHT)));
 			sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 			sc.setBorder(null);
+			blCentro.setLayout(new BoxLayout(blCentro, BoxLayout.Y_AXIS));
+			pCentro.setMaximumSize(new Dimension(5000,50));;
 			
 			///Crear Componentes
 			JButton btAlbum = new JButton("ÁLBUM");
@@ -73,6 +83,9 @@ public class Tienda extends JFrame {
 			add(pSuperior, BorderLayout.NORTH);
 			pMonedas.add(lMonedas);
 			pMonedas.add(lImagenMonedas);
+			blCentro.add(Box.createVerticalGlue());
+			blCentro.add(pCentro);
+			blCentro.add(Box.createVerticalGlue());
 			
 			
 			for (int i = 0; i < nombres.size(); i++) {
@@ -101,7 +114,7 @@ public class Tienda extends JFrame {
 				pSobre.add(pNombreSobre,BorderLayout.NORTH);
 				pSobre.add(lImagenSobre, BorderLayout.CENTER);
 				pSobre.add(pPrecioSobre,BorderLayout.SOUTH);
-				pCentro.add(pSobre, BorderLayout.CENTER);
+				pCentro.add(pSobre);
 				//Añadir ActionListener
 				lImagenSobre.addMouseListener(new MouseAdapter() {
 
@@ -111,7 +124,7 @@ public class Tienda extends JFrame {
 							
 							@Override
 							public void run() {
-								new VentanaSobres(null);
+								new VentanaSobres(Tienda.this, datos);
 								
 							}
 						});
@@ -137,17 +150,5 @@ public class Tienda extends JFrame {
 			});
 		}
 		
-			
-		
-		public static void main(String[] args) {
-			SwingUtilities.invokeLater(new Runnable() {
-				
-				@Override
-				public void run() {
-					new Tienda (null);
-					
-				}
-			});
-		}
 		}
 	

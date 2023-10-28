@@ -152,7 +152,6 @@ public class IniciarSesion extends JFrame {
 					@Override
 					public void run() {
 						Datos datos = new Ficheros();
-						datos.cargarModeloCartas();
 						Usuario usuario = new Usuario("Beñat","contrasena",datos);
 						usuario.getCartas().put(new Carta(1), 1);
 						usuario.getCartas().put(new Carta(5), 2);
