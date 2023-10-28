@@ -63,6 +63,7 @@ public class CrearCuenta extends JFrame {
 		JButton bCrearCuenta = new JButton("Crear cuenta");
 		JCheckBox cbMostrarContrasena = new JCheckBox("Mostrar contraseña");
 		
+		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
 		//Formato componentes
 		lPrincipal.setFont(new Font("Arial" ,Font.BOLD, 25));
 		lPrincipal.setForeground(Color.WHITE);
@@ -73,6 +74,7 @@ public class CrearCuenta extends JFrame {
 
 		
 		//Añadir componentes a contenedores
+		setIconImage(logoPequeño.getImage());
 		getContentPane().add(pSuperior, BorderLayout.NORTH);
 		getContentPane().add(pCentral, BorderLayout.CENTER);
 		getContentPane().add(pBoton, BorderLayout.SOUTH);

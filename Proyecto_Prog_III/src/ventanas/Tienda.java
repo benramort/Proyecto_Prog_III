@@ -59,12 +59,14 @@ public class Tienda extends JFrame {
 			ImageIcon imagen7 = new ImageIcon(getClass().getResource("/moneda.png"));
 			ImageIcon imagenMoneda = new ImageIcon(imagen7.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 			
+			ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
 			///Formato componentes
 			lImagenMonedas.setIcon(imagenMoneda);
 			Font fuenteNombre = new Font("Arial",Font.BOLD, 32);
 			btAlbum.setPreferredSize(new Dimension(90, 40));
 			
 			///Añadir componentes a contenedores
+			setIconImage(logoPequeño.getImage());
 			pSuperior.add(pBotonHome, BorderLayout.WEST);
 			pBotonHome.add(btAlbum);
 			pSuperior.add(pMonedas, BorderLayout.EAST);

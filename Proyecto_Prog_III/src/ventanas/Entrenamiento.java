@@ -68,10 +68,13 @@ public class Entrenamiento extends JFrame{
 		CartaEntrenando cartaEnt2 = new CartaEntrenando(carta2);
 		CartaEntrenando cartaEnt3 = new CartaEntrenando(carta3);
 		JButton bEntrenar = new JButton("ENTRENAR");
+		
+		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
 		//Formato componentes
 		bAlbum.setPreferredSize(new Dimension(90, 40));
 		bEntrenar.setPreferredSize(new Dimension(150, 50));
 		//Añadir componentes a contenedores
+		setIconImage(logoPequeño.getImage());
 		this.getContentPane().add(pInferior, BorderLayout.SOUTH);
 		this.getContentPane().add(pCentral, BorderLayout.CENTER);
 		pInferior.add(pBotonClear, BorderLayout.EAST);

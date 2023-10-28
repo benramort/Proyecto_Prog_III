@@ -82,6 +82,7 @@ public class Mercado extends JFrame {
 		ImageIcon imagen1 = new ImageIcon(getClass().getResource("/moneda.png"));
 		ImageIcon imagenMoneda = new ImageIcon(imagen1.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 		
+		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
 		//Formato componentes
 		lImagenMonedas.setIcon(imagenMoneda);
 		tfBuscar.setMaximumSize(new Dimension(200,100));
@@ -96,6 +97,7 @@ public class Mercado extends JFrame {
 		
 		
 		//Añadir componentes a contenedores
+		setIconImage(logoPequeño.getImage());
 		getContentPane().add(pIzquierdo,BorderLayout.WEST);
 		getContentPane().add(pDerecho, BorderLayout.CENTER);
 		

@@ -5,10 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import comportamientos.*;
 
@@ -29,7 +29,10 @@ public class VentanaSobres extends JFrame{
 		JPanel pCerrar = new JPanel();
 		//Crear Componentes
 		JButton cerrar = new JButton("CERRAR");
+		
+		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
 		///Añadir componentes a contenedores
+		setIconImage(logoPequeño.getImage());
 		pCerrar.add(cerrar);
 		
 		Datos datos = new Ficheros();

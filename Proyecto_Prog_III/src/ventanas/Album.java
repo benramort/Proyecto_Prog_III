@@ -127,6 +127,8 @@ public class Album extends JFrame {
 		JComboBox<Saga> cbSelSaga = new JComboBox<Saga>();
 		JLabel lCerrarFiltros = new JLabel("X");
 		
+		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
+		
 		//Formato componentes
 		lImagenMonedas.setIcon(imagenMoneda);
 		bIdle.setIcon(imagenIdle);
@@ -153,6 +155,7 @@ public class Album extends JFrame {
 		cbSelSaga.setMinimumSize(new Dimension(200, 200));
 		
 		//Añadir componentes a contenedores
+		setIconImage(logoPequeño.getImage());
 		this.getContentPane().add(pIzquierdo, BorderLayout.WEST);
 		this.getContentPane().add(pDerecho, BorderLayout.CENTER);
 		pIzquierdo.add(pBotones, BorderLayout.SOUTH);

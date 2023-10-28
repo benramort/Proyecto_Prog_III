@@ -89,6 +89,8 @@ public class IniciarSesion extends JFrame {
 		JButton btNuevaCuenta = new JButton("Crear cuenta");
 		JLabel lLogo = new JLabel(new ImageIcon("img/logo.png"));
 		JCheckBox cbMostrarContrasena = new JCheckBox("Mostrar contraseña");
+		
+		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
 		//Formato componentes
 		Font fuente = new Font("Arial", Font.BOLD, 15);
 		lUsuario.setFont(fuente);
@@ -97,6 +99,7 @@ public class IniciarSesion extends JFrame {
 		
 		
 		//Añadir componentes a contenedores
+		setIconImage(logoPequeño.getImage());
 		add(pInferior, BorderLayout.SOUTH);
 		pInferior.add(pInferiorBox);
 		pInferiorBox.add(pUsuarioContrasena);
