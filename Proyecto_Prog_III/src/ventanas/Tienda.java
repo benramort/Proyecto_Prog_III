@@ -43,11 +43,9 @@ public class Tienda extends JFrame {
 			JPanel pCentro = new JPanel();
 			JScrollPane sc = new JScrollPane(pCentro);
 			JPanel pBotonHome = new JPanel();
-			JPanel pInferior = new JPanel();
 			
 			///Formato Contenedores
 			pSuperior.setLayout(new BorderLayout());
-			pInferior.setLayout(new BorderLayout());
 			pMonedas.setLayout(new FlowLayout((FlowLayout.RIGHT)));
 			sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 			sc.setBorder(null);
@@ -70,7 +68,6 @@ public class Tienda extends JFrame {
 			pBotonHome.add(btAlbum);
 			pSuperior.add(pMonedas, BorderLayout.EAST);
 			add(pSuperior, BorderLayout.NORTH);
-			add(pInferior, BorderLayout.SOUTH);
 			pMonedas.add(lMonedas);
 			pMonedas.add(lImagenMonedas);
 			
@@ -81,13 +78,11 @@ public class Tienda extends JFrame {
 				JPanel pNombreSobre = new JPanel();
 				JPanel pPrecioSobre = new JPanel();
 				JLabel lImagenMonedas2 = new JLabel();
-				JPanel pAbrirSobre = new JPanel();
 				//Formato Contenedores
 				pSobre.setLayout(new BorderLayout());
 				pNombreSobre.setLayout(new FlowLayout(FlowLayout.CENTER));
 				pPrecioSobre.setLayout(new FlowLayout(FlowLayout.CENTER));
 				//Crear Componentes
-				JButton btAbrirSobres = new JButton("ABRIR");
 				JLabel lNombreSobre = new JLabel(nombres.get(i));
 				JLabel lPrecioSobre = new JLabel(precios.get(i));
 				JLabel lImagenSobre = new JLabel(new ImageIcon("img/logo.png"));
@@ -103,14 +98,12 @@ public class Tienda extends JFrame {
 				pSobre.add(pNombreSobre,BorderLayout.NORTH);
 				pSobre.add(lImagenSobre, BorderLayout.CENTER);
 				pSobre.add(pPrecioSobre,BorderLayout.SOUTH);
-				pAbrirSobre.add(btAbrirSobres);
 				pCentro.add(pSobre, BorderLayout.CENTER);
-				pCentro.add(pAbrirSobre, BorderLayout.SOUTH);
 				//Añadir ActionListener
-				btAbrirSobres.addActionListener(new ActionListener() {
-					
+				lImagenSobre.addMouseListener(new MouseListener() {
+
 					@Override
-					public void actionPerformed(ActionEvent e) {
+					public void mouseClicked(MouseEvent e) {
 						SwingUtilities.invokeLater(new Runnable() {
 							
 							@Override
@@ -119,7 +112,34 @@ public class Tienda extends JFrame {
 								
 							}
 						});
+						
 					}
+
+					@Override
+					public void mousePressed(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseReleased(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseEntered(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void mouseExited(MouseEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					
 				});
 			}
 				
