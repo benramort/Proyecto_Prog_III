@@ -11,11 +11,13 @@ public class RegistroTemporal {
 	int[] stamina;
 	double bonificacion;
 	ZonedDateTime fechaHora;
+	Datos datos;
 	
-	public RegistroTemporal(Carta carta1, Carta carta2, Carta carta3, double bonificacion, ZonedDateTime fechaHora) {
+	public RegistroTemporal(Carta carta1, Carta carta2, Carta carta3, double bonificacion, ZonedDateTime fechaHora, Datos datos) {
 		cartas = new Carta[] {carta1, carta2, carta2};
 		this.bonificacion = bonificacion;
 		this.fechaHora = fechaHora;
+		this.datos = datos;
 	}
 	
 	public RegistroTemporal(int carta1, int stamina1, int carta2, int stamina2, int carta3, int stamina3, double bonificacion, ZonedDateTime fechaHora) {
@@ -27,7 +29,7 @@ public class RegistroTemporal {
 	
 	private void recuperarCartas(int cod1, int cod2, int cod3) {
 		cartas = new Carta[3];
-		for (Carta c: MiBaseDeDatos.modeloCartas) {
+		for (Carta c: datos.getModeloCartas()) {
 			if (c.getId() == cod1) {
 				cartas[0] = c;
 			} else if (c.getId() == cod2) {
@@ -46,8 +48,8 @@ public class RegistroTemporal {
 	}
 	
 	public static void main(String[] args) {
-		RegistroTemporal r1 = new RegistroTemporal(null, null, null, 0, null);
-		MiBaseDeDatos.cargarModeloCartas();
+		Datos datos = new Ficheros();
+		RegistroTemporal r1 = new RegistroTemporal(null, null, null, 0, null, datos);
 		r1.recuperarCartas(2,1,4);
 	}
 

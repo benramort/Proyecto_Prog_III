@@ -11,17 +11,19 @@ public class Usuario{
 	private int monedas;
 	private Map<Carta,Integer> cartas; //Las cartas se ordenan naturalmente, y se almacena el número de cartas que tiene ese usuario. Si no tiene esa carta hay que añadirla con 0
 	private RegistroTemporal registroTemporal;
+	private Datos datos;
 	
 	public Usuario() {
 		
 	}
 	
-	public Usuario(String nombre, String contrasena) {
+	public Usuario(String nombre, String contrasena, Datos datos) {
 		this.nombre = nombre;
 		this.contrasena = contrasena;
+		this.datos = datos;
 		monedas = 0;
 		cartas = new TreeMap<Carta, Integer>();
-		for (Carta c: MiBaseDeDatos.modeloCartas) {
+		for (Carta c: datos.getModeloCartas()) {
 			cartas.put(c, 0);
 		}
 	}

@@ -11,24 +11,38 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
-public class MiBaseDeDatos {
+public class Ficheros implements Datos {
 	
 
 	public static List<Carta> modeloCartas = new ArrayList<>();
 	public static Set<Usuario> usuarios = new TreeSet<Usuario>(); //Esto tiene sentido que sea un list
 
-	private static Logger logger = Logger.getLogger(MiBaseDeDatos.class.getName());
+	private static Logger logger = Logger.getLogger(Ficheros.class.getName());
 	
 	public static Usuario cargarUsuario() {
 		return new Usuario();
+	}
+	
+	public Ficheros() {
+		cargarModeloCartas();
+		configurarLogger();
+	}
+	
+	public List<Carta> getModeloCartas() {
+		return modeloCartas;
+	}
+	
+	public Set<Usuario> getUsuarios() {
+		return usuarios;
 	}
 	
 //	public static List<Venta> cargarMercado() {
 //		
 //	}
 	
-	public static void cargarModeloCartas() {
+	public void cargarModeloCartas() {
 		try (Scanner scanner = new Scanner(new FileInputStream("data/modeloCartas.csv"))) {
 			while (scanner.hasNextLine()) {
 				String linea = scanner.nextLine();
@@ -46,7 +60,7 @@ public class MiBaseDeDatos {
 		}
 	}
 	
-	public static void cargarUsuarios() {
+	public void cargarUsuarios() {
 		try (Scanner scanner = new Scanner(new FileInputStream("data/usuarios.csv"))) {
 			while (scanner.hasNextLine()) {
 				String linea = scanner.nextLine();
@@ -62,7 +76,7 @@ public class MiBaseDeDatos {
 		}
 	}
 	
-	public static void configurarLogger() {
+	public void configurarLogger() {
 		try (FileInputStream is = new FileInputStream("data/logger.properties")) {
 			LogManager.getLogManager().readConfiguration(is);
 		} catch (FileNotFoundException ex) {
@@ -72,16 +86,14 @@ public class MiBaseDeDatos {
 			logger.info("No se ha podido cargar el fichero de configuración del logger. Usando configuración por defecto");
 		}
 		logger.fine("El logger se ha configurado correctamente");
-//		logger.warning("Pruebarññ");
-		//TODO guardar usuario/información del sistema en el logger
-		//TODO qué es el mensaje raro del logger (sun.awt.windows.WToolkit <clinit>)
 		
 	}
 	
 	public static void main(String[] args) {
-		configurarLogger();
-		cargarModeloCartas();
-		cargarUsuarios();
+		Ficheros f = new Ficheros();
+//		f.configurarLogger();
+//		f.cargarModeloCartas();
+//		f.cargarUsuarios();
 		for (Carta c: modeloCartas) {
 			System.out.println(c);
 		}

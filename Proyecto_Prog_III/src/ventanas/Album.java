@@ -17,7 +17,7 @@ import java.awt.event.MouseListener;
 import javax.swing.*;
 import javax.swing.border.*;
 import comportamientos.Carta;
-import comportamientos.MiBaseDeDatos;
+import comportamientos.Datos;
 import comportamientos.Saga;
 import comportamientos.Usuario;
 
@@ -30,11 +30,13 @@ public class Album extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	private Usuario usuario;
+	private Datos datos;
 	
 	
-	public Album(JFrame ventanaAnterior, Usuario usuario) {
+	public Album(JFrame ventanaAnterior, Usuario usuario, Datos datos) {
 		double escala = 1;
 		this.usuario = usuario;
+		this.datos = datos;
 		
 		//Formato ventana
 		setTitle("Universal Cards Collection");
@@ -348,28 +350,7 @@ public class Album extends JFrame {
 			}
 		});
 		
-		
-	}
-	
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			@Override
-			public void run() {
-				MiBaseDeDatos.cargarModeloCartas();
-				Usuario usuario = new Usuario("Beñat","contrasena");
-				usuario.getCartas().put(new Carta(1), 1);
-				usuario.getCartas().put(new Carta(5), 2);
-				usuario.getCartas().put(new Carta(6), 1);
-				usuario.getCartas().put(new Carta(4), 3);
-				new Album(null, usuario);
-				for (Carta c: usuario.getCartas().keySet()) {
-					System.out.println(c.toString() + usuario.getCartas().get(c));
-				}
-				
-			}
-		
-		});
+
 	}
 
 }

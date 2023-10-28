@@ -11,7 +11,8 @@ import javax.swing.*;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import comportamientos.Carta;
-import comportamientos.MiBaseDeDatos;
+import comportamientos.Datos;
+import comportamientos.Ficheros;
 import comportamientos.Usuario;
 
 public class IniciarSesion extends JFrame {
@@ -147,12 +148,13 @@ public class IniciarSesion extends JFrame {
 					
 					@Override
 					public void run() {
-						MiBaseDeDatos.cargarModeloCartas();
-						Usuario usuario = new Usuario("Beñat","contrasena");
+						Datos datos = new Ficheros();
+						datos.cargarModeloCartas();
+						Usuario usuario = new Usuario("Beñat","contrasena",datos);
 						usuario.getCartas().put(new Carta(1), 1);
 						usuario.getCartas().put(new Carta(5), 2);
 						usuario.getCartas().put(new Carta(6), 1);
-						new Album(IniciarSesion.this, usuario);
+						new Album(IniciarSesion.this, usuario, datos);
 						for (Carta c: usuario.getCartas().keySet()) {
 							System.out.println(c.toString() + usuario.getCartas().get(c));
 						}
