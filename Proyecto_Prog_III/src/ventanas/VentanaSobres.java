@@ -8,7 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
 
 public class VentanaSobres extends JFrame{
 	/**
@@ -17,9 +16,9 @@ public class VentanaSobres extends JFrame{
 	private static final long serialVersionUID = 1L;
 	public VentanaSobres (JFrame ventanaAnterior) {
 		List<String> nombres = new ArrayList<String>();
-		nombres .add("img/mario.png");
-		nombres .add("img/kratos.png");
-		nombres .add("img/luigi.png");
+		nombres.add("img/mario.png");
+		nombres.add("img/kratos.png");
+		nombres.add("img/luigi.png");
 		
 		///Formato Ventana
 		setSize(1500,1000);
@@ -29,22 +28,24 @@ public class VentanaSobres extends JFrame{
 		//Crear Contenedores
 		JPanel pCentro = new JPanel();
 		JScrollPane sc = new JScrollPane(pCentro);
-		
+		JPanel pCarta = new JPanel();
 		//Formato Contenedores
 		sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		sc.setBorder(null);
 		
+		
 		for (int i = 0; i < 3; i++) {
 			//Crear Contenedores
-			JPanel pCarta = new JPanel();
 			JLabel lImagenSobre = new JLabel(new ImageIcon(nombres.get(i)));
 			//Formato Contenedores
 			pCarta.setLayout(new BorderLayout());
 			//Añadir componentes a contenedores
 			pCarta.add(lImagenSobre, BorderLayout.CENTER);
 			
-			
 		}
+		
+		getContentPane().add(sc, BorderLayout.CENTER );
+		
 		setVisible(true);
 	}
 
