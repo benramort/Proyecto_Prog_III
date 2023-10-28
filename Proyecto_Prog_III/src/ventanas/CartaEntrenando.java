@@ -1,6 +1,5 @@
 package ventanas;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
@@ -17,6 +16,7 @@ public class CartaEntrenando extends JPanel{
 	
 	public JProgressBar pbStamina = new JProgressBar(0, 100);
 	public Carta carta = new Carta("mario", new Saga("SuperMario"));
+	public double porcentajeStamina;
 	
 	public CartaEntrenando() {
 		//Formato Panel
@@ -44,5 +44,15 @@ public class CartaEntrenando extends JPanel{
 	public Carta getCarta() {
 		return carta;
 	}
+
+	public double getPorcentajeStamina() {
+		return porcentajeStamina;
+	}
+
+	public void setPorcentajeStamina(double porcentajeStamina) {
+		this.porcentajeStamina = porcentajeStamina;
+	}
+	
+	
 	
 }

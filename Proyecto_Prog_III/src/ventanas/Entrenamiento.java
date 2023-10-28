@@ -29,7 +29,6 @@ public class Entrenamiento extends JFrame{
 		JPanel pCentral = new JPanel();
 		JPanel pBotonClear = new JPanel();
 		JPanel pTextos = new JPanel();
-		JPanel pBarraProgreso = new JPanel();
 		JPanel pCartas = new JPanel();
 		JPanel flowLayoutCartasH = new JPanel();
 		JPanel boxLayoutCartasV = new JPanel();
@@ -51,12 +50,11 @@ public class Entrenamiento extends JFrame{
 		JButton bAlbum = new JButton("ÁLBUM");
 		JLabel lMonedasGeneradas = new JLabel("Monedas generadas: " );
 		JLabel lMonedasGeneradas2 = new JLabel("XXXXXX");
-		JLabel lMonedasPorMinuto = new JLabel("Monedas/minuto: " );
+		JLabel lMonedasPorMinuto = new JLabel("Monedas/segundo: " );
 		JLabel lMonedasPorMinuto2 = new JLabel("XXXXXX" );
 		JLabel lImagenMonedasGeneradas = new JLabel();
 		JLabel lImagenMonedasPorMinuto = new JLabel();
 		JButton bClear = new JButton("CLEAR");
-		JProgressBar pbProgreso = new JProgressBar(0, 100);
 		ImageIcon imagen = new ImageIcon(getClass().getResource("/moneda.png"));
 		ImageIcon imagenMoneda = new ImageIcon(imagen.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 		CartaEntrenando carta1 = new CartaEntrenando();
@@ -64,9 +62,7 @@ public class Entrenamiento extends JFrame{
 		CartaEntrenando carta3 = new CartaEntrenando();
 		JButton bEntrenar = new JButton("ENTRENAR");
 		//Formato componentes
-		pbProgreso.setPreferredSize(new Dimension(1000, 30));
 		bAlbum.setPreferredSize(new Dimension(90, 40));
-		pbProgreso.setStringPainted(true);
 		bEntrenar.setPreferredSize(new Dimension(150, 50));
 		//Añadir componentes a contenedores
 		this.getContentPane().add(pInferior, BorderLayout.SOUTH);
@@ -92,10 +88,8 @@ public class Entrenamiento extends JFrame{
 		flowLayoutCartasH.add(carta2);
 		flowLayoutCartasH.add(Box.createHorizontalStrut(50));
 		flowLayoutCartasH.add(carta3);
-		pBarraProgreso.add(pbProgreso);
 		pBotonEntrenar.add(bEntrenar);
 		boxLayoutCartasV.add(flowLayoutCartasH);
-		boxLayoutCartasV.add(pBarraProgreso);
 		boxLayoutCartasV.add(pBotonEntrenar);
 		pBotonAlbum.add(bAlbum);
 		pCentral.add(pBotonAlbum, BorderLayout.NORTH);
@@ -109,69 +103,7 @@ public class Entrenamiento extends JFrame{
 						dispose();
 						
 			}
-		});
-		
-		bEntrenar.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Thread hiloBarraProgreso = new Thread(new Runnable() {
-					
-					@Override
-					public void run() {
-						bEntrenar.setEnabled(false);
-						
-						for(int i = 0; i <= 100; i++) {
-							try {
-								if(carta1.pbStamina.getValue() == 0) {
-									Thread.sleep(((carta2.getCarta().getMonedasPorMinuto()/60) + (carta3.getCarta().getMonedasPorMinuto()/60))*1000);									
-								} else if (carta2.pbStamina.getValue() == 0) {
-									Thread.sleep(((carta1.getCarta().getMonedasPorMinuto()/60) + (carta3.getCarta().getMonedasPorMinuto()/60))*1000);
-								} else if(carta3.pbStamina.getValue() == 0) {
-									Thread.sleep(((carta2.getCarta().getMonedasPorMinuto()/60) + (carta1.getCarta().getMonedasPorMinuto()/60))*1000);
-								} else if(carta1.pbStamina.getValue() == 0 && carta2.pbStamina.getValue() == 0) {
-									Thread.sleep(((carta3.getCarta().getMonedasPorMinuto()/60))*1000);
-								} else if(carta1.pbStamina.getValue() == 0 && carta3.pbStamina.getValue() == 0) {
-									Thread.sleep(((carta2.getCarta().getMonedasPorMinuto()/60))*1000);
-								} else if(carta2.pbStamina.getValue() == 0 && carta3.pbStamina.getValue() == 0) {
-									Thread.sleep(((carta1.getCarta().getMonedasPorMinuto()/60))*1000);
-								} else if(carta1.pbStamina.getValue() != 0 && carta2.pbStamina.getValue() != 0 && carta3.pbStamina.getValue() != 0 ) {
-									Thread.sleep(((carta1.getCarta().getMonedasPorMinuto()/60) + (carta2.getCarta().getMonedasPorMinuto()/60) + (carta3.getCarta().getMonedasPorMinuto()/60))*1000);
-								}
-								
-							} catch (InterruptedException e1) {
-								break;
-							}
-							int valor = i;
-							int valor2 = 100-i;
-						
-							SwingUtilities.invokeLater(new Runnable() {
-								
-								@Override
-								public void run() {
-									pbProgreso.setValue(valor);
-									carta1.pbStamina.setValue(valor2);
-									carta2.pbStamina.setValue(valor2);
-									carta3.pbStamina.setValue(valor2);
-									
-								}
-							});
-						}
-						
-						if(pbProgreso.getValue() == 100) {
-							bEntrenar.setEnabled(true);							
-						}
-					}
-		});
-				hiloBarraProgreso.start();
-				
-				
-				
-	
-				
-
-	}
-	
+		});	
 	
 //	public static void main(String[] args) {
 //		SwingUtilities.invokeLater(new Runnable() {
@@ -183,7 +115,7 @@ public class Entrenamiento extends JFrame{
 //			}
 //		});
 //	}
-		});
+
 	}
 }
 	
