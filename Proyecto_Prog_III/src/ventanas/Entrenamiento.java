@@ -10,12 +10,19 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import comportamientos.Carta;
+import comportamientos.Saga;
+
 public class Entrenamiento extends JFrame{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	Carta carta1 = new Carta("mario", new Saga("SuperMario"));
+	Carta carta2 = new Carta("yoshi", new Saga("SuperMario"));
+	Carta carta3 = new Carta("luigi", new Saga("SuperMario"));
 	
 	public Entrenamiento(JFrame ventanaAnterior) {
 		//Formato ventana
@@ -57,9 +64,9 @@ public class Entrenamiento extends JFrame{
 		JButton bClear = new JButton("CLEAR");
 		ImageIcon imagen = new ImageIcon(getClass().getResource("/moneda.png"));
 		ImageIcon imagenMoneda = new ImageIcon(imagen.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
-		CartaEntrenando carta1 = new CartaEntrenando();
-		CartaEntrenando carta2 = new CartaEntrenando();
-		CartaEntrenando carta3 = new CartaEntrenando();
+		CartaEntrenando cartaEnt1 = new CartaEntrenando(carta1);
+		CartaEntrenando cartaEnt2 = new CartaEntrenando(carta2);
+		CartaEntrenando cartaEnt3 = new CartaEntrenando(carta3);
 		JButton bEntrenar = new JButton("ENTRENAR");
 		//Formato componentes
 		bAlbum.setPreferredSize(new Dimension(90, 40));
@@ -83,11 +90,11 @@ public class Entrenamiento extends JFrame{
 		pCartas.add(boxLayoutCartasV);
 //		boxLayoutCartasV.add(Box.createVerticalGlue());
 //		boxLayoutCartasV.setBackground(Color.BLUE);
-		flowLayoutCartasH.add(carta1);
+		flowLayoutCartasH.add(cartaEnt1);
 		flowLayoutCartasH.add(Box.createHorizontalStrut(50));
-		flowLayoutCartasH.add(carta2);
+		flowLayoutCartasH.add(cartaEnt2);
 		flowLayoutCartasH.add(Box.createHorizontalStrut(50));
-		flowLayoutCartasH.add(carta3);
+		flowLayoutCartasH.add(cartaEnt3);
 		pBotonEntrenar.add(bEntrenar);
 		boxLayoutCartasV.add(flowLayoutCartasH);
 		boxLayoutCartasV.add(pBotonEntrenar);

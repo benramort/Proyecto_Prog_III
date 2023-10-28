@@ -15,10 +15,12 @@ public class CartaEntrenando extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
 	public JProgressBar pbStamina = new JProgressBar(0, 100);
-	public Carta carta = new Carta("mario", new Saga("SuperMario"));
-	public double porcentajeStamina;
+	public Carta carta;
+	public double porcentajeStamina = 100;
 	
-	public CartaEntrenando() {
+	public CartaEntrenando(Carta carta) {
+		this.carta = carta;
+		
 		//Formato Panel
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
@@ -32,6 +34,7 @@ public class CartaEntrenando extends JPanel{
 		//Formato componentes
 		pbStamina.setPreferredSize(new Dimension(250, 30));
 		pbStamina.setStringPainted(true);
+
 		//Añadir componentes a contenedores
 		this.add(pPrincipal);
 		pPrincipal.add(pCarta);

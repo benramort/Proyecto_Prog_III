@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -100,7 +101,7 @@ public class Tienda extends JFrame {
 				pSobre.add(pPrecioSobre,BorderLayout.SOUTH);
 				pCentro.add(pSobre, BorderLayout.CENTER);
 				//Añadir ActionListener
-				lImagenSobre.addMouseListener(new MouseListener() {
+				lImagenSobre.addMouseListener(new MouseAdapter() {
 
 					@Override
 					public void mouseClicked(MouseEvent e) {
@@ -108,38 +109,12 @@ public class Tienda extends JFrame {
 							
 							@Override
 							public void run() {
-								new VentanaSobres (null);
+								new VentanaSobres(null);
 								
 							}
 						});
 						
-					}
-
-					@Override
-					public void mousePressed(MouseEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					@Override
-					public void mouseReleased(MouseEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					@Override
-					public void mouseEntered(MouseEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-
-					@Override
-					public void mouseExited(MouseEvent e) {
-						// TODO Auto-generated method stub
-						
-					}
-					
-					
+					}			
 				});
 			}
 				
