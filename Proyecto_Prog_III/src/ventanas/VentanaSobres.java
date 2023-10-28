@@ -36,7 +36,7 @@ public class VentanaSobres extends JFrame{
 		
 		
 		for (int i = 0; i < 3; i++) {
-			pCentro.add(new PanelCarta(datos.getModeloCartas().get(r.nextInt(5))));
+			pCentro.add(new PanelCarta(datos.getModeloCartas().get(r.nextInt(datos.getModeloCartas().size()))));
 		}
 		
 		getContentPane().add(pCentro, BorderLayout.CENTER );
@@ -55,14 +55,14 @@ public class VentanaSobres extends JFrame{
 	}
 
 
-public static void main(String[] args) {
-	SwingUtilities.invokeLater(new Runnable() {
-		
-		@Override
-		public void run() {
-			new VentanaSobres (null);
-			
-		}
-	});
-}
+//public static void main(String[] args) {
+//	SwingUtilities.invokeLater(new Runnable() {
+//		
+//		@Override
+//		public void run() {
+//			new VentanaSobres (null);
+//			
+//		}
+//	});
+//}
 }
