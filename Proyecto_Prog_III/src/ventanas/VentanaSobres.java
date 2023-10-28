@@ -1,13 +1,16 @@
 package ventanas;
 
 import java.awt.BorderLayout;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.ImageIcon;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
+
+import comportamientos.*;
 
 public class VentanaSobres extends JFrame{
 	/**
@@ -15,49 +18,51 @@ public class VentanaSobres extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	public VentanaSobres (JFrame ventanaAnterior) {
-		List<String> nombres = new ArrayList<String>();
-		nombres.add("img/mario.png");
-		nombres.add("img/kratos.png");
-		nombres.add("img/luigi.png");
-		
+		Random r = new Random();
 		///Formato Ventana
-		setSize(1500,1000);
+		setSize(800,450);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setTitle("Universal Card Collection");
 		setLocationRelativeTo(ventanaAnterior);
 		//Crear Contenedores
 		JPanel pCentro = new JPanel();
-		JScrollPane sc = new JScrollPane(pCentro);
-		JPanel pCarta = new JPanel();
-		//Formato Contenedores
-		sc.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		sc.setBorder(null);
+		JPanel pCerrar = new JPanel();
+		//Crear Componentes
+		JButton cerrar = new JButton("CERRAR");
+		///Añadir componentes a contenedores
+		pCerrar.add(cerrar);
+		
+		Datos datos = new Ficheros();
 		
 		
 		for (int i = 0; i < 3; i++) {
-			//Crear Contenedores
-			JLabel lImagenSobre = new JLabel(new ImageIcon(nombres.get(i)));
-			//Formato Contenedores
-			pCarta.setLayout(new BorderLayout());
-			//Añadir componentes a contenedores
-			pCarta.add(lImagenSobre, BorderLayout.CENTER);
-			pCentro.add(pCarta);
+			pCentro.add(new PanelCarta(datos.getModeloCartas().get(r.nextInt(5))));
 		}
 		
-		getContentPane().add(sc, BorderLayout.CENTER );
+		getContentPane().add(pCentro, BorderLayout.CENTER );
+		getContentPane().add(pCerrar, BorderLayout.SOUTH);
 		
+		cerrar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				
+			}
+		});
+	
 		setVisible(true);
 	}
 
 
-//public static void main(String[] args) {
-//	SwingUtilities.invokeLater(new Runnable() {
-//		
-//		@Override
-//		public void run() {
-//			new VentanaSobres (null);
-//			
-//		}
-//	});
-//}
+public static void main(String[] args) {
+	SwingUtilities.invokeLater(new Runnable() {
+		
+		@Override
+		public void run() {
+			new VentanaSobres (null);
+			
+		}
+	});
+}
 }
