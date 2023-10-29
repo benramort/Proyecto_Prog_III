@@ -17,6 +17,7 @@ import java.awt.event.MouseListener;
 import javax.swing.*;
 import javax.swing.border.*;
 import comportamientos.Carta;
+import comportamientos.CartaVacia;
 import comportamientos.Datos;
 import comportamientos.Saga;
 import comportamientos.Usuario;
@@ -247,15 +248,15 @@ public class Album extends JFrame {
 				p.addMouseListener(hoverCartas);
 				pCartas.add(p);
 				p.setPreferredSize(new Dimension(235, 335)); //TODO espacio vertical
-				p.setOpaque(true);
+//				p.setOpaque(true);
 				p.setBackground(Color.RED);
 				System.out.println("Cargada carta "+c.getId());
 				cartasObtenidas++;
 			} else {
-				PanelCarta p = new PanelCarta(new Carta("yoshi", new Saga("SuperMario")));
-				p.addMouseListener(hoverCartas);
+				PanelCarta p = new PanelCarta(new CartaVacia());
+//				p.addMouseListener(hoverCartas);
 				pCartas.add(p);
-				System.out.println("Cargada carta "+c.getId());
+//				System.out.println("Cargada carta "+c.getId());
 			}
 		}
 		pPorcentaje.setPorcentaje((int) (cartasObtenidas/(double) usuario.getCartas().size()*100));

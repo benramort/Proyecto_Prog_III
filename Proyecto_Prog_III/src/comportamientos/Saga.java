@@ -8,7 +8,7 @@ public class Saga {
 	String nombreVisible;
 	ImageIcon recursoGrafico;
 	
-	public Saga(String nombreInterno, String nombreVisible) {
+	public Saga(String nombreInterno, String nombreVisible) { //TODO todas las cartas crean un objeto saga
 		this.nombreInterno = nombreInterno;
 		this.nombreVisible = nombreVisible;
 		recursoGrafico = new ImageIcon("img/logo"+nombreInterno+".png");
