@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 public class Ficheros implements Datos {
 	

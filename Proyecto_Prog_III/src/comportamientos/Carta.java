@@ -1,10 +1,5 @@
 package comportamientos;
 
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.Image;
-
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 public class Carta implements Comparable<Carta>{
