@@ -87,15 +87,5 @@ public class Ficheros implements Datos {
 		logger.fine("El logger se ha configurado correctamente");
 		
 	}
-	
-	public static void main(String[] args) {
-		Ficheros f = new Ficheros();
-//		f.configurarLogger();
-//		f.cargarModeloCartas();
-//		f.cargarUsuarios();
-		for (Carta c: modeloCartas) {
-			System.out.println(c);
-		}
-	}
 
 }

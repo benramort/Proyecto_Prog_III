@@ -10,8 +10,8 @@ public class Usuario{
 	private String contrasena;
 	private int monedas;
 	private Map<Carta,Integer> cartas; //Las cartas se ordenan naturalmente, y se almacena el número de cartas que tiene ese usuario. Si no tiene esa carta hay que añadirla con 0
-	private RegistroTemporal registroTemporal;
-	private Datos datos;
+//	private RegistroTemporal registroTemporal;
+//	private Datos datos;
 	
 	public Usuario() {
 		
@@ -20,7 +20,7 @@ public class Usuario{
 	public Usuario(String nombre, String contrasena, Datos datos) {
 		this.nombre = nombre;
 		this.contrasena = contrasena;
-		this.datos = datos;
+//		this.datos = datos;
 		monedas = 0;
 		cartas = new TreeMap<Carta, Integer>();
 		for (Carta c: datos.getModeloCartas()) {

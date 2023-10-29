@@ -30,15 +30,15 @@ public class Album extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Usuario usuario;
-	private Datos datos;
+//	private Usuario usuario;
+//	private Datos datos;
 	
 	
 	
 	public Album(JFrame ventanaAnterior, Usuario usuario, Datos datos) {
 		double escala = 1;
-		this.usuario = usuario;
-		this.datos = datos;
+//		this.usuario = usuario;
+//		this.datos = datos;
 		int cartasObtenidas = 0;
 		
 		//Formato ventana
