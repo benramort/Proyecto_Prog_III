@@ -6,7 +6,6 @@ import java.awt.FlowLayout;
 import javax.swing.*;
 
 import comportamientos.Carta;
-import comportamientos.Saga;
 
 public class CartaEntrenando extends JPanel{
 	/**
