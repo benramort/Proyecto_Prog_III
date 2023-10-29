@@ -26,7 +26,7 @@ public class PanelPorcentaje extends JPanel{  //TODO caso en el qe sea 100%
 	private int porcentaje;
 
 	public PanelPorcentaje(double porcentaje, int anchura, int altura) {
-		if (porcentaje > 100) {
+		if (porcentaje > 100) { //TODO se puede quitar?
 			this.porcentaje = (int) Math.round(porcentaje);
 		} else {
 			this.porcentaje = (int) Math.round(porcentaje);
