@@ -56,6 +56,10 @@ public class CartaEntrenando extends JPanel{
 		this.porcentajeStamina = porcentajeStamina;
 	}
 	
+	public JProgressBar getPbStamina() {
+		return pbStamina;
+	}
+	
 	
 	
 }
