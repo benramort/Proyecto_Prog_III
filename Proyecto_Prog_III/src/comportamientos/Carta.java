@@ -31,7 +31,7 @@ public class Carta implements Comparable<Carta>{
 		this.nombreInterno = nombreInterno;
 		this.nombreVisible = nombreVisible;
 		this.saga = saga;
-		this.recursoGrafico = new ImageIcon("img/"+nombreInterno+".png");;
+		this.recursoGrafico = new ImageIcon("img/"+nombreInterno+".png");
 		this.id = id;
 		this.monedasPorMinuto = monedasPorMinuto;
 		this.resistencia = resistencia;
