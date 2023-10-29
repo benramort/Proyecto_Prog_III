@@ -124,7 +124,12 @@ public class Tienda extends JFrame {
 							
 							@Override
 							public void run() {
-								new VentanaSobres(Tienda.this, datos);
+								int respuesta = JOptionPane.showConfirmDialog(lImagenSobre, "¿Seguro que quieres comprar este sobre??", "Confirmar compra", JOptionPane.YES_NO_OPTION);
+								if(respuesta == JOptionPane.OK_OPTION) {
+									new VentanaSobres(Tienda.this, datos);									
+								} else {
+									//
+								}
 								
 							}
 						});

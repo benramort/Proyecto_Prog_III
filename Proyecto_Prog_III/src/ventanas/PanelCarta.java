@@ -48,8 +48,11 @@ public class PanelCarta extends JPanel{
 		pProgressBar.setLayout(new BoxLayout(pProgressBar, BoxLayout.Y_AXIS));
 		
 		JLabel lGeneracion = new JLabel("Gen.:");
+		lGeneracion.setForeground(Color.WHITE);
 		JLabel lResistencia = new JLabel("Res.:");
+		lResistencia.setForeground(Color.WHITE);
 		JLabel lRecuperacion = new JLabel("Rec.:");
+		lRecuperacion.setForeground(Color.WHITE);
 		
 		JProgressBar pbGeneracion = new InvertedProgressBar(0, 100);
 		JProgressBar pbResistencia = new InvertedProgressBar(0, 100);

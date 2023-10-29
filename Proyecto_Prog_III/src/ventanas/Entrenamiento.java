@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import comportamientos.Carta;
+import comportamientos.ModoIdle;
 import comportamientos.Saga;
 
 public class Entrenamiento extends JFrame{
@@ -123,6 +124,15 @@ public class Entrenamiento extends JFrame{
 						
 			}
 		});	
+		
+		bEntrenar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new ModoIdle(cartaEnt1, cartaEnt2, cartaEnt3);
+				
+			}
+		});
 	
 //	public static void main(String[] args) {
 //		SwingUtilities.invokeLater(new Runnable() {
