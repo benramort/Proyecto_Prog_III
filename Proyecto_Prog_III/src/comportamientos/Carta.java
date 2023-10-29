@@ -20,7 +20,9 @@ public class Carta implements Comparable<Carta>{
 	int recuperacion = 25;
 	
 	
-	
+	public Carta() {
+		
+	}
 	
 	public Carta(int id) {
 		this.id = id;
