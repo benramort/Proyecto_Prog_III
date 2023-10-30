@@ -156,6 +156,8 @@ public class IniciarSesion extends JFrame {
 						usuario.getCartas().put(new Carta(1), 1);
 						usuario.getCartas().put(new Carta(5), 2);
 						usuario.getCartas().put(new Carta(6), 1);
+//						usuario.getCartas().put(new Carta(2), 1);
+//						usuario.getCartas().put(new Carta(4), 1);
 						new Album(IniciarSesion.this, usuario, datos);
 						for (Carta c: usuario.getCartas().keySet()) {
 							System.out.println(c.toString() + usuario.getCartas().get(c));
