@@ -17,39 +17,39 @@ import comportamientos.Usuario;
 
 public class IniciarSesion extends JFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+/**
+*
+*/
+private static final long serialVersionUID = 1L;
 	private static final Color c = new Color(42,215,245);
-	
+
 	public static void main(String[] args) {
-//		searchLookAndFeel();
+		// searchLookAndFeel();
 		SwingUtilities.invokeLater(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				new IniciarSesion();
-				
+
 			}
 		});
-		
+
 	}
-	
-//	private static void searchLookAndFeel() {
-//		LookAndFeelInfo[] lfs = UIManager.getInstalledLookAndFeels();
-//		for (LookAndFeelInfo lf : lfs) {
-//			System.out.println(lf.getName());
-//		}
-//		try {
-//		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-//		        if ("Nimbus".equals(info.getName())) {
-//		            UIManager.setLookAndFeel(info.getClassName());
-//		            return;
-//		        }
-//		    }
-//		} catch (Exception e) {} // Si no está disponible nimbus, no se hace nada
-//	}
+
+// private static void searchLookAndFeel() {
+// LookAndFeelInfo[] lfs = UIManager.getInstalledLookAndFeels();
+// for (LookAndFeelInfo lf : lfs) {
+// System.out.println(lf.getName());
+// }
+// try {
+//    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+//        if ("Nimbus".equals(info.getName())) {
+//            UIManager.setLookAndFeel(info.getClassName());
+//            return;
+//        }
+//    }
+// } catch (Exception e) {} // Si no está disponible nimbus, no se hace nada
+// }
 
 	public IniciarSesion() {
 		//Formato ventana
@@ -57,8 +57,8 @@ public class IniciarSesion extends JFrame {
 		setSize(1000, 700);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE); //Por qué exit on close??
-//		getContentPane().setBackground(Color.WHITE);
-		
+// getContentPane().setBackground(Color.WHITE);
+
 		//Crear contenedores
 		JPanel pInferior = new JPanel();
 		JPanel pInferiorBox = new JPanel();
@@ -70,9 +70,9 @@ public class IniciarSesion extends JFrame {
 		pTexto.setLayout(new BoxLayout(pTexto, BoxLayout.Y_AXIS));
 		JPanel pCampos = new JPanel();
 		pCampos.setLayout(new BoxLayout(pCampos, BoxLayout.Y_AXIS));
-		
+
 		//Formato de contenedores
-//		pInferior.setOpaque(false);
+		// pInferior.setOpaque(false);
 		pInferior.setBackground(c);
 		pUsuarioContrasena.setOpaque(false);
 		pBotonera.setOpaque(false);
@@ -96,8 +96,8 @@ public class IniciarSesion extends JFrame {
 		lUsuario.setFont(fuente);
 		lContrasena.setFont(fuente);
 		cbMostrarContrasena.setBackground(c);
-		
-		
+
+
 		//Añadir componentes a contenedores
 		setIconImage(logoPequeño.getImage());
 		add(pInferior, BorderLayout.SOUTH);
@@ -105,14 +105,14 @@ public class IniciarSesion extends JFrame {
 		pInferiorBox.add(pUsuarioContrasena);
 		pInferiorBox.add(pCheckBox);
 		pInferiorBox.add(pBotonera);
-		
-//		pInferiorBox.add(pUsuario);
-//		pInferiorBox.add(pContrasena);
-//		pUsuario.add(lUsuario);
-//		pUsuario.add(tfUsuario);
-//		pContrasena.add(lContrasena);
-//		pContrasena.add(pfContrasena);
-		
+
+// pInferiorBox.add(pUsuario);
+// pInferiorBox.add(pContrasena);
+// pUsuario.add(lUsuario);
+// pUsuario.add(tfUsuario);
+// pContrasena.add(lContrasena);
+// pContrasena.add(pfContrasena);
+
 		pUsuarioContrasena.add(pTexto);
 		pTexto.add(lUsuario);
 		pTexto.add(Box.createVerticalStrut(5)); //Añade distancia vertical
@@ -125,12 +125,12 @@ public class IniciarSesion extends JFrame {
 		pBotonera.add(btNuevaCuenta);
 		pCheckBox.add(cbMostrarContrasena);
 		add(lLogo, BorderLayout.CENTER);
-		
-		
-		
+
+
+
 		//Configurar escuchadores
 		btNuevaCuenta.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SwingUtilities.invokeLater(new Runnable() {
@@ -142,13 +142,13 @@ public class IniciarSesion extends JFrame {
 				dispose();
 			}
 		});
-		
+
 		btIniciarSesion.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SwingUtilities.invokeLater(new Runnable() {
-					
+
 					@Override
 					public void run() {
 						Datos datos = new Ficheros();
@@ -167,11 +167,11 @@ public class IniciarSesion extends JFrame {
 		});
 		char caracter = pfContrasena.getEchoChar();
 
-		
-		//https://www.youtube.com/shorts/pv5ubFk9JfY
-		
+
+//https://www.youtube.com/shorts/pv5ubFk9JfY
+
 		cbMostrarContrasena.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(cbMostrarContrasena.isSelected()) {
@@ -180,22 +180,10 @@ public class IniciarSesion extends JFrame {
 				} else {
 					pfContrasena.setEchoChar(caracter);
 				}
-				
+
 			}
 		});
-		
-		
-		
-		
-		
-		
-		setVisible(true);
-		
-		
-		
-		
-	}
-	
-	
 
+		setVisible(true);
+	}
 }

@@ -15,15 +15,15 @@ import comportamientos.Saga;
 
 public class Entrenamiento extends JFrame{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
+/**
+*
+*/
+private static final long serialVersionUID = 1L;
+
 	Carta carta1 = new Carta("mario", new Saga("SuperMario"));
-	Carta carta2 = new Carta("yoshi", new Saga("SuperMario"));
-	Carta carta3 = new Carta("luigi", new Saga("SuperMario"));
-	
+	Carta carta2 = new Carta("mario", new Saga("SuperMario"));
+	Carta carta3 = new Carta("mario", new Saga("SuperMario"));
+
 	public Entrenamiento(JFrame ventanaAnterior) {
 		//Formato ventana
 		setTitle("Entrenamiento");
@@ -50,14 +50,14 @@ public class Entrenamiento extends JFrame{
 		pCartas.setLayout(new FlowLayout(FlowLayout.CENTER));
 		pBotonEntrenar.setLayout(new FlowLayout(FlowLayout.CENTER));
 		flowLayoutCartasH.setLayout(new FlowLayout(FlowLayout.CENTER));
-//		flowLayoutCartasH.setOpaque(true);
-//		flowLayoutCartasH.setBackground(Color.BLUE);
+		// flowLayoutCartasH.setOpaque(true);
+		// flowLayoutCartasH.setBackground(Color.BLUE);
 		boxLayoutCartasV.setLayout(new BoxLayout(boxLayoutCartasV, BoxLayout.Y_AXIS));
 		pBotonAlbum.setLayout(new FlowLayout(FlowLayout.LEFT));
-//		pBotonAlbum.setMaximumSize(new Dimension(10000,50));
+		// pBotonAlbum.setMaximumSize(new Dimension(10000,50));
 		flowLayoutCartasH.setMaximumSize(new Dimension(1000,1000));
 		boxLayoutCartasV.setOpaque(true);
-//		boxLayoutCartasH.setOpaque(false);
+		// boxLayoutCartasH.setOpaque(false);
 		blCentro.setLayout(new BoxLayout(blCentro, BoxLayout.Y_AXIS));
 		//Creacion componentes
 		JButton bAlbum = new JButton("ÁLBUM");
@@ -98,10 +98,10 @@ public class Entrenamiento extends JFrame{
 		pTextos.add(lMonedasPorMinuto2);
 		pTextos.add(lImagenMonedasPorMinuto);
 		lImagenMonedasPorMinuto.setIcon(imagenMoneda);
-		pCentral.add(pCartas);		
+		pCentral.add(pCartas);
 		pCartas.add(boxLayoutCartasV);
-//		boxLayoutCartasV.add(Box.createVerticalGlue());
-//		boxLayoutCartasV.setBackground(Color.BLUE);
+		// boxLayoutCartasV.add(Box.createVerticalGlue());
+		// boxLayoutCartasV.setBackground(Color.BLUE);
 		flowLayoutCartasH.add(cartaEnt1);
 		flowLayoutCartasH.add(Box.createHorizontalStrut(50));
 		flowLayoutCartasH.add(cartaEnt2);
@@ -114,36 +114,38 @@ public class Entrenamiento extends JFrame{
 		add(pBotonAlbum, BorderLayout.NORTH);
 		
 		setVisible(true);
-		
+	
 		bAlbum.addActionListener(new ActionListener() {
-			
+	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-						dispose();
-						
-			}
-		});	
-		
-		bEntrenar.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new ModoIdle(cartaEnt1, cartaEnt2, cartaEnt3);
-				
+				dispose();
+	
 			}
 		});
 	
-//	public static void main(String[] args) {
-//		SwingUtilities.invokeLater(new Runnable() {
-//			
-//			@Override
-//			public void run() {
-//				new Entrenamiento(null);
-//				
-//			}
-//		});
-//	}
-
-	}
-}
+		bEntrenar.addActionListener(new ActionListener() {
 	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Thread modoIdle = new ModoIdle(cartaEnt1, cartaEnt2, cartaEnt3);
+				modoIdle.start();
+				bEntrenar.setEnabled(false);
+			}
+		});
+	
+		bEntrenar.setEnabled(true);
+	
+		// public static void main(String[] args) {
+		// SwingUtilities.invokeLater(new Runnable() {
+		//
+		// @Override
+		// public void run() {
+		// new Entrenamiento(null);
+		//
+		// }
+		// });
+		// }
+	
+	}
+	}
