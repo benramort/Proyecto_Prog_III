@@ -128,13 +128,13 @@ private static final long serialVersionUID = 1L;
 	
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				bEntrenar.setEnabled(false);
 				Thread modoIdle = new ModoIdle(cartaEnt1, cartaEnt2, cartaEnt3);
 				modoIdle.start();
-				bEntrenar.setEnabled(false);
+				bEntrenar.setEnabled(true);
 			}
 		});
 	
-		bEntrenar.setEnabled(true);
 	
 		// public static void main(String[] args) {
 		// SwingUtilities.invokeLater(new Runnable() {
