@@ -98,7 +98,7 @@ public class ModoIdle extends Thread {
 				contadorSeg++;
 				
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(1);
 				} catch (InterruptedException e) {
 					break;
 				}

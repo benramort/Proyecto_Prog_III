@@ -130,8 +130,7 @@ private static final long serialVersionUID = 1L;
 			public void actionPerformed(ActionEvent e) {
 				bEntrenar.setEnabled(false);
 				Thread modoIdle = new ModoIdle(cartaEnt1, cartaEnt2, cartaEnt3);
-				modoIdle.start();
-				bEntrenar.setEnabled(true);
+				modoIdle.start();					
 			}
 		});
 	

@@ -14,6 +14,9 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import javax.swing.*;
 import javax.swing.border.*;
 import comportamientos.Carta;

@@ -8,14 +8,14 @@ import javax.swing.ImageIcon;
 
 public class Carta implements Comparable<Carta>{
 
-	String nombreInterno;
-	String nombreVisible;
-	Saga saga;
-	ImageIcon recursoGrafico;
+	public String nombreInterno;
+	public String nombreVisible;
+	public Saga saga;
+	public ImageIcon recursoGrafico;
 	
 	int id;
 	int monedasPorMinuto = 100;
-	int resistencia = 50;
+	int resistencia = 10;
 	int recuperacion = 25;
 
 	public Carta() {
