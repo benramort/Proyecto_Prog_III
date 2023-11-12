@@ -25,7 +25,7 @@ public class Ficheros implements Datos {
 	
 	public Ficheros() {
 		cargarModeloCartas();
-		configurarLogger();
+//		configurarLogger();
 		cargarUsuarios();
 	}
 	
