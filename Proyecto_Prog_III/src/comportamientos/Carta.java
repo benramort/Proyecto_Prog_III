@@ -2,16 +2,18 @@ package comportamientos;
 
 
 
+import java.nio.file.Path;
+
 import javax.swing.ImageIcon;
 
 
 
 public class Carta implements Comparable<Carta>{
 
-	public String nombreInterno;
-	public String nombreVisible;
-	public Saga saga;
-	public ImageIcon recursoGrafico;
+	private String nombreInterno;
+	private String nombreVisible;
+	private Saga saga;
+	private ImageIcon recursoGrafico;
 	
 	int id;
 	int monedasPorMinuto = 100;
@@ -32,7 +34,9 @@ public class Carta implements Comparable<Carta>{
 		this.nombreInterno = nombreInterno;
 		this.nombreVisible = nombreVisible;
 		this.saga = saga;
-		this.recursoGrafico = new ImageIcon("img/"+nombreInterno+".png");
+		Path path = Path.of("img/"+nombreInterno+".png");
+//		System.out.println(path.toString());
+		this.recursoGrafico = new ImageIcon(path.toAbsolutePath().toString());
 		this.id = id;
 		this.monedasPorMinuto = monedasPorMinuto;
 		this.resistencia = resistencia;
@@ -45,7 +49,8 @@ public class Carta implements Comparable<Carta>{
 		this.nombreInterno = nombreInterno;
 		this.nombreVisible = nombreVisible;
 		this.saga = saga;
-		this.recursoGrafico = new ImageIcon("img/"+nombreInterno+".png");
+		Path path = Path.of("img/"+nombreInterno+".png");
+		this.recursoGrafico = new ImageIcon(path.toAbsolutePath().toString());
 	}
 
 	
