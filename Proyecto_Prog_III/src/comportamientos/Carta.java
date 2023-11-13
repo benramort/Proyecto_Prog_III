@@ -20,10 +20,6 @@ public class Carta implements Comparable<Carta>{
 	int resistencia = 10;
 	int recuperacion = 25;
 
-	public Carta() {
-
-	}
-
 	public Carta(int id) {
 		this.id = id;
 	}
@@ -110,7 +106,7 @@ public class Carta implements Comparable<Carta>{
 	
 
 	@Override
-	public boolean equals(Object o) {
+	public boolean equals(Object o) { //TODO igual hay que completar
 		if (o instanceof Carta) {
 			return id == ((Carta) o).getId();
 		}
