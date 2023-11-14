@@ -12,7 +12,7 @@ public class CartaEntrenando extends JPanel{
 *
 */
 private static final long serialVersionUID = 1L;
-
+	
 	public JProgressBar pbStamina = new JProgressBar(0, 100);
 	public Carta carta;
 	public double porcentajeStamina = 100;

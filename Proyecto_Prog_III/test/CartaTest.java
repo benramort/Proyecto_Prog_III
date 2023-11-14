@@ -3,11 +3,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.awt.Color;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 
 import org.junit.Before;
 import org.junit.Test;

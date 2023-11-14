@@ -277,7 +277,7 @@ public class Album extends JFrame {
 						
 						@Override
 						public void run() {
-							new Entrenamiento(Album.this);
+							new Entrenamiento(Album.this, usuario);
 						}
 					});
 				}

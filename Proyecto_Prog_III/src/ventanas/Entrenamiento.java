@@ -12,6 +12,7 @@ import javax.swing.*;
 import comportamientos.Carta;
 import comportamientos.ModoIdle;
 import comportamientos.Saga;
+import comportamientos.Usuario;
 
 public class Entrenamiento extends JFrame{
 
@@ -23,8 +24,9 @@ private static final long serialVersionUID = 1L;
 	Carta carta1 = new Carta("mario", new Saga("SuperMario"));
 	Carta carta2 = new Carta("mario", new Saga("SuperMario"));
 	Carta carta3 = new Carta("mario", new Saga("SuperMario"));
-
-	public Entrenamiento(JFrame ventanaAnterior) {
+	Usuario usuario;
+	
+	public Entrenamiento(JFrame ventanaAnterior, Usuario usuario) {
 		//Formato ventana
 		setTitle("Entrenamiento");
 		setSize(1200, 650);
@@ -74,11 +76,12 @@ private static final long serialVersionUID = 1L;
 		CartaEntrenando cartaEnt2 = new CartaEntrenando(carta2);
 		CartaEntrenando cartaEnt3 = new CartaEntrenando(carta3);
 		JButton bEntrenar = new JButton("ENTRENAR");
-		
+		JButton bRecogerMonedas = new JButton("RECOGER MONEDAS");
 		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
 		//Formato componentes
 		bAlbum.setPreferredSize(new Dimension(90, 40));
 		bEntrenar.setPreferredSize(new Dimension(150, 50));
+		bRecogerMonedas.setPreferredSize(new Dimension(150, 50));
 		//Añadir componentes a contenedores
 		setIconImage(logoPequeño.getImage());
 		this.getContentPane().add(pInferior, BorderLayout.SOUTH);
@@ -108,6 +111,8 @@ private static final long serialVersionUID = 1L;
 		flowLayoutCartasH.add(Box.createHorizontalStrut(50));
 		flowLayoutCartasH.add(cartaEnt3);
 		pBotonEntrenar.add(bEntrenar);
+		pBotonEntrenar.add(bRecogerMonedas);
+		bRecogerMonedas.setVisible(false);
 		boxLayoutCartasV.add(flowLayoutCartasH);
 		boxLayoutCartasV.add(pBotonEntrenar);
 		pBotonAlbum.add(bAlbum);
@@ -128,11 +133,22 @@ private static final long serialVersionUID = 1L;
 	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				bEntrenar.setEnabled(false);
-				Thread modoIdle = new ModoIdle(cartaEnt1, cartaEnt2, cartaEnt3);
-				modoIdle.start();					
-			}
-		});
+				bEntrenar.setVisible(false);
+				bRecogerMonedas.setVisible(true);
+				ModoIdle modoIdle = new ModoIdle(cartaEnt1, cartaEnt2, cartaEnt3);
+				modoIdle.start();
+				bRecogerMonedas.addActionListener(new ActionListener() {	
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					bRecogerMonedas.setVisible(false);
+					usuario.setMonedas(usuario.getMonedas() + modoIdle.getMonedasGeneradas());
+					bEntrenar.setVisible(true);						
+					
+				}
+				});
+			}			
+		});															
+
 	
 	
 		// public static void main(String[] args) {
