@@ -20,10 +20,10 @@ public class VentanaSobres extends JFrame{
 	
 	Datos datos;
 	
-	public VentanaSobres (JFrame ventanaAnterior, Datos datos) {
+	public VentanaSobres (JFrame ventanaAnterior, Datos datos, int numCartasPorSobre) {
 		Random r = new Random();
 		///Formato Ventana
-		setSize(800,430);
+		setSize(1000,430);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setTitle("Universal Card Collection");
 		setLocationRelativeTo(ventanaAnterior);
@@ -40,7 +40,7 @@ public class VentanaSobres extends JFrame{
 		pCerrar.add(cerrar);
 		
 		
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < numCartasPorSobre; i++) {
 			pCentro.add(new PanelCarta(datos.getModeloCartas().get(r.nextInt(datos.getModeloCartas().size()))));
 		}
 		

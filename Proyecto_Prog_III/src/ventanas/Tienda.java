@@ -87,7 +87,6 @@ public class Tienda extends JFrame {
 			
 			
 			for (int i = 0; i < nombres.size(); i++) {
-				int numCartasPorSobre = 0;
 				//Crear Contenedores
 				JPanel pSobre = new JPanel();
 				JPanel pNombreSobre = new JPanel();
@@ -123,18 +122,19 @@ public class Tienda extends JFrame {
 							
 							@Override
 							public void run() {
+								int numCartasPorSobre = 0;
 								int respuesta = JOptionPane.showConfirmDialog(lImagenSobre, "¿Seguro que quieres comprar este sobre??", "Confirmar compra", JOptionPane.YES_NO_OPTION);
 								if(respuesta == JOptionPane.OK_OPTION) {
 									if(lNombreSobre.getText() == ("Sobre Ultimate")) {
-										//numCartasPorSobre = 4;
+										numCartasPorSobre = 4;
 									}else if(lNombreSobre.getText() == ("Megasobre")) {
-										
+										numCartasPorSobre = 3;
 									}else if(lNombreSobre.getText() == ("Sobre Oro Premium")) {
-										
+										numCartasPorSobre = 2;
 									}else {
-										
+										numCartasPorSobre = 1;
 									}
-									new VentanaSobres(Tienda.this, datos);									
+									new VentanaSobres(Tienda.this, datos,numCartasPorSobre);									
 								} else {
 									//
 								}
