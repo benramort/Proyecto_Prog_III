@@ -26,16 +26,16 @@ public class Tienda extends JFrame {
 
 		public Tienda (JFrame ventanaAnterior, Usuario usuario, Datos datos) {
 			List<String> nombres = new ArrayList<String>();
-			nombres.add("Megasobre");
 			nombres.add("Sobre Ultimate");
-			nombres.add("Sobre Oro");
+			nombres.add("Megasobre");
 			nombres.add("Sobre Oro Premium");
+			nombres.add("Sobre Oro");
 			
 			List<String> precios = new ArrayList<String>();
-			precios.add("50000");
 			precios.add("125000");
-			precios.add("7500");
+			precios.add("50000");
 			precios.add("15000");
+			precios.add("7500");
 			///Formato Ventana
 			setSize(1500,1000);
 			setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -87,6 +87,7 @@ public class Tienda extends JFrame {
 			
 			
 			for (int i = 0; i < nombres.size(); i++) {
+				int numCartasPorSobre = 0;
 				//Crear Contenedores
 				JPanel pSobre = new JPanel();
 				JPanel pNombreSobre = new JPanel();
@@ -124,6 +125,15 @@ public class Tienda extends JFrame {
 							public void run() {
 								int respuesta = JOptionPane.showConfirmDialog(lImagenSobre, "¿Seguro que quieres comprar este sobre??", "Confirmar compra", JOptionPane.YES_NO_OPTION);
 								if(respuesta == JOptionPane.OK_OPTION) {
+									if(lNombreSobre.getText() == ("Sobre Ultimate")) {
+										//numCartasPorSobre = 4;
+									}else if(lNombreSobre.getText() == ("Megasobre")) {
+										
+									}else if(lNombreSobre.getText() == ("Sobre Oro Premium")) {
+										
+									}else {
+										
+									}
 									new VentanaSobres(Tienda.this, datos);									
 								} else {
 									//
