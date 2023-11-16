@@ -6,10 +6,15 @@ import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 
 import comportamientos.Carta;
+import comportamientos.CartaAEntrenar;
+import comportamientos.Datos;
+import comportamientos.Ficheros;
 import comportamientos.ModoIdle;
 import comportamientos.Saga;
 import comportamientos.Usuario;
@@ -21,10 +26,11 @@ public class Entrenamiento extends JFrame{
 */
 private static final long serialVersionUID = 1L;
 
-	Carta carta1 = new Carta("mario", new Saga("SuperMario"));
-	Carta carta2 = new Carta("mario", new Saga("SuperMario"));
-	Carta carta3 = new Carta("mario", new Saga("SuperMario"));
-	Usuario usuario;
+	Carta carta1 = new Carta(4, "mario", "Mario", new Saga("SuperMario", "Super Mario"), 50, 80, 20);
+	Carta carta2 = new CartaAEntrenar();
+	Carta carta3 = new CartaAEntrenar();
+	Datos datos = new Ficheros();
+	Usuario usuario = new Usuario("Beñat","contrasena",datos);
 	
 	public Entrenamiento(JFrame ventanaAnterior, Usuario usuario) {
 		//Formato ventana
@@ -147,7 +153,21 @@ private static final long serialVersionUID = 1L;
 				}
 				});
 			}			
-		});															
+		});
+		
+		cartaEnt1.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				SwingUtilities.invokeLater(new Runnable() {
+					
+					@Override
+					public void run() {
+						new VentanaSeleccion(Entrenamiento.this, usuario, datos);
+					}
+				});
+			}
+		});
 
 	
 	

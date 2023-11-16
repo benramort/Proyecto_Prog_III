@@ -61,7 +61,7 @@ public class Tienda extends JFrame {
 			
 			///Crear Componentes
 			JButton btAlbum = new JButton("ÁLBUM");
-			JLabel lMonedas = new JLabel("XXXXXXXXXX");
+			JLabel lMonedas = new JLabel(String.valueOf(usuario.getMonedas()));
 			JLabel lImagenMonedas = new JLabel();
 			
 			ImageIcon imagen7 = new ImageIcon(getClass().getResource("/moneda.png"));
