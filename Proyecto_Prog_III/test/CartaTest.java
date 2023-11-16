@@ -24,8 +24,6 @@ public class CartaTest {
 		carta = new Carta(1, "yoshi", "Yoshi", saga, 20, 30, 40);
 	}
 	
-	//TODO test de constructores
-	
 	@Test
 	public void testGetNombreInterno() {
 		assertEquals("yoshi", carta.getNombreInterno());
@@ -43,6 +41,8 @@ public class CartaTest {
 //		ii.equals(ii);
 //		assertEquals(ii, carta.getRecursoGrafico());
 //	}
+	
+	//TODO getRecursoGrafico
 	
 	@Test
 	public void testGetSaga() {

@@ -16,10 +16,6 @@ public class Saga {
 		Path path = Path.of("img/logo"+nombreInterno+".png");
 		this.recursoGrafico = new ImageIcon(path.toAbsolutePath().toString());
 	}
-	
-	public Saga(String nombre) {
-		this(nombre,nombre);
-	}
 
 	public String getNombreInterno() {
 		return nombreInterno;

@@ -41,19 +41,19 @@ public class Carta implements Comparable<Carta>{
 
 
 
-	public Carta(String nombreInterno, String nombreVisible, Saga saga) {
-		this.nombreInterno = nombreInterno;
-		this.nombreVisible = nombreVisible;
-		this.saga = saga;
-		Path path = Path.of("img/"+nombreInterno+".png");
-		this.recursoGrafico = new ImageIcon(path.toAbsolutePath().toString());
-	}
-
-	
-
-	public Carta(String nombre, Saga saga) {
-		this(nombre, nombre, saga);
-	}
+//	public Carta(String nombreInterno, String nombreVisible, Saga saga) {
+//		this.nombreInterno = nombreInterno;
+//		this.nombreVisible = nombreVisible;
+//		this.saga = saga;
+//		Path path = Path.of("img/"+nombreInterno+".png");
+//		this.recursoGrafico = new ImageIcon(path.toAbsolutePath().toString());
+//	}
+//
+//	
+//
+//	public Carta(String nombre, Saga saga) {
+//		this(nombre, nombre, saga);
+//	}
 
 
 
