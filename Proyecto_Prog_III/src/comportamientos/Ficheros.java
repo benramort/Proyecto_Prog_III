@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 public class Ficheros implements Datos {
 	
@@ -27,7 +25,7 @@ public class Ficheros implements Datos {
 	
 	public Ficheros() {
 		cargarModeloCartas();
-		configurarLogger();
+//		configurarLogger();
 		cargarUsuarios();
 	}
 	
@@ -88,16 +86,6 @@ public class Ficheros implements Datos {
 		}
 		logger.fine("El logger se ha configurado correctamente");
 		
-	}
-	
-	public static void main(String[] args) {
-		Ficheros f = new Ficheros();
-//		f.configurarLogger();
-//		f.cargarModeloCartas();
-//		f.cargarUsuarios();
-		for (Carta c: modeloCartas) {
-			System.out.println(c);
-		}
 	}
 
 }

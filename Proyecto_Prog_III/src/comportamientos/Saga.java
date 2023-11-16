@@ -1,17 +1,20 @@
 package comportamientos;
 
+import java.nio.file.Path;
+
 import javax.swing.ImageIcon;
 
 public class Saga {
 	
-	String nombreInterno; //String en camel case con la primera en mayuscula
-	String nombreVisible;
-	ImageIcon recursoGrafico;
+	private String nombreInterno; //String en camelCase con la primera en mayuscula
+	private String nombreVisible;
+	private ImageIcon recursoGrafico;
 	
 	public Saga(String nombreInterno, String nombreVisible) { //TODO todas las cartas crean un objeto saga
 		this.nombreInterno = nombreInterno;
 		this.nombreVisible = nombreVisible;
-		recursoGrafico = new ImageIcon("img/logo"+nombreInterno+".png");
+		Path path = Path.of("img/logo"+nombreInterno+".png");
+		this.recursoGrafico = new ImageIcon(path.toAbsolutePath().toString());
 	}
 	
 	public Saga(String nombre) {

@@ -1,7 +1,6 @@
 package ventanas;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
@@ -13,19 +12,21 @@ import javax.swing.*;
 import comportamientos.Carta;
 import comportamientos.ModoIdle;
 import comportamientos.Saga;
+import comportamientos.Usuario;
 
 public class Entrenamiento extends JFrame{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
+/**
+*
+*/
+private static final long serialVersionUID = 1L;
+
 	Carta carta1 = new Carta("mario", new Saga("SuperMario"));
-	Carta carta2 = new Carta("yoshi", new Saga("SuperMario"));
-	Carta carta3 = new Carta("luigi", new Saga("SuperMario"));
+	Carta carta2 = new Carta("mario", new Saga("SuperMario"));
+	Carta carta3 = new Carta("mario", new Saga("SuperMario"));
+	Usuario usuario;
 	
-	public Entrenamiento(JFrame ventanaAnterior) {
+	public Entrenamiento(JFrame ventanaAnterior, Usuario usuario) {
 		//Formato ventana
 		setTitle("Entrenamiento");
 		setSize(1200, 650);
@@ -51,14 +52,14 @@ public class Entrenamiento extends JFrame{
 		pCartas.setLayout(new FlowLayout(FlowLayout.CENTER));
 		pBotonEntrenar.setLayout(new FlowLayout(FlowLayout.CENTER));
 		flowLayoutCartasH.setLayout(new FlowLayout(FlowLayout.CENTER));
-//		flowLayoutCartasH.setOpaque(true);
-//		flowLayoutCartasH.setBackground(Color.BLUE);
+		// flowLayoutCartasH.setOpaque(true);
+		// flowLayoutCartasH.setBackground(Color.BLUE);
 		boxLayoutCartasV.setLayout(new BoxLayout(boxLayoutCartasV, BoxLayout.Y_AXIS));
 		pBotonAlbum.setLayout(new FlowLayout(FlowLayout.LEFT));
-//		pBotonAlbum.setMaximumSize(new Dimension(10000,50));
+		// pBotonAlbum.setMaximumSize(new Dimension(10000,50));
 		flowLayoutCartasH.setMaximumSize(new Dimension(1000,1000));
 		boxLayoutCartasV.setOpaque(true);
-//		boxLayoutCartasH.setOpaque(false);
+		// boxLayoutCartasH.setOpaque(false);
 		blCentro.setLayout(new BoxLayout(blCentro, BoxLayout.Y_AXIS));
 		//Creacion componentes
 		JButton bAlbum = new JButton("ÁLBUM");
@@ -75,11 +76,12 @@ public class Entrenamiento extends JFrame{
 		CartaEntrenando cartaEnt2 = new CartaEntrenando(carta2);
 		CartaEntrenando cartaEnt3 = new CartaEntrenando(carta3);
 		JButton bEntrenar = new JButton("ENTRENAR");
-		
+		JButton bRecogerMonedas = new JButton("RECOGER MONEDAS");
 		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
 		//Formato componentes
 		bAlbum.setPreferredSize(new Dimension(90, 40));
 		bEntrenar.setPreferredSize(new Dimension(150, 50));
+		bRecogerMonedas.setPreferredSize(new Dimension(150, 50));
 		//Añadir componentes a contenedores
 		setIconImage(logoPequeño.getImage());
 		this.getContentPane().add(pInferior, BorderLayout.SOUTH);
@@ -99,52 +101,66 @@ public class Entrenamiento extends JFrame{
 		pTextos.add(lMonedasPorMinuto2);
 		pTextos.add(lImagenMonedasPorMinuto);
 		lImagenMonedasPorMinuto.setIcon(imagenMoneda);
-		pCentral.add(pCartas);		
+		pCentral.add(pCartas);
 		pCartas.add(boxLayoutCartasV);
-//		boxLayoutCartasV.add(Box.createVerticalGlue());
-//		boxLayoutCartasV.setBackground(Color.BLUE);
+		// boxLayoutCartasV.add(Box.createVerticalGlue());
+		// boxLayoutCartasV.setBackground(Color.BLUE);
 		flowLayoutCartasH.add(cartaEnt1);
 		flowLayoutCartasH.add(Box.createHorizontalStrut(50));
 		flowLayoutCartasH.add(cartaEnt2);
 		flowLayoutCartasH.add(Box.createHorizontalStrut(50));
 		flowLayoutCartasH.add(cartaEnt3);
 		pBotonEntrenar.add(bEntrenar);
+		pBotonEntrenar.add(bRecogerMonedas);
+		bRecogerMonedas.setVisible(false);
 		boxLayoutCartasV.add(flowLayoutCartasH);
 		boxLayoutCartasV.add(pBotonEntrenar);
 		pBotonAlbum.add(bAlbum);
 		add(pBotonAlbum, BorderLayout.NORTH);
 		
 		setVisible(true);
-		
+	
 		bAlbum.addActionListener(new ActionListener() {
-			
+	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-						dispose();
-						
-			}
-		});	
-		
-		bEntrenar.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new ModoIdle(cartaEnt1, cartaEnt2, cartaEnt3);
-				
+				dispose();
+	
 			}
 		});
 	
-//	public static void main(String[] args) {
-//		SwingUtilities.invokeLater(new Runnable() {
-//			
-//			@Override
-//			public void run() {
-//				new Entrenamiento(null);
-//				
-//			}
-//		});
-//	}
-
-	}
-}
+		bEntrenar.addActionListener(new ActionListener() {
 	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				bEntrenar.setVisible(false);
+				bRecogerMonedas.setVisible(true);
+				ModoIdle modoIdle = new ModoIdle(cartaEnt1, cartaEnt2, cartaEnt3);
+				modoIdle.start();
+				bRecogerMonedas.addActionListener(new ActionListener() {	
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					bRecogerMonedas.setVisible(false);
+					usuario.setMonedas(usuario.getMonedas() + modoIdle.getMonedasGeneradas());
+					bEntrenar.setVisible(true);						
+					
+				}
+				});
+			}			
+		});															
+
+	
+	
+		// public static void main(String[] args) {
+		// SwingUtilities.invokeLater(new Runnable() {
+		//
+		// @Override
+		// public void run() {
+		// new Entrenamiento(null);
+		//
+		// }
+		// });
+		// }
+	
+	}
+	}

@@ -6,31 +6,30 @@ import java.awt.FlowLayout;
 import javax.swing.*;
 
 import comportamientos.Carta;
-import comportamientos.Saga;
 
 public class CartaEntrenando extends JPanel{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+/**
+*
+*/
+private static final long serialVersionUID = 1L;
 	
 	public JProgressBar pbStamina = new JProgressBar(0, 100);
 	public Carta carta;
 	public double porcentajeStamina = 100;
-	
+
 	public CartaEntrenando(Carta carta) {
 		this.carta = carta;
-		
+
 		//Formato Panel
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
-		
+
 		//Creacion contenedores
 		JPanel pPrincipal = new JPanel();
 		//Formato contenedores
 		pPrincipal.setLayout(new BoxLayout(pPrincipal, BoxLayout.Y_AXIS));
 		//Creacion componentes
 		PanelCarta pCarta = new PanelCarta(carta);
-		
+
 		//Formato componentes
 		pbStamina.setPreferredSize(new Dimension(250, 30));
 		pbStamina.setStringPainted(true);
@@ -41,9 +40,9 @@ public class CartaEntrenando extends JPanel{
 		pPrincipal.add(Box.createVerticalStrut(20));
 		pPrincipal.add(pbStamina);
 		setOpaque(false);
-		
+
 	}
-	
+
 	public Carta getCarta() {
 		return carta;
 	}
@@ -55,11 +54,9 @@ public class CartaEntrenando extends JPanel{
 	public void setPorcentajeStamina(double porcentajeStamina) {
 		this.porcentajeStamina = porcentajeStamina;
 	}
-	
+
 	public JProgressBar getPbStamina() {
-		return pbStamina;
+		return this.pbStamina;
 	}
-	
-	
-	
+
 }

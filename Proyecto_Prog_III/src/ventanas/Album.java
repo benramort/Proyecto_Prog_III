@@ -14,6 +14,9 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import javax.swing.*;
 import javax.swing.border.*;
 import comportamientos.Carta;
@@ -30,15 +33,15 @@ public class Album extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Usuario usuario;
-	private Datos datos;
+//	private Usuario usuario;
+//	private Datos datos;
 	
 	
 	
 	public Album(JFrame ventanaAnterior, Usuario usuario, Datos datos) {
 		double escala = 1;
-		this.usuario = usuario;
-		this.datos = datos;
+//		this.usuario = usuario;
+//		this.datos = datos;
 		int cartasObtenidas = 0;
 		
 		//Formato ventana
@@ -274,7 +277,7 @@ public class Album extends JFrame {
 						
 						@Override
 						public void run() {
-							new Entrenamiento(Album.this);
+							new Entrenamiento(Album.this, usuario);
 						}
 					});
 				}

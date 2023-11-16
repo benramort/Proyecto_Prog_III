@@ -2,8 +2,6 @@ package comportamientos;
 
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
 
 public class RegistroTemporal {
 	
