@@ -26,12 +26,12 @@ public class Entrenamiento extends JFrame{
 */
 private static final long serialVersionUID = 1L;
 
-	Carta carta1 = new CartaAEntrenar();
-	Carta carta2 = new CartaAEntrenar();
-	Carta carta3 = new CartaAEntrenar();
+	CartaEntrenando cartaEnt1 = new CartaEntrenando(new CartaAEntrenar());
+	CartaEntrenando cartaEnt2 = new CartaEntrenando(new CartaAEntrenar());
+	CartaEntrenando cartaEnt3 = new CartaEntrenando(new CartaAEntrenar());
 	Datos datos = new Ficheros();
 	Usuario usuario = new Usuario("Beñat","contrasena",datos);
-	
+	ModoIdle modoIdle;
 	public Entrenamiento(JFrame ventanaAnterior, Usuario usuario) {
 		//Formato ventana
 		setTitle("Entrenamiento");
@@ -78,9 +78,6 @@ private static final long serialVersionUID = 1L;
 		JButton bClear = new JButton("CLEAR");
 		ImageIcon imagen = new ImageIcon(getClass().getResource("/moneda.png"));
 		ImageIcon imagenMoneda = new ImageIcon(imagen.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
-		CartaEntrenando cartaEnt1 = new CartaEntrenando(carta1);
-		CartaEntrenando cartaEnt2 = new CartaEntrenando(carta2);
-		CartaEntrenando cartaEnt3 = new CartaEntrenando(carta3);
 		JButton bEntrenar = new JButton("ENTRENAR");
 		JButton bRecogerMonedas = new JButton("RECOGER MONEDAS");
 		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
@@ -131,7 +128,6 @@ private static final long serialVersionUID = 1L;
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-	
 			}
 		});
 	
@@ -141,18 +137,23 @@ private static final long serialVersionUID = 1L;
 			public void actionPerformed(ActionEvent e) {
 				bEntrenar.setVisible(false);
 				bRecogerMonedas.setVisible(true);
-				ModoIdle modoIdle = new ModoIdle(cartaEnt1, cartaEnt2, cartaEnt3);
+				modoIdle = new ModoIdle(cartaEnt1, cartaEnt2, cartaEnt3);
 				modoIdle.start();
-				bRecogerMonedas.addActionListener(new ActionListener() {	
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					bRecogerMonedas.setVisible(false);
-					usuario.setMonedas(usuario.getMonedas() + modoIdle.getMonedasGeneradas());
-					bEntrenar.setVisible(true);						
-					
-				}
-				});
 			}			
+		});
+		bRecogerMonedas.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				bRecogerMonedas.setVisible(false);
+				usuario.setMonedas(usuario.getMonedas() + modoIdle.getMonedasGeneradas());
+				bEntrenar.setVisible(true);						
+				modoIdle.setGenerarMonedasCarta1(false);
+				modoIdle.setGenerarMonedasCarta2(false);
+				modoIdle.setGenerarMonedasCarta3(false);
+				//TODO hacerlo bonito
+				//modoIdle.interrupt();
+				System.out.println(modoIdle.isInterrupted());
+			}
 		});
 		
 		cartaEnt1.addMouseListener(new MouseAdapter() {
@@ -210,4 +211,19 @@ private static final long serialVersionUID = 1L;
 		// }
 	
 	}
+	
+	public void cambiarCartaEntrenando(Carta carta, int indice) {
+		switch (indice) {
+		case 1: 
+			cartaEnt1.setCarta(carta);
+			repaint();
+		case 2: 
+			cartaEnt2 = new CartaEntrenando(carta);		
+		case 3: 
+			cartaEnt3 = new CartaEntrenando(carta);		
+		default: 
+		//TODO hacer una excepcion
+		}
+		System.out.println(cartaEnt1.getCarta());
 	}
+}

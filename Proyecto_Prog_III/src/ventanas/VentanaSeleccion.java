@@ -27,10 +27,13 @@ public class VentanaSeleccion extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	PanelCarta p;
 	Carta cartaSeleccionada;
+	JFrame ventanaAnterior;
 	
 	public VentanaSeleccion(JFrame ventanaAnterior, Usuario usuario, Datos datos) {
+		
+		this.ventanaAnterior = ventanaAnterior;
+		
 		double escala = 1;
 //		this.usuario = usuario;
 //		this.datos = datos;
@@ -73,13 +76,13 @@ public class VentanaSeleccion extends JFrame{
 		MouseListener hoverCartas = new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				p = (PanelCarta) e.getSource();
+				PanelCarta p = (PanelCarta) e.getSource();
 				p.mostrarStats(true);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				p = (PanelCarta) e.getSource();
+				PanelCarta p = (PanelCarta) e.getSource();
 				p.mostrarStats(false);
 			}
 		};
@@ -99,7 +102,7 @@ public class VentanaSeleccion extends JFrame{
 		 
 		for (Carta c: usuario.getCartas().keySet()) {
 			if (usuario.getCartas().get(c) != 0) {
-				p = new PanelCarta(c);
+				PanelCarta p = new PanelCarta(c);
 				p.addMouseListener(hoverCartas);
 				pCartas.add(p);
 				p.setPreferredSize(new Dimension(235, 335)); //TODO espacio vertical
@@ -107,18 +110,23 @@ public class VentanaSeleccion extends JFrame{
 				p.setBackground(Color.RED);
 				System.out.println("Cargada carta "+c.getId());
 				cartasObtenidas++;
-			} 
-		}
+				p.addMouseListener(new MouseAdapter() {
+
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						cartaSeleccionada = p.getCarta();
+						((Entrenamiento) ventanaAnterior).cambiarCartaEntrenando(cartaSeleccionada, 1);
+						dispose();
+					}
+				});
+			}
+		} 
+		
 		
 		
 		setVisible(true);
 		
 //		pCartas.setBackground(Color.RED);
 //		pCartas.setOpaque(true);
-		
-		System.out.println(Toolkit.getDefaultToolkit().getScreenResolution());
-		
-		
-		
 	}
 }

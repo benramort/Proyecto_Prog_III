@@ -11,7 +11,6 @@ public class ModoIdle extends Thread {
 	boolean generarMonedasCarta1 = true;
 	boolean generarMonedasCarta2 = true;
 	boolean generarMonedasCarta3 = true;
-	boolean interrumpirHilo = false;
 	
 	int monedasGeneradas;
 
@@ -35,7 +34,7 @@ public class ModoIdle extends Thread {
 		cartaEnt2.setPorcentajeStamina(100);
 		cartaEnt3.setPorcentajeStamina(100);
 		
-		while(generarMonedasCarta1 == true || generarMonedasCarta2 == true || generarMonedasCarta3 == true){
+		while(generarMonedasCarta1 == true || generarMonedasCarta2 == true || generarMonedasCarta3 == true && !isInterrupted()){
 			for(;;) {
 				//TODO hacer que cuando el porcentaje de stamina de alguna de las 
 				//cartas sea < 0, parar la generacion de monedas de esa carta y no guardar 
@@ -91,7 +90,7 @@ public class ModoIdle extends Thread {
 //			System.out.println(generarMonedasCarta1);
 //			System.out.println(generarMonedasCarta2);
 //			System.out.println(generarMonedasCarta3);
-				
+
 				contadorSeg++;
 				
 				try {
@@ -101,6 +100,15 @@ public class ModoIdle extends Thread {
 				}
 			}
 		}
+	}
+	public void setGenerarMonedasCarta1(boolean generarMonedasCarta1) {
+		this.generarMonedasCarta1 = generarMonedasCarta1;
+	}
+	public void setGenerarMonedasCarta2(boolean generarMonedasCarta2) {
+		this.generarMonedasCarta2 = generarMonedasCarta2;
+	}
+	public void setGenerarMonedasCarta3(boolean generarMonedasCarta3) {
+		this.generarMonedasCarta3 = generarMonedasCarta3;
 	}
 	public int getMonedasGeneradas() {
 		return monedasGeneradas;

@@ -16,6 +16,7 @@ private static final long serialVersionUID = 1L;
 	public JProgressBar pbStamina = new JProgressBar(0, 100);
 	public Carta carta;
 	public double porcentajeStamina = 100;
+	public PanelCarta pCarta;
 
 	public CartaEntrenando(Carta carta) {
 		this.carta = carta;
@@ -28,7 +29,7 @@ private static final long serialVersionUID = 1L;
 		//Formato contenedores
 		pPrincipal.setLayout(new BoxLayout(pPrincipal, BoxLayout.Y_AXIS));
 		//Creacion componentes
-		PanelCarta pCarta = new PanelCarta(carta);
+		pCarta = new PanelCarta(carta);
 
 		//Formato componentes
 		pbStamina.setPreferredSize(new Dimension(250, 30));
@@ -58,5 +59,17 @@ private static final long serialVersionUID = 1L;
 	public JProgressBar getPbStamina() {
 		return this.pbStamina;
 	}
+
+	public void setCarta(Carta carta) {
+		this.carta = carta;
+		pCarta = new PanelCarta(carta);
+		System.out.println("hola que ase");
+		repaint();
+	}
+	
+	
+
+	
+	
 
 }
