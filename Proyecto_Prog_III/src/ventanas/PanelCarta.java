@@ -125,6 +125,10 @@ public class PanelCarta extends JPanel{
 		return mostrandoStats;
 	}
 	
+	public Carta getCarta() {
+		return this.carta;
+	}
+	
 	
 
 }

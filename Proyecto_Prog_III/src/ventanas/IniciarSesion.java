@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.swing.*;
 
@@ -87,7 +89,9 @@ private static final long serialVersionUID = 1L;
 		JPasswordField pfContrasena = new JPasswordField(15);
 		JButton btIniciarSesion = new JButton("Iniciar sesión");
 		JButton btNuevaCuenta = new JButton("Crear cuenta");
-		JLabel lLogo = new JLabel(new ImageIcon("img/logo.png"));
+		Path path = Paths.get("");
+//		System.out.println(path.toAbsolutePath().toString());
+		JLabel lLogo = new JLabel(new ImageIcon(path.toAbsolutePath().toString() + "/img/logo.png"));
 		JCheckBox cbMostrarContrasena = new JCheckBox("Mostrar contraseña");
 		
 		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));

@@ -11,6 +11,7 @@ public class ModoIdle extends Thread {
 	boolean generarMonedasCarta1 = true;
 	boolean generarMonedasCarta2 = true;
 	boolean generarMonedasCarta3 = true;
+	boolean interrumpirHilo = false;
 	
 	int monedasGeneradas;
 

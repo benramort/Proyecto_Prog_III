@@ -27,6 +27,9 @@ public class VentanaSeleccion extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	PanelCarta p;
+	Carta cartaSeleccionada;
+	
 	public VentanaSeleccion(JFrame ventanaAnterior, Usuario usuario, Datos datos) {
 		double escala = 1;
 //		this.usuario = usuario;
@@ -70,13 +73,13 @@ public class VentanaSeleccion extends JFrame{
 		MouseListener hoverCartas = new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				PanelCarta p = (PanelCarta) e.getSource();
+				p = (PanelCarta) e.getSource();
 				p.mostrarStats(true);
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				PanelCarta p = (PanelCarta) e.getSource();
+				p = (PanelCarta) e.getSource();
 				p.mostrarStats(false);
 			}
 		};
@@ -87,29 +90,16 @@ public class VentanaSeleccion extends JFrame{
 			public void componentResized(ComponentEvent e) {
 				GridLayout gl = (GridLayout) pCartas.getLayout();
 //				System.out.println(spCartas.getWidth());
-				if (spCartas.getWidth() < 500) {
-					gl.setColumns(1);
-				} else if (spCartas.getWidth() < 800) {
-					gl.setColumns(2);
-				} else if (spCartas.getWidth() < 1000) {
-					gl.setColumns(3);
-				} else if (spCartas.getWidth() < 1200) {
-					gl.setColumns(4);
-				} else {
 					gl.setColumns(5);
-				}
 				VentanaSeleccion.this.revalidate();
-			}
-			
-			
-			
+			}	
 		});
 		
 		//Gestion de cartas
 		 
 		for (Carta c: usuario.getCartas().keySet()) {
 			if (usuario.getCartas().get(c) != 0) {
-				PanelCarta p = new PanelCarta(c);
+				p = new PanelCarta(c);
 				p.addMouseListener(hoverCartas);
 				pCartas.add(p);
 				p.setPreferredSize(new Dimension(235, 335)); //TODO espacio vertical
@@ -117,19 +107,18 @@ public class VentanaSeleccion extends JFrame{
 				p.setBackground(Color.RED);
 				System.out.println("Cargada carta "+c.getId());
 				cartasObtenidas++;
-			} else {
-				PanelCarta p = new PanelCarta(new CartaVacia());
-//				p.addMouseListener(hoverCartas);
-				pCartas.add(p);
-//				System.out.println("Cargada carta "+c.getId());
-			}
+			} 
 		}
 		
 		
 		setVisible(true);
 		
+//		pCartas.setBackground(Color.RED);
+//		pCartas.setOpaque(true);
+		
 		System.out.println(Toolkit.getDefaultToolkit().getScreenResolution());
 		
-
+		
+		
 	}
 }
