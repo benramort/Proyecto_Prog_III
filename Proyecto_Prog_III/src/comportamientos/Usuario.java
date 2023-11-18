@@ -63,13 +63,13 @@ public class Usuario implements Comparator<Usuario>{
 		return cartas;
 	}
 	
-	public static Usuario deLinea(String s) {
+	public static Usuario deLinea(String s) { //TODO falta decidir que hacer con las cartas de cada usuario, con las monedas...
 		String[] tokens = s.split(";");
 		return new Usuario(tokens[0],tokens[1],Integer.parseInt(tokens[2]));
 	}
 
 	@Override
-	public int compare(Usuario a, Usuario b) {
+	public int compare(Usuario a, Usuario b) { //TODO esto no es compareTo()?
 		return a.getNombre().compareTo(b.getNombre()) + a.getContrasena().compareTo(b.getContrasena());
 	}
 

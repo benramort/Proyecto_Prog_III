@@ -4,8 +4,10 @@ import javax.swing.*;
 
 import comportamientos.Carta;
 import comportamientos.Datos;
+import comportamientos.DatosFactory;
 import comportamientos.Ficheros;
 import comportamientos.Usuario;
+import excepciones.DataException;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -103,15 +105,23 @@ public class CrearCuenta extends JFrame {
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						Datos datos = new Ficheros();
-						Usuario usuario = new Usuario("Beñat","contrasena",datos);
-						usuario.getCartas().put(new Carta(1), 1);
-						usuario.getCartas().put(new Carta(5), 2);
-						usuario.getCartas().put(new Carta(6), 1);
-						new Album(null, usuario, datos);
-						for (Carta c: usuario.getCartas().keySet()) {
-							System.out.println(c.toString() + usuario.getCartas().get(c));
-						}				
+						
+						try {
+							Datos datos;
+							datos = DatosFactory.getDatos();
+							Usuario usuario = new Usuario("Beñat","contrasena",datos);
+							usuario.getCartas().put(new Carta(1), 1);
+							usuario.getCartas().put(new Carta(5), 2);
+							usuario.getCartas().put(new Carta(6), 1);
+							new Album(null, usuario, datos);
+							for (Carta c: usuario.getCartas().keySet()) {
+								System.out.println(c.toString() + usuario.getCartas().get(c));
+							}	
+						} catch (DataException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+									
 					}
 				});
 				dispose();

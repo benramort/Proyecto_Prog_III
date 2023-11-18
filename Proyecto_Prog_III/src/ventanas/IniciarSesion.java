@@ -11,11 +11,12 @@ import java.nio.file.Paths;
 
 import javax.swing.*;
 
-
 import comportamientos.Carta;
 import comportamientos.Datos;
+import comportamientos.DatosFactory;
 import comportamientos.Ficheros;
 import comportamientos.Usuario;
+import excepciones.DataException;
 
 public class IniciarSesion extends JFrame {
 
@@ -171,33 +172,41 @@ private static final long serialVersionUID = 1L;
 
 					@Override
 					public void run() {
-						Datos datos = new Ficheros();
+						Datos datos;
+						try {
+							datos = DatosFactory.getDatos();
+							
+							String contrasena = String.valueOf(pfContrasena.getPassword());
+							Usuario usuario = new Usuario(tfUsuario.getText(),contrasena,datos);
+							
+//							Comprobar si existe usuario para lanzar la ventana
+							if(existeUsuario(usuario,datos)) {
+								new Album(IniciarSesion.this, usuario, datos);
+								dispose();
+							} else if(contrasena.isEmpty()){
+								lIncorrecto.setText("Rellene los campos de inicio de sesión");
+								pIncorrecto.setVisible(true);
+							} else {
+								lIncorrecto.setText("Usuario o contraseña incorrectos");
+								pIncorrecto.setVisible(true);
+							}
+							
+							usuario.getCartas().put(new Carta(1), 1);
+							usuario.getCartas().put(new Carta(5), 2);
+							usuario.getCartas().put(new Carta(6), 1);
+						} catch (DataException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} //TODO comprobar esto
 						
 //						Obtener usuario
-						String contrasena = String.valueOf(pfContrasena.getPassword());
-						Usuario usuario = new Usuario(tfUsuario.getText(),contrasena,datos);
 						
-//						Comprobar si existe usuario para lanzar la ventana
-						if(existeUsuario(usuario,datos)) {
-							new Album(IniciarSesion.this, usuario, datos);
-							dispose();
-						} else if(contrasena.isEmpty()){
-							lIncorrecto.setText("Rellene los campos de inicio de sesión");
-							pIncorrecto.setVisible(true);
-						} else {
-							lIncorrecto.setText("Usuario o contraseña incorrectos");
-							pIncorrecto.setVisible(true);
-						}
-						
-						usuario.getCartas().put(new Carta(1), 1);
-						usuario.getCartas().put(new Carta(5), 2);
-						usuario.getCartas().put(new Carta(6), 1);
 //						usuario.getCartas().put(new Carta(2), 1);
 //						usuario.getCartas().put(new Carta(4), 1);
 						
-						for (Carta c: usuario.getCartas().keySet()) {
-							System.out.println(c.toString() + usuario.getCartas().get(c));
-						}
+//						for (Carta c: usuario.getCartas().keySet()) {
+//							System.out.println(c.toString() + usuario.getCartas().get(c));
+//						}
 					}
 				});
 				

@@ -85,7 +85,6 @@ public class Ficheros implements Datos {
 			logger.info("No se ha podido cargar el fichero de configuración del logger. Usando configuración por defecto");
 		}
 		logger.fine("El logger se ha configurado correctamente");
-		
 	}
 
 }
