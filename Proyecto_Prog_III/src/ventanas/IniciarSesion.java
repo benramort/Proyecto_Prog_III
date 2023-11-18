@@ -52,6 +52,16 @@ private static final long serialVersionUID = 1L;
 //    }
 // } catch (Exception e) {} // Si no está disponible nimbus, no se hace nada
 // }
+	
+	private boolean existeUsuario(Usuario u, Datos datos) {
+		Boolean r = false;
+		for(Usuario user: datos.getUsuarios()) {
+			if(user.compare(user, u)==0) {
+				r=true;
+			}
+		}
+		return r;
+	}
 
 	public IniciarSesion() {
 		//Formato ventana
@@ -156,21 +166,29 @@ private static final long serialVersionUID = 1L;
 					@Override
 					public void run() {
 						Datos datos = new Ficheros();
+						
+//						Obtener usuario
 						String contrasena = String.valueOf(pfContrasena.getPassword());
-						Usuario user = new Usuario(tfUsuario.getText(),contrasena,0);
-						Usuario usuario = new Usuario("Beñat","contrasena",datos);
+						Usuario usuario = new Usuario(tfUsuario.getText(),contrasena,datos);
+						
+//						Comprobar si existe usuario para lanzar la ventana
+						if(existeUsuario(usuario,datos)) {
+							new Album(IniciarSesion.this, usuario, datos);
+							dispose();
+						}
+						
 						usuario.getCartas().put(new Carta(1), 1);
 						usuario.getCartas().put(new Carta(5), 2);
 						usuario.getCartas().put(new Carta(6), 1);
 //						usuario.getCartas().put(new Carta(2), 1);
 //						usuario.getCartas().put(new Carta(4), 1);
-						new Album(IniciarSesion.this, usuario, datos);
+						
 						for (Carta c: usuario.getCartas().keySet()) {
 							System.out.println(c.toString() + usuario.getCartas().get(c));
 						}
 					}
 				});
-				dispose();
+				
 			}
 		});
 		char caracter = pfContrasena.getEchoChar();
