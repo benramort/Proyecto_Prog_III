@@ -15,7 +15,7 @@ public class Ficheros implements Datos {
 	
 
 	public static List<Carta> modeloCartas = new ArrayList<>();
-	public static Set<Usuario> usuarios = new TreeSet<Usuario>(); //Esto tiene sentido que sea un list
+	public static List<Usuario> usuarios = new ArrayList<Usuario>(); //Esto tiene sentido que sea un list
 
 	private static Logger logger = Logger.getLogger(Ficheros.class.getName());
 	
@@ -33,7 +33,7 @@ public class Ficheros implements Datos {
 		return modeloCartas;
 	}
 	
-	public Set<Usuario> getUsuarios() {
+	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
 	
