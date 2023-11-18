@@ -17,9 +17,11 @@ private static final long serialVersionUID = 1L;
 	public Carta carta;
 	public double porcentajeStamina = 100;
 	public PanelCarta pCarta;
+	public int indice;
 
-	public CartaEntrenando(Carta carta) {
+	public CartaEntrenando(Carta carta, int indice) {
 		this.carta = carta;
+		this.indice = indice;
 
 		//Formato Panel
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));

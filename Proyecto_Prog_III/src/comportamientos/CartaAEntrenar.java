@@ -5,7 +5,7 @@ import javax.swing.ImageIcon;
 public class CartaAEntrenar extends Carta{
 	
 	public CartaAEntrenar() { //TODO optimizr
-		super(0, null, null, new Saga("SuperMario", "Super Mario"), 0,0,0);
+		super(0, null, null, new Saga("", ""), 0,0,0);
 	}
 	
 	@Override

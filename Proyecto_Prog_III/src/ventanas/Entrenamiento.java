@@ -26,12 +26,14 @@ public class Entrenamiento extends JFrame{
 */
 private static final long serialVersionUID = 1L;
 
-	CartaEntrenando cartaEnt1 = new CartaEntrenando(new CartaAEntrenar());
-	CartaEntrenando cartaEnt2 = new CartaEntrenando(new CartaAEntrenar());
-	CartaEntrenando cartaEnt3 = new CartaEntrenando(new CartaAEntrenar());
+	CartaEntrenando cartaEnt1 = new CartaEntrenando(new CartaAEntrenar(), 1);
+	CartaEntrenando cartaEnt2 = new CartaEntrenando(new CartaAEntrenar(), 2);
+	CartaEntrenando cartaEnt3 = new CartaEntrenando(new CartaAEntrenar(), 3);
 	Datos datos = new Ficheros();
 	Usuario usuario = new Usuario("Beñat","contrasena",datos);
 	ModoIdle modoIdle;
+	JButton bEntrenar;
+	
 	public Entrenamiento(JFrame ventanaAnterior, Usuario usuario) {
 		//Formato ventana
 		setTitle("Entrenamiento");
@@ -78,7 +80,7 @@ private static final long serialVersionUID = 1L;
 		JButton bClear = new JButton("CLEAR");
 		ImageIcon imagen = new ImageIcon(getClass().getResource("/moneda.png"));
 		ImageIcon imagenMoneda = new ImageIcon(imagen.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
-		JButton bEntrenar = new JButton("ENTRENAR");
+		bEntrenar = new JButton("ENTRENAR");
 		JButton bRecogerMonedas = new JButton("RECOGER MONEDAS");
 		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
 		//Formato componentes
@@ -130,7 +132,11 @@ private static final long serialVersionUID = 1L;
 				dispose();
 			}
 		});
-	
+		
+//		if(cartaEnt1.getCarta().equals(new CartaAEntrenar()) && cartaEnt2.getCarta().equals(new CartaAEntrenar()) && cartaEnt3.getCarta().equals(new CartaAEntrenar())) {
+//			bEntrenar.setEnabled(false);
+//		}
+		
 		bEntrenar.addActionListener(new ActionListener() {
 	
 			@Override
@@ -209,21 +215,41 @@ private static final long serialVersionUID = 1L;
 		// }
 		// });
 		// }
+		
+		if(cartaEnt1.getCarta().getId() == 0 && cartaEnt2.getCarta().getId() == 0 && cartaEnt3.getCarta().getId() == 0) {
+			bEntrenar.setEnabled(false);
+		}
+		
+
 	
 	}
 	
+	public CartaEntrenando getCartaEnt1() {
+		return cartaEnt1;
+	}
+
+	public CartaEntrenando getCartaEnt2() {
+		return cartaEnt2;
+	}
+
+	public CartaEntrenando getCartaEnt3() {
+		return cartaEnt3;
+	}
+
 	public void cambiarCartaEntrenando(Carta carta, int indice) {
 		switch (indice) {
 		case 1: 
 			cartaEnt1.setCarta(carta);
-			repaint();
+			System.out.println(carta.getId());
 		case 2: 
-			cartaEnt2 = new CartaEntrenando(carta);		
+			cartaEnt2 = new CartaEntrenando(carta, 2);		
 		case 3: 
-			cartaEnt3 = new CartaEntrenando(carta);		
+			cartaEnt3 = new CartaEntrenando(carta, 3);		
 		default: 
 		//TODO hacer una excepcion
 		}
+		repaint();
+		bEntrenar.setEnabled(true);
 		System.out.println(cartaEnt1.getCarta());
 	}
 }

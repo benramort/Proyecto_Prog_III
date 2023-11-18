@@ -26,15 +26,13 @@ public class ModoIdle extends Thread {
 		double minutosCarta1 = (cartaEnt1.getCarta().getResistencia()*5)/(double)100;
 		double minutosCarta2 = (cartaEnt2.getCarta().getResistencia()*5)/(double)100;
 		double minutosCarta3 = (cartaEnt3.getCarta().getResistencia()*5)/(double)100;
+		
 		cartaEnt1.getPbStamina().setValue((int) cartaEnt1.getPorcentajeStamina());
 		cartaEnt2.getPbStamina().setValue((int) cartaEnt2.getPorcentajeStamina());
 		cartaEnt3.getPbStamina().setValue((int) cartaEnt3.getPorcentajeStamina());
 		
-		cartaEnt1.setPorcentajeStamina(100);
-		cartaEnt2.setPorcentajeStamina(100);
-		cartaEnt3.setPorcentajeStamina(100);
-		
 		while(generarMonedasCarta1 == true || generarMonedasCarta2 == true || generarMonedasCarta3 == true && !isInterrupted()){
+
 			for(;;) {
 				//TODO hacer que cuando el porcentaje de stamina de alguna de las 
 				//cartas sea < 0, parar la generacion de monedas de esa carta y no guardar 
