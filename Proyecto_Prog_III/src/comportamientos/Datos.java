@@ -10,5 +10,6 @@ public interface Datos {
 	public void configurarLogger();
 	public List<Usuario> getUsuarios();
 	public List<Carta> getModeloCartas();
+	public void guardarUsuario(Usuario usuario);
 
 }

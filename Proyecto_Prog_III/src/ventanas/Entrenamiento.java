@@ -30,11 +30,12 @@ private static final long serialVersionUID = 1L;
 	CartaEntrenando cartaEnt2 = new CartaEntrenando(new CartaAEntrenar(), 2);
 	CartaEntrenando cartaEnt3 = new CartaEntrenando(new CartaAEntrenar(), 3);
 	Datos datos = new Ficheros();
-	Usuario usuario = new Usuario("Beñat","contrasena",datos);
+	Usuario usuario;
 	ModoIdle modoIdle;
 	JButton bEntrenar;
 	
 	public Entrenamiento(JFrame ventanaAnterior, Usuario usuario) {
+		this.usuario = usuario;
 		//Formato ventana
 		setTitle("Entrenamiento");
 		setSize(1200, 650);

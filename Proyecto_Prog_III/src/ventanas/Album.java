@@ -14,6 +14,8 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -358,6 +360,14 @@ public class Album extends JFrame {
 				pBuscar.setVisible(false);
 				pPorcentaje.setVisible(true);
 				
+			}
+		});
+		
+		addWindowListener(new WindowAdapter() {
+
+			@Override
+			public void windowClosing(WindowEvent e) {
+				datos.guardarUsuario(usuario);
 			}
 		});
 		

@@ -109,7 +109,7 @@ public class CrearCuenta extends JFrame {
 						try {
 							Datos datos;
 							datos = DatosFactory.getDatos();
-							Usuario usuario = new Usuario("Beñat","contrasena",datos);
+							Usuario usuario = new Usuario("Beñat","contrasena",datos, 0);
 							usuario.getCartas().put(new Carta(1), 1);
 							usuario.getCartas().put(new Carta(5), 2);
 							usuario.getCartas().put(new Carta(6), 1);
@@ -122,6 +122,7 @@ public class CrearCuenta extends JFrame {
 							e.printStackTrace();
 						}
 									
+
 					}
 				});
 				dispose();

@@ -115,6 +115,7 @@ private static final long serialVersionUID = 1L;
 		lUsuario.setFont(fuente);
 		lContrasena.setFont(fuente);
 		cbMostrarContrasena.setBackground(c);
+		lIncorrecto.setForeground(Color.RED);
 
 
 		//Añadir componentes a contenedores
@@ -125,6 +126,7 @@ private static final long serialVersionUID = 1L;
 		pInferiorBox.add(pCheckBox);
 		pInferiorBox.add(pIncorrecto);
 		pInferiorBox.add(pBotonera);
+		
 
 // pInferiorBox.add(pUsuario);
 // pInferiorBox.add(pContrasena);
@@ -177,7 +179,7 @@ private static final long serialVersionUID = 1L;
 							datos = DatosFactory.getDatos();
 							
 							String contrasena = String.valueOf(pfContrasena.getPassword());
-							Usuario usuario = new Usuario(tfUsuario.getText(),contrasena,datos);
+							Usuario usuario = new Usuario(tfUsuario.getText(),contrasena,datos, 0);
 							
 //							Comprobar si existe usuario para lanzar la ventana
 							if(existeUsuario(usuario,datos)) {
@@ -198,8 +200,7 @@ private static final long serialVersionUID = 1L;
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						} //TODO comprobar esto
-						
-//						Obtener usuario
+					
 						
 //						usuario.getCartas().put(new Carta(2), 1);
 //						usuario.getCartas().put(new Carta(4), 1);
