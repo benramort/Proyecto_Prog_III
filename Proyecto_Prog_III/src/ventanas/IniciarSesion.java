@@ -156,6 +156,8 @@ private static final long serialVersionUID = 1L;
 					@Override
 					public void run() {
 						Datos datos = new Ficheros();
+						String contrasena = String.valueOf(pfContrasena.getPassword());
+						Usuario user = new Usuario(tfUsuario.getText(),contrasena,0);
 						Usuario usuario = new Usuario("Beñat","contrasena",datos);
 						usuario.getCartas().put(new Carta(1), 1);
 						usuario.getCartas().put(new Carta(5), 2);
