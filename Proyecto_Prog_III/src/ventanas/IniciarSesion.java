@@ -82,6 +82,7 @@ private static final long serialVersionUID = 1L;
 		pTexto.setLayout(new BoxLayout(pTexto, BoxLayout.Y_AXIS));
 		JPanel pCampos = new JPanel();
 		pCampos.setLayout(new BoxLayout(pCampos, BoxLayout.Y_AXIS));
+		JPanel pIncorrecto =  new JPanel();
 
 		//Formato de contenedores
 		// pInferior.setOpaque(false);
@@ -92,6 +93,8 @@ private static final long serialVersionUID = 1L;
 		pCampos.setOpaque(false);
 		pInferiorBox.setOpaque(false);
 		pCheckBox.setBackground(c);
+		pIncorrecto.setOpaque(false);
+		pIncorrecto.setVisible(false);
 		//Crear componentes
 		JLabel lUsuario = new JLabel("Usuario:");
 		JTextField tfUsuario = new JTextField(15);
@@ -103,6 +106,7 @@ private static final long serialVersionUID = 1L;
 //		System.out.println(path.toAbsolutePath().toString());
 		JLabel lLogo = new JLabel(new ImageIcon(path.toAbsolutePath().toString() + "/img/logo.png"));
 		JCheckBox cbMostrarContrasena = new JCheckBox("Mostrar contraseña");
+		JLabel lIncorrecto = new JLabel("Usuario o contraseña incorrectos");
 		
 		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
 		//Formato componentes
@@ -118,6 +122,7 @@ private static final long serialVersionUID = 1L;
 		pInferior.add(pInferiorBox);
 		pInferiorBox.add(pUsuarioContrasena);
 		pInferiorBox.add(pCheckBox);
+		pInferiorBox.add(pIncorrecto);
 		pInferiorBox.add(pBotonera);
 
 // pInferiorBox.add(pUsuario);
@@ -138,6 +143,7 @@ private static final long serialVersionUID = 1L;
 		pBotonera.add(btIniciarSesion);
 		pBotonera.add(btNuevaCuenta);
 		pCheckBox.add(cbMostrarContrasena);
+		pIncorrecto.add(lIncorrecto);
 		add(lLogo, BorderLayout.CENTER);
 
 
@@ -175,6 +181,12 @@ private static final long serialVersionUID = 1L;
 						if(existeUsuario(usuario,datos)) {
 							new Album(IniciarSesion.this, usuario, datos);
 							dispose();
+						} else if(contrasena.isEmpty()){
+							lIncorrecto.setText("Rellene los campos de inicio de sesión");
+							pIncorrecto.setVisible(true);
+						} else {
+							lIncorrecto.setText("Usuario o contraseña incorrectos");
+							pIncorrecto.setVisible(true);
 						}
 						
 						usuario.getCartas().put(new Carta(1), 1);
