@@ -14,26 +14,17 @@ public class Usuario implements Comparator<Usuario>{
 //	private RegistroTemporal registroTemporal;
 //	private Datos datos;
 	
-	public Usuario() {
-		
-	}
-	
-	public Usuario(String nombre, String contrasena, Datos datos) {
+	public Usuario(String nombre, String contrasena, Datos datos, int monedas) {
 		this.nombre = nombre;
 		this.contrasena = contrasena;
 //		this.datos = datos;
-		monedas = 0;
+		this.monedas = monedas;
 		cartas = new TreeMap<Carta, Integer>();
 		for (Carta c: datos.getModeloCartas()) {
 			cartas.put(c, 0);
 		}
 	}
-	
-	public Usuario(String nombre, String contrasena, int monedas) {
-		this.nombre = nombre;
-		this.contrasena = contrasena;
-		this.monedas = monedas;
-	}
+
 
 	public String getNombre() {
 		return nombre;
@@ -63,9 +54,20 @@ public class Usuario implements Comparator<Usuario>{
 		return cartas;
 	}
 	
-	public static Usuario deLinea(String s) {
+	public static Usuario deLinea(String s, Datos datos) {
 		String[] tokens = s.split(";");
-		return new Usuario(tokens[0],tokens[1],Integer.parseInt(tokens[2]));
+		return new Usuario(tokens[0], tokens[1], datos,Integer.parseInt(tokens[2]));
+	}
+	public String aLinea(Usuario usuario) {
+		String nombre = usuario.getNombre() + ";";
+		String contrasena = usuario.getContrasena() + ";";
+		String monedas = usuario.getMonedas() + "";
+		String cartasObtenidas = "";
+		for(Integer cantidadCarta : cartas.values()) {
+			cartasObtenidas += cantidadCarta + ",";
+		}
+		cartasObtenidas += ";";
+		return nombre + contrasena + cartasObtenidas + monedas;
 	}
 
 	@Override

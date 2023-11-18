@@ -2,7 +2,10 @@ package comportamientos;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,12 +19,9 @@ public class Ficheros implements Datos {
 
 	public static List<Carta> modeloCartas = new ArrayList<>();
 	public static List<Usuario> usuarios = new ArrayList<Usuario>(); //Esto tiene sentido que sea un list
-
+	
 	private static Logger logger = Logger.getLogger(Ficheros.class.getName());
 	
-	public static Usuario cargarUsuario() {
-		return new Usuario();
-	}
 	
 	public Ficheros() {
 		cargarModeloCartas();
@@ -64,7 +64,7 @@ public class Ficheros implements Datos {
 			while (scanner.hasNextLine()) {
 				String linea = scanner.nextLine();
 				try {
-					Usuario u = Usuario.deLinea(linea);
+					Usuario u = Usuario.deLinea(linea, this);
 					usuarios.add(u);
 				} catch (NumberFormatException ex) {
 					ex.printStackTrace();
@@ -72,6 +72,17 @@ public class Ficheros implements Datos {
 			}
 		} catch (FileNotFoundException ex) {
 			logger.warning("No se han podido cargar los usuarios");
+		}
+	}
+	
+	@Override
+	public void guardarUsuario(Usuario usuario) {
+		try {
+			PrintStream ps = new PrintStream(new FileOutputStream("data/usuarios.csv", true));
+			String linea = usuario.aLinea(usuario);
+			ps.println(linea);
+		} catch (IOException e) {
+			System.out.println("No se pudo guardar el usuario");
 		}
 	}
 	

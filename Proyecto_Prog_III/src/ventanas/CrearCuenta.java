@@ -104,7 +104,12 @@ public class CrearCuenta extends JFrame {
 					@Override
 					public void run() {
 						Datos datos = new Ficheros();
-						Usuario usuario = new Usuario("Beñat","contrasena",datos);
+//						Usuario usuario = new Usuario("Beñat","contrasena",datos);
+						String contrasena = "";
+						for(char caracterContrasena : pfContrasena.getPassword()) {
+							contrasena += caracterContrasena;
+						}
+						Usuario usuario = new Usuario(tfNombre.getText(), contrasena, datos, 0);
 						usuario.getCartas().put(new Carta(1), 1);
 						usuario.getCartas().put(new Carta(5), 2);
 						usuario.getCartas().put(new Carta(6), 1);
