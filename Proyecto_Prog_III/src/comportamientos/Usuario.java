@@ -105,6 +105,11 @@ public class Usuario {
 		}
 		return false;
 	}
+	
+	@Override
+	public String toString() {
+		return nombre;
+	}
 
 
 	
