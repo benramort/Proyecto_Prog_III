@@ -85,16 +85,28 @@ public class Ficheros implements Datos {
 		}
 		return null;
 	}
-	
+	//9045
 	@Override
 	public void guardarUsuario(Usuario usuario) { //TODO comprobar que no haya nombres de usuarios repetidos
+		for (int i=0; i<usuarios.size(); i++) {
+			Usuario u = usuarios.get(i);
+			if (u == usuario) {
+				usuarios.remove(i);
+				usuarios.add(usuario);
+			}
+		}
+	}
+	
+	public void guardarUsuarios() {
 		try {
-			PrintStream ps = new PrintStream(new FileOutputStream("data/usuarios.csv", true));
-			String linea = usuario.aLinea();
-			ps.println(linea);
+			PrintStream ps = new PrintStream(new FileOutputStream("data/usuarios.csv", false));
+			for (Usuario u : usuarios) {
+				String linea = u.aLinea();
+				ps.println(linea);
+			}
 			ps.close();
 		} catch (IOException e) {
-			System.out.println("No se pudo guardar el usuario");
+			logger.info("No se pudo guardar el usuario");
 		}
 	}
 	
@@ -105,7 +117,7 @@ public class Ficheros implements Datos {
 			logger.info("No se ha encontrado la configuracion del logger. Usando configuracion por defercto");
 			ex.printStackTrace();
 		} catch (IOException ex) {
-			logger.info("No se ha podido cargar el fichero de configuración del logger. Usando configuración por defecto");
+			logger.info("No se ha podido cargar del fichero de configuración del logger. Usando configuración por defecto");
 		}
 		logger.fine("El logger se ha configurado correctamente");
 	}
