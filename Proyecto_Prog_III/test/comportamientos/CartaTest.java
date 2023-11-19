@@ -11,9 +11,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import comportamientos.Carta;
-import comportamientos.Saga;
-
 public class CartaTest {
 	
 	private Carta carta;
