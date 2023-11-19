@@ -48,7 +48,7 @@ public class ModoIdle extends Thread {
 		cartaEnt2.setPorcentajeStamina(cartaEnt2.getPorcentajeStamina());
 		cartaEnt3.setPorcentajeStamina(cartaEnt3.getPorcentajeStamina());
 		
-		while(generarMonedasCarta1 == true || generarMonedasCarta2 == true || generarMonedasCarta3 == true && !isInterrupted()){
+//		while(generarMonedasCarta1 == true || generarMonedasCarta2 == true || generarMonedasCarta3 == true && !isInterrupted()) {
 
 			for(;;) {
 				//TODO hacer que cuando el porcentaje de stamina de alguna de las 
@@ -97,6 +97,8 @@ public class ModoIdle extends Thread {
 						monedasPorMinutoCarta3 = 0;
 					}
 				}
+				
+			if ((generarMonedasCarta1 == true || generarMonedasCarta2 == true || generarMonedasCarta3 == true && !isInterrupted()) == false) break;
 //
 			System.out.println("Stamina - " + cartaEnt1.getCarta().getResistencia());
 			System.out.println("MinutosCarta - " + minutosCarta3);
@@ -120,7 +122,7 @@ public class ModoIdle extends Thread {
 					break;
 				}
 			}
-		}
+//		}
 	}
 	public void setGenerarMonedasCarta1(boolean generarMonedasCarta1) {
 		this.generarMonedasCarta1 = generarMonedasCarta1;
