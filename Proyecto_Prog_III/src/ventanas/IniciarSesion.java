@@ -57,7 +57,7 @@ private static final long serialVersionUID = 1L;
 	private boolean existeUsuario(Usuario u, Datos datos) {
 		Boolean r = false;
 		for(Usuario user: datos.getUsuarios()) {
-			if(user.compare(user, u)==0) {
+			if(user == u) {
 				r=true;
 			}
 		}

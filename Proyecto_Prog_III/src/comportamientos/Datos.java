@@ -11,5 +11,6 @@ public interface Datos {
 	public List<Usuario> getUsuarios();
 	public List<Carta> getModeloCartas();
 	public void guardarUsuario(Usuario usuario);
+	public Usuario cargarUsuario(String nombre);
 
 }

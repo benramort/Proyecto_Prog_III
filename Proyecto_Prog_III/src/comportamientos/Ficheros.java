@@ -18,7 +18,7 @@ public class Ficheros implements Datos {
 	
 
 	public static List<Carta> modeloCartas = new ArrayList<>();
-	public static List<Usuario> usuarios = new ArrayList<Usuario>(); //Esto tiene sentido que sea un list
+	public static List<Usuario> usuarios = new ArrayList<Usuario>(); //Igual un mapa es más eficiente
 	
 	private static Logger logger = Logger.getLogger(Ficheros.class.getName());
 	
@@ -76,11 +76,23 @@ public class Ficheros implements Datos {
 	}
 	
 	@Override
-	public void guardarUsuario(Usuario usuario) {
+	public Usuario cargarUsuario(String s) {
+		cargarUsuarios();
+		for (Usuario usuario: usuarios) {
+			if (usuario.getNombre().equals(s)) {
+				return usuario;
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public void guardarUsuario(Usuario usuario) { //TODO comprobar que no haya nombres de usuarios repetidos
 		try {
 			PrintStream ps = new PrintStream(new FileOutputStream("data/usuarios.csv", true));
-			String linea = usuario.aLinea(usuario);
+			String linea = usuario.aLinea();
 			ps.println(linea);
+			ps.close();
 		} catch (IOException e) {
 			System.out.println("No se pudo guardar el usuario");
 		}
@@ -96,6 +108,15 @@ public class Ficheros implements Datos {
 			logger.info("No se ha podido cargar el fichero de configuración del logger. Usando configuración por defecto");
 		}
 		logger.fine("El logger se ha configurado correctamente");
+	}
+	
+	public static void main(String[] args) {
+		Datos datos = new Ficheros();
+//		datos.cargarUsuarios();
+		for (Usuario u: datos.getUsuarios()) {
+			System.out.println(u.aLinea());
+		}
+		System.out.println(datos.getUsuarios().size());
 	}
 
 }

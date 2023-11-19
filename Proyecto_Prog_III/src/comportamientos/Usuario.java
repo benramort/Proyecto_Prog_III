@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Usuario implements Comparator<Usuario>{
+public class Usuario {
 	
 	//Igual hace falta un id
 	private String nombre;
@@ -12,17 +12,26 @@ public class Usuario implements Comparator<Usuario>{
 	private int monedas;
 	private Map<Carta,Integer> cartas; //Las cartas se ordenan naturalmente, y se almacena el número de cartas que tiene ese usuario. Si no tiene esa carta hay que añadirla con 0
 //	private RegistroTemporal registroTemporal;
-//	private Datos datos;
+	private Datos datos;
 	
 	public Usuario(String nombre, String contrasena, Datos datos, int monedas) {
 		this.nombre = nombre;
 		this.contrasena = contrasena;
-//		this.datos = datos;
+		this.datos = datos;
 		this.monedas = monedas;
 		cartas = new TreeMap<Carta, Integer>();
 		for (Carta c: datos.getModeloCartas()) {
 			cartas.put(c, 0);
 		}
+	}
+	
+	public Usuario(String nombre, String contrasena, Datos datos, Map<Carta, Integer> cartas,int monedas) {
+		this.nombre = nombre;
+		this.contrasena = contrasena;
+		this.datos = datos;
+		this.monedas = monedas;
+		this.cartas = cartas;
+		
 	}
 
 
@@ -57,12 +66,29 @@ public class Usuario implements Comparator<Usuario>{
 
 	public static Usuario deLinea(String s, Datos datos) {
 		String[] tokens = s.split(";");
-		return new Usuario(tokens[0], tokens[1], datos,Integer.parseInt(tokens[2]));
+//		System.out.println(s);
+		return new Usuario(tokens[0], tokens[1], datos, cargarCartas(tokens[2], datos), Integer.parseInt(tokens[3])); //TODO gestionar excepciones
+		
 	}
-	public String aLinea(Usuario usuario) {
-		String nombre = usuario.getNombre() + ";";
-		String contrasena = usuario.getContrasena() + ";";
-		String monedas = usuario.getMonedas() + "";
+	
+	private static Map<Carta,Integer> cargarCartas(String s, Datos datos) {
+		String[] tokens = s.split(",");
+		if (tokens.length != datos.getModeloCartas().size()) {
+			System.out.println(tokens.length);
+			System.out.println(datos.getModeloCartas().size());
+			return null; //TODO hacer algo con este error
+		}
+		Map<Carta,Integer> mapa = new TreeMap<>();
+		for (int i=0; i<datos.getModeloCartas().size(); i++) {
+			mapa.put(datos.getModeloCartas().get(i), Integer.parseInt(tokens[i]));
+		}
+		return mapa;
+	}
+	
+	public String aLinea() {
+		String nombre = this.getNombre() + ";";
+		String contrasena = this.getContrasena() + ";";
+		String monedas = this.getMonedas() + "";
 		String cartasObtenidas = "";
 		for(Integer cantidadCarta : cartas.values()) {
 			cartasObtenidas += cantidadCarta + ",";
@@ -70,10 +96,14 @@ public class Usuario implements Comparator<Usuario>{
 		cartasObtenidas += ";";
 		return nombre + contrasena + cartasObtenidas + monedas;
 	}
-
+	
 	@Override
-	public int compare(Usuario a, Usuario b) { //TODO esto no es compareTo()?
-		return a.getNombre().compareTo(b.getNombre()) + a.getContrasena().compareTo(b.getContrasena());
+	public boolean equals(Object o) {
+		if (o instanceof Usuario) {
+			Usuario u = (Usuario) o;
+			return this.getNombre().equals(u.getNombre());
+		}
+		return false;
 	}
 
 
