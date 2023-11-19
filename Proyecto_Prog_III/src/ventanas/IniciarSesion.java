@@ -11,10 +11,8 @@ import java.nio.file.Paths;
 
 import javax.swing.*;
 
-import comportamientos.Carta;
 import comportamientos.Datos;
 import comportamientos.DatosFactory;
-import comportamientos.Ficheros;
 import comportamientos.Usuario;
 import excepciones.DataException;
 
@@ -180,7 +178,7 @@ private static final long serialVersionUID = 1L;
 							if(usuario != null) {
 //								System.out.println(usuario);
 //								System.out.println(usuario.getMonedas());
-								usuario.setMonedas(usuario.getMonedas()+10);
+//								usuario.setMonedas(usuario.getMonedas()+10);
 								new Album(IniciarSesion.this, usuario, datos);
 								dispose();
 							} else {

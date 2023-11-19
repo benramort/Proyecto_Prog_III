@@ -1,6 +1,5 @@
 package comportamientos;
 
-import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -12,12 +11,11 @@ public class Usuario {
 	private int monedas;
 	private Map<Carta,Integer> cartas; //Las cartas se ordenan naturalmente, y se almacena el número de cartas que tiene ese usuario. Si no tiene esa carta hay que añadirla con 0
 //	private RegistroTemporal registroTemporal;
-	private Datos datos;
+
 	
 	public Usuario(String nombre, String contrasena, Datos datos, int monedas) {
 		this.nombre = nombre;
 		this.contrasena = contrasena;
-		this.datos = datos;
 		this.monedas = monedas;
 		cartas = new TreeMap<Carta, Integer>();
 		for (Carta c: datos.getModeloCartas()) {
@@ -28,7 +26,6 @@ public class Usuario {
 	public Usuario(String nombre, String contrasena, Datos datos, Map<Carta, Integer> cartas,int monedas) {
 		this.nombre = nombre;
 		this.contrasena = contrasena;
-		this.datos = datos;
 		this.monedas = monedas;
 		this.cartas = cartas;
 		

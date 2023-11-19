@@ -16,7 +16,6 @@ import comportamientos.CartaAEntrenar;
 import comportamientos.Datos;
 import comportamientos.Ficheros;
 import comportamientos.ModoIdle;
-import comportamientos.Saga;
 import comportamientos.Usuario;
 
 public class Entrenamiento extends JFrame{
