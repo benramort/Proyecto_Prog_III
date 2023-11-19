@@ -61,6 +61,7 @@ public class Ficheros implements Datos {
 	
 	public void cargarUsuarios() {
 		try (Scanner scanner = new Scanner(new FileInputStream("data/usuarios.csv"))) {
+			usuarios.clear();
 			while (scanner.hasNextLine()) {
 				String linea = scanner.nextLine();
 				try {
@@ -87,19 +88,28 @@ public class Ficheros implements Datos {
 	}
 	//9045
 	@Override
-	public void guardarUsuario(Usuario usuario) { //TODO comprobar que no haya nombres de usuarios repetidos
+	public void guardarUsuario(Usuario usuario) { //Esto funciona
+//		boolean existeUsuario = false;
+		System.out.println(usuarios.size());
 		for (int i=0; i<usuarios.size(); i++) {
 			Usuario u = usuarios.get(i);
+			System.out.println(i+1+"/"+usuarios.size());
 			if (u == usuario) {
 				usuarios.remove(i);
-				usuarios.add(usuario);
+				System.out.println("Monedas del usuario"+usuario.getMonedas());
+				System.out.println("Usuario eliminado");
+//				usuarios.add(usuario);
 			}
 		}
+		usuarios.add(usuario);
+		System.out.println(usuarios);
+		guardarUsuarios();
+		
 	}
 	
 	public void guardarUsuarios() {
 		try {
-			PrintStream ps = new PrintStream(new FileOutputStream("data/usuarios.csv", false));
+			PrintStream ps = new PrintStream(new FileOutputStream("data/usuarios.csv"));
 			for (Usuario u : usuarios) {
 				String linea = u.aLinea();
 				ps.println(linea);
@@ -128,7 +138,7 @@ public class Ficheros implements Datos {
 		for (Usuario u: datos.getUsuarios()) {
 			System.out.println(u.aLinea());
 		}
-		System.out.println(datos.getUsuarios().size());
+		datos.guardarUsuario(new Usuario("1", "1", datos, 0));
 	}
 
 }
