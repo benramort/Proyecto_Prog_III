@@ -10,7 +10,7 @@ public class CartaVacia extends Carta {
 	
 	@Override
 	public ImageIcon getRecursoGrafico() {
-		return new ImageIcon("res/bloqueado.png");
+		return new ImageIcon("img/bloqueado.png");
 	}
 
 }
