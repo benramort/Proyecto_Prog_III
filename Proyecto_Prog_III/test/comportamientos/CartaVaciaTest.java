@@ -8,31 +8,29 @@ import javax.swing.ImageIcon;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CartaAEntrenarTest {
-	CartaAEntrenar cartaAEntrenar;
+public class CartaVaciaTest {
+	CartaVacia cartaVacia;
 	Carta carta;
 	ImageIcon recursoGrafico;
 	
 	@Before
 	public void preparatorio(){
 		carta = new Carta(0, null, null, new Saga("", ""), 0,0,0);
-		cartaAEntrenar = new CartaAEntrenar();
+		cartaVacia = new CartaVacia();
 		
 	}
 	
 	@Test
 	public void cartaAEntenar() {
-		assertEquals(carta,cartaAEntrenar);
-		assertNotNull(cartaAEntrenar);
+		assertEquals(carta,cartaVacia);
+		assertNotNull(cartaVacia);
 	}
 	
 	@Test
     public void testGetRecursoGrafico() {
-        recursoGrafico = cartaAEntrenar.getRecursoGrafico();
+        recursoGrafico = cartaVacia.getRecursoGrafico();
         assertNotNull(recursoGrafico);
         assertEquals("res/bloqueado.png", recursoGrafico.getDescription());
     }
-	
-	
 	
 }
