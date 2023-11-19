@@ -50,56 +50,56 @@ public class ModoIdle extends Thread {
 		
 //		while(generarMonedasCarta1 == true || generarMonedasCarta2 == true || generarMonedasCarta3 == true && !isInterrupted()) {
 
-			for(;;) {
-				//TODO hacer que cuando el porcentaje de stamina de alguna de las 
-				//cartas sea < 0, parar la generacion de monedas de esa carta y no guardar 
-				//el porcentaje de stamina negativo
-				if(contadorSeg != 0 && contadorSeg % (double)60 == (double)0) {
-					if(generarMonedasCarta1 == true && generarMonedasCarta2 == true && generarMonedasCarta3 == true) {
-						monedasGeneradas += monedasPorMinutoCarta1 + monedasPorMinutoCarta2 + monedasPorMinutoCarta3;						
-					} else if(generarMonedasCarta1 == true && generarMonedasCarta2 == true && generarMonedasCarta3 == false) {
-						monedasGeneradas += monedasPorMinutoCarta1 + monedasPorMinutoCarta2;
-					} else if(generarMonedasCarta1 == true && generarMonedasCarta2 == false && generarMonedasCarta3 == true) {
-						monedasGeneradas += monedasPorMinutoCarta1 + monedasPorMinutoCarta3;
-					} else if(generarMonedasCarta1 == true && generarMonedasCarta2 == false && generarMonedasCarta3 == false) {
-						monedasGeneradas += monedasPorMinutoCarta1;
-					} else if(generarMonedasCarta1 == false && generarMonedasCarta2 == true && generarMonedasCarta3 == true) {
-						monedasGeneradas += monedasPorMinutoCarta2 + monedasPorMinutoCarta3;
-					} else if(generarMonedasCarta1 == false && generarMonedasCarta2 == true && generarMonedasCarta3 == false) {
-						monedasGeneradas += monedasPorMinutoCarta2;
-					} else if(generarMonedasCarta1 == false && generarMonedasCarta2 == false && generarMonedasCarta3 == true) {
-						monedasGeneradas += monedasPorMinutoCarta3;
-					} else {
-						break;
-					}
+		for(;;) {
+			//TODO hacer que cuando el porcentaje de stamina de alguna de las 
+			//cartas sea < 0, parar la generacion de monedas de esa carta y no guardar 
+			//el porcentaje de stamina negativo
+			if(contadorSeg != 0 && contadorSeg % (double)60 == (double)0) {
+				if(generarMonedasCarta1 == true && generarMonedasCarta2 == true && generarMonedasCarta3 == true) {
+					monedasGeneradas += monedasPorMinutoCarta1 + monedasPorMinutoCarta2 + monedasPorMinutoCarta3;						
+				} else if(generarMonedasCarta1 == true && generarMonedasCarta2 == true && generarMonedasCarta3 == false) {
+					monedasGeneradas += monedasPorMinutoCarta1 + monedasPorMinutoCarta2;
+				} else if(generarMonedasCarta1 == true && generarMonedasCarta2 == false && generarMonedasCarta3 == true) {
+					monedasGeneradas += monedasPorMinutoCarta1 + monedasPorMinutoCarta3;
+				} else if(generarMonedasCarta1 == true && generarMonedasCarta2 == false && generarMonedasCarta3 == false) {
+					monedasGeneradas += monedasPorMinutoCarta1;
+				} else if(generarMonedasCarta1 == false && generarMonedasCarta2 == true && generarMonedasCarta3 == true) {
+					monedasGeneradas += monedasPorMinutoCarta2 + monedasPorMinutoCarta3;
+				} else if(generarMonedasCarta1 == false && generarMonedasCarta2 == true && generarMonedasCarta3 == false) {
+					monedasGeneradas += monedasPorMinutoCarta2;
+				} else if(generarMonedasCarta1 == false && generarMonedasCarta2 == false && generarMonedasCarta3 == true) {
+					monedasGeneradas += monedasPorMinutoCarta3;
+				} else {
+					break;
 				}
-				if(contadorSeg != 0 && contadorSeg % (minutosCarta1*(double)60) == (double)0) {
-					cartaEnt1.setPorcentajeStamina(cartaEnt1.getPorcentajeStamina()-1);
-					cartaEnt1.getPbStamina().setValue((int) cartaEnt1.getPorcentajeStamina());
-					if((double)cartaEnt1.getPorcentajeStamina() <= 0) {
-						generarMonedasCarta1 = false;
-						monedasPorMinutoCarta1 = 0;
-					}
+			}
+			if(contadorSeg != 0 && contadorSeg % (minutosCarta1*(double)60) == (double)0) {
+				cartaEnt1.setPorcentajeStamina(cartaEnt1.getPorcentajeStamina()-1);
+				cartaEnt1.getPbStamina().setValue((int) cartaEnt1.getPorcentajeStamina());
+				if((double)cartaEnt1.getPorcentajeStamina() <= 0) {
+					generarMonedasCarta1 = false;
+					monedasPorMinutoCarta1 = 0;
 				}
-				if(contadorSeg != 0 && contadorSeg % (minutosCarta2*(double)60) == (double)0) {
-					cartaEnt2.setPorcentajeStamina(cartaEnt2.getPorcentajeStamina()-1);
-					cartaEnt2.getPbStamina().setValue((int) cartaEnt2.getPorcentajeStamina());
-					if((double)cartaEnt2.getPorcentajeStamina() == 0) {
-						generarMonedasCarta2 = false;
-						monedasPorMinutoCarta2 = 0;
-					}
+			}
+			if(contadorSeg != 0 && contadorSeg % (minutosCarta2*(double)60) == (double)0) {
+				cartaEnt2.setPorcentajeStamina(cartaEnt2.getPorcentajeStamina()-1);
+				cartaEnt2.getPbStamina().setValue((int) cartaEnt2.getPorcentajeStamina());
+				if((double)cartaEnt2.getPorcentajeStamina() == 0) {
+					generarMonedasCarta2 = false;
+					monedasPorMinutoCarta2 = 0;
 				}
-				if(contadorSeg != 0 && contadorSeg % (minutosCarta3*(double)60) == (double)0) {
-					cartaEnt3.setPorcentajeStamina(cartaEnt3.getPorcentajeStamina()-1);
-					cartaEnt3.getPbStamina().setValue((int) cartaEnt3.getPorcentajeStamina());
-					if((double)cartaEnt3.getPorcentajeStamina() == 0) {
-						generarMonedasCarta3 = false;
-						monedasPorMinutoCarta3 = 0;
-					}
+			}
+			if(contadorSeg != 0 && contadorSeg % (minutosCarta3*(double)60) == (double)0) {
+				cartaEnt3.setPorcentajeStamina(cartaEnt3.getPorcentajeStamina()-1);
+				cartaEnt3.getPbStamina().setValue((int) cartaEnt3.getPorcentajeStamina());
+				if((double)cartaEnt3.getPorcentajeStamina() == 0) {
+					generarMonedasCarta3 = false;
+					monedasPorMinutoCarta3 = 0;
 				}
-				
-			if ((generarMonedasCarta1 || generarMonedasCarta2 || generarMonedasCarta3) == false) break;
-//
+			}
+
+
+			//
 			System.out.println("Stamina - " + cartaEnt1.getCarta().getResistencia());
 			System.out.println("MinutosCarta - " + minutosCarta3);
 			System.out.println("ContadorSeg - " + contadorSeg);
@@ -111,18 +111,20 @@ public class ModoIdle extends Thread {
 			System.out.println(generarMonedasCarta2);
 			System.out.println(generarMonedasCarta3);
 
-				contadorSeg++;
-				
-				((Entrenamiento)ventana).cambiarLabelMonedasGeneradas();
-				((Entrenamiento)ventana).cambiarLabelMonedasPorMinuto();
-				
-				try {
-					Thread.sleep(1);
-				} catch (InterruptedException e) {
-					break;
-				}
+			contadorSeg++;
+
+			((Entrenamiento)ventana).cambiarLabelMonedasGeneradas();
+			((Entrenamiento)ventana).cambiarLabelMonedasPorMinuto();
+
+			if ((generarMonedasCarta1 || generarMonedasCarta2 || generarMonedasCarta3) == false) break;
+
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+				break;
 			}
-//		}
+		}
+		//		}
 	}
 	public void setGenerarMonedasCarta1(boolean generarMonedasCarta1) {
 		this.generarMonedasCarta1 = generarMonedasCarta1;
