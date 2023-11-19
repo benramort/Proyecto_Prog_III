@@ -53,16 +53,6 @@ private static final long serialVersionUID = 1L;
 //    }
 // } catch (Exception e) {} // Si no está disponible nimbus, no se hace nada
 // }
-	
-	private boolean existeUsuario(Usuario u, Datos datos) {
-		Boolean r = false;
-		for(Usuario user: datos.getUsuarios()) {
-			if(user == u) {
-				r=true;
-			}
-		}
-		return r;
-	}
 
 	public IniciarSesion() {
 		//Formato ventana
@@ -179,27 +169,33 @@ private static final long serialVersionUID = 1L;
 							datos = DatosFactory.getDatos();
 							
 							String contrasena = String.valueOf(pfContrasena.getPassword());
-							Usuario usuario = new Usuario(tfUsuario.getText(),contrasena,datos, 0);
 							
-//							Comprobar si existe usuario para lanzar la ventana
-							if(existeUsuario(usuario,datos)) {
-								new Album(IniciarSesion.this, usuario, datos);
-								dispose();
-							} else if(contrasena.isEmpty()){
+							if (contrasena.isEmpty() || tfUsuario.getText().isEmpty()) {
 								lIncorrecto.setText("Rellene los campos de inicio de sesión");
 								pIncorrecto.setVisible(true);
+								return;
+							}
+//							Comprobar si existe usuario para lanzar la ventana
+							Usuario usuario = validarUsuario(tfUsuario.getText(),contrasena, datos);
+							if(usuario != null) {
+								System.out.println(usuario);
+								System.out.println(usuario.getMonedas());
+								new Album(IniciarSesion.this, usuario, datos);
+								dispose();
 							} else {
 								lIncorrecto.setText("Usuario o contraseña incorrectos");
 								pIncorrecto.setVisible(true);
+								System.out.println(datos.getUsuarios());
 							}
 							
-							usuario.getCartas().put(new Carta(1), 1);
-							usuario.getCartas().put(new Carta(5), 2);
-							usuario.getCartas().put(new Carta(6), 1);
+//							usuario.getCartas().put(new Carta(1), 1);
+//							usuario.getCartas().put(new Carta(5), 2);
+//							usuario.getCartas().put(new Carta(6), 1);
 						} catch (DataException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						} //TODO comprobar esto
+						
 					
 						
 //						usuario.getCartas().put(new Carta(2), 1);
@@ -208,6 +204,13 @@ private static final long serialVersionUID = 1L;
 //						for (Carta c: usuario.getCartas().keySet()) {
 //							System.out.println(c.toString() + usuario.getCartas().get(c));
 //						}
+					}
+					
+					private Usuario validarUsuario(String nombre, String contrasena, Datos datos) {
+						Usuario u = datos.cargarUsuario(nombre);
+						if (u == null) return null;
+						if (contrasena.equals(u.getContrasena()) == false) return null;
+						return u;
 					}
 				});
 				

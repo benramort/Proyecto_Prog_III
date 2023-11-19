@@ -109,14 +109,15 @@ public class CrearCuenta extends JFrame {
 						try {
 							Datos datos;
 							datos = DatosFactory.getDatos();
-							Usuario usuario = new Usuario("Beñat","contrasena",datos, 0);
+							String contrasena = "";
+							Usuario usuario = new Usuario(tfNombre.getText(), String.valueOf( pfContrasena.getPassword()), datos, 0);
 							usuario.getCartas().put(new Carta(1), 1);
 							usuario.getCartas().put(new Carta(5), 2);
 							usuario.getCartas().put(new Carta(6), 1);
 							new Album(null, usuario, datos);
-							for (Carta c: usuario.getCartas().keySet()) {
-								System.out.println(c.toString() + usuario.getCartas().get(c));
-							}	
+//							for (Carta c: usuario.getCartas().keySet()) {
+//								System.out.println(c.toString() + usuario.getCartas().get(c));
+//							}	
 						} catch (DataException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
