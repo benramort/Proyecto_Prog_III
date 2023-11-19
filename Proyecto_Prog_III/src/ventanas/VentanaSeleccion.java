@@ -30,7 +30,7 @@ public class VentanaSeleccion extends JFrame{
 	Carta cartaSeleccionada;
 	JFrame ventanaAnterior;
 	
-	public VentanaSeleccion(JFrame ventanaAnterior, Usuario usuario, Datos datos) {
+	public VentanaSeleccion(JFrame ventanaAnterior, Usuario usuario, Datos datos, int indice) {
 		
 		this.ventanaAnterior = ventanaAnterior;
 		
@@ -115,7 +115,7 @@ public class VentanaSeleccion extends JFrame{
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						cartaSeleccionada = p.getCarta();
-						((Entrenamiento) ventanaAnterior).cambiarCartaEntrenando(cartaSeleccionada, 1);
+						((Entrenamiento) ventanaAnterior).cambiarCartaEntrenando(cartaSeleccionada, indice);
 						dispose();
 					}
 				});
