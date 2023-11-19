@@ -98,7 +98,7 @@ public class ModoIdle extends Thread {
 					}
 				}
 				
-			if ((generarMonedasCarta1 == true || generarMonedasCarta2 == true || generarMonedasCarta3 == true && !isInterrupted()) == false) break;
+			if ((generarMonedasCarta1 || generarMonedasCarta2 || generarMonedasCarta3) == false) break;
 //
 			System.out.println("Stamina - " + cartaEnt1.getCarta().getResistencia());
 			System.out.println("MinutosCarta - " + minutosCarta3);
