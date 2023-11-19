@@ -178,8 +178,9 @@ private static final long serialVersionUID = 1L;
 //							Comprobar si existe usuario para lanzar la ventana
 							Usuario usuario = validarUsuario(tfUsuario.getText(),contrasena, datos);
 							if(usuario != null) {
-								System.out.println(usuario);
-								System.out.println(usuario.getMonedas());
+//								System.out.println(usuario);
+//								System.out.println(usuario.getMonedas());
+								usuario.setMonedas(usuario.getMonedas()+10);
 								new Album(IniciarSesion.this, usuario, datos);
 								dispose();
 							} else {
@@ -209,6 +210,7 @@ private static final long serialVersionUID = 1L;
 					private Usuario validarUsuario(String nombre, String contrasena, Datos datos) {
 						Usuario u = datos.cargarUsuario(nombre);
 						if (u == null) return null;
+						System.out.println(u.aLinea());
 						if (contrasena.equals(u.getContrasena()) == false) return null;
 						return u;
 					}

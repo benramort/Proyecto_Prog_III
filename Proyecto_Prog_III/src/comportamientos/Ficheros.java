@@ -61,6 +61,7 @@ public class Ficheros implements Datos {
 	
 	public void cargarUsuarios() {
 		try (Scanner scanner = new Scanner(new FileInputStream("data/usuarios.csv"))) {
+			usuarios.clear();
 			while (scanner.hasNextLine()) {
 				String linea = scanner.nextLine();
 				try {
@@ -85,16 +86,37 @@ public class Ficheros implements Datos {
 		}
 		return null;
 	}
-	
+	//9045
 	@Override
-	public void guardarUsuario(Usuario usuario) { //TODO comprobar que no haya nombres de usuarios repetidos
+	public void guardarUsuario(Usuario usuario) { //Esto funciona
+//		boolean existeUsuario = false;
+		System.out.println(usuarios.size());
+		for (int i=0; i<usuarios.size(); i++) {
+			Usuario u = usuarios.get(i);
+			System.out.println(i+1+"/"+usuarios.size());
+			if (u == usuario) {
+				usuarios.remove(i);
+				System.out.println("Monedas del usuario"+usuario.getMonedas());
+				System.out.println("Usuario eliminado");
+//				usuarios.add(usuario);
+			}
+		}
+		usuarios.add(usuario);
+		System.out.println(usuarios);
+		guardarUsuarios();
+		
+	}
+	
+	public void guardarUsuarios() {
 		try {
-			PrintStream ps = new PrintStream(new FileOutputStream("data/usuarios.csv", true));
-			String linea = usuario.aLinea();
-			ps.println(linea);
+			PrintStream ps = new PrintStream(new FileOutputStream("data/usuarios.csv"));
+			for (Usuario u : usuarios) {
+				String linea = u.aLinea();
+				ps.println(linea);
+			}
 			ps.close();
 		} catch (IOException e) {
-			System.out.println("No se pudo guardar el usuario");
+			logger.info("No se pudo guardar el usuario");
 		}
 	}
 	
@@ -105,7 +127,7 @@ public class Ficheros implements Datos {
 			logger.info("No se ha encontrado la configuracion del logger. Usando configuracion por defercto");
 			ex.printStackTrace();
 		} catch (IOException ex) {
-			logger.info("No se ha podido cargar el fichero de configuración del logger. Usando configuración por defecto");
+			logger.info("No se ha podido cargar del fichero de configuración del logger. Usando configuración por defecto");
 		}
 		logger.fine("El logger se ha configurado correctamente");
 	}
@@ -116,7 +138,7 @@ public class Ficheros implements Datos {
 		for (Usuario u: datos.getUsuarios()) {
 			System.out.println(u.aLinea());
 		}
-		System.out.println(datos.getUsuarios().size());
+		datos.guardarUsuario(new Usuario("1", "1", datos, 0));
 	}
 
 }
