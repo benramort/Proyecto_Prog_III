@@ -5,7 +5,6 @@ import javax.swing.*;
 import comportamientos.Carta;
 import comportamientos.Datos;
 import comportamientos.DatosFactory;
-import comportamientos.Ficheros;
 import comportamientos.Usuario;
 import excepciones.DataException;
 
@@ -109,7 +108,6 @@ public class CrearCuenta extends JFrame {
 						try {
 							Datos datos;
 							datos = DatosFactory.getDatos();
-							String contrasena = "";
 							Usuario usuario = new Usuario(tfNombre.getText(), String.valueOf( pfContrasena.getPassword()), datos, 0);
 							usuario.getCartas().put(new Carta(1), 1);
 							usuario.getCartas().put(new Carta(5), 2);

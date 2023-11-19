@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
@@ -17,7 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import comportamientos.Carta;
-import comportamientos.CartaVacia;
 import comportamientos.Datos;
 import comportamientos.Usuario;
 
@@ -37,7 +35,7 @@ public class VentanaSeleccion extends JFrame{
 		double escala = 1;
 //		this.usuario = usuario;
 //		this.datos = datos;
-		int cartasObtenidas = 0;
+//		int cartasObtenidas = 0;
 		
 		//Formato ventana
 		setTitle("Universal Cards Collection");
@@ -109,7 +107,7 @@ public class VentanaSeleccion extends JFrame{
 //				p.setOpaque(true);
 				p.setBackground(Color.RED);
 				System.out.println("Cargada carta "+c.getId());
-				cartasObtenidas++;
+//				cartasObtenidas++;
 				p.addMouseListener(new MouseAdapter() {
 
 					@Override
