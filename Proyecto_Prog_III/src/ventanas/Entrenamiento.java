@@ -34,6 +34,10 @@ private static final long serialVersionUID = 1L;
 	ModoIdle modoIdle;
 	JButton bEntrenar;
 	
+	
+	JLabel lMonedasGeneradas2;
+	JLabel lMonedasPorMinuto2;
+	
 	public Entrenamiento(JFrame ventanaAnterior, Usuario usuario) {
 		this.usuario = usuario;
 		//Formato ventana
@@ -73,9 +77,9 @@ private static final long serialVersionUID = 1L;
 		//Creacion componentes
 		JButton bAlbum = new JButton("ÁLBUM");
 		JLabel lMonedasGeneradas = new JLabel("Monedas generadas: " );
-		JLabel lMonedasGeneradas2 = new JLabel("XXXXXX");
-		JLabel lMonedasPorMinuto = new JLabel("Monedas/segundo: " );
-		JLabel lMonedasPorMinuto2 = new JLabel("XXXXXX" );
+		lMonedasGeneradas2 = new JLabel("0");
+		JLabel lMonedasPorMinuto = new JLabel("Monedas/minuto: " );
+		lMonedasPorMinuto2 = new JLabel("0");
 		JLabel lImagenMonedasGeneradas = new JLabel();
 		JLabel lImagenMonedasPorMinuto = new JLabel();
 		JButton bClear = new JButton("CLEAR");
@@ -144,8 +148,13 @@ private static final long serialVersionUID = 1L;
 			public void actionPerformed(ActionEvent e) {
 				bEntrenar.setVisible(false);
 				bRecogerMonedas.setVisible(true);
-				modoIdle = new ModoIdle(cartaEnt1, cartaEnt2, cartaEnt3);
+				modoIdle = new ModoIdle(cartaEnt1, cartaEnt2, cartaEnt3, Entrenamiento.this);
+				System.out.println(cartaEnt1.getCarta());
+				System.out.println(cartaEnt2.getCarta());
+				System.out.println(cartaEnt3.getCarta());
+				System.out.println(cartaEnt1.getCarta().getResistencia());
 				modoIdle.start();
+				lMonedasPorMinuto2.setText(modoIdle.getMonedasPorMinuto() + "");
 			}			
 		});
 		bRecogerMonedas.addActionListener(new ActionListener() {	
@@ -171,7 +180,7 @@ private static final long serialVersionUID = 1L;
 					
 					@Override
 					public void run() {
-						new VentanaSeleccion(Entrenamiento.this, usuario, datos);
+						new VentanaSeleccion(Entrenamiento.this, usuario, datos, 1);
 					}
 				});
 			}
@@ -184,7 +193,7 @@ private static final long serialVersionUID = 1L;
 					
 					@Override
 					public void run() {
-						new VentanaSeleccion(Entrenamiento.this, usuario, datos);
+						new VentanaSeleccion(Entrenamiento.this, usuario, datos, 2);
 					}
 				});
 			}
@@ -198,7 +207,7 @@ private static final long serialVersionUID = 1L;
 					
 					@Override
 					public void run() {
-						new VentanaSeleccion(Entrenamiento.this, usuario, datos);
+						new VentanaSeleccion(Entrenamiento.this, usuario, datos, 3);
 					}
 				});
 			}
@@ -220,9 +229,7 @@ private static final long serialVersionUID = 1L;
 		if(cartaEnt1.getCarta().getId() == 0 && cartaEnt2.getCarta().getId() == 0 && cartaEnt3.getCarta().getId() == 0) {
 			bEntrenar.setEnabled(false);
 		}
-		
 
-	
 	}
 	
 	public CartaEntrenando getCartaEnt1() {
@@ -241,11 +248,13 @@ private static final long serialVersionUID = 1L;
 		switch (indice) {
 		case 1: 
 			cartaEnt1.setCarta(carta);
-			System.out.println(carta.getId());
+			break;
 		case 2: 
-			cartaEnt2 = new CartaEntrenando(carta, 2);		
+			cartaEnt2.setCarta(carta);
+			break;
 		case 3: 
-			cartaEnt3 = new CartaEntrenando(carta, 3);		
+			cartaEnt3.setCarta(carta);
+			break;
 		default: 
 		//TODO hacer una excepcion
 		}
@@ -253,4 +262,25 @@ private static final long serialVersionUID = 1L;
 		bEntrenar.setEnabled(true);
 		System.out.println(cartaEnt1.getCarta());
 	}
+	
+	public void cambiarLabelMonedasGeneradas() {
+		lMonedasGeneradas2.setText(modoIdle.getMonedasGeneradas() + "");
+		lMonedasGeneradas2.repaint();
+	}
+
+	public void cambiarLabelMonedasPorMinuto() {
+		lMonedasPorMinuto2.setText(modoIdle.getMonedasPorMinuto() + "");
+		lMonedasPorMinuto2.repaint();
+	}
+	
+//	public static void main(String[] args) {
+//		SwingUtilities.invokeLater(new Runnable() {
+//			
+//			@Override
+//			public void run() {
+//				new Entrenamiento(null, usuario);
+//				
+//			}
+//		});
+//	}
 }

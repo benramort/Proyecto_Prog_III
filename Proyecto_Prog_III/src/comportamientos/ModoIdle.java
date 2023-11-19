@@ -1,6 +1,9 @@
 package comportamientos;
 
+import javax.swing.JFrame;
+
 import ventanas.CartaEntrenando;
+import ventanas.Entrenamiento;
 
 public class ModoIdle extends Thread {
 	
@@ -12,16 +15,26 @@ public class ModoIdle extends Thread {
 	boolean generarMonedasCarta2 = true;
 	boolean generarMonedasCarta3 = true;
 	
+	double monedasPorMinutoCarta1;
+	double monedasPorMinutoCarta2;
+	double monedasPorMinutoCarta3;
+	
 	int monedasGeneradas;
+	
+	JFrame ventana;
 
-	public ModoIdle(CartaEntrenando cartaEnt1, CartaEntrenando cartaEnt2, CartaEntrenando cartaEnt3 ) {
+	public ModoIdle(CartaEntrenando cartaEnt1, CartaEntrenando cartaEnt2, CartaEntrenando cartaEnt3, JFrame ventana) {
 		this.cartaEnt1 = cartaEnt1;
 		this.cartaEnt2 = cartaEnt2;
 		this.cartaEnt3 = cartaEnt3;
+		this.ventana = ventana;
+		monedasPorMinutoCarta1 = cartaEnt1.getCarta().getMonedasPorMinuto();
+		monedasPorMinutoCarta2 = cartaEnt2.getCarta().getMonedasPorMinuto();
+		monedasPorMinutoCarta3 = cartaEnt3.getCarta().getMonedasPorMinuto();
 	}
 	@Override
 	public void run() {
-	
+		
 		double contadorSeg = 0;
 		double minutosCarta1 = (cartaEnt1.getCarta().getResistencia()*5)/(double)100;
 		double minutosCarta2 = (cartaEnt2.getCarta().getResistencia()*5)/(double)100;
@@ -31,6 +44,10 @@ public class ModoIdle extends Thread {
 		cartaEnt2.getPbStamina().setValue((int) cartaEnt2.getPorcentajeStamina());
 		cartaEnt3.getPbStamina().setValue((int) cartaEnt3.getPorcentajeStamina());
 		
+		cartaEnt1.setPorcentajeStamina(cartaEnt1.getPorcentajeStamina());
+		cartaEnt2.setPorcentajeStamina(cartaEnt2.getPorcentajeStamina());
+		cartaEnt3.setPorcentajeStamina(cartaEnt3.getPorcentajeStamina());
+		
 		while(generarMonedasCarta1 == true || generarMonedasCarta2 == true || generarMonedasCarta3 == true && !isInterrupted()){
 
 			for(;;) {
@@ -39,19 +56,19 @@ public class ModoIdle extends Thread {
 				//el porcentaje de stamina negativo
 				if(contadorSeg != 0 && contadorSeg % (double)60 == (double)0) {
 					if(generarMonedasCarta1 == true && generarMonedasCarta2 == true && generarMonedasCarta3 == true) {
-						monedasGeneradas += cartaEnt1.getCarta().getMonedasPorMinuto() + cartaEnt2.getCarta().getMonedasPorMinuto() + cartaEnt3.getCarta().getMonedasPorMinuto();						
+						monedasGeneradas += monedasPorMinutoCarta1 + monedasPorMinutoCarta2 + monedasPorMinutoCarta3;						
 					} else if(generarMonedasCarta1 == true && generarMonedasCarta2 == true && generarMonedasCarta3 == false) {
-						monedasGeneradas += cartaEnt1.getCarta().getMonedasPorMinuto() + cartaEnt2.getCarta().getMonedasPorMinuto();
+						monedasGeneradas += monedasPorMinutoCarta1 + monedasPorMinutoCarta2;
 					} else if(generarMonedasCarta1 == true && generarMonedasCarta2 == false && generarMonedasCarta3 == true) {
-						monedasGeneradas += cartaEnt1.getCarta().getMonedasPorMinuto() + cartaEnt3.getCarta().getMonedasPorMinuto();
+						monedasGeneradas += monedasPorMinutoCarta1 + monedasPorMinutoCarta3;
 					} else if(generarMonedasCarta1 == true && generarMonedasCarta2 == false && generarMonedasCarta3 == false) {
-						monedasGeneradas += cartaEnt1.getCarta().getMonedasPorMinuto();
+						monedasGeneradas += monedasPorMinutoCarta1;
 					} else if(generarMonedasCarta1 == false && generarMonedasCarta2 == true && generarMonedasCarta3 == true) {
-						monedasGeneradas += cartaEnt2.getCarta().getMonedasPorMinuto() + cartaEnt3.getCarta().getMonedasPorMinuto();
+						monedasGeneradas += monedasPorMinutoCarta2 + monedasPorMinutoCarta3;
 					} else if(generarMonedasCarta1 == false && generarMonedasCarta2 == true && generarMonedasCarta3 == false) {
-						monedasGeneradas += cartaEnt2.getCarta().getMonedasPorMinuto();
+						monedasGeneradas += monedasPorMinutoCarta2;
 					} else if(generarMonedasCarta1 == false && generarMonedasCarta2 == false && generarMonedasCarta3 == true) {
-						monedasGeneradas += cartaEnt3.getCarta().getMonedasPorMinuto();
+						monedasGeneradas += monedasPorMinutoCarta3;
 					} else {
 						break;
 					}
@@ -59,8 +76,9 @@ public class ModoIdle extends Thread {
 				if(contadorSeg != 0 && contadorSeg % (minutosCarta1*(double)60) == (double)0) {
 					cartaEnt1.setPorcentajeStamina(cartaEnt1.getPorcentajeStamina()-1);
 					cartaEnt1.getPbStamina().setValue((int) cartaEnt1.getPorcentajeStamina());
-					if((double)cartaEnt1.getPorcentajeStamina() == 0) {
+					if((double)cartaEnt1.getPorcentajeStamina() <= 0) {
 						generarMonedasCarta1 = false;
+						monedasPorMinutoCarta1 = 0;
 					}
 				}
 				if(contadorSeg != 0 && contadorSeg % (minutosCarta2*(double)60) == (double)0) {
@@ -68,6 +86,7 @@ public class ModoIdle extends Thread {
 					cartaEnt2.getPbStamina().setValue((int) cartaEnt2.getPorcentajeStamina());
 					if((double)cartaEnt2.getPorcentajeStamina() == 0) {
 						generarMonedasCarta2 = false;
+						monedasPorMinutoCarta2 = 0;
 					}
 				}
 				if(contadorSeg != 0 && contadorSeg % (minutosCarta3*(double)60) == (double)0) {
@@ -75,21 +94,25 @@ public class ModoIdle extends Thread {
 					cartaEnt3.getPbStamina().setValue((int) cartaEnt3.getPorcentajeStamina());
 					if((double)cartaEnt3.getPorcentajeStamina() == 0) {
 						generarMonedasCarta3 = false;
+						monedasPorMinutoCarta3 = 0;
 					}
 				}
 //
-//			System.out.println("Stamina - " + cartaEnt1.getCarta().getResistencia());
-//			System.out.println("MinutosCarta - " + minutosCarta3);
-//			System.out.println("ContadorSeg - " + contadorSeg);
-//			System.out.println("Resto - " + contadorSeg % (minutosCarta1*60));
-//			System.out.println("Porcentaje stamina - " + cartaEnt1.getPorcentajeStamina());
-//			System.out.println(cartaEnt2.getPorcentajeStamina());
-//			System.out.println(cartaEnt3.getPorcentajeStamina());
-//			System.out.println(generarMonedasCarta1);
-//			System.out.println(generarMonedasCarta2);
-//			System.out.println(generarMonedasCarta3);
+			System.out.println("Stamina - " + cartaEnt1.getCarta().getResistencia());
+			System.out.println("MinutosCarta - " + minutosCarta3);
+			System.out.println("ContadorSeg - " + contadorSeg);
+			System.out.println("Resto - " + contadorSeg % (minutosCarta1*60));
+			System.out.println("Porcentaje stamina - " + cartaEnt1.getPorcentajeStamina());
+			System.out.println(cartaEnt2.getPorcentajeStamina());
+			System.out.println(cartaEnt3.getPorcentajeStamina());
+			System.out.println(generarMonedasCarta1);
+			System.out.println(generarMonedasCarta2);
+			System.out.println(generarMonedasCarta3);
 
 				contadorSeg++;
+				
+				((Entrenamiento)ventana).cambiarLabelMonedasGeneradas();
+				((Entrenamiento)ventana).cambiarLabelMonedasPorMinuto();
 				
 				try {
 					Thread.sleep(1);
@@ -110,6 +133,10 @@ public class ModoIdle extends Thread {
 	}
 	public int getMonedasGeneradas() {
 		return monedasGeneradas;
+	}
+	
+	public double getMonedasPorMinuto() {
+		return monedasPorMinutoCarta1 + monedasPorMinutoCarta2 + monedasPorMinutoCarta3;
 	}
 	
 
