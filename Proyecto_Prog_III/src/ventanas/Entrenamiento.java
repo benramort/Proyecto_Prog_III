@@ -28,7 +28,7 @@ private static final long serialVersionUID = 1L;
 	CartaEntrenando cartaEnt1 = new CartaEntrenando(new CartaAEntrenar(), 1);
 	CartaEntrenando cartaEnt2 = new CartaEntrenando(new CartaAEntrenar(), 2);
 	CartaEntrenando cartaEnt3 = new CartaEntrenando(new CartaAEntrenar(), 3);
-	Datos datos = new Ficheros();
+	Datos datos;
 	Usuario usuario;
 	ModoIdle modoIdle;
 	JButton bEntrenar;
@@ -37,8 +37,9 @@ private static final long serialVersionUID = 1L;
 	JLabel lMonedasGeneradas2;
 	JLabel lMonedasPorMinuto2;
 	
-	public Entrenamiento(JFrame ventanaAnterior, Usuario usuario) {
+	public Entrenamiento(JFrame ventanaAnterior, Usuario usuario, Datos datos) {
 		this.usuario = usuario;
+		this.datos = datos;
 		//Formato ventana
 		setTitle("Entrenamiento");
 		setSize(1200, 650);

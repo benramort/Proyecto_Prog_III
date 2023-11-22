@@ -22,6 +22,9 @@ public class IniciarSesion extends JFrame {
 *
 */
 private static final long serialVersionUID = 1L;
+Datos datos;
+
+
 	private static final Color c = new Color(42,215,245);
 
 	public static void main(String[] args) {
@@ -53,6 +56,13 @@ private static final long serialVersionUID = 1L;
 // }
 
 	public IniciarSesion() {
+		try {
+			datos = DatosFactory.getDatos();
+		} catch (DataException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		//Formato ventana
 		setTitle("Iniciar sesión");
 		setSize(1000, 700);
@@ -162,9 +172,6 @@ private static final long serialVersionUID = 1L;
 
 					@Override
 					public void run() {
-						Datos datos;
-						try {
-							datos = DatosFactory.getDatos();
 							
 							String contrasena = String.valueOf(pfContrasena.getPassword());
 							
@@ -190,10 +197,6 @@ private static final long serialVersionUID = 1L;
 //							usuario.getCartas().put(new Carta(1), 1);
 //							usuario.getCartas().put(new Carta(5), 2);
 //							usuario.getCartas().put(new Carta(6), 1);
-						} catch (DataException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} //TODO comprobar esto
 						
 					
 						
