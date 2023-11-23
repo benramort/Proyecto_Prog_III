@@ -3,6 +3,8 @@ package ventanas;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
@@ -18,10 +20,12 @@ public class VentanaSobres extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	Random r = new Random();
 	Datos datos;
+	List<Carta> cartasDesbloqueadas = new ArrayList<>();
 	
-	public VentanaSobres (JFrame ventanaAnterior, Datos datos, int numCartasPorSobre) {
-		Random r = new Random();
+	public VentanaSobres (JFrame ventanaAnterior, Datos datos, int numCartasPorSobre, Usuario usuario) {
+		
 		///Formato Ventana
 		setSize(1000,430);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -32,22 +36,29 @@ public class VentanaSobres extends JFrame{
 		JPanel pCentro = new JPanel();
 		JPanel pCerrar = new JPanel();
 		//Crear Componentes
-		JButton cerrar = new JButton("CERRAR");
+		JButton bCerrar = new JButton("CERRAR");
 		
 		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
 		///Añadir componentes a contenedores
 		setIconImage(logoPequeño.getImage());
-		pCerrar.add(cerrar);
+		pCerrar.add(bCerrar);
 		
 		
 		for (int i = 0; i < numCartasPorSobre; i++) {
 			pCentro.add(new PanelCarta(datos.getModeloCartas().get(r.nextInt(datos.getModeloCartas().size()))));
+			cartasDesbloqueadas.add(((PanelCarta)pCentro.getComponent(i)).getCarta());
+		}
+		
+		for(Carta c : cartasDesbloqueadas) {
+			if(usuario.getCartas().containsKey(c)) {
+				usuario.getCartas().put(c, usuario.getCartas().get(c) + 1);
+			}
 		}
 		
 		getContentPane().add(pCentro, BorderLayout.CENTER );
 		getContentPane().add(pCerrar, BorderLayout.SOUTH);
 		
-		cerrar.addActionListener(new ActionListener() {
+		bCerrar.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {

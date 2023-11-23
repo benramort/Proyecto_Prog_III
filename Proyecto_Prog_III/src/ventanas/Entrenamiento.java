@@ -162,6 +162,8 @@ private static final long serialVersionUID = 1L;
 			public void actionPerformed(ActionEvent e) {
 				bRecogerMonedas.setVisible(false);
 				usuario.setMonedas(usuario.getMonedas() + modoIdle.getMonedasGeneradas());
+				lMonedasGeneradas2.setText("0");
+				lMonedasGeneradas2.repaint();
 				bEntrenar.setVisible(true);						
 				modoIdle.setGenerarMonedasCarta1(false);
 				modoIdle.setGenerarMonedasCarta2(false);

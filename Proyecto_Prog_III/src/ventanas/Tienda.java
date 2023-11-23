@@ -134,7 +134,7 @@ public class Tienda extends JFrame {
 									}else {
 										numCartasPorSobre = 1;
 									}
-									new VentanaSobres(Tienda.this, datos,numCartasPorSobre);									
+									new VentanaSobres(Tienda.this, datos,numCartasPorSobre, usuario);									
 								} else {
 									//
 								}
