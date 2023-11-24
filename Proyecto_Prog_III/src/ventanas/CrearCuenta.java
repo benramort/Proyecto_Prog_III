@@ -109,9 +109,9 @@ public class CrearCuenta extends JFrame {
 							Datos datos;
 							datos = DatosFactory.getDatos();
 							Usuario usuario = new Usuario(tfNombre.getText(), String.valueOf( pfContrasena.getPassword()), datos, 0);
-//							usuario.getCartas().put(new Carta(1), 1);
-//							usuario.getCartas().put(new Carta(5), 2);
-//							usuario.getCartas().put(new Carta(6), 1);
+							usuario.getCartas().put(new Carta(1), 1);
+							usuario.getCartas().put(new Carta(5), 2);
+							usuario.getCartas().put(new Carta(6), 1);
 							new Album(null, usuario, datos);
 //							for (Carta c: usuario.getCartas().keySet()) {
 //								System.out.println(c.toString() + usuario.getCartas().get(c));

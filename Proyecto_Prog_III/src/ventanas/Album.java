@@ -347,7 +347,10 @@ public class Album extends JFrame {
 		//Gestion de cartas
 		
 		pCartas.removeAll();
+//		pCartas = new JPanel();
+		pCartas.setLayout(new GridLayout(0, 4, 0, 0));
 		
+		System.out.println("Hola");
 		int cartasObtenidas = 0;
 		
 		//Configurar escuchadores
@@ -373,7 +376,7 @@ public class Album extends JFrame {
 				p.setPreferredSize(new Dimension(235, 335)); //TODO espacio vertical
 				//						p.setOpaque(true);
 				p.setBackground(Color.RED);
-				System.out.println("Cargada carta "+c.getId());
+//				System.out.println("Cargada carta "+c.getId());
 				cartasObtenidas++;
 			} else {
 				PanelCarta p = new PanelCarta(new CartaVacia());
@@ -382,7 +385,13 @@ public class Album extends JFrame {
 				//						System.out.println("Cargada carta "+c.getId());
 			}
 		}
+
+//		System.out.println(pCartas.isVisible());
 		pPorcentaje.setPorcentaje((int) (cartasObtenidas/(double) usuario.getCartas().size()*100));
+		pPorcentaje.repaint();
+		pCartas.revalidate();
+		pCartas.repaint(); //El repaint hace que se borren las imagenes del grid
+		System.out.println(pCartas.getComponentCount());
 	}
 
 }

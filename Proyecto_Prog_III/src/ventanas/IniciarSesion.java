@@ -6,13 +6,12 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import javax.swing.*;
 
+import comportamientos.Carta;
 import comportamientos.Datos;
 import comportamientos.DatosFactory;
 import comportamientos.Usuario;
@@ -195,10 +194,6 @@ Datos datos;
 								pIncorrecto.setVisible(true);
 								System.out.println(datos.getUsuarios());
 							}
-							
-//							usuario.getCartas().put(new Carta(1), 1);
-//							usuario.getCartas().put(new Carta(5), 2);
-//							usuario.getCartas().put(new Carta(6), 1);
 						
 					
 						
