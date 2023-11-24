@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -121,7 +123,7 @@ public class Tienda extends JFrame {
 						SwingUtilities.invokeLater(new Runnable() {
 							
 							@Override
-							public void run() {
+							public void run() { //Este runnable mejor a otra clase
 								int numCartasPorSobre = 0;
 								int respuesta = JOptionPane.showConfirmDialog(lImagenSobre, "¿Seguro que quieres comprar este sobre??", "Confirmar compra", JOptionPane.YES_NO_OPTION);
 								if(respuesta == JOptionPane.OK_OPTION) {
@@ -147,21 +149,29 @@ public class Tienda extends JFrame {
 			}
 				
 			
-			
-			getContentPane().add(sc, BorderLayout.CENTER );
-			
-			
-			setVisible(true);
-			
-			btAlbum.addActionListener(new ActionListener() {
+			addWindowListener(new WindowAdapter() {
+
+				@Override
+				public void windowClosed(WindowEvent e) {
+					SwingUtilities.invokeLater(() -> {((Album) ventanaAnterior).cargarCartas();});
+				}
 				
+			});
+
+			getContentPane().add(sc, BorderLayout.CENTER );
+
+
+			setVisible(true);
+
+			btAlbum.addActionListener(new ActionListener() {
+
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					dispose();
-					
+
 				}
 			});
 		}
-		
-		}
+
+}
 	

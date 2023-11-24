@@ -33,14 +33,16 @@ public class Album extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-//	private Usuario usuario;
-//	private Datos datos;
+	private Usuario usuario;
+	private Datos datos;
+	private PanelPorcentaje pPorcentaje;
+	private JPanel pCartas;
 	
 	
 	
 	public Album(JFrame ventanaAnterior, Usuario usuario, Datos datos) {
 		double escala = 1;
-//		this.usuario = usuario;
+		this.usuario = usuario;
 //		this.datos = datos;
 		int cartasObtenidas = 0;
 		
@@ -54,11 +56,11 @@ public class Album extends JFrame {
 		//Crear contenedores
 		JPanel pIzquierdo = new JPanel();
 		JPanel pDerecho = new JPanel();
-		JPanel pCartas = new JPanel(new GridLayout(0, 4, 0, 0));
+		pCartas = new JPanel(new GridLayout(0, 4, 0, 0));
 		//TODO espacio vertical de cartas
 		JPanel pBotones = new JPanel();
 		JPanel pMonedas = new JPanel();
-		PanelPorcentaje pPorcentaje = new PanelPorcentaje(0, 300, 300, Color.BLACK);
+		pPorcentaje = new PanelPorcentaje(0, 300, 300, Color.BLACK);
 		JPanel pPorcentaje2 = new JPanel();
 		JPanel pPorcentaje3 = new JPanel();
 		JPanel pBuscar = new JPanel();
@@ -204,20 +206,8 @@ public class Album extends JFrame {
 		pBuscar.setVisible(false);
 		
 		
-		//Configurar escuchadores
-		MouseListener hoverCartas = new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				PanelCarta p = (PanelCarta) e.getSource();
-				p.mostrarStats(true);
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				PanelCarta p = (PanelCarta) e.getSource();
-				p.mostrarStats(false);
-			}
-		};
+		cargarCartas();
+		
 		
 		spCartas.addComponentListener(new ComponentAdapter() {
 
@@ -243,26 +233,7 @@ public class Album extends JFrame {
 			
 		});
 		
-		//Gestion de cartas
-		 
-		for (Carta c: usuario.getCartas().keySet()) {
-			if (usuario.getCartas().get(c) != 0) {
-				PanelCarta p = new PanelCarta(c);
-				p.addMouseListener(hoverCartas);
-				pCartas.add(p);
-				p.setPreferredSize(new Dimension(235, 335)); //TODO espacio vertical
-//				p.setOpaque(true);
-				p.setBackground(Color.RED);
-				System.out.println("Cargada carta "+c.getId());
-				cartasObtenidas++;
-			} else {
-				PanelCarta p = new PanelCarta(new CartaVacia());
-//				p.addMouseListener(hoverCartas);
-				pCartas.add(p);
-//				System.out.println("Cargada carta "+c.getId());
-			}
-		}
-		pPorcentaje.setPorcentaje((int) (cartasObtenidas/(double) usuario.getCartas().size()*100));
+		
 		
 		
 		setVisible(true);
@@ -370,6 +341,48 @@ public class Album extends JFrame {
 		});
 		
 
+	}
+	
+	public void cargarCartas() {
+		//Gestion de cartas
+		
+		pCartas.removeAll();
+		
+		int cartasObtenidas = 0;
+		
+		//Configurar escuchadores
+		MouseListener hoverCartas = new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				PanelCarta p = (PanelCarta) e.getSource();
+				p.mostrarStats(true);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				PanelCarta p = (PanelCarta) e.getSource();
+				p.mostrarStats(false);
+			}
+		};
+
+		for (Carta c: usuario.getCartas().keySet()) {
+			if (usuario.getCartas().get(c) != 0) {
+				PanelCarta p = new PanelCarta(c);
+				p.addMouseListener(hoverCartas);
+				pCartas.add(p);
+				p.setPreferredSize(new Dimension(235, 335)); //TODO espacio vertical
+				//						p.setOpaque(true);
+				p.setBackground(Color.RED);
+				System.out.println("Cargada carta "+c.getId());
+				cartasObtenidas++;
+			} else {
+				PanelCarta p = new PanelCarta(new CartaVacia());
+				//						p.addMouseListener(hoverCartas);
+				pCartas.add(p);
+				//						System.out.println("Cargada carta "+c.getId());
+			}
+		}
+		pPorcentaje.setPorcentaje((int) (cartasObtenidas/(double) usuario.getCartas().size()*100));
 	}
 
 }
