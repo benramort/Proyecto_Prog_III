@@ -153,7 +153,7 @@ public class Tienda extends JFrame {
 
 				@Override
 				public void windowClosed(WindowEvent e) {
-					SwingUtilities.invokeLater(() -> {((Album) ventanaAnterior).cargarCartas();});
+				((Album) ventanaAnterior).cargarCartas();
 				}
 				
 			});

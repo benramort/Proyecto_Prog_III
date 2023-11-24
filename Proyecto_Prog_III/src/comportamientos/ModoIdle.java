@@ -1,6 +1,7 @@
 package comportamientos;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 import ventanas.CartaEntrenando;
 import ventanas.Entrenamiento;
@@ -113,8 +114,10 @@ public class ModoIdle extends Thread {
 
 			contadorSeg++;
 
-			((Entrenamiento)ventana).cambiarLabelMonedasGeneradas();
-			((Entrenamiento)ventana).cambiarLabelMonedasPorMinuto();
+			SwingUtilities.invokeLater(() -> {
+				((Entrenamiento)ventana).cambiarLabelMonedasGeneradas();
+				((Entrenamiento)ventana).cambiarLabelMonedasPorMinuto();
+			});			
 
 			if ((generarMonedasCarta1 || generarMonedasCarta2 || generarMonedasCarta3) == false) break;
 
