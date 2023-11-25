@@ -146,8 +146,18 @@ public class Tienda extends JFrame {
 			public void windowClosing(WindowEvent e) {
 				System.out.println("Evento de cerrado");
 				((Album) ventanaAnterior).cargarCartas();
+				((Album) ventanaAnterior).repaint();
 			}
 
+		});
+		
+		btAlbum.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				((Album) ventanaAnterior).cargarCartas();
+				((Album) ventanaAnterior).repaint();				
+			}
 		});
 
 	}
