@@ -37,7 +37,7 @@ public class Album extends JFrame {
 	private Datos datos;
 	private PanelPorcentaje pPorcentaje;
 	private JPanel pCartas;
-	
+	public JLabel lMonedas;
 	
 	
 	public Album(JFrame ventanaAnterior, Usuario usuario, Datos datos) {
@@ -102,7 +102,7 @@ public class Album extends JFrame {
 		JButton bSalir = new JButton();
 		JButton bBuscar = new JButton();
 		JScrollPane spCartas = new JScrollPane();
-		JLabel lMonedas = new JLabel(String.valueOf(usuario.getMonedas())); //TODO cambiar cuando se cierra el modo idle
+		lMonedas = new JLabel(String.valueOf(usuario.getMonedas())); //TODO cambiar cuando se cierra el modo idle
 		JLabel lImagenMonedas = new JLabel();
 		
 		ImageIcon imagen = new ImageIcon(getClass().getResource("/idle.png"));
@@ -350,7 +350,7 @@ public class Album extends JFrame {
 //		pCartas = new JPanel();
 		pCartas.setLayout(new GridLayout(0, 4, 0, 0));
 		
-		System.out.println("Hola");
+//		System.out.println("Hola");
 		int cartasObtenidas = 0;
 		
 		//Configurar escuchadores
