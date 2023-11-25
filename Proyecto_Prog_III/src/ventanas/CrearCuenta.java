@@ -40,7 +40,7 @@ public class CrearCuenta extends JFrame {
 		JPanel pContrasena = new JPanel();
 		JPanel pContrasena2 = new JPanel();
 		JPanel pBoton = new JPanel();
-
+		JPanel pIncorrecto = new JPanel();
 		//Formato contenedores
 		pSuperior.setBackground(c);
 		pCentral.setLayout(new BoxLayout(pCentral, BoxLayout.Y_AXIS));
@@ -62,6 +62,7 @@ public class CrearCuenta extends JFrame {
 		JPasswordField pfContrasena2 = new JPasswordField(15);
 		JButton bCrearCuenta = new JButton("Crear cuenta");
 		JCheckBox cbMostrarContrasena = new JCheckBox("Mostrar contraseña");
+		JLabel lIncorrecto = new JLabel("Las dos contraseñas deben de ser iguales");
 		
 		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
 		//Formato componentes
@@ -71,6 +72,9 @@ public class CrearCuenta extends JFrame {
 		lCorreo.setFont(new Font("Arial", Font.BOLD, 15));
 		lContrasena.setFont(new Font("Arial", Font.BOLD, 15));
 		lContrasena2.setFont(new Font("Arial", Font.BOLD, 15));
+		lIncorrecto.setForeground(Color.RED);
+		lIncorrecto.setOpaque(true);
+		lIncorrecto.setVisible(false);
 
 		
 		//Añadir componentes a contenedores
@@ -83,6 +87,7 @@ public class CrearCuenta extends JFrame {
 		pCentral.add(pCorreo);
 		pCentral.add(pContrasena);
 		pCentral.add(pContrasena2);
+		pCentral.add(pIncorrecto);
 		pNombre.add(lNombre);
 		pNombre.add(tfNombre);
 		pCorreo.add(lCorreo);
@@ -93,6 +98,7 @@ public class CrearCuenta extends JFrame {
 		pContrasena2.add(pfContrasena2);
 		pBoton.add(bCrearCuenta);
 		pContrasena2.add(cbMostrarContrasena);
+		pIncorrecto.add(lIncorrecto);
 
 		
 		setVisible(true);
@@ -104,29 +110,37 @@ public class CrearCuenta extends JFrame {
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						
-						try {
-							Datos datos;
-							datos = DatosFactory.getDatos();
-							Usuario usuario = new Usuario(tfNombre.getText(), String.valueOf( pfContrasena.getPassword()), datos, 100000);
-							usuario.getCartas().put(new Carta(1), 0);
-							usuario.getCartas().put(new Carta(2), 0);
-							usuario.getCartas().put(new Carta(4), 0);
-							usuario.getCartas().put(new Carta(5), 0);
-							usuario.getCartas().put(new Carta(6), 0);
-							new Album(null, usuario, datos);
-//							for (Carta c: usuario.getCartas().keySet()) {
-//								System.out.println(c.toString() + usuario.getCartas().get(c));
-//							}	
-						} catch (DataException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+						String contrasena = String.valueOf(pfContrasena.getPassword());
+						String confirmarContrasena = String.valueOf(pfContrasena2.getPassword());
+						if(!contrasena.isEmpty() && !confirmarContrasena.isEmpty() && contrasena.equals(confirmarContrasena)) {
+							try {
+								Datos datos;
+								datos = DatosFactory.getDatos();
+								Usuario usuario = new Usuario(tfNombre.getText(), String.valueOf( pfContrasena.getPassword()), datos, 100000);
+								usuario.getCartas().put(new Carta(1), 0);
+								usuario.getCartas().put(new Carta(2), 0);
+								usuario.getCartas().put(new Carta(4), 0);
+								usuario.getCartas().put(new Carta(5), 0);
+								usuario.getCartas().put(new Carta(6), 0);
+								new Album(null, usuario, datos);
+//								for (Carta c: usuario.getCartas().keySet()) {
+//									System.out.println(c.toString() + usuario.getCartas().get(c));
+//								}	
+							} catch (DataException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							dispose();
+						} else {
+							lIncorrecto.setVisible(true);
 						}
+							
+						
 									
 
 					}
 				});
-				dispose();
+				
 			}
 		});
 		char caracter = pfContrasena.getEchoChar();

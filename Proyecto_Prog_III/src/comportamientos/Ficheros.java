@@ -91,7 +91,7 @@ public class Ficheros implements Datos {
 			System.out.println(usuarios.size());
 			for (int i=0; i<usuarios.size(); i++) {
 				Usuario u = usuarios.get(i);
-				System.out.println(i+1+"/"+usuarios.size());
+				System.out.println(i + 1 + "/" + usuarios.size());
 				if (u == usuario) {
 					usuarios.remove(i);
 					System.out.println("Monedas del usuario"+usuario.getMonedas());
