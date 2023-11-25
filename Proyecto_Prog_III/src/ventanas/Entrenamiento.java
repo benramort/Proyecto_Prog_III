@@ -38,6 +38,8 @@ private static final long serialVersionUID = 1L;
 	JLabel lMonedasGeneradas2;
 	JLabel lMonedasPorMinuto2;
 	
+	JPanel flowLayoutCartasH;
+	
 	public Entrenamiento(JFrame ventanaAnterior, Usuario usuario, Datos datos) {
 		this.usuario = usuario;
 		this.datos = datos;
@@ -54,7 +56,7 @@ private static final long serialVersionUID = 1L;
 		JPanel pTextos = new JPanel();
 		JPanel pCartas = new JPanel();
 		JPanel blCentro = new JPanel();
-		JPanel flowLayoutCartasH = new JPanel();
+		flowLayoutCartasH = new JPanel();
 		JPanel boxLayoutCartasV = new JPanel();
 		JPanel pBotonAlbum = new JPanel();
 		JPanel pBotonEntrenar = new JPanel();

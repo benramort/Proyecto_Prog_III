@@ -29,16 +29,16 @@ public class Tienda extends JFrame {
 
 	public Tienda (JFrame ventanaAnterior, Usuario usuario, Datos datos) {
 		List<String> nombres = new ArrayList<String>();
-		nombres.add("Sobre Ultimate");
-		nombres.add("Megasobre");
-		nombres.add("Sobre Oro Premium");
 		nombres.add("Sobre Oro");
+		nombres.add("Sobre Oro Premium");
+		nombres.add("Megasobre");
+		nombres.add("Sobre Ultimate");
 
 		List<String> precios = new ArrayList<String>();
-		precios.add("125000");
-		precios.add("50000");
-		precios.add("15000");
 		precios.add("7500");
+		precios.add("15000");
+		precios.add("50000");
+		precios.add("125000");
 		///Formato Ventana
 		setSize(1500,1000);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);

@@ -120,8 +120,6 @@ public class VentanaSeleccion extends JFrame{
 			}
 		} 
 		
-		
-		
 		setVisible(true);
 		
 //		pCartas.setBackground(Color.RED);
