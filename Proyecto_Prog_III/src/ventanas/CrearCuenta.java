@@ -62,7 +62,7 @@ public class CrearCuenta extends JFrame {
 		JPasswordField pfContrasena2 = new JPasswordField(15);
 		JButton bCrearCuenta = new JButton("Crear cuenta");
 		JCheckBox cbMostrarContrasena = new JCheckBox("Mostrar contraseña");
-		JLabel lIncorrecto = new JLabel("Las dos contraseñas deben de ser iguales");
+		JLabel lIncorrecto = new JLabel();
 		
 		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
 		//Formato componentes
@@ -116,22 +116,29 @@ public class CrearCuenta extends JFrame {
 							try {
 								Datos datos;
 								datos = DatosFactory.getDatos();
-								Usuario usuario = new Usuario(tfNombre.getText(), String.valueOf( pfContrasena.getPassword()), datos, 100000);
-								usuario.getCartas().put(new Carta(1), 0);
-								usuario.getCartas().put(new Carta(2), 0);
-								usuario.getCartas().put(new Carta(4), 0);
-								usuario.getCartas().put(new Carta(5), 0);
-								usuario.getCartas().put(new Carta(6), 0);
-								new Album(null, usuario, datos);
+								if(datos.comprobarUsuario(tfNombre.getText()) == null) {
+									Usuario usuario = new Usuario(tfNombre.getText(), String.valueOf( pfContrasena.getPassword()), datos, 100000);
+									usuario.getCartas().put(new Carta(1), 0);
+									usuario.getCartas().put(new Carta(2), 0);
+									usuario.getCartas().put(new Carta(4), 0);
+									usuario.getCartas().put(new Carta(5), 0);
+									usuario.getCartas().put(new Carta(6), 0);
+									new Album(null, usuario, datos);
 //								for (Carta c: usuario.getCartas().keySet()) {
 //									System.out.println(c.toString() + usuario.getCartas().get(c));
 //								}	
+								
+								dispose();	
+								} else {
+									lIncorrecto.setText("Ese nombre de usario ya existe");
+									lIncorrecto.setVisible(true);
+								}
 							} catch (DataException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-							dispose();
 						} else {
+							lIncorrecto.setText("Las dos contraseñas deben de ser iguales");
 							lIncorrecto.setVisible(true);
 						}
 							
