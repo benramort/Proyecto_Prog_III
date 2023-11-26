@@ -37,7 +37,7 @@ public class Album extends JFrame {
 	private Datos datos;
 	private PanelPorcentaje pPorcentaje;
 	private JPanel pCartas;
-	public JLabel lMonedas;
+	public JLabel lMonedasAlbum;
 	
 	
 	public Album(JFrame ventanaAnterior, Usuario usuario, Datos datos) {
@@ -102,7 +102,7 @@ public class Album extends JFrame {
 		JButton bSalir = new JButton();
 		JButton bBuscar = new JButton();
 		JScrollPane spCartas = new JScrollPane();
-		lMonedas = new JLabel(String.valueOf(usuario.getMonedas())); //TODO cambiar cuando se cierra el modo idle
+		lMonedasAlbum = new JLabel(String.valueOf(usuario.getMonedas())); //TODO cambiar cuando se cierra el modo idle
 		JLabel lImagenMonedas = new JLabel();
 		
 		ImageIcon imagen = new ImageIcon(getClass().getResource("/idle.png"));
@@ -176,7 +176,7 @@ public class Album extends JFrame {
 		pDerecho.add(pMonedas, BorderLayout.NORTH);
 		pDerecho.add(spCartas, BorderLayout.CENTER);
 //		pCartas.add(spCartas);
-		pMonedas.add(lMonedas);
+		pMonedas.add(lMonedasAlbum);
 		pMonedas.add(lImagenMonedas);
 		pIzquierdo.add(pPorcentaje3, BorderLayout.CENTER);
 		pPorcentaje3.add(Box.createVerticalGlue());

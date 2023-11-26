@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import ventanas.VentanaSobres;
+import ventanas.Tienda;
 
 public class Compra {
 	
@@ -38,9 +39,10 @@ public class Compra {
 					new VentanaSobres(ventana, datos, numCartasPorSobre, usuario);
 					monedasUsuario = usuario.getMonedas() - Integer.parseInt(lPrecioSobre.getText());
 					usuario.setMonedas(monedasUsuario);
+					((Tienda)ventana).lMonedas.setText(usuario.getMonedas() + "");
+					((Tienda)ventana).lMonedas.repaint();
 				}
-				//usuario.getMonedas() = usuario.getMonedas() - Integer.parseInt(lPrecioSobre.getText());
-			}else if(lNombreSobre.getText() == ("Megasobre")) {
+			} else if(lNombreSobre.getText() == ("Megasobre")) {
 				numCartasPorSobre = 3;
 				int monedasRestantes = monedas - Integer.parseInt(lPrecioSobre.getText());
 				if (monedasRestantes < 0) {
@@ -49,6 +51,8 @@ public class Compra {
 					new VentanaSobres(ventana, datos, numCartasPorSobre, usuario);
 					monedasUsuario = usuario.getMonedas() - Integer.parseInt(lPrecioSobre.getText());
 					usuario.setMonedas(monedasUsuario);
+					((Tienda)ventana).lMonedas.setText(usuario.getMonedas() + "");
+					((Tienda)ventana).lMonedas.repaint();
 				}
 			}else if(lNombreSobre.getText() == ("Sobre Oro Premium")) {
 				numCartasPorSobre = 2;
@@ -59,6 +63,8 @@ public class Compra {
 					new VentanaSobres(ventana, datos, numCartasPorSobre, usuario);
 					monedasUsuario = usuario.getMonedas() - Integer.parseInt(lPrecioSobre.getText());
 					usuario.setMonedas(monedasUsuario);
+					((Tienda)ventana).lMonedas.setText(usuario.getMonedas() + "");
+					((Tienda)ventana).lMonedas.repaint();
 				}
 			}else {
 				numCartasPorSobre = 1;
@@ -69,6 +75,8 @@ public class Compra {
 					new VentanaSobres(ventana, datos, numCartasPorSobre, usuario);
 					monedasUsuario = usuario.getMonedas() - Integer.parseInt(lPrecioSobre.getText());
 					usuario.setMonedas(monedasUsuario);
+					((Tienda)ventana).lMonedas.setText(usuario.getMonedas() + "");
+					((Tienda)ventana).lMonedas.repaint();
 				}
 			}									
 		}
