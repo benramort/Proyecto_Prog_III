@@ -25,6 +25,7 @@ public class Compra {
 	
 	public void gestionarCompra() {
 		int numCartasPorSobre = 0;
+		int monedasUsuario = 0;
 		int monedas = usuario.getMonedas();
 		int respuesta = JOptionPane.showConfirmDialog(lNombreSobre, "¿Seguro que quieres comprar este sobre??", "Confirmar compra", JOptionPane.YES_NO_OPTION);
 		if(respuesta == JOptionPane.OK_OPTION) {
@@ -35,6 +36,8 @@ public class Compra {
 					 JOptionPane.showMessageDialog(lNombreSobre, "No tienes monedas suficientes", "Error", JOptionPane.ERROR_MESSAGE);
 				} else {
 					new VentanaSobres(ventana, datos, numCartasPorSobre, usuario);
+					monedasUsuario = usuario.getMonedas() - Integer.parseInt(lPrecioSobre.getText());
+					usuario.setMonedas(monedasUsuario);
 				}
 				//usuario.getMonedas() = usuario.getMonedas() - Integer.parseInt(lPrecioSobre.getText());
 			}else if(lNombreSobre.getText() == ("Megasobre")) {
@@ -44,6 +47,8 @@ public class Compra {
 					 JOptionPane.showMessageDialog(lNombreSobre, "No tienes monedas suficientes", "Error", JOptionPane.ERROR_MESSAGE);
 				}else {
 					new VentanaSobres(ventana, datos, numCartasPorSobre, usuario);
+					monedasUsuario = usuario.getMonedas() - Integer.parseInt(lPrecioSobre.getText());
+					usuario.setMonedas(monedasUsuario);
 				}
 			}else if(lNombreSobre.getText() == ("Sobre Oro Premium")) {
 				numCartasPorSobre = 2;
@@ -52,6 +57,8 @@ public class Compra {
 					 JOptionPane.showMessageDialog(lNombreSobre, "No tienes monedas suficientes", "Error", JOptionPane.ERROR_MESSAGE);
 				}else {
 					new VentanaSobres(ventana, datos, numCartasPorSobre, usuario);
+					monedasUsuario = usuario.getMonedas() - Integer.parseInt(lPrecioSobre.getText());
+					usuario.setMonedas(monedasUsuario);
 				}
 			}else {
 				numCartasPorSobre = 1;
@@ -60,6 +67,8 @@ public class Compra {
 					 JOptionPane.showMessageDialog(lNombreSobre, "No tienes monedas suficientes", "Error", JOptionPane.ERROR_MESSAGE);
 				}else {
 					new VentanaSobres(ventana, datos, numCartasPorSobre, usuario);
+					monedasUsuario = usuario.getMonedas() - Integer.parseInt(lPrecioSobre.getText());
+					usuario.setMonedas(monedasUsuario);
 				}
 			}									
 		}
