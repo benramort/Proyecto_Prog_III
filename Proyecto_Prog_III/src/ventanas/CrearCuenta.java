@@ -113,14 +113,15 @@ public class CrearCuenta extends JFrame {
 					public void run() {
 						String contrasena = String.valueOf(pfContrasena.getPassword());
 						String confirmarContrasena = String.valueOf(pfContrasena2.getPassword());
-						String patron = "[a-zA-Z0-9]";
+						String patron1 = "[a-zA-Z]{6,}";
+						String patron2 = "[0-9]{6,}";
 						if(!contrasena.isEmpty() && !confirmarContrasena.isEmpty() && contrasena.equals(confirmarContrasena)) {
 							try {
 								Datos datos;
 								datos = DatosFactory.getDatos();
 								if(datos.comprobarUsuario(tfNombre.getText()) == null) {
 									if(contrasena.length() >= 6 && contrasena.length() <= 16) {
-//										if(Pattern.matches(patron, contrasena)) {
+										if(Pattern.matches(patron1, contrasena) && Pattern.matches(patron2, contrasena)) {
 											Usuario usuario = new Usuario(tfNombre.getText(), String.valueOf( pfContrasena.getPassword()), datos, 100000);
 											usuario.getCartas().put(new Carta(1), 0);
 											usuario.getCartas().put(new Carta(2), 0);
@@ -133,10 +134,10 @@ public class CrearCuenta extends JFrame {
 //										}	
 										
 										dispose();
-//										} else {
-//											lIncorrecto.setText("La contraseña debe contener letras y números");
-//											lIncorrecto.setVisible(true);
-//										}
+										} else {
+											lIncorrecto.setText("La contraseña debe contener letras y números");
+											lIncorrecto.setVisible(true);
+										}
 
 									} else {
 										lIncorrecto.setText("La contraseña debe tener entre 6 y 16 caracteres");
