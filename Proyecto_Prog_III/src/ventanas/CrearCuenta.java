@@ -117,18 +117,29 @@ public class CrearCuenta extends JFrame {
 								Datos datos;
 								datos = DatosFactory.getDatos();
 								if(datos.comprobarUsuario(tfNombre.getText()) == null) {
-									Usuario usuario = new Usuario(tfNombre.getText(), String.valueOf( pfContrasena.getPassword()), datos, 100000);
-									usuario.getCartas().put(new Carta(1), 0);
-									usuario.getCartas().put(new Carta(2), 0);
-									usuario.getCartas().put(new Carta(4), 0);
-									usuario.getCartas().put(new Carta(5), 0);
-									usuario.getCartas().put(new Carta(6), 0);
-									new Album(null, usuario, datos);
-//								for (Carta c: usuario.getCartas().keySet()) {
-//									System.out.println(c.toString() + usuario.getCartas().get(c));
-//								}	
-								
-								dispose();	
+									if(contrasena.length() >= 6 && contrasena.length() <= 16) {
+										if(contrasena.contains("1") || contrasena.contains("2") || contrasena.contains("3") || contrasena.contains("4") || contrasena.contains("5") || contrasena.contains("6") || contrasena.contains("7") || contrasena.contains("8") || contrasena.contains("9") || contrasena.contains("0") && contrasena.matches("abcdefghijklmnopqrstuvwxyz")) {
+											Usuario usuario = new Usuario(tfNombre.getText(), String.valueOf( pfContrasena.getPassword()), datos, 100000);
+											usuario.getCartas().put(new Carta(1), 0);
+											usuario.getCartas().put(new Carta(2), 0);
+											usuario.getCartas().put(new Carta(4), 0);
+											usuario.getCartas().put(new Carta(5), 0);
+											usuario.getCartas().put(new Carta(6), 0);
+											new Album(null, usuario, datos);
+//										for (Carta c: usuario.getCartas().keySet()) {
+//											System.out.println(c.toString() + usuario.getCartas().get(c));
+//										}	
+										
+										dispose();
+										} else {
+											lIncorrecto.setText("La contraseña debe contener letras y números");
+											lIncorrecto.setVisible(true);
+										}
+
+									} else {
+										lIncorrecto.setText("La contraseña debe tener entre 6 y 16 caracteres");
+										lIncorrecto.setVisible(true);
+									}
 								} else {
 									lIncorrecto.setText("Ese nombre de usario ya existe");
 									lIncorrecto.setVisible(true);
