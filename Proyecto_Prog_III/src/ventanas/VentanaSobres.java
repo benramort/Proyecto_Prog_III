@@ -62,8 +62,10 @@ public class VentanaSobres extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				((Tienda)ventanaAnterior).lMonedas.repaint();
+				System.out.println("cerrando ventana");
+				System.out.println(usuario.getMonedas());
 				dispose();
-				repaint();
 			}
 		});
 	
