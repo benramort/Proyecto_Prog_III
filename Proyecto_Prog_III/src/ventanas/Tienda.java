@@ -121,7 +121,7 @@ public class Tienda extends JFrame {
 
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					Compra compra = new Compra(lNombreSobre, datos, usuario, Tienda.this);
+					Compra compra = new Compra(lNombreSobre, lPrecioSobre, datos, usuario, Tienda.this);
 					compra.gestionarCompra();
 				}
 			});
