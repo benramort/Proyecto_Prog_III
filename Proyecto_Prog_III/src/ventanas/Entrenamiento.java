@@ -8,13 +8,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.*;
 
 import comportamientos.Carta;
 import comportamientos.CartaAEntrenar;
 import comportamientos.Datos;
-import comportamientos.Ficheros;
 import comportamientos.ModoIdle;
 import comportamientos.Usuario;
 
@@ -37,6 +38,8 @@ private static final long serialVersionUID = 1L;
 	JLabel lMonedasGeneradas2;
 	JLabel lMonedasPorMinuto2;
 	
+	JPanel flowLayoutCartasH;
+	
 	public Entrenamiento(JFrame ventanaAnterior, Usuario usuario, Datos datos) {
 		this.usuario = usuario;
 		this.datos = datos;
@@ -53,7 +56,7 @@ private static final long serialVersionUID = 1L;
 		JPanel pTextos = new JPanel();
 		JPanel pCartas = new JPanel();
 		JPanel blCentro = new JPanel();
-		JPanel flowLayoutCartasH = new JPanel();
+		flowLayoutCartasH = new JPanel();
 		JPanel boxLayoutCartasV = new JPanel();
 		JPanel pBotonAlbum = new JPanel();
 		JPanel pBotonEntrenar = new JPanel();
@@ -162,6 +165,8 @@ private static final long serialVersionUID = 1L;
 			public void actionPerformed(ActionEvent e) {
 				bRecogerMonedas.setVisible(false);
 				usuario.setMonedas(usuario.getMonedas() + modoIdle.getMonedasGeneradas());
+				lMonedasGeneradas2.setText("0");
+				lMonedasGeneradas2.repaint();
 				bEntrenar.setVisible(true);						
 				modoIdle.setGenerarMonedasCarta1(false);
 				modoIdle.setGenerarMonedasCarta2(false);
@@ -210,6 +215,22 @@ private static final long serialVersionUID = 1L;
 						new VentanaSeleccion(Entrenamiento.this, usuario, datos, 3);
 					}
 				});
+			}
+		});
+		
+		bAlbum.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				((Album) ventanaAnterior).lMonedasAlbum.setText(String.valueOf(usuario.getMonedas()));
+			}
+		});
+
+		addWindowListener(new WindowAdapter() {
+
+			@Override
+			public void windowClosing(WindowEvent e) {
+				((Album) ventanaAnterior).lMonedasAlbum.setText(String.valueOf(usuario.getMonedas()));
 			}
 		});
 

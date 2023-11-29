@@ -28,7 +28,6 @@ public class Usuario {
 		this.contrasena = contrasena;
 		this.monedas = monedas;
 		this.cartas = cartas;
-		
 	}
 
 

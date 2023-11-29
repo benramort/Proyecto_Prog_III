@@ -83,23 +83,36 @@ public class Ficheros implements Datos {
 		}
 		return null;
 	}
-	//9045
+	
+	@Override
+	public Usuario comprobarUsuario(String nombre) {
+		if(cargarUsuario(nombre) == null) {
+			return null;
+		} else {
+			return cargarUsuario(nombre);
+		}
+	}
+
 	@Override
 	public void guardarUsuario(Usuario usuario) { //Esto funciona
 //		boolean existeUsuario = false;
-		System.out.println(usuarios.size());
-		for (int i=0; i<usuarios.size(); i++) {
-			Usuario u = usuarios.get(i);
-			System.out.println(i+1+"/"+usuarios.size());
-			if (u == usuario) {
-				usuarios.remove(i);
-				System.out.println("Monedas del usuario"+usuario.getMonedas());
-				System.out.println("Usuario eliminado");
-//				usuarios.add(usuario);
+		try {
+			System.out.println(usuarios.size());
+			for (int i=0; i<usuarios.size(); i++) {
+				Usuario u = usuarios.get(i);
+				System.out.println(i + 1 + "/" + usuarios.size());
+				if (u == usuario) {
+					usuarios.remove(i);
+					System.out.println("Monedas del usuario"+usuario.getMonedas());
+					System.out.println("Usuario eliminado");
+//					usuarios.add(usuario);
+				}
 			}
+			usuarios.add(usuario);
+			System.out.println(usuarios);
+		} catch (NullPointerException ex) {
+			ex.printStackTrace();
 		}
-		usuarios.add(usuario);
-		System.out.println(usuarios);
 		guardarUsuarios();
 		
 	}
