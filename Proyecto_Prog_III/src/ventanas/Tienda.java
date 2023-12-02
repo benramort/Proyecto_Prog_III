@@ -27,6 +27,8 @@ public class Tienda extends JFrame {
 	Datos datos;
 	Usuario usuario;
 
+	public JLabel lMonedas;
+	
 	public Tienda (JFrame ventanaAnterior, Usuario usuario, Datos datos) {
 		List<String> nombres = new ArrayList<String>();
 		nombres.add("Sobre Oro");
@@ -64,7 +66,7 @@ public class Tienda extends JFrame {
 
 		///Crear Componentes
 		JButton btAlbum = new JButton("ÁLBUM");
-		JLabel lMonedas = new JLabel(String.valueOf(usuario.getMonedas()));
+		lMonedas = new JLabel(String.valueOf(usuario.getMonedas()));
 		JLabel lImagenMonedas = new JLabel();
 
 		ImageIcon imagen7 = new ImageIcon(getClass().getResource("/moneda.png"));
@@ -121,8 +123,9 @@ public class Tienda extends JFrame {
 
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					Compra compra = new Compra(lNombreSobre, datos, usuario, Tienda.this);
+					Compra compra = new Compra(lNombreSobre, lPrecioSobre, datos, usuario, Tienda.this);
 					compra.gestionarCompra();
+					
 				}
 			});
 
@@ -136,6 +139,9 @@ public class Tienda extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					dispose();
+					((Album) ventanaAnterior).lMonedasAlbum.setText(usuario.getMonedas() + "");
+					((Album) ventanaAnterior).cargarCartas();
+					((Album) ventanaAnterior).repaint();
 				}
 			});
 		}
@@ -144,20 +150,11 @@ public class Tienda extends JFrame {
 
 			@Override
 			public void windowClosing(WindowEvent e) {
-				System.out.println("Evento de cerrado");
+				((Album) ventanaAnterior).lMonedasAlbum.setText(usuario.getMonedas() + "");
 				((Album) ventanaAnterior).cargarCartas();
 				((Album) ventanaAnterior).repaint();
 			}
 
-		});
-		
-		btAlbum.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				((Album) ventanaAnterior).cargarCartas();
-				((Album) ventanaAnterior).repaint();				
-			}
 		});
 
 	}

