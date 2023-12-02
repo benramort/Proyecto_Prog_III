@@ -388,7 +388,6 @@ public class Album extends JFrame {
 
 //		System.out.println(pCartas.isVisible());
 		pPorcentaje.setPorcentaje((int) (cartasObtenidas/(double) usuario.getCartas().size()*100));
-		pPorcentaje.repaint();
 		pCartas.revalidate();
 		pCartas.repaint(); //El repaint hace que se borren las imagenes del grid
 		System.out.println(pCartas.getComponentCount());
