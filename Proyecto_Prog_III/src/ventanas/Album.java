@@ -20,6 +20,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.*;
 import javax.swing.border.*;
 import comportamientos.Carta;
+import comportamientos.CartaAEntrenar;
 import comportamientos.CartaVacia;
 import comportamientos.Datos;
 import comportamientos.Saga;
@@ -248,7 +249,8 @@ public class Album extends JFrame {
 						
 						@Override
 						public void run() {
-							new Entrenamiento(Album.this, usuario, datos);
+							new Entrenamiento(
+									Album.this, usuario, datos);
 						}
 					});
 				}

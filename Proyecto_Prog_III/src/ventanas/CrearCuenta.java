@@ -109,6 +109,7 @@ public class CrearCuenta extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SwingUtilities.invokeLater(new Runnable() {
+					@SuppressWarnings("unused")
 					@Override
 					public void run() {
 						String contrasena = String.valueOf(pfContrasena.getPassword());
@@ -121,13 +122,14 @@ public class CrearCuenta extends JFrame {
 								datos = DatosFactory.getDatos();
 								if(datos.comprobarUsuario(tfNombre.getText()) == null) {
 									if(contrasena.length() >= 6 && contrasena.length() <= 16) {
-										if(Pattern.matches(patron1, contrasena) && Pattern.matches(patron2, contrasena)) {
+//										if(Pattern.matches(patron1, contrasena) && Pattern.matches(patron2, contrasena)) {
+										if (true) {
 											Usuario usuario = new Usuario(tfNombre.getText(), String.valueOf( pfContrasena.getPassword()), datos, 100000);
-											usuario.getCartas().put(new Carta(1), 0);
-											usuario.getCartas().put(new Carta(2), 0);
-											usuario.getCartas().put(new Carta(4), 0);
-											usuario.getCartas().put(new Carta(5), 0);
-											usuario.getCartas().put(new Carta(6), 0);
+//											usuario.getCartas().put(new Carta(1), 0);
+//											usuario.getCartas().put(new Carta(2), 0);
+//											usuario.getCartas().put(new Carta(4), 0);
+//											usuario.getCartas().put(new Carta(5), 0);
+//											usuario.getCartas().put(new Carta(6), 0);
 											new Album(null, usuario, datos);
 //										for (Carta c: usuario.getCartas().keySet()) {
 //											System.out.println(c.toString() + usuario.getCartas().get(c));
