@@ -8,13 +8,14 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 import comportamientos.Saga;
+import comportamientos.Usuario;
 
 public class Mercado extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	
 
-	public Mercado(JFrame ventanaAnterior) {
+	public Mercado(JFrame ventanaAnterior, Usuario usuario) {
 		//Formato ventana
 		setTitle("Mercado");
 		setSize(1500,1000);
@@ -63,7 +64,7 @@ public class Mercado extends JFrame {
 		
 		//Crear componentes
 		JButton bBotonHome = new JButton("ÁLBUM");
-		JLabel lMonedas = new JLabel("XXXXXXXXXX");
+		JLabel lMonedas = new JLabel(usuario.getMonedas() + "");
 		JLabel lImagenMonedas = new JLabel();
 		JTextField tfBuscar = new JTextField("Buscar:");
 		JLabel lPrecioMin = new JLabel("Precio mínimo: ");

@@ -187,10 +187,6 @@ public class Album extends JFrame {
 		
 		pBuscar.add(pBuscarSuperior);
 		pBuscar.add(tfBuscar);
-		pBuscar.add(Box.createVerticalStrut(20));
-		pBuscar.add(pPrecioMin);
-		pBuscar.add(Box.createVerticalStrut(10));
-		pBuscar.add(pPrecioMax);
 		pBuscar.add(Box.createVerticalStrut(10));
 		pBuscar.add(pSaga);
 		pBuscarSuperior.add(pBotonCerrarFiltros, BorderLayout.EAST);
@@ -263,7 +259,7 @@ public class Album extends JFrame {
 					
 					@Override
 					public void run() {
-						new Mercado(Album.this);
+						new Mercado(Album.this, usuario);
 					}
 				});
 			}
