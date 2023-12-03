@@ -26,9 +26,9 @@ public class Entrenamiento extends JFrame{
 */
 private static final long serialVersionUID = 1L;
 
-	CartaEntrenando cartaEnt1 = new CartaEntrenando(new CartaAEntrenar(), 1);
-	CartaEntrenando cartaEnt2 = new CartaEntrenando(new CartaAEntrenar(), 2);
-	CartaEntrenando cartaEnt3 = new CartaEntrenando(new CartaAEntrenar(), 3);
+	CartaEntrenando cartaEnt1 = new CartaEntrenando(new CartaAEntrenar());
+	CartaEntrenando cartaEnt2 = new CartaEntrenando(new CartaAEntrenar());
+	CartaEntrenando cartaEnt3 = new CartaEntrenando(new CartaAEntrenar());
 	Datos datos;
 	Usuario usuario;
 	ModoIdle modoIdle;
@@ -268,17 +268,24 @@ private static final long serialVersionUID = 1L;
 	public void cambiarCartaEntrenando(Carta carta, int indice) {
 		switch (indice) {
 		case 1: 
-			cartaEnt1.setCarta(carta);
+			cartaEnt1 = new CartaEntrenando(carta);
 			break;
 		case 2: 
-			cartaEnt2.setCarta(carta);
+			cartaEnt2 = new CartaEntrenando(carta);
 			break;
 		case 3: 
-			cartaEnt3.setCarta(carta);
+			cartaEnt3 = new CartaEntrenando(carta);
 			break;
 		default: 
 		//TODO hacer una excepcion
 		}
+		flowLayoutCartasH.removeAll();
+		flowLayoutCartasH.add(cartaEnt1);
+		flowLayoutCartasH.add(cartaEnt2);
+		flowLayoutCartasH.add(cartaEnt3);
+//		flowLayoutCartasH.add(new JLabel("Hol"));
+		flowLayoutCartasH.revalidate();
+		flowLayoutCartasH.repaint();
 		repaint();
 		bEntrenar.setEnabled(true);
 		System.out.println(cartaEnt1.getCarta());

@@ -20,6 +20,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.*;
 import javax.swing.border.*;
 import comportamientos.Carta;
+import comportamientos.CartaAEntrenar;
 import comportamientos.CartaVacia;
 import comportamientos.Datos;
 import comportamientos.Saga;
@@ -244,7 +245,8 @@ public class Album extends JFrame {
 						
 						@Override
 						public void run() {
-							new Entrenamiento(Album.this, usuario, datos);
+							new Entrenamiento(
+									Album.this, usuario, datos);
 						}
 					});
 				}
@@ -384,7 +386,6 @@ public class Album extends JFrame {
 
 //		System.out.println(pCartas.isVisible());
 		pPorcentaje.setPorcentaje((int) (cartasObtenidas/(double) usuario.getCartas().size()*100));
-		pPorcentaje.repaint();
 		pCartas.revalidate();
 		pCartas.repaint(); //El repaint hace que se borren las imagenes del grid
 		System.out.println(pCartas.getComponentCount());

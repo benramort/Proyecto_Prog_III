@@ -109,6 +109,7 @@ public class CrearCuenta extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SwingUtilities.invokeLater(new Runnable() {
+					@SuppressWarnings("unused")
 					@Override
 					public void run() {
 						String contrasena = String.valueOf(pfContrasena.getPassword());
@@ -119,12 +120,15 @@ public class CrearCuenta extends JFrame {
 								datos = DatosFactory.getDatos();
 								if(datos.comprobarUsuario(tfNombre.getText()) == null) {
 									if(contrasena.length() >= 6 && contrasena.length() <= 16) {
+//										if(Pattern.matches(patron1, contrasena) && Pattern.matches(patron2, contrasena)) {
+										if (true) {
+
 											Usuario usuario = new Usuario(tfNombre.getText(), String.valueOf( pfContrasena.getPassword()), datos, 100000);
-											usuario.getCartas().put(new Carta(1), 0);
-											usuario.getCartas().put(new Carta(2), 0);
-											usuario.getCartas().put(new Carta(4), 0);
-											usuario.getCartas().put(new Carta(5), 0);
-											usuario.getCartas().put(new Carta(6), 0);
+//											usuario.getCartas().put(new Carta(1), 0);
+//											usuario.getCartas().put(new Carta(2), 0);
+//											usuario.getCartas().put(new Carta(4), 0);
+//											usuario.getCartas().put(new Carta(5), 0);
+//											usuario.getCartas().put(new Carta(6), 0);
 											new Album(null, usuario, datos);
 //										for (Carta c: usuario.getCartas().keySet()) {
 //											System.out.println(c.toString() + usuario.getCartas().get(c));
@@ -139,6 +143,7 @@ public class CrearCuenta extends JFrame {
 									lIncorrecto.setText("Ese nombre de usario ya existe");
 									lIncorrecto.setVisible(true);
 								}
+								}
 							} catch (DataException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -147,20 +152,12 @@ public class CrearCuenta extends JFrame {
 							lIncorrecto.setText("Las dos contraseñas deben de ser iguales");
 							lIncorrecto.setVisible(true);
 						}
-							
-						
-									
-
 					}
 				});
-				
 			}
 		});
 		char caracter = pfContrasena.getEchoChar();
 
-		
-		
-		
 		//https://www.youtube.com/shorts/pv5ubFk9JfY
 		cbMostrarContrasena.addActionListener(new ActionListener() {
 			
