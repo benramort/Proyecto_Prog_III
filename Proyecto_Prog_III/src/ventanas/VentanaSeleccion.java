@@ -114,6 +114,9 @@ public class VentanaSeleccion extends JFrame{
 					public void mouseClicked(MouseEvent e) {
 						cartaSeleccionada = p.getCarta();
 						((Entrenamiento) ventanaAnterior).cambiarCartaEntrenando(cartaSeleccionada, indice);
+						if(((Entrenamiento) ventanaAnterior).cartaEnt1.getCarta().getId() == 0 || ((Entrenamiento) ventanaAnterior).cartaEnt2.getCarta().getId() == 0 || ((Entrenamiento) ventanaAnterior).cartaEnt3.getCarta().getId() == 0) {
+							((Entrenamiento) ventanaAnterior).bEntrenar.setEnabled(false);
+						}
 						dispose();
 					}
 				});

@@ -247,7 +247,7 @@ private static final long serialVersionUID = 1L;
 		// });
 		// }
 		
-		if(cartaEnt1.getCarta().getId() == 0 && cartaEnt2.getCarta().getId() == 0 && cartaEnt3.getCarta().getId() == 0) {
+		if((cartaEnt1.getCarta().getId() == 0 || cartaEnt2.getCarta().getId() == 0 || cartaEnt3.getCarta().getId() == 0)) {
 			bEntrenar.setEnabled(false);
 		}
 
