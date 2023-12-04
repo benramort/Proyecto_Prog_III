@@ -15,6 +15,7 @@ import javax.swing.*;
 
 import comportamientos.Carta;
 import comportamientos.CartaAEntrenar;
+import comportamientos.CartaVacia;
 import comportamientos.Datos;
 import comportamientos.ModoIdle;
 import comportamientos.Usuario;
@@ -32,7 +33,7 @@ private static final long serialVersionUID = 1L;
 	Datos datos;
 	Usuario usuario;
 	ModoIdle modoIdle;
-	JButton bEntrenar;
+	public JButton bEntrenar;
 	
 	
 	JLabel lMonedasGeneradas2;
@@ -234,7 +235,26 @@ private static final long serialVersionUID = 1L;
 			}
 		});
 
-	
+		
+		bClear.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cartaEnt1 = new CartaEntrenando(new CartaVacia());
+				cartaEnt2 = new CartaEntrenando(new CartaVacia());
+				cartaEnt3 = new CartaEntrenando(new CartaVacia());
+				flowLayoutCartasH.removeAll();
+				flowLayoutCartasH.add(cartaEnt1);
+				flowLayoutCartasH.add(cartaEnt2);
+				flowLayoutCartasH.add(cartaEnt3);
+//				flowLayoutCartasH.add(new JLabel("Hol"));
+				flowLayoutCartasH.revalidate();
+				flowLayoutCartasH.repaint();
+				repaint();
+				bEntrenar.setEnabled(false);
+				
+			}
+		});
 	
 		// public static void main(String[] args) {
 		// SwingUtilities.invokeLater(new Runnable() {

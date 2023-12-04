@@ -79,6 +79,7 @@ public class ModoIdle extends Thread {
 					monedasGeneradas += monedasPorMinutoCarta3;
 				} else {
 					break;
+					
 				}
 			}
 			if(contadorSeg != 0 && contadorSeg % (minutosCarta1*(double)60) == (double)0) {
@@ -91,6 +92,7 @@ public class ModoIdle extends Thread {
 					}
 				});
 				if((double)cartaEnt1.getPorcentajeStamina() <= 0) {
+					cartaEnt1.setPorcentajeStamina(0);
 					generarMonedasCarta1 = false;
 					monedasPorMinutoCarta1 = 0;
 				}
@@ -104,7 +106,8 @@ public class ModoIdle extends Thread {
 						cartaEnt2.getPbStamina().setValue((int) cartaEnt2.getPorcentajeStamina());						
 					}
 				});
-				if((double)cartaEnt2.getPorcentajeStamina() == 0) {
+				if((double)cartaEnt2.getPorcentajeStamina() <= 0) {
+					cartaEnt2.setPorcentajeStamina(0);
 					generarMonedasCarta2 = false;
 					monedasPorMinutoCarta2 = 0;
 				}
@@ -118,7 +121,8 @@ public class ModoIdle extends Thread {
 						cartaEnt3.getPbStamina().setValue((int) cartaEnt3.getPorcentajeStamina());						
 					}
 				});
-				if((double)cartaEnt3.getPorcentajeStamina() == 0) {
+				if((double)cartaEnt3.getPorcentajeStamina() <= 0) {
+					cartaEnt3.setPorcentajeStamina(0);
 					generarMonedasCarta3 = false;
 					monedasPorMinutoCarta3 = 0;
 				}
@@ -126,16 +130,10 @@ public class ModoIdle extends Thread {
 
 
 			//
-//			System.out.println("Stamina - " + cartaEnt1.getCarta().getResistencia());
-//			System.out.println("MinutosCarta - " + minutosCarta3);
-//			System.out.println("ContadorSeg - " + contadorSeg);
-//			System.out.println("Resto - " + contadorSeg % (minutosCarta1*60));
-//			System.out.println("Porcentaje stamina - " + cartaEnt1.getPorcentajeStamina());
-//			System.out.println(cartaEnt2.getPorcentajeStamina());
-//			System.out.println(cartaEnt3.getPorcentajeStamina());
-//			System.out.println(generarMonedasCarta1);
-//			System.out.println(generarMonedasCarta2);
-//			System.out.println(generarMonedasCarta3);
+			
+			System.out.println(cartaEnt1.getCarta() + " - " + cartaEnt1.getPorcentajeStamina());
+			System.out.println(cartaEnt2.getCarta() + " - " + cartaEnt2.getPorcentajeStamina());
+			System.out.println(cartaEnt3.getCarta() + " - " + cartaEnt3.getPorcentajeStamina());
 
 			contadorSeg++;
 
@@ -147,7 +145,7 @@ public class ModoIdle extends Thread {
 			if ((generarMonedasCarta1 || generarMonedasCarta2 || generarMonedasCarta3) == false) break;
 
 			try {
-				Thread.sleep(1);
+				Thread.sleep((long) 0.1);
 			} catch (InterruptedException e) {
 				break;
 			}
