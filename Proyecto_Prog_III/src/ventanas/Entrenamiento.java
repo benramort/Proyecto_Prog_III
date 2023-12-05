@@ -27,9 +27,17 @@ public class Entrenamiento extends JFrame{
 */
 private static final long serialVersionUID = 1L;
 
-	CartaEntrenando cartaEnt1 = new CartaEntrenando(new CartaAEntrenar());
-	CartaEntrenando cartaEnt2 = new CartaEntrenando(new CartaAEntrenar());
-	CartaEntrenando cartaEnt3 = new CartaEntrenando(new CartaAEntrenar());
+	CartaAEntrenar carta1 = new CartaAEntrenar();
+	CartaAEntrenar carta2 = new CartaAEntrenar();
+	CartaAEntrenar carta3 = new CartaAEntrenar();
+
+	CartaEntrenando cartaIzq = new CartaEntrenando(carta1);
+	CartaEntrenando cartaCen = new CartaEntrenando(carta2);
+	CartaEntrenando cartaDer = new CartaEntrenando(carta3);
+	
+	CartaEntrenando cartaEnt1 = cartaIzq;
+	CartaEntrenando cartaEnt2 = cartaCen;
+	CartaEntrenando cartaEnt3 = cartaDer;
 	Datos datos;
 	Usuario usuario;
 	ModoIdle modoIdle;
@@ -245,9 +253,9 @@ private static final long serialVersionUID = 1L;
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				cartaEnt1 = new CartaEntrenando(new CartaAEntrenar());
-				cartaEnt2 = new CartaEntrenando(new CartaAEntrenar());
-				cartaEnt3 = new CartaEntrenando(new CartaAEntrenar());
+				cartaEnt1 = cartaIzq;
+				cartaEnt2 = cartaCen;
+				cartaEnt3 = cartaDer;
 				flowLayoutCartasH.removeAll();
 				flowLayoutCartasH.add(cartaEnt1);
 				flowLayoutCartasH.add(Box.createHorizontalStrut(50));
