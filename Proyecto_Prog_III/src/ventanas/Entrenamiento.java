@@ -41,6 +41,8 @@ private static final long serialVersionUID = 1L;
 	
 	JPanel flowLayoutCartasH;
 	
+	public JButton bClear;
+	
 	public Entrenamiento(JFrame ventanaAnterior, Usuario usuario, Datos datos) {
 		this.usuario = usuario;
 		this.datos = datos;
@@ -86,7 +88,7 @@ private static final long serialVersionUID = 1L;
 		lMonedasPorMinuto2 = new JLabel("0");
 		JLabel lImagenMonedasGeneradas = new JLabel();
 		JLabel lImagenMonedasPorMinuto = new JLabel();
-		JButton bClear = new JButton("CLEAR");
+		bClear = new JButton("CLEAR");
 		ImageIcon imagen = new ImageIcon(getClass().getResource("/moneda.png"));
 		ImageIcon imagenMoneda = new ImageIcon(imagen.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 		bEntrenar = new JButton("ENTRENAR");
@@ -173,8 +175,11 @@ private static final long serialVersionUID = 1L;
 				modoIdle.setGenerarMonedasCarta2(false);
 				modoIdle.setGenerarMonedasCarta3(false);
 				//TODO hacerlo bonito
-				//modoIdle.interrupt();
-				System.out.println(modoIdle.isInterrupted());
+				modoIdle.interrupt();
+				if(modoIdle.isInterrupted()) {
+					bClear.setEnabled(true);
+				}
+//				System.out.println("Está interrumpido? " + modoIdle.isInterrupted());
 			}
 		});
 		
@@ -240,16 +245,17 @@ private static final long serialVersionUID = 1L;
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				cartaEnt1 = new CartaEntrenando(new CartaVacia());
-				cartaEnt2 = new CartaEntrenando(new CartaVacia());
-				cartaEnt3 = new CartaEntrenando(new CartaVacia());
+				cartaEnt1 = new CartaEntrenando(new CartaAEntrenar());
+				cartaEnt2 = new CartaEntrenando(new CartaAEntrenar());
+				cartaEnt3 = new CartaEntrenando(new CartaAEntrenar());
 				flowLayoutCartasH.removeAll();
 				flowLayoutCartasH.add(cartaEnt1);
+				flowLayoutCartasH.add(Box.createHorizontalStrut(50));
 				flowLayoutCartasH.add(cartaEnt2);
+				flowLayoutCartasH.add(Box.createHorizontalStrut(50));
 				flowLayoutCartasH.add(cartaEnt3);
 //				flowLayoutCartasH.add(new JLabel("Hol"));
-				flowLayoutCartasH.revalidate();
-				flowLayoutCartasH.repaint();
+				revalidate();
 				repaint();
 				bEntrenar.setEnabled(false);
 				
@@ -268,6 +274,10 @@ private static final long serialVersionUID = 1L;
 		// }
 		
 		if((cartaEnt1.getCarta().getId() == 0 || cartaEnt2.getCarta().getId() == 0 || cartaEnt3.getCarta().getId() == 0)) {
+			bEntrenar.setEnabled(false);
+		}
+
+		if(cartaEnt1.getCarta().getId() != 0 && cartaEnt2.getCarta().getId() != 0 && cartaEnt3.getCarta().getId() != 0) {
 			bEntrenar.setEnabled(false);
 		}
 
@@ -301,11 +311,12 @@ private static final long serialVersionUID = 1L;
 		}
 		flowLayoutCartasH.removeAll();
 		flowLayoutCartasH.add(cartaEnt1);
+		flowLayoutCartasH.add(Box.createHorizontalStrut(50));
 		flowLayoutCartasH.add(cartaEnt2);
+		flowLayoutCartasH.add(Box.createHorizontalStrut(50));
 		flowLayoutCartasH.add(cartaEnt3);
 //		flowLayoutCartasH.add(new JLabel("Hol"));
-		flowLayoutCartasH.revalidate();
-		flowLayoutCartasH.repaint();
+		revalidate();
 		repaint();
 		bEntrenar.setEnabled(true);
 		System.out.println(cartaEnt1.getCarta());

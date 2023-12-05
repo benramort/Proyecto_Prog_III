@@ -36,6 +36,8 @@ public class ModoIdle extends Thread {
 	@Override
 	public void run() {
 		
+		((Entrenamiento) ventana).bClear.setEnabled(false);
+		
 		double contadorSeg = 0;
 		double minutosCarta1 = (cartaEnt1.getCarta().getResistencia()*5)/(double)100;
 		double minutosCarta2 = (cartaEnt2.getCarta().getResistencia()*5)/(double)100;
@@ -88,6 +90,9 @@ public class ModoIdle extends Thread {
 					@Override
 					public void run() {
 						cartaEnt1.setPorcentajeStamina(cartaEnt1.getPorcentajeStamina()-1);
+						if(cartaEnt1.getPorcentajeStamina() <= 0) {
+							cartaEnt1.setPorcentajeStamina(0);
+						}
 						cartaEnt1.getPbStamina().setValue((int) cartaEnt1.getPorcentajeStamina());						
 					}
 				});
@@ -95,6 +100,7 @@ public class ModoIdle extends Thread {
 					cartaEnt1.setPorcentajeStamina(0);
 					generarMonedasCarta1 = false;
 					monedasPorMinutoCarta1 = 0;
+					cartaEnt1.setPorcentajeStamina(0);
 				}
 			}
 			if(contadorSeg != 0 && contadorSeg % (minutosCarta2*(double)60) == (double)0) {
@@ -103,6 +109,9 @@ public class ModoIdle extends Thread {
 					@Override
 					public void run() {
 						cartaEnt2.setPorcentajeStamina(cartaEnt2.getPorcentajeStamina()-1);
+						if(cartaEnt2.getPorcentajeStamina() <= 0) {
+							cartaEnt2.setPorcentajeStamina(0);
+						}
 						cartaEnt2.getPbStamina().setValue((int) cartaEnt2.getPorcentajeStamina());						
 					}
 				});
@@ -110,6 +119,7 @@ public class ModoIdle extends Thread {
 					cartaEnt2.setPorcentajeStamina(0);
 					generarMonedasCarta2 = false;
 					monedasPorMinutoCarta2 = 0;
+					cartaEnt2.setPorcentajeStamina(0);
 				}
 			}
 			if(contadorSeg != 0 && contadorSeg % (minutosCarta3*(double)60) == (double)0) {
@@ -118,11 +128,13 @@ public class ModoIdle extends Thread {
 					@Override
 					public void run() {
 						cartaEnt3.setPorcentajeStamina(cartaEnt3.getPorcentajeStamina()-1);
+						if(cartaEnt3.getPorcentajeStamina() <= 0) {
+							cartaEnt3.setPorcentajeStamina(0);
+						}
 						cartaEnt3.getPbStamina().setValue((int) cartaEnt3.getPorcentajeStamina());						
 					}
 				});
 				if((double)cartaEnt3.getPorcentajeStamina() <= 0) {
-					cartaEnt3.setPorcentajeStamina(0);
 					generarMonedasCarta3 = false;
 					monedasPorMinutoCarta3 = 0;
 				}
