@@ -1,8 +1,10 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,6 +53,8 @@ private static final long serialVersionUID = 1L;
 	
 	public JButton bClear;
 	
+	public JLabel lError;
+	
 	public Entrenamiento(JFrame ventanaAnterior, Usuario usuario, Datos datos) {
 		this.usuario = usuario;
 		this.datos = datos;
@@ -71,6 +75,7 @@ private static final long serialVersionUID = 1L;
 		JPanel boxLayoutCartasV = new JPanel();
 		JPanel pBotonAlbum = new JPanel();
 		JPanel pBotonEntrenar = new JPanel();
+		JPanel pError = new JPanel();
 		//Formato contenedores
 		pInferior.setLayout(new BorderLayout());
 		pTextos.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -102,10 +107,14 @@ private static final long serialVersionUID = 1L;
 		bEntrenar = new JButton("ENTRENAR");
 		JButton bRecogerMonedas = new JButton("RECOGER MONEDAS");
 		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
+		lError = new JLabel("Todas las cartas están sin stamina");
 		//Formato componentes
 		bAlbum.setPreferredSize(new Dimension(90, 40));
 		bEntrenar.setPreferredSize(new Dimension(150, 50));
 		bRecogerMonedas.setPreferredSize(new Dimension(150, 50));
+		lError.setFont(new Font("Arial", Font.BOLD, 24));
+		lError.setForeground(Color.RED);
+		lError.setVisible(false);
 		//Añadir componentes a contenedores
 		setIconImage(logoPequeño.getImage());
 		this.getContentPane().add(pInferior, BorderLayout.SOUTH);
@@ -139,6 +148,8 @@ private static final long serialVersionUID = 1L;
 		bRecogerMonedas.setVisible(false);
 		boxLayoutCartasV.add(flowLayoutCartasH);
 		boxLayoutCartasV.add(pBotonEntrenar);
+		boxLayoutCartasV.add(pError);
+		pError.add(lError);
 		pBotonAlbum.add(bAlbum);
 		add(pBotonAlbum, BorderLayout.NORTH);
 		
@@ -253,6 +264,7 @@ private static final long serialVersionUID = 1L;
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				lError	.setVisible(false);
 				cartaEnt1 = cartaIzq;
 				cartaEnt2 = cartaCen;
 				cartaEnt3 = cartaDer;

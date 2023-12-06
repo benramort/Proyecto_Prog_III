@@ -156,6 +156,11 @@ public class ModoIdle extends Thread {
 
 			if ((generarMonedasCarta1 || generarMonedasCarta2 || generarMonedasCarta3) == false) break;
 
+			if(cartaEnt1.getPorcentajeStamina() == 0 && cartaEnt2.getPorcentajeStamina() == 0 && cartaEnt3.getPorcentajeStamina() == 0) {
+				((Entrenamiento) ventana).bEntrenar.setEnabled(false);
+				((Entrenamiento) ventana).lError.setVisible(true);
+			}
+			
 			try {
 				Thread.sleep((long) 0.1);
 			} catch (InterruptedException e) {
