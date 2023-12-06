@@ -2,6 +2,7 @@ package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ComponentAdapter;
@@ -28,6 +29,8 @@ public class VentanaSeleccion extends JFrame{
 	Carta cartaSeleccionada;
 	JFrame ventanaAnterior;
 	
+	JPanel pCartas;
+	
 	public VentanaSeleccion(JFrame ventanaAnterior, Usuario usuario, Datos datos, int indice) {
 		
 		this.ventanaAnterior = ventanaAnterior;
@@ -46,7 +49,7 @@ public class VentanaSeleccion extends JFrame{
 		
 		//Crear contenedores
 		JPanel pCentral = new JPanel();
-		JPanel pCartas = new JPanel(new GridLayout(0, 4, 0, 0));
+		pCartas = new JPanel(new GridLayout(0, 4, 0, 0));
 		//TODO espacio vertical de cartas
 		//Formato contenedores
 		
@@ -121,7 +124,18 @@ public class VentanaSeleccion extends JFrame{
 					}
 				});
 			}
-		} 
+		}
+//		Component[] cartasEntrenando = ((Entrenamiento)ventanaAnterior).flowLayoutCartasH.getComponents();
+//		Component[] panelesCarta = pCartas.getComponents();
+//		
+//		for(Component c : cartasEntrenando) {
+//			for(Component p : panelesCarta) {
+//				if(((CartaEntrenando) c).getCarta().equals(((PanelCarta) p).getCarta())){
+//					p.setVisible(false);
+//				}
+//			}
+//		}
+//		repaint();
 		
 		setVisible(true);
 		

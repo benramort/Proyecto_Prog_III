@@ -20,7 +20,6 @@ import java.awt.event.WindowEvent;
 import javax.swing.*;
 import javax.swing.border.*;
 import comportamientos.Carta;
-import comportamientos.CartaAEntrenar;
 import comportamientos.CartaVacia;
 import comportamientos.Datos;
 import comportamientos.Saga;
@@ -338,6 +337,13 @@ public class Album extends JFrame {
 			}
 		});
 		
+//		for(PanelCarta p : (PanelCarta[]) pCartas.getComponents()) {
+//			System.out.println(p.toString());
+//			if(!tfBuscar.getText().isEmpty() && !p.getCarta().getNombreInterno().toUpperCase().startsWith(tfBuscar.getText().toUpperCase())) {
+//				p.setVisible(false);
+//				repaint();
+//			}
+//		}
 
 	}
 	

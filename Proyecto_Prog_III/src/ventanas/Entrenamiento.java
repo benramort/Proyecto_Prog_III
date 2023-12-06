@@ -2,6 +2,7 @@ package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -54,6 +55,8 @@ private static final long serialVersionUID = 1L;
 	public JButton bClear;
 	
 	public JLabel lError;
+	
+	
 	
 	public Entrenamiento(JFrame ventanaAnterior, Usuario usuario, Datos datos) {
 		this.usuario = usuario;
@@ -264,7 +267,7 @@ private static final long serialVersionUID = 1L;
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				lError	.setVisible(false);
+				lError.setVisible(false);
 				cartaEnt1 = cartaIzq;
 				cartaEnt2 = cartaCen;
 				cartaEnt3 = cartaDer;
@@ -298,8 +301,10 @@ private static final long serialVersionUID = 1L;
 		}
 
 		if(cartaEnt1.getCarta().getId() != 0 && cartaEnt2.getCarta().getId() != 0 && cartaEnt3.getCarta().getId() != 0) {
+			
 			bEntrenar.setEnabled(false);
 		}
+		
 
 	}
 	
@@ -351,6 +356,8 @@ private static final long serialVersionUID = 1L;
 		lMonedasPorMinuto2.setText(modoIdle.getMonedasPorMinuto() + "");
 		lMonedasPorMinuto2.repaint();
 	}
+	
+
 	
 //	public static void main(String[] args) {
 //		SwingUtilities.invokeLater(new Runnable() {
