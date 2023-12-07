@@ -13,6 +13,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
 
@@ -56,11 +58,15 @@ private static final long serialVersionUID = 1L;
 	
 	public JLabel lError;
 	
+	List<Carta> cartasNoMostradas = new ArrayList<>();
 	
 	
 	public Entrenamiento(JFrame ventanaAnterior, Usuario usuario, Datos datos) {
 		this.usuario = usuario;
 		this.datos = datos;
+		cartasNoMostradas.add(cartaEnt1.getCarta());
+		cartasNoMostradas.add(cartaEnt2.getCarta());
+		cartasNoMostradas.add(cartaEnt3.getCarta());
 		//Formato ventana
 		setTitle("Entrenamiento");
 		setSize(1200, 650);
@@ -213,7 +219,7 @@ private static final long serialVersionUID = 1L;
 					
 					@Override
 					public void run() {
-						new VentanaSeleccion(Entrenamiento.this, usuario, datos, 1);
+						new VentanaSeleccion(Entrenamiento.this, usuario, datos, 1, cartasNoMostradas);
 					}
 				});
 			}
@@ -226,7 +232,7 @@ private static final long serialVersionUID = 1L;
 					
 					@Override
 					public void run() {
-						new VentanaSeleccion(Entrenamiento.this, usuario, datos, 2);
+						new VentanaSeleccion(Entrenamiento.this, usuario, datos, 2, cartasNoMostradas);
 					}
 				});
 			}
@@ -240,7 +246,7 @@ private static final long serialVersionUID = 1L;
 					
 					@Override
 					public void run() {
-						new VentanaSeleccion(Entrenamiento.this, usuario, datos, 3);
+						new VentanaSeleccion(Entrenamiento.this, usuario, datos, 3, cartasNoMostradas);
 					}
 				});
 			}
@@ -281,7 +287,7 @@ private static final long serialVersionUID = 1L;
 				revalidate();
 				repaint();
 				bEntrenar.setEnabled(false);
-				
+				cartasNoMostradas.clear();
 			}
 		});
 	
@@ -324,12 +330,15 @@ private static final long serialVersionUID = 1L;
 		switch (indice) {
 		case 1: 
 			cartaEnt1 = new CartaEntrenando(carta);
+			cartasNoMostradas.add(cartaEnt1.getCarta());
 			break;
 		case 2: 
 			cartaEnt2 = new CartaEntrenando(carta);
+			cartasNoMostradas.add(cartaEnt2.getCarta());
 			break;
 		case 3: 
 			cartaEnt3 = new CartaEntrenando(carta);
+			cartasNoMostradas.add(cartaEnt3.getCarta());
 			break;
 		default: 
 		//TODO hacer una excepcion

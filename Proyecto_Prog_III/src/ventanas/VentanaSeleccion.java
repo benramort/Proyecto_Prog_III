@@ -10,6 +10,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -31,7 +32,7 @@ public class VentanaSeleccion extends JFrame{
 	
 	JPanel pCartas;
 	
-	public VentanaSeleccion(JFrame ventanaAnterior, Usuario usuario, Datos datos, int indice) {
+	public VentanaSeleccion(JFrame ventanaAnterior, Usuario usuario, Datos datos, int indice, List<Carta> cartasNoMostradas) {
 		
 		this.ventanaAnterior = ventanaAnterior;
 		
@@ -104,6 +105,9 @@ public class VentanaSeleccion extends JFrame{
 		for (Carta c: usuario.getCartas().keySet()) {
 			if (usuario.getCartas().get(c) != 0) {
 				PanelCarta p = new PanelCarta(c);
+				if(cartasNoMostradas.contains(p.getCarta())) {
+					continue;
+				}
 				p.addMouseListener(hoverCartas);
 				pCartas.add(p);
 				p.setPreferredSize(new Dimension(235, 335)); //TODO espacio vertical
@@ -125,6 +129,8 @@ public class VentanaSeleccion extends JFrame{
 				});
 			}
 		}
+		
+		
 //		Component[] cartasEntrenando = ((Entrenamiento)ventanaAnterior).flowLayoutCartasH.getComponents();
 //		Component[] panelesCarta = pCartas.getComponents();
 //		
