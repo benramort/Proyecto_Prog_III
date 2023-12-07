@@ -36,6 +36,8 @@ public class ModoIdle extends Thread {
 	@Override
 	public void run() {
 		
+		((Entrenamiento) ventana).bClear.setEnabled(false);
+		
 		double contadorSeg = 0;
 		double minutosCarta1 = (cartaEnt1.getCarta().getResistencia()*5)/(double)100;
 		double minutosCarta2 = (cartaEnt2.getCarta().getResistencia()*5)/(double)100;
@@ -79,6 +81,7 @@ public class ModoIdle extends Thread {
 					monedasGeneradas += monedasPorMinutoCarta3;
 				} else {
 					break;
+					
 				}
 			}
 			if(contadorSeg != 0 && contadorSeg % (minutosCarta1*(double)60) == (double)0) {
@@ -87,12 +90,17 @@ public class ModoIdle extends Thread {
 					@Override
 					public void run() {
 						cartaEnt1.setPorcentajeStamina(cartaEnt1.getPorcentajeStamina()-1);
+						if(cartaEnt1.getPorcentajeStamina() <= 0) {
+							cartaEnt1.setPorcentajeStamina(0);
+						}
 						cartaEnt1.getPbStamina().setValue((int) cartaEnt1.getPorcentajeStamina());						
 					}
 				});
 				if((double)cartaEnt1.getPorcentajeStamina() <= 0) {
+					cartaEnt1.setPorcentajeStamina(0);
 					generarMonedasCarta1 = false;
 					monedasPorMinutoCarta1 = 0;
+					cartaEnt1.setPorcentajeStamina(0);
 				}
 			}
 			if(contadorSeg != 0 && contadorSeg % (minutosCarta2*(double)60) == (double)0) {
@@ -101,12 +109,17 @@ public class ModoIdle extends Thread {
 					@Override
 					public void run() {
 						cartaEnt2.setPorcentajeStamina(cartaEnt2.getPorcentajeStamina()-1);
+						if(cartaEnt2.getPorcentajeStamina() <= 0) {
+							cartaEnt2.setPorcentajeStamina(0);
+						}
 						cartaEnt2.getPbStamina().setValue((int) cartaEnt2.getPorcentajeStamina());						
 					}
 				});
-				if((double)cartaEnt2.getPorcentajeStamina() == 0) {
+				if((double)cartaEnt2.getPorcentajeStamina() <= 0) {
+					cartaEnt2.setPorcentajeStamina(0);
 					generarMonedasCarta2 = false;
 					monedasPorMinutoCarta2 = 0;
+					cartaEnt2.setPorcentajeStamina(0);
 				}
 			}
 			if(contadorSeg != 0 && contadorSeg % (minutosCarta3*(double)60) == (double)0) {
@@ -115,10 +128,13 @@ public class ModoIdle extends Thread {
 					@Override
 					public void run() {
 						cartaEnt3.setPorcentajeStamina(cartaEnt3.getPorcentajeStamina()-1);
+						if(cartaEnt3.getPorcentajeStamina() <= 0) {
+							cartaEnt3.setPorcentajeStamina(0);
+						}
 						cartaEnt3.getPbStamina().setValue((int) cartaEnt3.getPorcentajeStamina());						
 					}
 				});
-				if((double)cartaEnt3.getPorcentajeStamina() == 0) {
+				if((double)cartaEnt3.getPorcentajeStamina() <= 0) {
 					generarMonedasCarta3 = false;
 					monedasPorMinutoCarta3 = 0;
 				}
@@ -126,16 +142,10 @@ public class ModoIdle extends Thread {
 
 
 			//
-//			System.out.println("Stamina - " + cartaEnt1.getCarta().getResistencia());
-//			System.out.println("MinutosCarta - " + minutosCarta3);
-//			System.out.println("ContadorSeg - " + contadorSeg);
-//			System.out.println("Resto - " + contadorSeg % (minutosCarta1*60));
-//			System.out.println("Porcentaje stamina - " + cartaEnt1.getPorcentajeStamina());
-//			System.out.println(cartaEnt2.getPorcentajeStamina());
-//			System.out.println(cartaEnt3.getPorcentajeStamina());
-//			System.out.println(generarMonedasCarta1);
-//			System.out.println(generarMonedasCarta2);
-//			System.out.println(generarMonedasCarta3);
+			
+			System.out.println(cartaEnt1.getCarta() + " - " + cartaEnt1.getPorcentajeStamina());
+			System.out.println(cartaEnt2.getCarta() + " - " + cartaEnt2.getPorcentajeStamina());
+			System.out.println(cartaEnt3.getCarta() + " - " + cartaEnt3.getPorcentajeStamina());
 
 			contadorSeg++;
 
@@ -146,8 +156,13 @@ public class ModoIdle extends Thread {
 
 			if ((generarMonedasCarta1 || generarMonedasCarta2 || generarMonedasCarta3) == false) break;
 
+			if(cartaEnt1.getPorcentajeStamina() == 0 && cartaEnt2.getPorcentajeStamina() == 0 && cartaEnt3.getPorcentajeStamina() == 0) {
+				((Entrenamiento) ventana).bEntrenar.setEnabled(false);
+				((Entrenamiento) ventana).lError.setVisible(true);
+			}
+			
 			try {
-				Thread.sleep(1);
+				Thread.sleep((long) 0.1);
 			} catch (InterruptedException e) {
 				break;
 			}

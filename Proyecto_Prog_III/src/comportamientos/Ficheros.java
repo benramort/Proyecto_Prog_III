@@ -126,7 +126,7 @@ public class Ficheros implements Datos {
 			}
 			ps.close();
 		} catch (IOException e) {
-			logger.info("No se pudo guardar el usuario");
+			logger.warning("No se pudo guardar el usuario");
 		}
 	}
 	
@@ -139,7 +139,7 @@ public class Ficheros implements Datos {
 		} catch (IOException ex) {
 			logger.info("No se ha podido cargar del fichero de configuración del logger. Usando configuración por defecto");
 		}
-		logger.fine("El logger se ha configurado correctamente");
+		logger.info("El logger se ha configurado correctamente");
 	}
 	
 	public static void main(String[] args) {

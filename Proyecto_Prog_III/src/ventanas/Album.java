@@ -187,10 +187,6 @@ public class Album extends JFrame {
 		
 		pBuscar.add(pBuscarSuperior);
 		pBuscar.add(tfBuscar);
-		pBuscar.add(Box.createVerticalStrut(20));
-		pBuscar.add(pPrecioMin);
-		pBuscar.add(Box.createVerticalStrut(10));
-		pBuscar.add(pPrecioMax);
 		pBuscar.add(Box.createVerticalStrut(10));
 		pBuscar.add(pSaga);
 		pBuscarSuperior.add(pBotonCerrarFiltros, BorderLayout.EAST);
@@ -248,7 +244,8 @@ public class Album extends JFrame {
 						
 						@Override
 						public void run() {
-							new Entrenamiento(Album.this, usuario, datos);
+							new Entrenamiento(
+									Album.this, usuario, datos);
 						}
 					});
 				}
@@ -263,7 +260,7 @@ public class Album extends JFrame {
 					
 					@Override
 					public void run() {
-						new Mercado(Album.this);
+						new Mercado(Album.this, usuario);
 					}
 				});
 			}
@@ -340,6 +337,13 @@ public class Album extends JFrame {
 			}
 		});
 		
+//		for(PanelCarta p : (PanelCarta[]) pCartas.getComponents()) {
+//			System.out.println(p.toString());
+//			if(!tfBuscar.getText().isEmpty() && !p.getCarta().getNombreInterno().toUpperCase().startsWith(tfBuscar.getText().toUpperCase())) {
+//				p.setVisible(false);
+//				repaint();
+//			}
+//		}
 
 	}
 	
@@ -388,7 +392,6 @@ public class Album extends JFrame {
 
 //		System.out.println(pCartas.isVisible());
 		pPorcentaje.setPorcentaje((int) (cartasObtenidas/(double) usuario.getCartas().size()*100));
-		pPorcentaje.repaint();
 		pCartas.revalidate();
 		pCartas.repaint(); //El repaint hace que se borren las imagenes del grid
 		System.out.println(pCartas.getComponentCount());

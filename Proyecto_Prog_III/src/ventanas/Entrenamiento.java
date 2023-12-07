@@ -1,8 +1,11 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +18,7 @@ import javax.swing.*;
 
 import comportamientos.Carta;
 import comportamientos.CartaAEntrenar;
+import comportamientos.CartaVacia;
 import comportamientos.Datos;
 import comportamientos.ModoIdle;
 import comportamientos.Usuario;
@@ -26,19 +30,33 @@ public class Entrenamiento extends JFrame{
 */
 private static final long serialVersionUID = 1L;
 
-	CartaEntrenando cartaEnt1 = new CartaEntrenando(new CartaAEntrenar(), 1);
-	CartaEntrenando cartaEnt2 = new CartaEntrenando(new CartaAEntrenar(), 2);
-	CartaEntrenando cartaEnt3 = new CartaEntrenando(new CartaAEntrenar(), 3);
+	CartaAEntrenar carta1 = new CartaAEntrenar();
+	CartaAEntrenar carta2 = new CartaAEntrenar();
+	CartaAEntrenar carta3 = new CartaAEntrenar();
+
+	CartaEntrenando cartaIzq = new CartaEntrenando(carta1);
+	CartaEntrenando cartaCen = new CartaEntrenando(carta2);
+	CartaEntrenando cartaDer = new CartaEntrenando(carta3);
+	
+	CartaEntrenando cartaEnt1 = cartaIzq;
+	CartaEntrenando cartaEnt2 = cartaCen;
+	CartaEntrenando cartaEnt3 = cartaDer;
 	Datos datos;
 	Usuario usuario;
 	ModoIdle modoIdle;
-	JButton bEntrenar;
+	public JButton bEntrenar;
 	
 	
 	JLabel lMonedasGeneradas2;
 	JLabel lMonedasPorMinuto2;
 	
 	JPanel flowLayoutCartasH;
+	
+	public JButton bClear;
+	
+	public JLabel lError;
+	
+	
 	
 	public Entrenamiento(JFrame ventanaAnterior, Usuario usuario, Datos datos) {
 		this.usuario = usuario;
@@ -60,6 +78,7 @@ private static final long serialVersionUID = 1L;
 		JPanel boxLayoutCartasV = new JPanel();
 		JPanel pBotonAlbum = new JPanel();
 		JPanel pBotonEntrenar = new JPanel();
+		JPanel pError = new JPanel();
 		//Formato contenedores
 		pInferior.setLayout(new BorderLayout());
 		pTextos.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -85,16 +104,20 @@ private static final long serialVersionUID = 1L;
 		lMonedasPorMinuto2 = new JLabel("0");
 		JLabel lImagenMonedasGeneradas = new JLabel();
 		JLabel lImagenMonedasPorMinuto = new JLabel();
-		JButton bClear = new JButton("CLEAR");
+		bClear = new JButton("CLEAR");
 		ImageIcon imagen = new ImageIcon(getClass().getResource("/moneda.png"));
 		ImageIcon imagenMoneda = new ImageIcon(imagen.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 		bEntrenar = new JButton("ENTRENAR");
 		JButton bRecogerMonedas = new JButton("RECOGER MONEDAS");
 		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
+		lError = new JLabel("Todas las cartas están sin stamina");
 		//Formato componentes
 		bAlbum.setPreferredSize(new Dimension(90, 40));
 		bEntrenar.setPreferredSize(new Dimension(150, 50));
 		bRecogerMonedas.setPreferredSize(new Dimension(150, 50));
+		lError.setFont(new Font("Arial", Font.BOLD, 24));
+		lError.setForeground(Color.RED);
+		lError.setVisible(false);
 		//Añadir componentes a contenedores
 		setIconImage(logoPequeño.getImage());
 		this.getContentPane().add(pInferior, BorderLayout.SOUTH);
@@ -128,6 +151,8 @@ private static final long serialVersionUID = 1L;
 		bRecogerMonedas.setVisible(false);
 		boxLayoutCartasV.add(flowLayoutCartasH);
 		boxLayoutCartasV.add(pBotonEntrenar);
+		boxLayoutCartasV.add(pError);
+		pError.add(lError);
 		pBotonAlbum.add(bAlbum);
 		add(pBotonAlbum, BorderLayout.NORTH);
 		
@@ -172,8 +197,11 @@ private static final long serialVersionUID = 1L;
 				modoIdle.setGenerarMonedasCarta2(false);
 				modoIdle.setGenerarMonedasCarta3(false);
 				//TODO hacerlo bonito
-				//modoIdle.interrupt();
-				System.out.println(modoIdle.isInterrupted());
+				modoIdle.interrupt();
+				if(modoIdle.isInterrupted()) {
+					bClear.setEnabled(true);
+				}
+//				System.out.println("Está interrumpido? " + modoIdle.isInterrupted());
 			}
 		});
 		
@@ -234,7 +262,28 @@ private static final long serialVersionUID = 1L;
 			}
 		});
 
-	
+		
+		bClear.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				lError.setVisible(false);
+				cartaEnt1 = cartaIzq;
+				cartaEnt2 = cartaCen;
+				cartaEnt3 = cartaDer;
+				flowLayoutCartasH.removeAll();
+				flowLayoutCartasH.add(cartaEnt1);
+				flowLayoutCartasH.add(Box.createHorizontalStrut(50));
+				flowLayoutCartasH.add(cartaEnt2);
+				flowLayoutCartasH.add(Box.createHorizontalStrut(50));
+				flowLayoutCartasH.add(cartaEnt3);
+//				flowLayoutCartasH.add(new JLabel("Hol"));
+				revalidate();
+				repaint();
+				bEntrenar.setEnabled(false);
+				
+			}
+		});
 	
 		// public static void main(String[] args) {
 		// SwingUtilities.invokeLater(new Runnable() {
@@ -247,9 +296,15 @@ private static final long serialVersionUID = 1L;
 		// });
 		// }
 		
-		if(cartaEnt1.getCarta().getId() == 0 && cartaEnt2.getCarta().getId() == 0 && cartaEnt3.getCarta().getId() == 0) {
+		if((cartaEnt1.getCarta().getId() == 0 || cartaEnt2.getCarta().getId() == 0 || cartaEnt3.getCarta().getId() == 0)) {
 			bEntrenar.setEnabled(false);
 		}
+
+		if(cartaEnt1.getCarta().getId() != 0 && cartaEnt2.getCarta().getId() != 0 && cartaEnt3.getCarta().getId() != 0) {
+			
+			bEntrenar.setEnabled(false);
+		}
+		
 
 	}
 	
@@ -268,17 +323,25 @@ private static final long serialVersionUID = 1L;
 	public void cambiarCartaEntrenando(Carta carta, int indice) {
 		switch (indice) {
 		case 1: 
-			cartaEnt1.setCarta(carta);
+			cartaEnt1 = new CartaEntrenando(carta);
 			break;
 		case 2: 
-			cartaEnt2.setCarta(carta);
+			cartaEnt2 = new CartaEntrenando(carta);
 			break;
 		case 3: 
-			cartaEnt3.setCarta(carta);
+			cartaEnt3 = new CartaEntrenando(carta);
 			break;
 		default: 
 		//TODO hacer una excepcion
 		}
+		flowLayoutCartasH.removeAll();
+		flowLayoutCartasH.add(cartaEnt1);
+		flowLayoutCartasH.add(Box.createHorizontalStrut(50));
+		flowLayoutCartasH.add(cartaEnt2);
+		flowLayoutCartasH.add(Box.createHorizontalStrut(50));
+		flowLayoutCartasH.add(cartaEnt3);
+//		flowLayoutCartasH.add(new JLabel("Hol"));
+		revalidate();
 		repaint();
 		bEntrenar.setEnabled(true);
 		System.out.println(cartaEnt1.getCarta());
@@ -293,6 +356,8 @@ private static final long serialVersionUID = 1L;
 		lMonedasPorMinuto2.setText(modoIdle.getMonedasPorMinuto() + "");
 		lMonedasPorMinuto2.repaint();
 	}
+	
+
 	
 //	public static void main(String[] args) {
 //		SwingUtilities.invokeLater(new Runnable() {
