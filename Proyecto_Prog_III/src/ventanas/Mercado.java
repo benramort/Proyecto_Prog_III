@@ -139,20 +139,15 @@ public class Mercado extends JFrame {
 		pInferior.add(botonVender);
 		
 		
-		for (int i = 0; i < 10 ; i++) {
-			venta.setCarta(datos.getModeloCartas().get(r.nextInt(datos.getModeloCartas().size())));
-			venta.setPrecio(r.nextInt(200000, 1250000));
-			venta.setUsuario(datos.getUsuarios().get(r.nextInt(datos.getUsuarios().size())));
-			ventas.add(venta);
-			
-		}
-		
 		String[] cabeceras = {"Carta", "Precio", "Usuario"};
 		DefaultTableModel modeloTabla = new DefaultTableModel(null, cabeceras);
 		for(Venta v : ventas) {
-			ImageIcon imagen = v.getCarta().getRecursoGrafico();
-			modeloTabla.addRow(new Object[] {new JLabel(new ImageIcon(imagen.getImage().getScaledInstance(235, 335, Image.SCALE_DEFAULT))), v.getPrecio(), v.getUsuario().getNombre()});
+			ImageIcon imagen = datos.getModeloCartas().get(r.nextInt(datos.getModeloCartas().size())).getRecursoGrafico();
+			modeloTabla.addRow(new Object[] {new JLabel(new ImageIcon(imagen.getImage().getScaledInstance(235, 335, Image.SCALE_DEFAULT))), r.nextInt(200000, 1250000), datos.getUsuarios().get(r.nextInt(datos.getUsuarios().size()))});
 		}
+		
+		//Para poner imágenes en una tabla nos hemos basado ene ste vídeo:
+		//https://www.youtube.com/watch?v=oLksi_fsRHo&t=567s
 		JTable jTable = new JTable();
 		JScrollPane spTabla = new JScrollPane(jTable);
 		spTabla.setPreferredSize(new Dimension(500, 500));
