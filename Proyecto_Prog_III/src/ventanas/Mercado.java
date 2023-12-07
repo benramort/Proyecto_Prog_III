@@ -9,6 +9,8 @@ import java.util.Random;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import comportamientos.Datos;
 import comportamientos.Saga;
@@ -44,7 +46,6 @@ public class Mercado extends JFrame {
 		JPanel pPrecio1 = new JPanel();
 		JPanel pPrecio2 = new JPanel();
 		JPanel pSaga = new JPanel();
-		JPanel pTabla = new JPanel();
 		//Formato contenedores
 		Border bordePanelIzquierdo = BorderFactory.createLineBorder(Color.BLACK);
 		pIzquierdo.setBorder(bordePanelIzquierdo);
@@ -70,8 +71,6 @@ public class Mercado extends JFrame {
 		
 		pBotonAlbum.setLayout(new FlowLayout(FlowLayout.LEFT));
 		pInferior.setLayout(new FlowLayout(FlowLayout.CENTER));
-		
-		pTabla.setPreferredSize(new Dimension(500, 500));
 		
 		//Crear componentes
 		JButton bBotonHome = new JButton("ÁLBUM");
@@ -140,18 +139,28 @@ public class Mercado extends JFrame {
 		pInferior.add(botonVender);
 		
 		
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 10 ; i++) {
 			venta.setCarta(datos.getModeloCartas().get(r.nextInt(datos.getModeloCartas().size())));
-			venta.setPrecio(r.nextInt(200000, 2000000));
+			venta.setPrecio(r.nextInt(200000, 1250000));
 			venta.setUsuario(datos.getUsuarios().get(r.nextInt(datos.getUsuarios().size())));
 			ventas.add(venta);
+			
 		}
 		
-		JTable jTable = new JTable(new ModeloJTableCartas(ventas));
-		jTable.setPreferredSize(new Dimension(1000, 1000));
-		
-		pDerecho.add(pTabla);
-		pTabla.add(jTable);
+		String[] cabeceras = {"Carta", "Precio", "Usuario"};
+		DefaultTableModel modeloTabla = new DefaultTableModel(null, cabeceras);
+		for(Venta v : ventas) {
+			ImageIcon imagen = v.getCarta().getRecursoGrafico();
+			modeloTabla.addRow(new Object[] {new JLabel(new ImageIcon(imagen.getImage().getScaledInstance(235, 335, Image.SCALE_DEFAULT))), v.getPrecio(), v.getUsuario().getNombre()});
+		}
+		JTable jTable = new JTable();
+		JScrollPane spTabla = new JScrollPane(jTable);
+		spTabla.setPreferredSize(new Dimension(500, 500));
+		jTable.setModel(modeloTabla);
+		jTable.setRowHeight(350);
+		jTable.setPreferredSize(new Dimension(1000, 3500));
+		jTable.setDefaultRenderer(Object.class, new RendererJTableCartas());
+		pDerecho.add(spTabla);
 		
 		setVisible(true);
 		
