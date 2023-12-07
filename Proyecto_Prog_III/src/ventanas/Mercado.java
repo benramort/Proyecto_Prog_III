@@ -3,6 +3,8 @@ package ventanas;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -148,12 +150,44 @@ public class Mercado extends JFrame {
 			ventas.add(venta);
 		}
 		
+		JLabel lImagenCarta;
+		JLabel lPrecio;
+		JLabel lUsuario;
+		
 		String[] cabeceras = {"Carta", "Precio", "Usuario"};
 		DefaultTableModel modeloTabla = new DefaultTableModel(null, cabeceras);
 		for(int i = 0; i < 10; i++) {
 			ImageIcon imagen = datos.getModeloCartas().get(r.nextInt(datos.getModeloCartas().size())).getRecursoGrafico();
-			modeloTabla.addRow(new Object[] {new JLabel(new ImageIcon(imagen.getImage().getScaledInstance(235, 335, Image.SCALE_DEFAULT))), r.nextInt(200000, 1250000), datos.getUsuarios().get(r.nextInt(datos.getUsuarios().size()))});
+			lImagenCarta = new JLabel(new ImageIcon(imagen.getImage().getScaledInstance(235, 335, Image.SCALE_DEFAULT)));
+			lPrecio = new JLabel(r.nextInt(200000, 1250000) + "");
+			lPrecio.setHorizontalAlignment(JLabel.CENTER);
+			lPrecio.setFont(new Font("Arial", Font.BOLD, 20));
+			lUsuario = new JLabel(datos.getUsuarios().get(r.nextInt(datos.getUsuarios().size())) + "");
+			lUsuario.setHorizontalAlignment(JLabel.CENTER);
+			lUsuario.setFont(new Font("Arial", Font.BOLD, 20));
+			modeloTabla.addRow(new Object[] {lImagenCarta, lPrecio, lUsuario});
+			
+			lImagenCarta.addMouseListener(new MouseAdapter() {
+
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					SwingUtilities.invokeLater(new Runnable() {
+						@Override
+						public void run() {
+							int resp = JOptionPane.showConfirmDialog(Mercado.this, "¿Quieres comprar esta carta?", "Comprar", JOptionPane.YES_NO_OPTION);
+							if (resp==JOptionPane.OK_OPTION) {
+								//
+							}
+							
+						}
+					});
+				}
+				
+			});
 		}
+		
+		
+		
 		//Para insertar imagenes en una tabla nos hemos basado en este video:
 		//https://www.youtube.com/watch?v=oLksi_fsRHo&t=567s
 		JTable jTable = new JTable();
