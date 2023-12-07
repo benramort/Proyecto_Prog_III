@@ -23,6 +23,10 @@ public class JTableCartas implements TableModel {
 		}
 	}
 	
+	public JTableCartas() {
+		
+	}
+	
 	@Override
 	public int getRowCount() {
 		return cartas.size();

@@ -14,8 +14,8 @@ import java.util.logging.Logger;
 public class Ficheros implements Datos {
 	
 
-	public static List<Carta> modeloCartas = new ArrayList<>();
-	public static List<Usuario> usuarios = new ArrayList<Usuario>(); //Igual un mapa es más eficiente
+	private List<Carta> modeloCartas = new ArrayList<>();
+	private List<Usuario> usuarios = new ArrayList<Usuario>(); //Igual un mapa es más eficiente
 	
 	private static Logger logger = Logger.getLogger(Ficheros.class.getName());
 	

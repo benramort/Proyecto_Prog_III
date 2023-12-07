@@ -5,14 +5,22 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 public class BasesDeDatos implements Datos {
 	
 	private static Logger logger = Logger.getLogger(Ficheros.class.getName());
+	
+	private List<Carta> modeloCartas = new ArrayList<>();
+//	private Set<Saga> sagas = new HashSet<>(); TODO optimizar creación de sagas
 	
 	private Connection conn;
 	
@@ -31,6 +39,26 @@ public class BasesDeDatos implements Datos {
 
 	@Override
 	public void cargarModeloCartas() {
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM MODELO_CARTAS");
+			while (rs.next()) {
+				int id = rs.getInt(1);
+				String nombreInterno = rs.getString(2);
+				String nombreVisible = rs.getString(3);
+				String sagaInterno = rs.getString(4);
+				String sagaVisible = rs.getString(5);
+				int monedasPorMinuto = rs.getInt(6);
+				int resistencia = rs.getInt(7);
+				int recuperacion = rs.getInt(8);
+				Saga saga = new Saga(sagaInterno, sagaVisible);
+				Carta carta = new Carta(id, nombreInterno, nombreVisible, saga, monedasPorMinuto, resistencia, recuperacion);
+//				System.out.println(carta);
+				modeloCartas.add(carta);
+			}
+		} catch (SQLException e) {
+			logger.warning("No se han podido cargar los modelos de cartas");
+		}
 		
 	}
 
@@ -60,8 +88,7 @@ public class BasesDeDatos implements Datos {
 
 	@Override
 	public List<Carta> getModeloCartas() {
-		// TODO Auto-generated method stub
-		return null;
+		return modeloCartas;
 	}
 
 	@Override
@@ -93,6 +120,8 @@ public class BasesDeDatos implements Datos {
 	public static void main(String[] args) {
 		
 		BasesDeDatos bd = new BasesDeDatos();
+		bd.cargarModeloCartas();
+		System.out.println(bd.getModeloCartas());
 		bd.cerrarConexion();
 		
 	}
