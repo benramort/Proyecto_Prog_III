@@ -260,7 +260,7 @@ public class Album extends JFrame {
 					
 					@Override
 					public void run() {
-						new Mercado(Album.this, usuario);
+						new Mercado(Album.this, usuario, datos);
 					}
 				});
 			}

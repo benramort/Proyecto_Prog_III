@@ -3,20 +3,28 @@ package ventanas;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 
+import comportamientos.Datos;
 import comportamientos.Saga;
 import comportamientos.Usuario;
-import ventanas.JTableCartas;
+import comportamientos.Venta;
+
 
 public class Mercado extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	
-
-	public Mercado(JFrame ventanaAnterior, Usuario usuario) {
+	private Venta venta = new Venta();
+	private List<Venta> ventas = new ArrayList<>();
+	private Random r = new Random();
+	
+	public Mercado(JFrame ventanaAnterior, Usuario usuario, Datos datos) {		
 		//Formato ventana
 		setTitle("Mercado");
 		setSize(1500,1000);
@@ -36,7 +44,7 @@ public class Mercado extends JFrame {
 		JPanel pPrecio1 = new JPanel();
 		JPanel pPrecio2 = new JPanel();
 		JPanel pSaga = new JPanel();
-
+		JPanel pTabla = new JPanel();
 		//Formato contenedores
 		Border bordePanelIzquierdo = BorderFactory.createLineBorder(Color.BLACK);
 		pIzquierdo.setBorder(bordePanelIzquierdo);
@@ -62,6 +70,8 @@ public class Mercado extends JFrame {
 		
 		pBotonAlbum.setLayout(new FlowLayout(FlowLayout.LEFT));
 		pInferior.setLayout(new FlowLayout(FlowLayout.CENTER));
+		
+		pTabla.setPreferredSize(new Dimension(500, 500));
 		
 		//Crear componentes
 		JButton bBotonHome = new JButton("ÁLBUM");
@@ -129,8 +139,19 @@ public class Mercado extends JFrame {
 		
 		pInferior.add(botonVender);
 		
-		JTable jTable = new JTable(new JTableCartas());
-		pDerecho.add(jTable);
+		
+		for (int i = 0; i < 5; i++) {
+			venta.setCarta(datos.getModeloCartas().get(r.nextInt(datos.getModeloCartas().size())));
+			venta.setPrecio(r.nextInt(200000, 2000000));
+			venta.setUsuario(datos.getUsuarios().get(r.nextInt(datos.getUsuarios().size())));
+			ventas.add(venta);
+		}
+		
+		JTable jTable = new JTable(new ModeloJTableCartas(ventas));
+		jTable.setPreferredSize(new Dimension(1000, 1000));
+		
+		pDerecho.add(pTabla);
+		pTabla.add(jTable);
 		
 		setVisible(true);
 		
