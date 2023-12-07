@@ -4,62 +4,77 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 
 import comportamientos.Carta;
 import comportamientos.Datos;
 
-public class JTableCartas {
-	ArrayList<Carta> cartas;
-	Datos datos;
-	Random r = new Random();
+public class JTableCartas implements TableModel {
+	static List<Carta> cartas = new ArrayList<Carta>();
+	static Datos datos;
+	static Random r = new Random();
+	String[] cabeceras = {"Carta", "Precio", "Usuario"};
 	
-	public void crearCartas(ArrayList<Carta> cartas) {
+	public static void crearCartas() {
 		for (int i = 0; i < 5; i++) {
 			cartas.add(datos.getModeloCartas().get(r.nextInt(datos.getModeloCartas().size())));
 		}
 	}
 	
-	class MyTableModel extends AbstractTableModel {
-		private static List<Carta> cartas;
+	@Override
+	public int getRowCount() {
+		return cartas.size();
+	}
 
-		String[] cabeceras = {"Carta", "Precio", "Usuario"};
+	@Override
+	public int getColumnCount() {
+		return cabeceras.length;
+	}
+
+	@Override
+	public String getColumnName(int column) {
+		return cabeceras[column];
 		
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
+	}
+
+	@Override
+	public boolean isCellEditable(int rowIndex, int columnIndex) {
+		return false;
+	}
+
+	@Override
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		return null;
+	}
+
+	@Override
+	public Class<?> getColumnClass(int columnIndex) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+		// TODO Auto-generated method stub
 		
-		public MyTableModel(List<Carta> cartas) {
-			this.cartas = cartas;
-		}
+	}
 
-		@Override
-		public int getRowCount() {
-			return cartas.size();
-		}
+	@Override
+	public void addTableModelListener(TableModelListener l) {
+		// TODO Auto-generated method stub
+		
+	}
 
-		@Override
-		public int getColumnCount() {
-			return cabeceras.length;
-		}
+	@Override
+	public void removeTableModelListener(TableModelListener l) {
+		// TODO Auto-generated method stub
+		
+	}
 
-		@Override
-		public String getColumnName(int column) {
-			return cabeceras[column];
-			
-		}
-
-		@Override
-		public boolean isCellEditable(int rowIndex, int columnIndex) {
-			return false;
-		}
-
-		@Override
-		public Object getValueAt(int rowIndex, int columnIndex) {
-			return null;
-		}
-
+	public static void main(String[] args) {
+		crearCartas();
 	}
 }
 

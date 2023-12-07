@@ -128,7 +128,9 @@ public class Mercado extends JFrame {
 		pSaga.add(cbSelSaga);
 		
 		pInferior.add(botonVender);
-		pDerecho.add(new JTableCartas());
+		
+		JTable jTable = new JTable(new JTableCartas());
+		pDerecho.add(jTable);
 		
 		setVisible(true);
 		
