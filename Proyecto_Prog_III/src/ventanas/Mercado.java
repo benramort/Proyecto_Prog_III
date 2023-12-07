@@ -9,6 +9,7 @@ import javax.swing.border.Border;
 
 import comportamientos.Saga;
 import comportamientos.Usuario;
+import ventanas.JTableCartas;
 
 public class Mercado extends JFrame {
 	
@@ -127,7 +128,7 @@ public class Mercado extends JFrame {
 		pSaga.add(cbSelSaga);
 		
 		pInferior.add(botonVender);
-		
+		pDerecho.add(new JTableCartas());
 		
 		setVisible(true);
 		
