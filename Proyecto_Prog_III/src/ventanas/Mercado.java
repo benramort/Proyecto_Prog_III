@@ -138,15 +138,23 @@ public class Mercado extends JFrame {
 		
 		pInferior.add(botonVender);
 		
+		int cartaAletaoria = r.nextInt(datos.getModeloCartas().size());
+		int precioAleatorio = r.nextInt(200000, 1250000);
+		int usuarioAleatorio = r.nextInt(datos.getUsuarios().size());
+		for (int i = 0; i < 10 ; i++) {
+			venta.setCarta(datos.getModeloCartas().get(cartaAletaoria));
+			venta.setPrecio(precioAleatorio);
+			venta.setUsuario(datos.getUsuarios().get(usuarioAleatorio));
+			ventas.add(venta);
+		}
 		
 		String[] cabeceras = {"Carta", "Precio", "Usuario"};
 		DefaultTableModel modeloTabla = new DefaultTableModel(null, cabeceras);
-		for(Venta v : ventas) {
+		for(int i = 0; i < 10; i++) {
 			ImageIcon imagen = datos.getModeloCartas().get(r.nextInt(datos.getModeloCartas().size())).getRecursoGrafico();
 			modeloTabla.addRow(new Object[] {new JLabel(new ImageIcon(imagen.getImage().getScaledInstance(235, 335, Image.SCALE_DEFAULT))), r.nextInt(200000, 1250000), datos.getUsuarios().get(r.nextInt(datos.getUsuarios().size()))});
 		}
-		
-		//Para poner imágenes en una tabla nos hemos basado ene ste vídeo:
+		//Para insertar imagenes en una tabla nos hemos basado en este video:
 		//https://www.youtube.com/watch?v=oLksi_fsRHo&t=567s
 		JTable jTable = new JTable();
 		JScrollPane spTabla = new JScrollPane(jTable);
