@@ -6,6 +6,9 @@ import java.awt.event.ActionListener;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -13,18 +16,14 @@ import java.util.Random;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.table.AbstractTableModel;
-
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-
-import comportamientos.Carta;
-
-import comportamientos.Compra;
 
 import comportamientos.Datos;
 import comportamientos.Saga;
 import comportamientos.Usuario;
 import comportamientos.Venta;
+import comportamientos.Carta;
 import comportamientos.CompraCarta;
 
 
@@ -32,7 +31,7 @@ public class Mercado extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	
-
+	JLabel lMonedas;
 
 	public Mercado(JFrame ventanaAnterior, Datos datos, Usuario usuario) {
 		Venta venta = new Venta();
@@ -85,7 +84,7 @@ public class Mercado extends JFrame {
 		
 		//Crear componentes
 		JButton bBotonHome = new JButton("ÁLBUM");
-		JLabel lMonedas = new JLabel(usuario.getMonedas() + "");
+		lMonedas = new JLabel(usuario.getMonedas() + "");
 		JLabel lImagenMonedas = new JLabel();
 		JTextField tfBuscar = new JTextField("Buscar:");
 		JLabel lPrecioMin = new JLabel("Precio mínimo: ");
@@ -149,71 +148,37 @@ public class Mercado extends JFrame {
 		
 		pInferior.add(botonVender);
 		
-
-		int cartaAletaoria = r.nextInt(datos.getModeloCartas().size());
-		int precioAleatorio = r.nextInt(200000, 1250000);
-		int usuarioAleatorio = r.nextInt(datos.getUsuarios().size());
+		AbstractTableModel modeloTabla = new ModeloJTableCartas(ventas);
 		for (int i = 0; i < 10 ; i++) {
-			venta.setCarta(datos.getModeloCartas().get(cartaAletaoria));
-			venta.setPrecio(precioAleatorio);
-			venta.setUsuario(datos.getUsuarios().get(usuarioAleatorio));
+			venta.setCarta(datos.getModeloCartas().get(r.nextInt(datos.getModeloCartas().size())));
+			venta.setPrecio(r.nextInt(200000, 1250000));
+			venta.setUsuario(datos.getUsuarios().get(r.nextInt(datos.getUsuarios().size())));
 			ventas.add(venta);
-		}
+		}			
 		
-		JLabel lImagenCarta;
-		JLabel lPrecio;
-		JLabel lUsuario;
-		
-		String[] cabeceras = {"Carta", "Precio", "Usuario"};
-		DefaultTableModel modeloTabla = new DefaultTableModel(null, cabeceras);
-		for(Venta v : ventas) {
-			ImageIcon imagen = datos.getModeloCartas().get(r.nextInt(datos.getModeloCartas().size())).getRecursoGrafico();
-			lImagenCarta = new JLabel(new ImageIcon(imagen.getImage().getScaledInstance(235, 335, Image.SCALE_DEFAULT)));
-			lPrecio = new JLabel(r.nextInt(200000, 1250000) + "");
-			lPrecio.setHorizontalAlignment(JLabel.CENTER);
-			lPrecio.setFont(new Font("Arial", Font.BOLD, 20));
-			lUsuario = new JLabel(datos.getUsuarios().get(r.nextInt(datos.getUsuarios().size())) + "");
-			lUsuario.setHorizontalAlignment(JLabel.CENTER);
-			lUsuario.setFont(new Font("Arial", Font.BOLD, 20));
-			modeloTabla.addRow(new Object[] {lImagenCarta, lPrecio, lUsuario});
-			
-			lImagenCarta.addMouseListener(new MouseAdapter() {
 
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					SwingUtilities.invokeLater(new Runnable() {
-						@Override
-						public void run() {
-
-							int resp = JOptionPane.showConfirmDialog(Mercado.this, "¿Quieres comprar esta carta?", "Comprar", JOptionPane.YES_NO_OPTION);
-							if (resp==JOptionPane.OK_OPTION) {
-								Carta cartaComprada = v.getCarta();
-								System.out.println(cartaComprada.toString());
-							}
-							
-
-//							CompraCarta compraCarta = new CompraCarta(lImagenCarta, lPrecio, datos, usuario, Mercado.this);
-//							compraCarta.gestionarCompra();
-
-						}
-					});
-				}
-				
-			});
-		}
-		
-		
-		
 		//Para insertar imagenes en una tabla nos hemos basado en este video:
 		//https://www.youtube.com/watch?v=oLksi_fsRHo&t=567s
-		JTable jTable = new JTable();
+		JTable jTable = new JTable(modeloTabla);
 		JScrollPane spTabla = new JScrollPane(jTable);
 		spTabla.setPreferredSize(new Dimension(500, 500));
-		jTable.setModel(modeloTabla);
 		jTable.setRowHeight(350);
 		jTable.setPreferredSize(new Dimension(1000, 3500));
 		jTable.setDefaultRenderer(Object.class, new RendererJTableCartas());
 		pDerecho.add(spTabla);
+		
+		jTable.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int fila = jTable.rowAtPoint(e.getPoint());
+				CompraCarta compra = new CompraCarta((Carta) ventas.get(fila).getCarta(), ventas.get(fila).getPrecio(), datos, usuario, Mercado.this);
+				compra.gestionarCompra();
+				usuario.getCartas().put((Carta) ventas.get(fila).getCarta(), usuario.getCartas().get((Carta) ventas.get(fila).getCarta()) + 1);
+				lMonedas.setText(String.valueOf(usuario.getMonedas()));
+				
+			}
+		});
 		
 		setVisible(true);
 		
@@ -221,8 +186,20 @@ public class Mercado extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				
+				((Album) ventanaAnterior).lMonedasAlbum.setText(String.valueOf(usuario.getMonedas()));
+				((Album) ventanaAnterior).cargarCartas();
+				((Album) ventanaAnterior).repaint();
+				dispose();	
+			}
+		});
+		
+		addWindowListener(new WindowAdapter() {
+
+			@Override
+			public void windowClosing(WindowEvent e) {
+				((Album) ventanaAnterior).lMonedasAlbum.setText(String.valueOf(usuario.getMonedas()));
+				((Album) ventanaAnterior).cargarCartas();
+				((Album) ventanaAnterior).repaint();
 			}
 		});
 	}
