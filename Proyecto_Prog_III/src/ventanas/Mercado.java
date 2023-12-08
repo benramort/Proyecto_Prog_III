@@ -3,10 +3,16 @@ package ventanas;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.table.AbstractTableModel;
 
+import comportamientos.Carta;
+import comportamientos.Datos;
 import comportamientos.Saga;
 import comportamientos.Usuario;
 import ventanas.JTableCartas;
@@ -16,7 +22,7 @@ public class Mercado extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 
-	public Mercado(JFrame ventanaAnterior, Usuario usuario) {
+	public Mercado(JFrame ventanaAnterior, Datos datos, Usuario usuario) {
 		//Formato ventana
 		setTitle("Mercado");
 		setSize(1500,1000);
@@ -129,7 +135,64 @@ public class Mercado extends JFrame {
 		
 		pInferior.add(botonVender);
 		
-		JTable jTable = new JTable(new JTableCartas());
+		
+		
+		List<Carta> cartas = new ArrayList<Carta>();
+		List<Carta> cartasMercado = JTableCartas.crearCartas(cartas, datos);
+		
+		class MyTableModel extends AbstractTableModel {
+			String[] cabeceras = {"Carta", "Precio", "Usuario"};
+			
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+			
+			private List<Carta> cartas;
+			
+			public MyTableModel(List<Carta> cartas) {
+				this.cartas = cartas;
+			}
+
+			@Override
+			public Object getValueAt(int row, int column) {
+				Carta c = cartas.get(row);
+				switch (column) {
+				case 0: return c.getNombreInterno();
+				case 1: return c.getMonedasPorMinuto();
+				case 2: return c.getSaga();
+				default: return null;
+				}
+			}
+
+			@Override
+			public int getRowCount() {
+				return cartas.size();
+			}
+
+			@Override
+			public int getColumnCount() {
+				return cabeceras.length;
+			}
+
+			@Override
+			public String getColumnName(int column) {
+				return cabeceras[column];
+				
+			}
+
+			@Override
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
+				return false;
+			}
+
+			@Override
+			public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+				
+			}
+			
+		}
+		JTable jTable = new JTable(new MyTableModel(cartasMercado));
 		pDerecho.add(jTable);
 		
 		setVisible(true);
