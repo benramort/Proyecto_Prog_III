@@ -14,6 +14,7 @@ import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import comportamientos.Carta;
 import comportamientos.Datos;
 import comportamientos.Saga;
 import comportamientos.Usuario;
@@ -156,7 +157,7 @@ public class Mercado extends JFrame {
 		
 		String[] cabeceras = {"Carta", "Precio", "Usuario"};
 		DefaultTableModel modeloTabla = new DefaultTableModel(null, cabeceras);
-		for(int i = 0; i < 10; i++) {
+		for(Venta v : ventas) {
 			ImageIcon imagen = datos.getModeloCartas().get(r.nextInt(datos.getModeloCartas().size())).getRecursoGrafico();
 			lImagenCarta = new JLabel(new ImageIcon(imagen.getImage().getScaledInstance(235, 335, Image.SCALE_DEFAULT)));
 			lPrecio = new JLabel(r.nextInt(200000, 1250000) + "");
@@ -176,7 +177,8 @@ public class Mercado extends JFrame {
 						public void run() {
 							int resp = JOptionPane.showConfirmDialog(Mercado.this, "¿Quieres comprar esta carta?", "Comprar", JOptionPane.YES_NO_OPTION);
 							if (resp==JOptionPane.OK_OPTION) {
-								//
+								Carta cartaComprada = v.getCarta();
+								System.out.println(cartaComprada.toString());
 							}
 							
 						}
