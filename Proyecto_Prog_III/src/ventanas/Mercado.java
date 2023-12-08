@@ -3,6 +3,7 @@ package ventanas;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -11,25 +12,32 @@ import java.util.Random;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.table.AbstractTableModel;
+
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import comportamientos.Carta;
+
+import comportamientos.Compra;
+
 import comportamientos.Datos;
 import comportamientos.Saga;
 import comportamientos.Usuario;
 import comportamientos.Venta;
+import comportamientos.CompraCarta;
 
 
 public class Mercado extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private Venta venta = new Venta();
-	private List<Venta> ventas = new ArrayList<>();
-	private Random r = new Random();
-	
-	public Mercado(JFrame ventanaAnterior, Usuario usuario, Datos datos) {		
+
+
+	public Mercado(JFrame ventanaAnterior, Datos datos, Usuario usuario) {
+		Venta venta = new Venta();
+		List<Venta> ventas = new ArrayList<>();
+		Random r = new Random();
 		//Formato ventana
 		setTitle("Mercado");
 		setSize(1500,1000);
@@ -141,6 +149,7 @@ public class Mercado extends JFrame {
 		
 		pInferior.add(botonVender);
 		
+
 		int cartaAletaoria = r.nextInt(datos.getModeloCartas().size());
 		int precioAleatorio = r.nextInt(200000, 1250000);
 		int usuarioAleatorio = r.nextInt(datos.getUsuarios().size());
@@ -175,12 +184,17 @@ public class Mercado extends JFrame {
 					SwingUtilities.invokeLater(new Runnable() {
 						@Override
 						public void run() {
+
 							int resp = JOptionPane.showConfirmDialog(Mercado.this, "¿Quieres comprar esta carta?", "Comprar", JOptionPane.YES_NO_OPTION);
 							if (resp==JOptionPane.OK_OPTION) {
 								Carta cartaComprada = v.getCarta();
 								System.out.println(cartaComprada.toString());
 							}
 							
+
+//							CompraCarta compraCarta = new CompraCarta(lImagenCarta, lPrecio, datos, usuario, Mercado.this);
+//							compraCarta.gestionarCompra();
+
 						}
 					});
 				}
