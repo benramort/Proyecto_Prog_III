@@ -18,10 +18,12 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import comportamientos.Carta;
+import comportamientos.Compra;
 import comportamientos.Datos;
 import comportamientos.Saga;
 import comportamientos.Usuario;
 import comportamientos.Venta;
+import comportamientos.CompraCarta;
 
 
 public class Mercado extends JFrame {
@@ -146,11 +148,6 @@ public class Mercado extends JFrame {
 		pInferior.add(botonVender);
 		
 
-		
-		
-		List<Carta> cartas = new ArrayList<Carta>();
-		List<Carta> cartasMercado = JTableCartas.crearCartas(cartas, datos);
-		
 		int cartaAletaoria = r.nextInt(datos.getModeloCartas().size());
 		int precioAleatorio = r.nextInt(200000, 1250000);
 		int usuarioAleatorio = r.nextInt(datos.getUsuarios().size());
@@ -185,11 +182,8 @@ public class Mercado extends JFrame {
 					SwingUtilities.invokeLater(new Runnable() {
 						@Override
 						public void run() {
-							int resp = JOptionPane.showConfirmDialog(Mercado.this, "¿Quieres comprar esta carta?", "Comprar", JOptionPane.YES_NO_OPTION);
-							if (resp==JOptionPane.OK_OPTION) {
-								//
-							}
-							
+//							CompraCarta compraCarta = new CompraCarta(lImagenCarta, lPrecio, datos, usuario, Mercado.this);
+//							compraCarta.gestionarCompra();
 						}
 					});
 				}
