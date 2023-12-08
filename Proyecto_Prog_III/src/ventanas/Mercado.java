@@ -3,6 +3,9 @@ package ventanas;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -11,18 +14,26 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.table.AbstractTableModel;
 
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 import comportamientos.Carta;
 import comportamientos.Datos;
 import comportamientos.Saga;
 import comportamientos.Usuario;
-import ventanas.JTableCartas;
+import comportamientos.Venta;
+
 
 public class Mercado extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	
 
+
 	public Mercado(JFrame ventanaAnterior, Datos datos, Usuario usuario) {
+		Venta venta = new Venta();
+		List<Venta> ventas = new ArrayList<>();
+		Random r = new Random();
 		//Formato ventana
 		setTitle("Mercado");
 		setSize(1500,1000);
@@ -42,7 +53,6 @@ public class Mercado extends JFrame {
 		JPanel pPrecio1 = new JPanel();
 		JPanel pPrecio2 = new JPanel();
 		JPanel pSaga = new JPanel();
-
 		//Formato contenedores
 		Border bordePanelIzquierdo = BorderFactory.createLineBorder(Color.BLACK);
 		pIzquierdo.setBorder(bordePanelIzquierdo);
@@ -135,65 +145,70 @@ public class Mercado extends JFrame {
 		
 		pInferior.add(botonVender);
 		
+
 		
 		
 		List<Carta> cartas = new ArrayList<Carta>();
 		List<Carta> cartasMercado = JTableCartas.crearCartas(cartas, datos);
 		
-		class MyTableModel extends AbstractTableModel {
-			String[] cabeceras = {"Carta", "Precio", "Usuario"};
-			
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-			
-			private List<Carta> cartas;
-			
-			public MyTableModel(List<Carta> cartas) {
-				this.cartas = cartas;
-			}
-
-			@Override
-			public Object getValueAt(int row, int column) {
-				Carta c = cartas.get(row);
-				switch (column) {
-				case 0: return c.getNombreInterno();
-				case 1: return c.getMonedasPorMinuto();
-				case 2: return c.getSaga();
-				default: return null;
-				}
-			}
-
-			@Override
-			public int getRowCount() {
-				return cartas.size();
-			}
-
-			@Override
-			public int getColumnCount() {
-				return cabeceras.length;
-			}
-
-			@Override
-			public String getColumnName(int column) {
-				return cabeceras[column];
-				
-			}
-
-			@Override
-			public boolean isCellEditable(int rowIndex, int columnIndex) {
-				return false;
-			}
-
-			@Override
-			public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-				
-			}
-			
+		int cartaAletaoria = r.nextInt(datos.getModeloCartas().size());
+		int precioAleatorio = r.nextInt(200000, 1250000);
+		int usuarioAleatorio = r.nextInt(datos.getUsuarios().size());
+		for (int i = 0; i < 10 ; i++) {
+			venta.setCarta(datos.getModeloCartas().get(cartaAletaoria));
+			venta.setPrecio(precioAleatorio);
+			venta.setUsuario(datos.getUsuarios().get(usuarioAleatorio));
+			ventas.add(venta);
 		}
-		JTable jTable = new JTable(new MyTableModel(cartasMercado));
-		pDerecho.add(jTable);
+		
+		JLabel lImagenCarta;
+		JLabel lPrecio;
+		JLabel lUsuario;
+		
+		String[] cabeceras = {"Carta", "Precio", "Usuario"};
+		DefaultTableModel modeloTabla = new DefaultTableModel(null, cabeceras);
+		for(int i = 0; i < 10; i++) {
+			ImageIcon imagen = datos.getModeloCartas().get(r.nextInt(datos.getModeloCartas().size())).getRecursoGrafico();
+			lImagenCarta = new JLabel(new ImageIcon(imagen.getImage().getScaledInstance(235, 335, Image.SCALE_DEFAULT)));
+			lPrecio = new JLabel(r.nextInt(200000, 1250000) + "");
+			lPrecio.setHorizontalAlignment(JLabel.CENTER);
+			lPrecio.setFont(new Font("Arial", Font.BOLD, 20));
+			lUsuario = new JLabel(datos.getUsuarios().get(r.nextInt(datos.getUsuarios().size())) + "");
+			lUsuario.setHorizontalAlignment(JLabel.CENTER);
+			lUsuario.setFont(new Font("Arial", Font.BOLD, 20));
+			modeloTabla.addRow(new Object[] {lImagenCarta, lPrecio, lUsuario});
+			
+			lImagenCarta.addMouseListener(new MouseAdapter() {
+
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					SwingUtilities.invokeLater(new Runnable() {
+						@Override
+						public void run() {
+							int resp = JOptionPane.showConfirmDialog(Mercado.this, "¿Quieres comprar esta carta?", "Comprar", JOptionPane.YES_NO_OPTION);
+							if (resp==JOptionPane.OK_OPTION) {
+								//
+							}
+							
+						}
+					});
+				}
+				
+			});
+		}
+		
+		
+		
+		//Para insertar imagenes en una tabla nos hemos basado en este video:
+		//https://www.youtube.com/watch?v=oLksi_fsRHo&t=567s
+		JTable jTable = new JTable();
+		JScrollPane spTabla = new JScrollPane(jTable);
+		spTabla.setPreferredSize(new Dimension(500, 500));
+		jTable.setModel(modeloTabla);
+		jTable.setRowHeight(350);
+		jTable.setPreferredSize(new Dimension(1000, 3500));
+		jTable.setDefaultRenderer(Object.class, new RendererJTableCartas());
+		pDerecho.add(spTabla);
 		
 		setVisible(true);
 		

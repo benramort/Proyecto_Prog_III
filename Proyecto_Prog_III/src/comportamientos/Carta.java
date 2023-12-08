@@ -55,8 +55,6 @@ public class Carta implements Comparable<Carta>{
 //		this(nombre, nombre, saga);
 //	}
 
-
-
 	public String getNombreInterno() {
 		return nombreInterno;
 	}
