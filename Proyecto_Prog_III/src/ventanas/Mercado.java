@@ -167,6 +167,8 @@ public class Mercado extends JFrame {
 		jTable.setDefaultRenderer(Object.class, new RendererJTableCartas());
 		pDerecho.add(spTabla);
 		
+		//jTable.getTableHeader().setDefaultRenderer(new RendererJTableCartas());
+		
 		jTable.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -200,6 +202,15 @@ public class Mercado extends JFrame {
 				((Album) ventanaAnterior).lMonedasAlbum.setText(String.valueOf(usuario.getMonedas()));
 				((Album) ventanaAnterior).cargarCartas();
 				((Album) ventanaAnterior).repaint();
+			}
+		});
+		
+		botonVender.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new VentaCartas(Mercado.this, usuario, datos);
+				
 			}
 		});
 	}
