@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -20,6 +21,7 @@ public class BasesDeDatos implements Datos {
 	private static Logger logger = Logger.getLogger(Ficheros.class.getName());
 	
 	private List<Carta> modeloCartas = new ArrayList<>();
+	private List<Usuario> usuarios = new ArrayList<>();
 //	private Set<Saga> sagas = new HashSet<>(); TODO optimizar creación de sagas
 	
 	private Connection conn;
@@ -64,7 +66,22 @@ public class BasesDeDatos implements Datos {
 
 	@Override
 	public void cargarUsuarios() {
-		
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM USUARIOS");
+			while (rs.next()) {
+//				int id = rs.getInt(1);
+				String nom = rs.getString(2);
+				String pass = rs.getString(3);
+				String cartasString = rs.getString(4);
+				int monedas = rs.getInt(5);
+				Map<Carta, Integer> cartas = Usuario.cargarCartas(cartasString, this);
+				Usuario usuario = new Usuario(nom, pass, this, cartas, monedas);
+				usuarios.add(usuario);
+			}
+		} catch (SQLException e) {
+			logger.warning("No se han podido cargar los modelos de cartas");
+		}
 	}
 
 	@Override
@@ -82,8 +99,7 @@ public class BasesDeDatos implements Datos {
 
 	@Override
 	public List<Usuario> getUsuarios() {
-		// TODO Auto-generated method stub
-		return null;
+		return usuarios;
 	}
 
 	@Override
@@ -121,7 +137,9 @@ public class BasesDeDatos implements Datos {
 		
 		BasesDeDatos bd = new BasesDeDatos();
 		bd.cargarModeloCartas();
+		bd.cargarUsuarios();
 		System.out.println(bd.getModeloCartas());
+		System.out.println(bd.getUsuarios());
 		bd.cerrarConexion();
 		
 	}
