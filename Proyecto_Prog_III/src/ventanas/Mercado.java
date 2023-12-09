@@ -4,19 +4,39 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
+import comportamientos.Datos;
 import comportamientos.Saga;
 import comportamientos.Usuario;
-import ventanas.JTableCartas;
+import comportamientos.Venta;
+import comportamientos.Carta;
+import comportamientos.CompraCarta;
+
 
 public class Mercado extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	
+	JLabel lMonedas;
 
-	public Mercado(JFrame ventanaAnterior, Usuario usuario) {
+	public Mercado(JFrame ventanaAnterior, Datos datos, Usuario usuario) {
+		Venta venta = new Venta();
+		List<Venta> ventas = new ArrayList<>();
+		Random r = new Random();
 		//Formato ventana
 		setTitle("Mercado");
 		setSize(1500,1000);
@@ -36,7 +56,6 @@ public class Mercado extends JFrame {
 		JPanel pPrecio1 = new JPanel();
 		JPanel pPrecio2 = new JPanel();
 		JPanel pSaga = new JPanel();
-
 		//Formato contenedores
 		Border bordePanelIzquierdo = BorderFactory.createLineBorder(Color.BLACK);
 		pIzquierdo.setBorder(bordePanelIzquierdo);
@@ -65,7 +84,7 @@ public class Mercado extends JFrame {
 		
 		//Crear componentes
 		JButton bBotonHome = new JButton("ÁLBUM");
-		JLabel lMonedas = new JLabel(usuario.getMonedas() + "");
+		lMonedas = new JLabel(usuario.getMonedas() + "");
 		JLabel lImagenMonedas = new JLabel();
 		JTextField tfBuscar = new JTextField("Buscar:");
 		JLabel lPrecioMin = new JLabel("Precio mínimo: ");
@@ -129,8 +148,39 @@ public class Mercado extends JFrame {
 		
 		pInferior.add(botonVender);
 		
-		JTable jTable = new JTable(new JTableCartas());
-		pDerecho.add(jTable);
+		AbstractTableModel modeloTabla = new ModeloJTableCartas(ventas);
+		for (int i = 0; i < 10 ; i++) {
+			venta.setCarta(datos.getModeloCartas().get(r.nextInt(datos.getModeloCartas().size())));
+			venta.setPrecio(r.nextInt(200000, 1250000));
+			venta.setUsuario(datos.getUsuarios().get(r.nextInt(datos.getUsuarios().size())));
+			ventas.add(venta);
+		}			
+		
+
+		//Para insertar imagenes en una tabla nos hemos basado en este video:
+		//https://www.youtube.com/watch?v=oLksi_fsRHo&t=567s
+		JTable jTable = new JTable(modeloTabla);
+		JScrollPane spTabla = new JScrollPane(jTable);
+		spTabla.setPreferredSize(new Dimension(500, 500));
+		jTable.setRowHeight(350);
+		jTable.setPreferredSize(new Dimension(1000, 3500));
+		jTable.setDefaultRenderer(Object.class, new RendererJTableCartas());
+		pDerecho.add(spTabla);
+		
+		//jTable.getTableHeader().setDefaultRenderer(new RendererJTableCartas());
+		
+		jTable.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int fila = jTable.rowAtPoint(e.getPoint());
+				CompraCarta compra = new CompraCarta((Carta) ventas.get(fila).getCarta(), ventas.get(fila).getPrecio(), datos, usuario, Mercado.this);
+				compra.gestionarCompra();
+				usuario.getCartas().put((Carta) ventas.get(fila).getCarta(), usuario.getCartas().get((Carta) ventas.get(fila).getCarta()) + 1);
+				lMonedas.setText(String.valueOf(usuario.getMonedas()));
+				
+			}
+		});
 		
 		setVisible(true);
 		
@@ -138,7 +188,28 @@ public class Mercado extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				((Album) ventanaAnterior).lMonedasAlbum.setText(String.valueOf(usuario.getMonedas()));
+				((Album) ventanaAnterior).cargarCartas();
+				((Album) ventanaAnterior).repaint();
+				dispose();	
+			}
+		});
+		
+		addWindowListener(new WindowAdapter() {
+
+			@Override
+			public void windowClosing(WindowEvent e) {
+				((Album) ventanaAnterior).lMonedasAlbum.setText(String.valueOf(usuario.getMonedas()));
+				((Album) ventanaAnterior).cargarCartas();
+				((Album) ventanaAnterior).repaint();
+			}
+		});
+		
+		botonVender.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new VentaCartas(Mercado.this, usuario, datos);
 				
 			}
 		});
