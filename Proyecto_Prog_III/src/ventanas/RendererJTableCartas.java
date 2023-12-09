@@ -1,7 +1,6 @@
 package ventanas;
 
 import java.awt.Component;
-import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -27,12 +26,9 @@ public class RendererJTableCartas extends DefaultTableCellRenderer{
 		if(value instanceof Carta) {
 			JLabel label = new JLabel(new ImageIcon(((Carta) value).getRecursoGrafico().getImage().getScaledInstance(235, 335, Image.SCALE_DEFAULT)));
 			return label;
-		} else {
-			JLabel label = new JLabel(value.toString());
-			label.setHorizontalAlignment(JLabel.CENTER);
-			label.setFont(new Font("Arial", Font.BOLD, 20));
-			return label;
-		}		
+		}
+		return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+		
 		
 	}
 
