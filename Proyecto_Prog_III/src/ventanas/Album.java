@@ -379,7 +379,7 @@ public class Album extends JFrame {
 				p.addMouseListener(hoverCartas);
 				pCartas.add(p);
 				p.setPreferredSize(new Dimension(235, 335)); //TODO espacio vertical
-				//						p.setOpaque(true);
+//				p.setOpaque(true);
 				p.setBackground(Color.RED);
 //				System.out.println("Cargada carta "+c.getId());
 				cartasObtenidas++;
