@@ -32,13 +32,13 @@ public class VentaCartas extends JFrame{
 	CartaAEntrenar carta2 = new CartaAEntrenar();
 	CartaAEntrenar carta3 = new CartaAEntrenar();
 
-	CartaEntrenando cartaIzq = new CartaEntrenando(carta1);
-	CartaEntrenando cartaCen = new CartaEntrenando(carta2);
-	CartaEntrenando cartaDer = new CartaEntrenando(carta3);
+	CartaVendiendo cartaIzq = new CartaVendiendo(carta1);
+	CartaVendiendo cartaCen = new CartaVendiendo(carta2);
+	CartaVendiendo cartaDer = new CartaVendiendo(carta3);
 	
-	CartaEntrenando cartaEnt1 = cartaIzq;
-	CartaEntrenando cartaEnt2 = cartaCen;
-	CartaEntrenando cartaEnt3 = cartaDer;
+	CartaVendiendo cartaEnt1 = cartaIzq;
+	CartaVendiendo cartaEnt2 = cartaCen;
+	CartaVendiendo cartaEnt3 = cartaDer;
 	Datos datos;
 	Usuario usuario;
 	
@@ -260,30 +260,30 @@ public class VentaCartas extends JFrame{
 
 	}
 	
-	public CartaEntrenando getCartaEnt1() {
+	public CartaVendiendo getCartaEnt1() {
 		return cartaEnt1;
 	}
 
-	public CartaEntrenando getCartaEnt2() {
+	public CartaVendiendo getCartaEnt2() {
 		return cartaEnt2;
 	}
 
-	public CartaEntrenando getCartaEnt3() {
+	public CartaVendiendo getCartaEnt3() {
 		return cartaEnt3;
 	}
 
 	public void cambiarCartaEntrenando(Carta carta, int indice) {
 		switch (indice) {
 		case 1: 
-			cartaEnt1 = new CartaEntrenando(carta);
+			cartaEnt1 = new CartaVendiendo(carta);
 			cartasNoMostradas.add(cartaEnt1.getCarta());
 			break;
 		case 2: 
-			cartaEnt2 = new CartaEntrenando(carta);
+			cartaEnt2 = new CartaVendiendo(carta);
 			cartasNoMostradas.add(cartaEnt2.getCarta());
 			break;
 		case 3: 
-			cartaEnt3 = new CartaEntrenando(carta);
+			cartaEnt3 = new CartaVendiendo(carta);
 			cartasNoMostradas.add(cartaEnt3.getCarta());
 			break;
 		default: 

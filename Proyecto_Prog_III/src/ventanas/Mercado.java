@@ -151,7 +151,7 @@ public class Mercado extends JFrame {
 		AbstractTableModel modeloTabla = new ModeloJTableCartas(ventas);
 		for (int i = 0; i < 10 ; i++) {
 			venta.setCarta(datos.getModeloCartas().get(r.nextInt(datos.getModeloCartas().size())));
-			venta.setPrecio(r.nextInt(200000, 1250000));
+			venta.setPrecio(r.nextInt(100, 200));
 			venta.setUsuario(datos.getUsuarios().get(r.nextInt(datos.getUsuarios().size())));
 			ventas.add(venta);
 		}			
