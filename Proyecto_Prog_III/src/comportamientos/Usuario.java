@@ -67,7 +67,7 @@ public class Usuario {
 		
 	}
 	
-	private static Map<Carta,Integer> cargarCartas(String s, Datos datos) {
+	public static Map<Carta,Integer> cargarCartas(String s, Datos datos) {
 		String[] tokens = s.split(",");
 		if (tokens.length != datos.getModeloCartas().size()) {
 			System.out.println(tokens.length);
