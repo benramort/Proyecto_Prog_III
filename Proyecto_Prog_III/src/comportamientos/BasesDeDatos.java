@@ -22,7 +22,7 @@ public class BasesDeDatos implements Datos {
 	
 	private List<Carta> modeloCartas = new ArrayList<>();
 	private List<Usuario> usuarios = new ArrayList<>();
-//	private Set<Saga> sagas = new HashSet<>(); TODO optimizar creación de sagas
+//	private Set<Saga> sagas = new HashSet<>(); TODO optimizar creación de sagasxddd
 	
 	private Connection conn;
 	
