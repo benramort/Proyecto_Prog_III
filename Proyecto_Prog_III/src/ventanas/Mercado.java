@@ -34,7 +34,7 @@ public class Mercado extends JFrame {
 	JLabel lMonedas;
 
 	public Mercado(JFrame ventanaAnterior, Datos datos, Usuario usuario) {
-		Venta venta = new Venta();
+//		Venta venta = new Venta();
 		List<Venta> ventas = new ArrayList<>();
 		Random r = new Random();
 		//Formato ventana
@@ -150,11 +150,13 @@ public class Mercado extends JFrame {
 		
 		AbstractTableModel modeloTabla = new ModeloJTableCartas(ventas);
 		for (int i = 0; i < 10 ; i++) {
+			Venta venta = new Venta();
 			venta.setCarta(datos.getModeloCartas().get(r.nextInt(datos.getModeloCartas().size())));
 			venta.setPrecio(r.nextInt(100, 200));
 			venta.setUsuario(datos.getUsuarios().get(r.nextInt(datos.getUsuarios().size())));
 			ventas.add(venta);
 		}			
+		System.out.println(ventas);
 		
 
 		//Para insertar imagenes en una tabla nos hemos basado en este video:

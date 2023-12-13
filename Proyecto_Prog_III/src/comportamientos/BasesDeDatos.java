@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -58,6 +59,7 @@ public class BasesDeDatos implements Datos {
 //				System.out.println(carta);
 				modeloCartas.add(carta);
 			}
+			stmt.close();
 		} catch (SQLException e) {
 			logger.warning("No se han podido cargar los modelos de cartas");
 		}
@@ -79,6 +81,7 @@ public class BasesDeDatos implements Datos {
 				Usuario usuario = new Usuario(nom, pass, this, cartas, monedas);
 				usuarios.add(usuario);
 			}
+			stmt.close();
 		} catch (SQLException e) {
 			logger.warning("No se han podido cargar los modelos de cartas");
 		}
@@ -115,13 +118,24 @@ public class BasesDeDatos implements Datos {
 
 	@Override
 	public Usuario cargarUsuario(String nombre) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Usuario comprobarUsuario(String nombre) {
-		// TODO Auto-generated method stub
+		try {
+			PreparedStatement prepStmt = conn.prepareStatement("SELECT * FROM USUARIOS WHERE USERNAME = ?");
+			prepStmt.setString(1, nombre);
+			ResultSet rs = prepStmt.executeQuery();
+			rs.next();
+//			int id = rs.getInt(1);
+			String nom = rs.getString(2);
+			String pass = rs.getString(3);
+			String cartasString = rs.getString(4);
+			int monedas = rs.getInt(5);
+			Map<Carta, Integer> cartas = Usuario.cargarCartas(cartasString, this);
+			Usuario usuario = new Usuario(nom, pass, this, cartas, monedas);
+			prepStmt.close();
+			return usuario;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 	
@@ -140,6 +154,7 @@ public class BasesDeDatos implements Datos {
 		bd.cargarUsuarios();
 		System.out.println(bd.getModeloCartas());
 		System.out.println(bd.getUsuarios());
+		System.out.println(bd.cargarUsuario("benat"));
 		bd.cerrarConexion();
 		
 	}

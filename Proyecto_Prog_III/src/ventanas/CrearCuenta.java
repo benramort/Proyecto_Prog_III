@@ -117,7 +117,7 @@ public class CrearCuenta extends JFrame {
 							try {
 								Datos datos;
 								datos = DatosFactory.getDatos();
-								if(datos.comprobarUsuario(tfNombre.getText()) == null) {
+								if(datos.cargarUsuario(tfNombre.getText()) == null) {
 									if(contrasena.length() >= 6 && contrasena.length() <= 16) {
 //										if(Pattern.matches(patron1, contrasena) && Pattern.matches(patron2, contrasena)) {
 										Usuario usuario = new Usuario(tfNombre.getText(), String.valueOf( pfContrasena.getPassword()), datos, 100000);

@@ -37,6 +37,7 @@ public class ModeloJTableCartas extends AbstractTableModel implements TableModel
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Venta v = ventas.get(rowIndex);
+//		System.out.println(v.getCarta());
 		switch (columnIndex) {
 			case 0: return v.getCarta();
 			case 1: return v.getPrecio();
