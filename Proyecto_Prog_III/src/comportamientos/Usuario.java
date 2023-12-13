@@ -1,6 +1,9 @@
 package comportamientos;
 
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 public class Usuario {
@@ -11,6 +14,7 @@ public class Usuario {
 	private int monedas;
 	private Map<Carta,Integer> cartas; //Las cartas se ordenan naturalmente, y se almacena el número de cartas que tiene ese usuario. Si no tiene esa carta hay que añadirla con 0
 //	private RegistroTemporal registroTemporal;
+	private Map<Carta,ZonedDateTime> cartasSinStamina = new TreeMap<>();
 
 	
 	public Usuario(String nombre, String contrasena, Datos datos, int monedas) {
@@ -93,6 +97,19 @@ public class Usuario {
 		return nombre + contrasena + cartasObtenidas + monedas;
 	}
 	
+	public void nuevaCartaSinStamina(Carta carta) {
+		cartasSinStamina.put(carta, ZonedDateTime.now());
+	}
+	
+	public void actualizarCartasSinStamina() {
+		for (Entry<Carta, ZonedDateTime> entry : cartasSinStamina.entrySet()) {
+			long minutos = entry.getValue().until(ZonedDateTime.now(), ChronoUnit.MINUTES);
+			if (minutos > entry.getKey().getRecuperacion()*20) { //1 de estamina equivale a 20 minutos
+				cartasSinStamina.remove(entry.getKey());
+			}
+		}
+	}
+	
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof Usuario) {
@@ -106,6 +123,17 @@ public class Usuario {
 	public String toString() {
 		return nombre;
 	}
+	
+//	public static void main(String[] args) {
+//		Map<Carta,ZonedDateTime> cartasSinStamina = new TreeMap<>();
+//		cartasSinStamina.put(new CartaAEntrenar(), ZonedDateTime.now());
+//		cartasSinStamina.put(new CartaVacia(), ZonedDateTime.now());
+//		System.out.println(cartasSinStamina);
+//		for (Entry<Carta, ZonedDateTime> entry : cartasSinStamina.entrySet()) {
+//			cartasSinStamina.remove(entry.getKey());
+//		}
+//		System.out.println(cartasSinStamina);
+//	}
 
 
 	

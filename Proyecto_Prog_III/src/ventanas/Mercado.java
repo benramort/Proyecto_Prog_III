@@ -96,7 +96,7 @@ public class Mercado extends JFrame {
 //		lSagas.add(new Saga("Super Mario"));
 //		lSagas.add(new Saga("God of War"));
 		JComboBox<Saga> cbSelSaga = new JComboBox<Saga>();
-		JButton botonVender = new JButton("Vender");
+		JButton botonVender = new JButton("VENDER");
 		
 		ImageIcon imagen1 = new ImageIcon(getClass().getResource("/moneda.png"));
 		ImageIcon imagenMoneda = new ImageIcon(imagen1.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
@@ -163,6 +163,7 @@ public class Mercado extends JFrame {
 		//https://www.youtube.com/watch?v=oLksi_fsRHo&t=567s
 		JTable jTable = new JTable(modeloTabla);
 		JScrollPane spTabla = new JScrollPane(jTable);
+		spTabla.getVerticalScrollBar().setUnitIncrement(20);
 		spTabla.setPreferredSize(new Dimension(500, 500));
 		jTable.setRowHeight(350);
 		jTable.setPreferredSize(new Dimension(1000, 3500));

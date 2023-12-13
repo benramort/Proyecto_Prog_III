@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
@@ -15,6 +17,7 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -37,7 +40,6 @@ public class VentanaSeleccionVender extends JFrame{
 	
 	Carta cartaSeleccionada;
 	JFrame ventanaAnterior;
-	Integer precio;
 	JPanel pCartas;
 	
 	public VentanaSeleccionVender(JFrame ventanaAnterior, Usuario usuario, Datos datos, int indice, List<Carta> cartasNoMostradas) {
@@ -59,6 +61,9 @@ public class VentanaSeleccionVender extends JFrame{
 		//Crear contenedores
 		JPanel pCentral = new JPanel();
 		JPanel pInferior = new JPanel();
+		JPanel pPrecioYBoton = new JPanel();
+		JPanel pPrecio = new JPanel();
+		JPanel pBotonAceptar = new JPanel();
 		pCartas = new JPanel(new GridLayout(0, 4, 0, 0));
 		//TODO espacio vertical de cartas
 		//Formato contenedores
@@ -69,12 +74,17 @@ public class VentanaSeleccionVender extends JFrame{
 		Border bordePInferior = BorderFactory.createLineBorder(Color.BLACK);
 		pInferior.setBorder(bordePInferior);
 		pInferior.setVisible(false);
+		pBotonAceptar.setLayout(new FlowLayout(FlowLayout.CENTER));
+		pPrecioYBoton.setLayout(new BoxLayout(pPrecioYBoton, BoxLayout.Y_AXIS));
+		pPrecio.setBackground(new Color(255, 255, 255));
+		pBotonAceptar.setBackground(new Color(255, 255, 255));
+		pPrecio.setLayout(new FlowLayout(FlowLayout.CENTER));
 		//Crear componentes
 		JScrollPane spCartas = new JScrollPane();
 		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
 		JLabel lPrecioCarta = new JLabel("Precio: ");
 		JSpinner spPrecio = new JSpinner();
-		JButton bAceptar = new JButton("Aceptar");
+		JButton bAceptar = new JButton("ACEPTAR");
 		//Formato componentes
 		spCartas.setViewportView(pCartas);
 		spCartas.setBorder(null);
@@ -83,13 +93,19 @@ public class VentanaSeleccionVender extends JFrame{
 		spPrecio.setModel(new SpinnerNumberModel(0, 0, 1500000, 100));
 		spPrecio.setPreferredSize(new Dimension(200, 30));
 		lPrecioCarta.setFont(new Font("Arial", Font.BOLD, 24));
+		
+		bAceptar.setPreferredSize(new Dimension(100, 40));
 		//Añadir componentes a contenedores
 		setIconImage(logoPequeño.getImage());
 		this.getContentPane().add(pCentral, BorderLayout.CENTER);
 		this.getContentPane().add(pInferior, BorderLayout.SOUTH);		
 		pCentral.add(spCartas, BorderLayout.CENTER);
-		pInferior.add(lPrecioCarta);
-		pInferior.add(spPrecio);
+		pInferior.add(pPrecioYBoton);
+		pPrecioYBoton.add(pPrecio);
+		pPrecio.add(lPrecioCarta);
+		pPrecio.add(spPrecio);
+		pPrecioYBoton.add(pBotonAceptar);
+		pBotonAceptar.add(bAceptar);
 //		pCartas.add(spCartas);		
 
 		
@@ -141,27 +157,26 @@ public class VentanaSeleccionVender extends JFrame{
 					public void mouseClicked(MouseEvent e) {
 						cartaSeleccionada = p.getCarta();
 						pInferior.setVisible(true);
-						precio = (Integer)spPrecio.getValue();
 						p.setOpaque(true);
 						p.revalidate();
 						p.repaint();
-						((VentaCartas) ventanaAnterior).cambiarCartaVendiendo(cartaSeleccionada, indice);
-						if(indice == 1) {
-							((VentaCartas) ventanaAnterior).cartaVen1.getLPrecio().setText((int)precio + "");														
-							revalidate();
-						} else if(indice == 2){
-							((VentaCartas) ventanaAnterior).cartaVen2.getLPrecio().setText((int)precio + "");							;							
-							revalidate();
-						} else {
-							((VentaCartas) ventanaAnterior).cartaVen3.getLPrecio().setText((int)precio + "");														
-							revalidate();
-						}
+						bAceptar.addActionListener(new ActionListener() {
+							
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								((VentaCartas) ventanaAnterior).cambiarCartaVendiendo(cartaSeleccionada, indice, spPrecio.getValue());
+								((VentaCartas) ventanaAnterior).revalidate();
+								((VentaCartas) ventanaAnterior).repaint();
+								dispose();
+							}
+						});
 					}
-//						dispose();
 					
 				});
 			}
 		}
+		
+
 		
 		setVisible(true);
 		
