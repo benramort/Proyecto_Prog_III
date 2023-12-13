@@ -156,7 +156,7 @@ public class Mercado extends JFrame {
 			venta.setUsuario(datos.getUsuarios().get(r.nextInt(datos.getUsuarios().size())));
 			ventas.add(venta);
 		}			
-		System.out.println(ventas);
+//		System.out.println(ventas);
 		
 
 		//Para insertar imagenes en una tabla nos hemos basado en este video:

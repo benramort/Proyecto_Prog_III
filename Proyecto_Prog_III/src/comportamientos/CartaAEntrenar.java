@@ -10,7 +10,7 @@ public class CartaAEntrenar extends Carta{
 	
 	@Override
 	public ImageIcon getRecursoGrafico() {
-		return new ImageIcon("img/bloqueado.png");
+		return new ImageIcon("img/seleccion.png");
 	}
 
 }
