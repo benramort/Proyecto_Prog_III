@@ -204,6 +204,9 @@ private static final long serialVersionUID = 1L;
 				modoIdle.setGenerarMonedasCarta3(false);
 				//TODO hacerlo bonito
 				modoIdle.interrupt();
+				usuario.nuevaCartaSinStamina(cartaEnt1.getCarta());
+				usuario.nuevaCartaSinStamina(cartaEnt2.getCarta());
+				usuario.nuevaCartaSinStamina(cartaEnt3.getCarta());
 				if(modoIdle.isInterrupted()) {
 					bClear.setEnabled(true);
 				}

@@ -1,14 +1,9 @@
 1;kratos;Kratos;GodOfWar;God Of War;40;80;45
 2;atreus;Atreus;GodOfWar;God Of War;50;75;10
-3;ares;Ares;GodOfWar;God Of War;70;05;50
+3;ares;Ares;GodOfWar;God Of War;80;05;50
 4;mario;Mario;SuperMario;Super Mario;50;80;20
 5;luigi;Luigi;SuperMario;Super Mario;50;30;90
 6;yoshi;Yoshi;SuperMario;Super Mario;80;20;50
-<<<<<<< HEAD
 7;link;Link;TheLegendOfZelda;The Legend of Zelda;40;40;60
 8;zelda;Zelda;TheLegendOfZelda;The Legend of Zelda;30;80;40
 9;ganondorf;Ganondorf;TheLegendOFZelda;The Legend of Zelda;60;60;10
-=======
-7;link;Link;TheLegendOFZelda;The Legend of Zelda;40;40;60
-8;zelda;Zelda;TheLegendOfZelda;The Legend Of Zelda;55;25;30
->>>>>>> branch 'master' of https://github.com/benramort/Proyecto_Prog_III
