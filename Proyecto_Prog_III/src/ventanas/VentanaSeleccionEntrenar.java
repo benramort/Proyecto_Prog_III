@@ -21,7 +21,7 @@ import comportamientos.Carta;
 import comportamientos.Datos;
 import comportamientos.Usuario;
 
-public class VentanaSeleccion extends JFrame{
+public class VentanaSeleccionEntrenar extends JFrame{
 	/**
 	 * 
 	 */
@@ -32,7 +32,7 @@ public class VentanaSeleccion extends JFrame{
 	
 	JPanel pCartas;
 	
-	public VentanaSeleccion(JFrame ventanaAnterior, Usuario usuario, Datos datos, int indice, List<Carta> cartasNoMostradas) {
+	public VentanaSeleccionEntrenar(JFrame ventanaAnterior, Usuario usuario, Datos datos, int indice, List<Carta> cartasNoMostradas) {
 		
 		this.ventanaAnterior = ventanaAnterior;
 		
@@ -96,7 +96,7 @@ public class VentanaSeleccion extends JFrame{
 				GridLayout gl = (GridLayout) pCartas.getLayout();
 //				System.out.println(spCartas.getWidth());
 					gl.setColumns(5);
-				VentanaSeleccion.this.revalidate();
+				VentanaSeleccionEntrenar.this.revalidate();
 			}	
 		});
 		

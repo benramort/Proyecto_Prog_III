@@ -219,7 +219,7 @@ private static final long serialVersionUID = 1L;
 					
 					@Override
 					public void run() {
-						new VentanaSeleccion(Entrenamiento.this, usuario, datos, 1, cartasNoMostradas);
+						new VentanaSeleccionEntrenar(Entrenamiento.this, usuario, datos, 1, cartasNoMostradas);
 					}
 				});
 			}
@@ -232,7 +232,7 @@ private static final long serialVersionUID = 1L;
 					
 					@Override
 					public void run() {
-						new VentanaSeleccion(Entrenamiento.this, usuario, datos, 2, cartasNoMostradas);
+						new VentanaSeleccionEntrenar(Entrenamiento.this, usuario, datos, 2, cartasNoMostradas);
 					}
 				});
 			}
@@ -246,7 +246,7 @@ private static final long serialVersionUID = 1L;
 					
 					@Override
 					public void run() {
-						new VentanaSeleccion(Entrenamiento.this, usuario, datos, 3, cartasNoMostradas);
+						new VentanaSeleccionEntrenar(Entrenamiento.this, usuario, datos, 3, cartasNoMostradas);
 					}
 				});
 			}
