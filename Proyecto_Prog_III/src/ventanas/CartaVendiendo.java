@@ -1,5 +1,6 @@
 package ventanas;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.Box;
@@ -38,8 +39,8 @@ public class CartaVendiendo extends JPanel{
 		pCarta = new PanelCarta(carta);
 
 		//Formato componentes
-
-
+		lPrecio.setPreferredSize(new Dimension(200, 50));
+		
 		//Añadir componentes a contenedores
 		this.add(pPrincipal);
 		pPrincipal.add(pCarta);
@@ -59,6 +60,10 @@ public class CartaVendiendo extends JPanel{
 		this.carta = carta;
 		pCarta = new PanelCarta(carta);
 		repaint();
+	}
+	
+	public JLabel getLPrecio() {
+		return lPrecio;
 	}
 }
 

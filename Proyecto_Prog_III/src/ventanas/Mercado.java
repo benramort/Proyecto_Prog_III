@@ -204,6 +204,21 @@ public class Mercado extends JFrame {
 				((Album) ventanaAnterior).repaint();
 			}
 		});
+		
+		botonVender.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SwingUtilities.invokeLater(new Runnable() {
+					
+					@Override
+					public void run() {
+						new VentaCartas(Mercado.this, usuario, datos);
+					}
+				});
+				
+			}
+		});
 	}
 	
 //	public static void main(String[] args) {
