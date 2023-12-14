@@ -101,9 +101,12 @@ public class VentanaSeleccionEntrenar extends JFrame{
 		});
 		
 		//Gestion de cartas
-		 
+		usuario.actualizarCartasSinStamina();
 		for (Carta c: usuario.getCartas().keySet()) {
 			if (usuario.getCartas().get(c) != 0) {
+				if (usuario.getCartasSinStamina().get(c) != null) {
+					continue;
+				}
 				PanelCarta p = new PanelCarta(c);
 				if(cartasNoMostradas.contains(p.getCarta())) {
 					continue;

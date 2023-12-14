@@ -2,8 +2,13 @@ package comportamientos;
 
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 import java.util.TreeMap;
 
 public class Usuario {
@@ -63,6 +68,10 @@ public class Usuario {
 		return cartas;
 	}
 	
+	public Map<Carta, ZonedDateTime> getCartasSinStamina() {
+		return cartasSinStamina;
+	}
+	
 
 	public static Usuario deLinea(String s, Datos datos) {
 		String[] tokens = s.split(";");
@@ -102,12 +111,19 @@ public class Usuario {
 	}
 	
 	public void actualizarCartasSinStamina() {
+		List<Carta> aEliminar = new ArrayList<>();
 		for (Entry<Carta, ZonedDateTime> entry : cartasSinStamina.entrySet()) {
 			long minutos = entry.getValue().until(ZonedDateTime.now(), ChronoUnit.MINUTES);
-			if (minutos > entry.getKey().getRecuperacion()*20) { //1 de estamina equivale a 20 minutos
-				cartasSinStamina.remove(entry.getKey());
+			System.out.println(entry.getKey() + ":" + minutos);
+			if (minutos >= entry.getKey().getRecuperacion()) { //1 de estamina equivale a 20 minutos TODO poner por 20
+//				cartasSinStamina.remove(entry.getKey());
+				aEliminar.add(entry.getKey());
 			}
 		}
+		for (Carta carta : aEliminar) {
+			cartasSinStamina.remove(carta);
+		}
+		
 	}
 	
 	@Override
@@ -134,6 +150,25 @@ public class Usuario {
 //		}
 //		System.out.println(cartasSinStamina);
 //	}
+	
+	public static void main(String[] args) {
+		Datos datos = new Ficheros();
+		Usuario usuario = new Usuario(null, null, datos, 0);
+		usuario.nuevaCartaSinStamina(datos.getModeloCartas().get(0));
+		usuario.nuevaCartaSinStamina(datos.getModeloCartas().get(1));
+		ZonedDateTime inicio = ZonedDateTime.now();
+		while (true) {
+			usuario.actualizarCartasSinStamina();
+			System.out.println(inicio.until(ZonedDateTime.now(), ChronoUnit.SECONDS));
+			System.out.println(usuario.getCartasSinStamina());
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 
 
 	

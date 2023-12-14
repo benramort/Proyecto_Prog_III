@@ -162,7 +162,7 @@ public class ModoIdle extends Thread {
 			}
 			
 			try {
-				Thread.sleep(1000); //TODO sleep preciso
+				Thread.sleep(1); //TODO sleep preciso
 			} catch (InterruptedException e) {
 				break;
 			}
