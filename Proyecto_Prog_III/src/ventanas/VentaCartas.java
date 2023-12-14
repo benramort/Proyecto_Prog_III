@@ -100,11 +100,9 @@ public class VentaCartas extends JFrame{
 		bClear = new JButton("CLEAR");
 		ImageIcon imagen = new ImageIcon(getClass().getResource("/moneda.png"));
 		ImageIcon imagenMoneda = new ImageIcon(imagen.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
-//		JButton bRecogerMonedas = new JButton("RECOGER MONEDAS");
 		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
 		//Formato componentes
-		bMercado.setPreferredSize(new Dimension(90, 40));
-//		bRecogerMonedas.setPreferredSize(new Dimension(150, 50));
+		bMercado.setPreferredSize(new Dimension(100, 40));
 		//Añadir componentes a contenedores
 		setIconImage(logoPequeño.getImage());
 		this.getContentPane().add(pInferior, BorderLayout.SOUTH);
@@ -119,14 +117,14 @@ public class VentaCartas extends JFrame{
 		pCartas.add(boxLayoutCartasV);
 		// boxLayoutCartasV.add(Box.createVerticalGlue());
 		// boxLayoutCartasV.setBackground(Color.BLUE);
+		boxLayoutCartasV.add(flowLayoutCartasH);
 		flowLayoutCartasH.add(cartaVen1);
-		flowLayoutCartasH.add(Box.createHorizontalStrut(100));
+//		flowLayoutCartasH.add(Box.createHorizontalStrut(10));
 		flowLayoutCartasH.add(cartaVen2);
-		flowLayoutCartasH.add(Box.createHorizontalStrut(100));
+//		flowLayoutCartasH.add(Box.createHorizontalStrut(10));
 		flowLayoutCartasH.add(cartaVen3);
 //		pBotonRecogerMonedas.add(bRecogerMonedas);
 //		pBotonEntrenar.add(bRecogerMonedas);
-		boxLayoutCartasV.add(flowLayoutCartasH);
 		boxLayoutCartasV.add(pBotonRecogerMonedas);
 		pBotonMercado.add(bMercado);
 		add(pBotonMercado, BorderLayout.NORTH);
@@ -232,9 +230,9 @@ public class VentaCartas extends JFrame{
 				cartaVen3 = cartaDer;
 				flowLayoutCartasH.removeAll();
 				flowLayoutCartasH.add(cartaVen1);
-				flowLayoutCartasH.add(Box.createHorizontalStrut(100));
+//				flowLayoutCartasH.add(Box.createHorizontalStrut(10));
 				flowLayoutCartasH.add(cartaVen2);
-				flowLayoutCartasH.add(Box.createHorizontalStrut(100));
+//				flowLayoutCartasH.add(Box.createHorizontalStrut(10));
 				flowLayoutCartasH.add(cartaVen3);
 //				flowLayoutCartasH.add(new JLabel("Hol"));
 				revalidate();
@@ -277,25 +275,28 @@ public class VentaCartas extends JFrame{
 		return cartaVen3;
 	}
 
-	public void cambiarCartaVendiendo(Carta carta, int indice) {
+	public void cambiarCartaVendiendo(Carta carta, int indice, Object precio) {
 		switch (indice) {
 		case 1: 
 			cartaVen1 = new CartaVendiendo(carta);
+			cartaVen1.getLPrecio().setText(precio + "");
 			break;
 		case 2: 
 			cartaVen2 = new CartaVendiendo(carta);
+			cartaVen2.getLPrecio().setText(precio + "");
 			break;
 		case 3: 
 			cartaVen3 = new CartaVendiendo(carta);
+			cartaVen3.getLPrecio().setText(precio  + "");
 			break;
 		default: 
 		//TODO hacer una excepcion
 		}
 		flowLayoutCartasH.removeAll();
 		flowLayoutCartasH.add(cartaVen1);
-		flowLayoutCartasH.add(Box.createHorizontalStrut(100));
+//		flowLayoutCartasH.add(Box.createHorizontalStrut(10));
 		flowLayoutCartasH.add(cartaVen2);
-		flowLayoutCartasH.add(Box.createHorizontalStrut(100));
+//		flowLayoutCartasH.add(Box.createHorizontalStrut(10));
 		flowLayoutCartasH.add(cartaVen3);
 //		flowLayoutCartasH.add(new JLabel("Hol"));
 		revalidate();
