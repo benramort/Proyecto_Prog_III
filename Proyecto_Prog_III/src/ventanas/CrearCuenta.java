@@ -121,7 +121,7 @@ public class CrearCuenta extends JFrame {
 									if(contrasena.length() >= 6 && contrasena.length() <= 16) {
 //										if(Pattern.matches(patron1, contrasena) && Pattern.matches(patron2, contrasena)) {
 										Usuario usuario = new Usuario(tfNombre.getText(), String.valueOf( pfContrasena.getPassword()), datos, 100000);
-										for(int i = 1; i <= 12; i++) {
+										for(int i = 1; i <= 13; i++) {
 											usuario.getCartas().put(new Carta(1), 0);											
 										}
 											new Album(null, usuario, datos);
