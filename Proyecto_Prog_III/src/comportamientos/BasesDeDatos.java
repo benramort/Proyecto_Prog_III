@@ -118,12 +118,6 @@ public class BasesDeDatos implements Datos {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public Usuario comprobarUsuario(String nombre) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	public void cerrarConexion() {
 		try {
