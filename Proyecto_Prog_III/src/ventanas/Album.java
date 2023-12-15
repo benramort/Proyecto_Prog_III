@@ -52,7 +52,7 @@ public class Album extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(new BorderLayout());
-		
+		this.getContentPane().setBackground(new Color(255, 255, 255));
 		//Crear contenedores
 		JPanel pIzquierdo = new JPanel();
 		JPanel pDerecho = new JPanel();
@@ -92,7 +92,6 @@ public class Album extends JFrame {
 		pPrecioMax.setMaximumSize(new Dimension(400, 800));
 		pPrecioMax.setLayout(new FlowLayout(FlowLayout.CENTER));
 		pSaga.setLayout(new FlowLayout(FlowLayout.CENTER));
-
 
 		//Crear componentes
 		JButton bIdle = new JButton();
@@ -154,7 +153,7 @@ public class Album extends JFrame {
 		spCartas.setViewportView(pCartas);
 		spCartas.setBorder(null);
 		spCartas.getVerticalScrollBar().setUnitIncrement(15);
-		
+		spCartas.setBackground(new Color(255, 255, 255));
 		tfBuscar.setMaximumSize(new Dimension(200, 100));
 		spSelPrecioMin.setPreferredSize(new Dimension(100, 25));
 		spSelPrecioMax.setPreferredSize(new Dimension(100, 25));

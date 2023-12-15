@@ -1,6 +1,14 @@
 package comportamientos;
 
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 import java.util.TreeMap;
 
 public class Usuario {
@@ -11,6 +19,7 @@ public class Usuario {
 	private int monedas;
 	private Map<Carta,Integer> cartas; //Las cartas se ordenan naturalmente, y se almacena el número de cartas que tiene ese usuario. Si no tiene esa carta hay que añadirla con 0
 //	private RegistroTemporal registroTemporal;
+	private Map<Carta,ZonedDateTime> cartasSinStamina = new TreeMap<>();
 
 	
 	public Usuario(String nombre, String contrasena, Datos datos, int monedas) {
@@ -59,6 +68,10 @@ public class Usuario {
 		return cartas;
 	}
 	
+	public Map<Carta, ZonedDateTime> getCartasSinStamina() {
+		return cartasSinStamina;
+	}
+	
 
 	public static Usuario deLinea(String s, Datos datos) {
 		String[] tokens = s.split(";");
@@ -93,6 +106,26 @@ public class Usuario {
 		return nombre + contrasena + cartasObtenidas + monedas;
 	}
 	
+	public void nuevaCartaSinStamina(Carta carta) {
+		cartasSinStamina.put(carta, ZonedDateTime.now());
+	}
+	
+	public void actualizarCartasSinStamina() {
+		List<Carta> aEliminar = new ArrayList<>();
+		for (Entry<Carta, ZonedDateTime> entry : cartasSinStamina.entrySet()) {
+			long minutos = entry.getValue().until(ZonedDateTime.now(), ChronoUnit.MINUTES);
+			System.out.println(entry.getKey() + ":" + minutos);
+			if (minutos >= entry.getKey().getRecuperacion()) { //1 de estamina equivale a 20 minutos TODO poner por 20
+//				cartasSinStamina.remove(entry.getKey());
+				aEliminar.add(entry.getKey());
+			}
+		}
+		for (Carta carta : aEliminar) {
+			cartasSinStamina.remove(carta);
+		}
+		
+	}
+	
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof Usuario) {
@@ -105,6 +138,36 @@ public class Usuario {
 	@Override
 	public String toString() {
 		return nombre;
+	}
+	
+//	public static void main(String[] args) {
+//		Map<Carta,ZonedDateTime> cartasSinStamina = new TreeMap<>();
+//		cartasSinStamina.put(new CartaAEntrenar(), ZonedDateTime.now());
+//		cartasSinStamina.put(new CartaVacia(), ZonedDateTime.now());
+//		System.out.println(cartasSinStamina);
+//		for (Entry<Carta, ZonedDateTime> entry : cartasSinStamina.entrySet()) {
+//			cartasSinStamina.remove(entry.getKey());
+//		}
+//		System.out.println(cartasSinStamina);
+//	}
+	
+	public static void main(String[] args) {
+		Datos datos = new Ficheros();
+		Usuario usuario = new Usuario(null, null, datos, 0);
+		usuario.nuevaCartaSinStamina(datos.getModeloCartas().get(0));
+		usuario.nuevaCartaSinStamina(datos.getModeloCartas().get(1));
+		ZonedDateTime inicio = ZonedDateTime.now();
+		while (true) {
+			usuario.actualizarCartasSinStamina();
+			System.out.println(inicio.until(ZonedDateTime.now(), ChronoUnit.SECONDS));
+			System.out.println(usuario.getCartasSinStamina());
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 

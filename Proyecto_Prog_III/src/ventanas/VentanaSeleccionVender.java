@@ -2,9 +2,12 @@ package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
@@ -12,16 +15,24 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.border.Border;
 
 import comportamientos.Carta;
 import comportamientos.Datos;
 import comportamientos.Usuario;
 
-public class VentanaSeleccion extends JFrame{
+public class VentanaSeleccionVender extends JFrame{
 	/**
 	 * 
 	 */
@@ -29,10 +40,9 @@ public class VentanaSeleccion extends JFrame{
 	
 	Carta cartaSeleccionada;
 	JFrame ventanaAnterior;
-	
 	JPanel pCartas;
 	
-	public VentanaSeleccion(JFrame ventanaAnterior, Usuario usuario, Datos datos, int indice, List<Carta> cartasNoMostradas) {
+	public VentanaSeleccionVender(JFrame ventanaAnterior, Usuario usuario, Datos datos, int indice, List<Carta> cartasNoMostradas) {
 		
 		this.ventanaAnterior = ventanaAnterior;
 		
@@ -50,26 +60,52 @@ public class VentanaSeleccion extends JFrame{
 		
 		//Crear contenedores
 		JPanel pCentral = new JPanel();
+		JPanel pInferior = new JPanel();
+		JPanel pPrecioYBoton = new JPanel();
+		JPanel pPrecio = new JPanel();
+		JPanel pBotonAceptar = new JPanel();
 		pCartas = new JPanel(new GridLayout(0, 4, 0, 0));
 		//TODO espacio vertical de cartas
 		//Formato contenedores
-		
-
+		pInferior.setLayout(new FlowLayout(FlowLayout.CENTER));
+		pInferior.setPreferredSize(new Dimension(1500, 100));
+		pInferior.setBackground(new Color(255, 255, 255));
+		pInferior.setOpaque(true);
+		Border bordePInferior = BorderFactory.createLineBorder(Color.BLACK);
+		pInferior.setBorder(bordePInferior);
+		pInferior.setVisible(false);
+		pBotonAceptar.setLayout(new FlowLayout(FlowLayout.CENTER));
+		pPrecioYBoton.setLayout(new BoxLayout(pPrecioYBoton, BoxLayout.Y_AXIS));
+		pPrecio.setBackground(new Color(255, 255, 255));
+		pBotonAceptar.setBackground(new Color(255, 255, 255));
+		pPrecio.setLayout(new FlowLayout(FlowLayout.CENTER));
 		//Crear componentes
 		JScrollPane spCartas = new JScrollPane();
-
-		
 		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
-		
+		JLabel lPrecioCarta = new JLabel("Precio: ");
+		JSpinner spPrecio = new JSpinner();
+		JButton bAceptar = new JButton("ACEPTAR");
 		//Formato componentes
 		spCartas.setViewportView(pCartas);
 		spCartas.setBorder(null);
 		spCartas.getVerticalScrollBar().setUnitIncrement(15);
-	
+		
+		spPrecio.setModel(new SpinnerNumberModel(0, 0, 1500000, 100));
+		spPrecio.setPreferredSize(new Dimension(200, 30));
+		lPrecioCarta.setFont(new Font("Arial", Font.BOLD, 24));
+		
+		bAceptar.setPreferredSize(new Dimension(100, 40));
 		//Añadir componentes a contenedores
 		setIconImage(logoPequeño.getImage());
 		this.getContentPane().add(pCentral, BorderLayout.CENTER);
+		this.getContentPane().add(pInferior, BorderLayout.SOUTH);		
 		pCentral.add(spCartas, BorderLayout.CENTER);
+		pInferior.add(pPrecioYBoton);
+		pPrecioYBoton.add(pPrecio);
+		pPrecio.add(lPrecioCarta);
+		pPrecio.add(spPrecio);
+		pPrecioYBoton.add(pBotonAceptar);
+		pBotonAceptar.add(bAceptar);
 //		pCartas.add(spCartas);		
 
 		
@@ -96,13 +132,14 @@ public class VentanaSeleccion extends JFrame{
 				GridLayout gl = (GridLayout) pCartas.getLayout();
 //				System.out.println(spCartas.getWidth());
 					gl.setColumns(5);
-				VentanaSeleccion.this.revalidate();
+				VentanaSeleccionVender.this.revalidate();
 			}	
 		});
 		
 		//Gestion de cartas
 		 
 		for (Carta c: usuario.getCartas().keySet()) {
+			
 			if (usuario.getCartas().get(c) != 0) {
 				PanelCarta p = new PanelCarta(c);
 				if(cartasNoMostradas.contains(p.getCarta())) {
@@ -111,8 +148,7 @@ public class VentanaSeleccion extends JFrame{
 				p.addMouseListener(hoverCartas);
 				pCartas.add(p);
 				p.setPreferredSize(new Dimension(235, 335)); //TODO espacio vertical
-//				p.setOpaque(true);
-				p.setBackground(Color.RED);
+				p.setBackground(Color.CYAN);
 				System.out.println("Cargada carta "+c.getId());
 //				cartasObtenidas++;
 				p.addMouseListener(new MouseAdapter() {
@@ -120,28 +156,27 @@ public class VentanaSeleccion extends JFrame{
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						cartaSeleccionada = p.getCarta();
-						((Entrenamiento) ventanaAnterior).cambiarCartaEntrenando(cartaSeleccionada, indice);
-						if(((Entrenamiento) ventanaAnterior).cartaEnt1.getCarta().getId() == 0 || ((Entrenamiento) ventanaAnterior).cartaEnt2.getCarta().getId() == 0 || ((Entrenamiento) ventanaAnterior).cartaEnt3.getCarta().getId() == 0) {
-							((Entrenamiento) ventanaAnterior).bEntrenar.setEnabled(false);
-						}
-						dispose();
+						pInferior.setVisible(true);
+						p.setOpaque(true);
+						p.revalidate();
+						p.repaint();
+						bAceptar.addActionListener(new ActionListener() {
+							
+							@Override
+							public void actionPerformed(ActionEvent e) {
+								((VentaCartas) ventanaAnterior).cambiarCartaVendiendo(cartaSeleccionada, indice, spPrecio.getValue());
+								((VentaCartas) ventanaAnterior).revalidate();
+								((VentaCartas) ventanaAnterior).repaint();
+								dispose();
+							}
+						});
 					}
+					
 				});
 			}
 		}
 		
-		
-//		Component[] cartasEntrenando = ((Entrenamiento)ventanaAnterior).flowLayoutCartasH.getComponents();
-//		Component[] panelesCarta = pCartas.getComponents();
-//		
-//		for(Component c : cartasEntrenando) {
-//			for(Component p : panelesCarta) {
-//				if(((CartaEntrenando) c).getCarta().equals(((PanelCarta) p).getCarta())){
-//					p.setVisible(false);
-//				}
-//			}
-//		}
-//		repaint();
+
 		
 		setVisible(true);
 		

@@ -39,7 +39,7 @@ public class ModoIdle extends Thread {
 		((Entrenamiento) ventana).bClear.setEnabled(false);
 		
 		double contadorSeg = 0;
-		double minutosCarta1 = (cartaEnt1.getCarta().getResistencia()*5)/(double)100;
+		double minutosCarta1 = (cartaEnt1.getCarta().getResistencia()*5)/(double)100; //1 de estamina son +-5 minutos
 		double minutosCarta2 = (cartaEnt2.getCarta().getResistencia()*5)/(double)100;
 		double minutosCarta3 = (cartaEnt3.getCarta().getResistencia()*5)/(double)100;
 		
@@ -88,7 +88,7 @@ public class ModoIdle extends Thread {
 				SwingUtilities.invokeLater(new Runnable() {
 					
 					@Override
-					public void run() {
+					public void run() { //TODO seguro que este runable está bien??
 						cartaEnt1.setPorcentajeStamina(cartaEnt1.getPorcentajeStamina()-1);
 						if(cartaEnt1.getPorcentajeStamina() <= 0) {
 							cartaEnt1.setPorcentajeStamina(0);
@@ -162,7 +162,7 @@ public class ModoIdle extends Thread {
 			}
 			
 			try {
-				Thread.sleep((long) 0.1);
+				Thread.sleep(1); //TODO sleep preciso
 			} catch (InterruptedException e) {
 				break;
 			}

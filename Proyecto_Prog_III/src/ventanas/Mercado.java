@@ -34,7 +34,7 @@ public class Mercado extends JFrame {
 	JLabel lMonedas;
 
 	public Mercado(JFrame ventanaAnterior, Datos datos, Usuario usuario) {
-		Venta venta = new Venta();
+//		Venta venta = new Venta();
 		List<Venta> ventas = new ArrayList<>();
 		Random r = new Random();
 		//Formato ventana
@@ -96,7 +96,7 @@ public class Mercado extends JFrame {
 //		lSagas.add(new Saga("Super Mario"));
 //		lSagas.add(new Saga("God of War"));
 		JComboBox<Saga> cbSelSaga = new JComboBox<Saga>();
-		JButton botonVender = new JButton("Vender");
+		JButton botonVender = new JButton("VENDER");
 		
 		ImageIcon imagen1 = new ImageIcon(getClass().getResource("/moneda.png"));
 		ImageIcon imagenMoneda = new ImageIcon(imagen1.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
@@ -150,17 +150,20 @@ public class Mercado extends JFrame {
 		
 		AbstractTableModel modeloTabla = new ModeloJTableCartas(ventas);
 		for (int i = 0; i < 10 ; i++) {
+			Venta venta = new Venta();
 			venta.setCarta(datos.getModeloCartas().get(r.nextInt(datos.getModeloCartas().size())));
-			venta.setPrecio(r.nextInt(200000, 1250000));
+			venta.setPrecio(r.nextInt(100, 200));
 			venta.setUsuario(datos.getUsuarios().get(r.nextInt(datos.getUsuarios().size())));
 			ventas.add(venta);
 		}			
+//		System.out.println(ventas);
 		
 
 		//Para insertar imagenes en una tabla nos hemos basado en este video:
 		//https://www.youtube.com/watch?v=oLksi_fsRHo&t=567s
 		JTable jTable = new JTable(modeloTabla);
 		JScrollPane spTabla = new JScrollPane(jTable);
+		spTabla.getVerticalScrollBar().setUnitIncrement(20);
 		spTabla.setPreferredSize(new Dimension(500, 500));
 		jTable.setRowHeight(350);
 		jTable.setPreferredSize(new Dimension(1000, 3500));
@@ -200,6 +203,21 @@ public class Mercado extends JFrame {
 				((Album) ventanaAnterior).lMonedasAlbum.setText(String.valueOf(usuario.getMonedas()));
 				((Album) ventanaAnterior).cargarCartas();
 				((Album) ventanaAnterior).repaint();
+			}
+		});
+		
+		botonVender.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SwingUtilities.invokeLater(new Runnable() {
+					
+					@Override
+					public void run() {
+						new VentaCartas(Mercado.this, usuario, datos);
+					}
+				});
+				
 			}
 		});
 	}

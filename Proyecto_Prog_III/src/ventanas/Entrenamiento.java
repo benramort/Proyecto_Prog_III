@@ -204,6 +204,9 @@ private static final long serialVersionUID = 1L;
 				modoIdle.setGenerarMonedasCarta3(false);
 				//TODO hacerlo bonito
 				modoIdle.interrupt();
+				usuario.nuevaCartaSinStamina(cartaEnt1.getCarta());
+				usuario.nuevaCartaSinStamina(cartaEnt2.getCarta());
+				usuario.nuevaCartaSinStamina(cartaEnt3.getCarta());
 				if(modoIdle.isInterrupted()) {
 					bClear.setEnabled(true);
 				}
@@ -219,7 +222,7 @@ private static final long serialVersionUID = 1L;
 					
 					@Override
 					public void run() {
-						new VentanaSeleccion(Entrenamiento.this, usuario, datos, 1, cartasNoMostradas);
+						new VentanaSeleccionEntrenar(Entrenamiento.this, usuario, datos, 1, cartasNoMostradas);
 					}
 				});
 			}
@@ -232,7 +235,7 @@ private static final long serialVersionUID = 1L;
 					
 					@Override
 					public void run() {
-						new VentanaSeleccion(Entrenamiento.this, usuario, datos, 2, cartasNoMostradas);
+						new VentanaSeleccionEntrenar(Entrenamiento.this, usuario, datos, 2, cartasNoMostradas);
 					}
 				});
 			}
@@ -246,7 +249,7 @@ private static final long serialVersionUID = 1L;
 					
 					@Override
 					public void run() {
-						new VentanaSeleccion(Entrenamiento.this, usuario, datos, 3, cartasNoMostradas);
+						new VentanaSeleccionEntrenar(Entrenamiento.this, usuario, datos, 3, cartasNoMostradas);
 					}
 				});
 			}

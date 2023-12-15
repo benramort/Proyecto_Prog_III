@@ -136,10 +136,10 @@ public class Ficheros implements Datos {
 	public static void main(String[] args) {
 		Datos datos = new Ficheros();
 //		datos.cargarUsuarios();
-		for (Usuario u: datos.getUsuarios()) {
-			System.out.println(u.aLinea());
+		for (Carta u: datos.getModeloCartas()) {
+			System.out.println(u);
 		}
-		datos.guardarUsuario(new Usuario("1", "1", datos, 0));
+//		datos.guardarUsuario(new Usuario("1", "1", datos, 0));
 	}
 
 }
