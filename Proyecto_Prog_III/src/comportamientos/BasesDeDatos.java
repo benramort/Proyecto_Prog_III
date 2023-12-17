@@ -78,8 +78,8 @@ public class BasesDeDatos implements Datos {
 				String cartasString = rs.getString(4);
 				int monedas = rs.getInt(5);
 				Map<Carta, Integer> cartas = Usuario.cargarCartas(cartasString, this);
-				Usuario usuario = new Usuario(nom, pass, this, cartas, monedas);
-				usuarios.add(usuario);
+//				Usuario usuario = new Usuario(nom, pass, this, cartas, monedas);
+//				usuarios.add(usuario);
 			}
 			stmt.close();
 		} catch (SQLException e) {
@@ -113,7 +113,6 @@ public class BasesDeDatos implements Datos {
 	@Override
 	public void guardarUsuario(Usuario usuario) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -129,9 +128,9 @@ public class BasesDeDatos implements Datos {
 			String cartasString = rs.getString(4);
 			int monedas = rs.getInt(5);
 			Map<Carta, Integer> cartas = Usuario.cargarCartas(cartasString, this);
-			Usuario usuario = new Usuario(nom, pass, this, cartas, monedas);
+//			Usuario usuario = new Usuario(nom, pass, this, cartas, monedas);
 			prepStmt.close();
-			return usuario;
+//			return usuario;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
