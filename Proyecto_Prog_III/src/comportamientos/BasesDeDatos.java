@@ -9,11 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -38,6 +37,7 @@ public class BasesDeDatos implements Datos {
 		} catch (SQLException ex) {
 			logger.warning("No se ha podido conectar con la base de datos");
 		}
+		cargarModeloCartas();
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class BasesDeDatos implements Datos {
 				int recuperacion = rs.getInt(8);
 				Saga saga = new Saga(sagaInterno, sagaVisible);
 				Carta carta = new Carta(id, nombreInterno, nombreVisible, saga, monedasPorMinuto, resistencia, recuperacion);
-//				System.out.println(carta);
+				System.out.println(carta);
 				modeloCartas.add(carta);
 			}
 			stmt.close();
@@ -77,9 +77,11 @@ public class BasesDeDatos implements Datos {
 				String pass = rs.getString(3);
 				String cartasString = rs.getString(4);
 				int monedas = rs.getInt(5);
+				String sinStaminaString = rs.getString(6);
 				Map<Carta, Integer> cartas = Usuario.cargarCartas(cartasString, this);
-//				Usuario usuario = new Usuario(nom, pass, this, cartas, monedas);
-//				usuarios.add(usuario);
+				Map<Carta, ZonedDateTime> cartasSinStamina = Usuario.cargarSinStamina(sinStaminaString, this);
+				Usuario usuario = new Usuario(nom, pass, this, cartas, monedas, cartasSinStamina);
+				usuarios.add(usuario);
 			}
 			stmt.close();
 		} catch (SQLException e) {
@@ -113,17 +115,18 @@ public class BasesDeDatos implements Datos {
 	@Override
 	public void guardarUsuario(Usuario usuario) {
 		try {
-			PreparedStatement insert = conn.prepareStatement("INSERT INTO usuarios VALUES (?, ?, ?, ?, ?)");
-			insert.setInt(1,0);
-			insert.setString(2, usuario.getNombre());
-			insert.setString(3, usuario.getContrasena());
-			insert.setObject(4, usuario.getCartas());
-			insert.setInt(5, usuario.getMonedas());
-			
+			PreparedStatement insert = conn.prepareStatement("INSERT INTO usuarios (USERNAME, PASSWORD, CARTAS, MONEDAS) VALUES (?, ?, ?, ?)");
+			//insert.setInt(1,0);
+			insert.setString(1, usuario.getNombre());
+			insert.setString(2, usuario.getContrasena());
+			insert.setObject(3, usuario.getCartas());
+			insert.setInt(4, usuario.getMonedas());
+			insert.setString(5, null);
 			insert.executeUpdate();
-			
+			insert.close();
 		} catch (SQLException e) {
 			System.out.println("No se han podido insertar los datos");
+			e.printStackTrace();
 		}
 		
 	}
@@ -134,16 +137,21 @@ public class BasesDeDatos implements Datos {
 			PreparedStatement prepStmt = conn.prepareStatement("SELECT * FROM USUARIOS WHERE USERNAME = ?");
 			prepStmt.setString(1, nombre);
 			ResultSet rs = prepStmt.executeQuery();
-			rs.next();
-//			int id = rs.getInt(1);
-			String nom = rs.getString(2);
-			String pass = rs.getString(3);
-			String cartasString = rs.getString(4);
-			int monedas = rs.getInt(5);
-			Map<Carta, Integer> cartas = Usuario.cargarCartas(cartasString, this);
-//			Usuario usuario = new Usuario(nom, pass, this, cartas, monedas);
-			prepStmt.close();
-//			return usuario;
+			if (rs.next()) {
+//				System.out.println(rs.getString(2));
+//				int id = rs.getInt(1);
+				String nom = rs.getString(2);
+				String pass = rs.getString(3);
+				String cartasString = rs.getString(4);
+				int monedas = rs.getInt(5);
+				String sinStaminaString = rs.getString(6);
+				System.out.println(cartasString);
+				Map<Carta, Integer> cartas = Usuario.cargarCartas(cartasString, this);
+				Map<Carta, ZonedDateTime> cartasSinStamina = Usuario.cargarSinStamina(sinStaminaString, this);
+				Usuario usuario = new Usuario(nom, pass, this, cartas, monedas, cartasSinStamina);
+				prepStmt.close();
+				return usuario;
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -162,13 +170,12 @@ public class BasesDeDatos implements Datos {
 	public static void main(String[] args) {
 		
 		BasesDeDatos bd = new BasesDeDatos();
-		bd.cargarModeloCartas();
-		bd.cargarUsuarios();
 		System.out.println(bd.getModeloCartas());
-		System.out.println(bd.getUsuarios());
-		System.out.println(bd.cargarUsuario("benat"));
-		bd.cerrarConexion();
-		
+		Usuario usuario = new Usuario("Benaat", "aaaaa", bd, 10);
+		bd.guardarUsuario(usuario);
+		Usuario usuario2 = bd.cargarUsuario("Benaat");
+		System.out.println(usuario2);
+		usuario2.aLinea();
 	}
 
 }
