@@ -3,6 +3,7 @@ package ventanas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -42,13 +43,15 @@ public class CartaVendiendo extends JPanel{
 		//Formato componentes
 		pCarta.setPreferredSize(new Dimension(300, 350));
 		pCarta.setMinimumSize(new Dimension(300, 350));
-		lPrecio.setPreferredSize(new Dimension(300, 45));
+		lPrecio.setPreferredSize(new Dimension(300, 35));
+		lPrecio.setHorizontalAlignment(JLabel.CENTER);
+		lPrecio.setFont(new Font("Arial", Font.BOLD, 15));
 //		lPrecio.setBackground(Color.RED);
 //		lPrecio.setOpaque(true);
 		//Añadir componentes a contenedores
 		this.add(pPrincipal);
 		pPrincipal.add(pCarta);
-		pPrincipal.add(Box.createVerticalStrut(20));
+		pPrincipal.add(Box.createVerticalStrut(10));
 		pPrincipal.add(lPrecio);
 		pPrincipal.setPreferredSize(new Dimension(250, 400));
 
@@ -57,8 +60,6 @@ public class CartaVendiendo extends JPanel{
 	public Carta getCarta() {
 		return carta;
 	}
-	
-	
 
 	public void setCarta(Carta carta) {
 		this.carta = carta;

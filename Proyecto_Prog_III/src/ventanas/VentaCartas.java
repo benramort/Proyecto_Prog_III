@@ -120,9 +120,9 @@ public class VentaCartas extends JFrame{
 		// boxLayoutCartasV.setBackground(Color.BLUE);
 		boxLayoutCartasV.add(flowLayoutCartasH);
 		flowLayoutCartasH.add(cartaVen1);
-		flowLayoutCartasH.add(Box.createHorizontalStrut(10));
+		flowLayoutCartasH.add(Box.createHorizontalStrut(50));
 		flowLayoutCartasH.add(cartaVen2);
-		flowLayoutCartasH.add(Box.createHorizontalStrut(10));
+		flowLayoutCartasH.add(Box.createHorizontalStrut(50));
 		flowLayoutCartasH.add(cartaVen3);
 //		pBotonRecogerMonedas.add(bRecogerMonedas);
 //		pBotonEntrenar.add(bRecogerMonedas);
