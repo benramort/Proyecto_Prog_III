@@ -112,7 +112,19 @@ public class BasesDeDatos implements Datos {
 
 	@Override
 	public void guardarUsuario(Usuario usuario) {
-		// TODO Auto-generated method stub
+		try {
+			PreparedStatement insert = conn.prepareStatement("INSERT INTO usuarios VALUES (?, ?, ?, ?, ?)");
+			insert.setInt(1,0);
+			insert.setString(2, usuario.getNombre());
+			insert.setString(3, usuario.getContrasena());
+			insert.setObject(4, usuario.getCartas());
+			insert.setInt(5, usuario.getMonedas());
+			
+			insert.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("No se han podido insertar los datos");
+		}
 		
 	}
 
