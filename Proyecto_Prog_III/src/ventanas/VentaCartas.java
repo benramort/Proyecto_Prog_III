@@ -1,6 +1,7 @@
 package ventanas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
@@ -37,9 +38,9 @@ public class VentaCartas extends JFrame{
 	CartaAEntrenar carta2 = new CartaAEntrenar();
 	CartaAEntrenar carta3 = new CartaAEntrenar();
 
-	CartaVendiendo cartaIzq = new CartaVendiendo(carta1);
-	CartaVendiendo cartaCen = new CartaVendiendo(carta2);
-	CartaVendiendo cartaDer = new CartaVendiendo(carta3);
+	CartaVendiendo cartaIzq = new CartaVendiendo(carta1, "");
+	CartaVendiendo cartaCen = new CartaVendiendo(carta2, "");
+	CartaVendiendo cartaDer = new CartaVendiendo(carta3, "");
 	
 	CartaVendiendo cartaVen1 = cartaIzq;
 	CartaVendiendo cartaVen2 = cartaCen;
@@ -48,7 +49,7 @@ public class VentaCartas extends JFrame{
 	Usuario usuario;
 	
 	JPanel flowLayoutCartasH;
-	
+	Color color = new Color(255, 1, 1);
 	public JButton bClear;
 	
 	List<Carta> cartasNoMostradas = new ArrayList<>();
@@ -86,14 +87,14 @@ public class VentaCartas extends JFrame{
 		pCentral.setMaximumSize(new Dimension(100000,500));
 		pCartas.setLayout(new FlowLayout(FlowLayout.CENTER));
 		flowLayoutCartasH.setLayout(new FlowLayout(FlowLayout.CENTER));
-		// flowLayoutCartasH.setOpaque(true);
-		// flowLayoutCartasH.setBackground(Color.BLUE);
+//		flowLayoutCartasH.setOpaque(true);
+//		flowLayoutCartasH.setBackground(color);
 		boxLayoutCartasV.setLayout(new BoxLayout(boxLayoutCartasV, BoxLayout.Y_AXIS));
 		pBotonMercado.setLayout(new FlowLayout(FlowLayout.LEFT));
 		// pBotonAlbum.setMaximumSize(new Dimension(10000,50));
-		flowLayoutCartasH.setMaximumSize(new Dimension(1000,1000));
-		boxLayoutCartasV.setOpaque(true);
-		// boxLayoutCartasH.setOpaque(false);
+		flowLayoutCartasH.setMaximumSize(new Dimension(2000,1000));
+//		boxLayoutCartasV.setOpaque(true);
+		boxLayoutCartasV.setBackground(Color.BLUE);
 		blCentro.setLayout(new BoxLayout(blCentro, BoxLayout.Y_AXIS));
 		//Creacion componentes
 		JButton bMercado = new JButton("MERCADO");
@@ -119,13 +120,12 @@ public class VentaCartas extends JFrame{
 		// boxLayoutCartasV.setBackground(Color.BLUE);
 		boxLayoutCartasV.add(flowLayoutCartasH);
 		flowLayoutCartasH.add(cartaVen1);
-//		flowLayoutCartasH.add(Box.createHorizontalStrut(10));
+		flowLayoutCartasH.add(Box.createHorizontalStrut(50));
 		flowLayoutCartasH.add(cartaVen2);
-//		flowLayoutCartasH.add(Box.createHorizontalStrut(10));
+		flowLayoutCartasH.add(Box.createHorizontalStrut(50));
 		flowLayoutCartasH.add(cartaVen3);
 //		pBotonRecogerMonedas.add(bRecogerMonedas);
 //		pBotonEntrenar.add(bRecogerMonedas);
-		boxLayoutCartasV.add(pBotonRecogerMonedas);
 		pBotonMercado.add(bMercado);
 		add(pBotonMercado, BorderLayout.NORTH);
 		
@@ -278,16 +278,16 @@ public class VentaCartas extends JFrame{
 	public void cambiarCartaVendiendo(Carta carta, int indice, Object precio) {
 		switch (indice) {
 		case 1: 
-			cartaVen1 = new CartaVendiendo(carta);
-			cartaVen1.getLPrecio().setText(precio + "");
+			cartaVen1 = new CartaVendiendo(carta, precio);
+			repaint();
 			break;
 		case 2: 
-			cartaVen2 = new CartaVendiendo(carta);
-			cartaVen2.getLPrecio().setText(precio + "");
+			cartaVen2 = new CartaVendiendo(carta, precio);
+			repaint();
 			break;
 		case 3: 
-			cartaVen3 = new CartaVendiendo(carta);
-			cartaVen3.getLPrecio().setText(precio  + "");
+			cartaVen3 = new CartaVendiendo(carta, precio);
+			repaint();
 			break;
 		default: 
 		//TODO hacer una excepcion
