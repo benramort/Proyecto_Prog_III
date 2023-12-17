@@ -1,5 +1,6 @@
 package ventanas;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
@@ -17,14 +18,15 @@ public class CartaVendiendo extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public int precio;
+	public Object precio;
 	public Carta carta;
 	public PanelCarta pCarta;
 	public JLabel lPrecio;
 //	public int indice;
 
-	public CartaVendiendo(Carta carta) {
+	public CartaVendiendo(Carta carta, Object precio) {
 		this.carta = carta;
+		this.precio = precio;
 //		this.indice = indice;
 
 		//Formato Panel
@@ -35,18 +37,20 @@ public class CartaVendiendo extends JPanel{
 		//Formato contenedores
 		pPrincipal.setLayout(new BoxLayout(pPrincipal, BoxLayout.Y_AXIS));
 		//Creacion componentes
-		lPrecio = new JLabel();
+		lPrecio = new JLabel(precio + "");
 		pCarta = new PanelCarta(carta);
-
 		//Formato componentes
-		lPrecio.setPreferredSize(new Dimension(200, 50));
-		
+		pCarta.setPreferredSize(new Dimension(300, 350));
+		pCarta.setMinimumSize(new Dimension(300, 350));
+		lPrecio.setPreferredSize(new Dimension(300, 45));
+//		lPrecio.setBackground(Color.RED);
+//		lPrecio.setOpaque(true);
 		//Añadir componentes a contenedores
 		this.add(pPrincipal);
 		pPrincipal.add(pCarta);
 		pPrincipal.add(Box.createVerticalStrut(20));
 		pPrincipal.add(lPrecio);
-		setOpaque(false);
+		pPrincipal.setPreferredSize(new Dimension(250, 400));
 
 	}
 
