@@ -10,9 +10,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -56,7 +58,6 @@ public class BasesDeDatos implements Datos {
 				int recuperacion = rs.getInt(8);
 				Saga saga = new Saga(sagaInterno, sagaVisible);
 				Carta carta = new Carta(id, nombreInterno, nombreVisible, saga, monedasPorMinuto, resistencia, recuperacion);
-				System.out.println(carta);
 				modeloCartas.add(carta);
 			}
 			stmt.close();
@@ -115,15 +116,50 @@ public class BasesDeDatos implements Datos {
 	@Override
 	public void guardarUsuario(Usuario usuario) {
 		try {
-			PreparedStatement insert = conn.prepareStatement("INSERT INTO usuarios (USERNAME, PASSWORD, CARTAS, MONEDAS) VALUES (?, ?, ?, ?)");
-			//insert.setInt(1,0);
-			insert.setString(1, usuario.getNombre());
-			insert.setString(2, usuario.getContrasena());
-			insert.setObject(3, usuario.getCartas());
-			insert.setInt(4, usuario.getMonedas());
-			insert.setString(5, null);
-			insert.executeUpdate();
-			insert.close();
+			if(cargarUsuario(usuario.getNombre())==null) {
+				PreparedStatement insert = conn.prepareStatement("INSERT INTO usuarios (USERNAME, PASSWORD, CARTAS, MONEDAS, CARTAS_SIN_STAMINA) VALUES (?, ?, ?, ?, ?)");
+				//insert.setInt(1,0);
+				String cartasObtenidas = "";
+				for(Integer cantidadCarta : usuario.getCartas().values()) {
+					cartasObtenidas += cantidadCarta + ",";
+				}
+				
+				String cartasSinStamina = "";
+				for (Entry<Carta, ZonedDateTime> entry : usuario.getCartasSinStamina().entrySet()) {
+					cartasSinStamina += entry.getKey().getId() + "=" + entry.getValue().format(DateTimeFormatter.ISO_ZONED_DATE_TIME)+",";
+				}
+				System.out.println(cartasSinStamina);
+				
+				
+				insert.setString(1, usuario.getNombre());
+				insert.setString(2, usuario.getContrasena());
+				insert.setString(3, cartasObtenidas);
+				insert.setInt(4, usuario.getMonedas());
+				insert.setString(5, cartasSinStamina);
+				insert.executeUpdate();
+				insert.close();
+			} else {
+				PreparedStatement update = conn.prepareStatement("UPDATE usuarios SET CARTAS= ?, MONEDAS= ?, CARTAS_SIN_STAMINA = ? WHERE USERNAME= ?");
+				String cartasObtenidas = "";
+				for(Integer cantidadCarta : usuario.getCartas().values()) {
+					cartasObtenidas += cantidadCarta + ",";
+				}
+				
+				String cartasSinStamina = "";
+				for (Entry<Carta, ZonedDateTime> entry : usuario.getCartasSinStamina().entrySet()) {
+					cartasSinStamina += entry.getKey().getId() + "=" + entry.getValue().format(DateTimeFormatter.ISO_ZONED_DATE_TIME)+",";
+				}
+				System.out.println(cartasSinStamina);
+				
+				update.setString(1, cartasObtenidas);
+				update.setInt(2, usuario.getMonedas());
+				update.setString(3, cartasSinStamina);
+				update.setString(4, usuario.getNombre());
+				update.executeUpdate();
+				update.close();
+				
+			}
+			
 		} catch (SQLException e) {
 			System.out.println("No se han podido insertar los datos");
 			e.printStackTrace();
@@ -172,6 +208,7 @@ public class BasesDeDatos implements Datos {
 		BasesDeDatos bd = new BasesDeDatos();
 		System.out.println(bd.getModeloCartas());
 		Usuario usuario = new Usuario("Benaat", "aaaaa", bd, 10);
+		usuario.nuevaCartaSinStamina(bd.getModeloCartas().get(6));
 		bd.guardarUsuario(usuario);
 		Usuario usuario2 = bd.cargarUsuario("Benaat");
 		System.out.println(usuario2);

@@ -98,8 +98,12 @@ public class Usuario {
 	}
 	
 	public static Map<Carta, ZonedDateTime> cargarSinStamina(String s, Datos datos) {
-		String[] tokens = s.split(",");
 		Map<Carta, ZonedDateTime> mapa = new TreeMap<>();
+		if(s.isEmpty()) {
+			return mapa;
+		}
+		String[] tokens = s.split(",");
+		
 //		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		for (String token : tokens) {
 			String[] splitToken = token.split("=");
