@@ -19,6 +19,8 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.*;
 import javax.swing.border.*;
+
+import comportamientos.BasesDeDatos;
 import comportamientos.Carta;
 import comportamientos.CartaVacia;
 import comportamientos.Datos;
@@ -289,6 +291,9 @@ public class Album extends JFrame {
 					public void run() {
 						int resp = JOptionPane.showConfirmDialog( Album.this, "¿Seguro que quieres salir?", "Salir", JOptionPane.YES_NO_OPTION );
 						if (resp==JOptionPane.OK_OPTION) {
+							if(datos instanceof BasesDeDatos) {
+								((BasesDeDatos) datos).cerrarConexion();
+							}
 							Album.this.dispose();
 						}
 						
@@ -334,6 +339,9 @@ public class Album extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				datos.guardarUsuario(usuario);
+				if(datos instanceof BasesDeDatos) {
+					((BasesDeDatos) datos).cerrarConexion();
+				}
 			}
 		});
 		
