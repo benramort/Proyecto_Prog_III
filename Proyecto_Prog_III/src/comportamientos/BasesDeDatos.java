@@ -198,6 +198,7 @@ public class BasesDeDatos implements Datos {
 	public void cerrarConexion() {
 		try {
 			conn.close();
+			logger.info("Cierre de la conexión a la base de datos");
 		} catch (SQLException e) {
 			logger.info("Error en el cierre de la conexión a la base de datos, probablemente queden recursos abiertos");
 		}

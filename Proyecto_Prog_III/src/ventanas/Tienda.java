@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
-import comportamientos.Compra;
 import comportamientos.Datos;
 import comportamientos.Usuario;
 public class Tienda extends JFrame {
@@ -124,7 +123,7 @@ public class Tienda extends JFrame {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					Compra compra = new Compra(lNombreSobre, lPrecioSobre, datos, usuario, Tienda.this);
-					compra.gestionarCompra();
+					compra.gestionarCompra(Tienda.this);
 					
 				}
 			});

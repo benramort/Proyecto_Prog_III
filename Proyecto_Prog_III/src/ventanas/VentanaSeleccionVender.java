@@ -164,9 +164,9 @@ public class VentanaSeleccionVender extends JFrame{
 							
 							@Override
 							public void actionPerformed(ActionEvent e) {
-								((VentaCartas) ventanaAnterior).cambiarCartaVendiendo(cartaSeleccionada, indice, spPrecio.getValue());
-								((VentaCartas) ventanaAnterior).revalidate();
-								((VentaCartas) ventanaAnterior).repaint();
+								((VentanaVentaCartas) ventanaAnterior).cambiarCartaVendiendo(cartaSeleccionada, indice, spPrecio.getValue());
+								((VentanaVentaCartas) ventanaAnterior).revalidate();
+								((VentanaVentaCartas) ventanaAnterior).repaint();
 								dispose();
 							}
 						});

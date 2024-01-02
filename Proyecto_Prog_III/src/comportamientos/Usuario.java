@@ -21,7 +21,7 @@ public class Usuario {
 	private int monedas;
 	private Map<Carta,Integer> cartas; //Las cartas se ordenan naturalmente, y se almacena el número de cartas que tiene ese usuario. Si no tiene esa carta hay que añadirla con 0
 //	private RegistroTemporal registroTemporal;
-	private Map<Carta,ZonedDateTime> cartasSinStamina = new TreeMap<>();
+	private Map<Carta,ZonedDateTime> cartasSinStamina;
 
 	
 	public Usuario(String nombre, String contrasena, Datos datos, int monedas) {
@@ -32,6 +32,7 @@ public class Usuario {
 		for (Carta c: datos.getModeloCartas()) {
 			cartas.put(c, 0);
 		}
+		this.cartasSinStamina = new TreeMap<>(); 
 	}
 	
 	public Usuario(String nombre, String contrasena, Datos datos, Map<Carta, Integer> cartas,int monedas, Map<Carta, ZonedDateTime> cartasSinStamina) {
@@ -155,7 +156,12 @@ public class Usuario {
 	public boolean equals(Object o) {
 		if (o instanceof Usuario) {
 			Usuario u = (Usuario) o;
-			return this.getNombre().equals(u.getNombre());
+			if(!this.getNombre().equals(u.getNombre())) return false;
+			if(!this.getContrasena().equals(u.getContrasena())) return false;
+			if(this.getMonedas() != u.getMonedas()) return false;
+			if(!this.getCartasSinStamina().equals(u.getCartasSinStamina())) return false;
+			if(!this.getCartas().equals(u.getCartas())) return false;
+			return true;
 		}
 		return false;
 	}

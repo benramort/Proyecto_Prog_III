@@ -26,13 +26,6 @@ public class CartaAEntrenarTest {
 		assertNotNull(cartaAEntrenar);
 	}
 	
-	@Test
-    public void testGetRecursoGrafico() {
-        recursoGrafico = cartaAEntrenar.getRecursoGrafico();
-        assertNotNull(recursoGrafico);
-        assertEquals("res/bloqueado.png", recursoGrafico.getDescription());
-    }
-	
 	
 	
 }

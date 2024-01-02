@@ -1,10 +1,11 @@
-package comportamientos;
+package ventanas;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import ventanas.VentanaSobres;
-import ventanas.Tienda;
+
+import comportamientos.Datos;
+import comportamientos.Usuario;
 
 public class Compra {
 	
@@ -12,7 +13,6 @@ public class Compra {
 	JLabel lPrecioSobre;
 	Datos datos;
 	Usuario usuario;
-	JFrame ventana;
 
 	
 	
@@ -21,10 +21,9 @@ public class Compra {
 		this.lPrecioSobre = lPrecioSobre;
 		this.datos = datos;
 		this.usuario = usuario;
-		this.ventana = ventana;
 	}
 	
-	public void gestionarCompra() {
+	public void gestionarCompra(JFrame ventana) {
 		int numCartasPorSobre = 0;
 		int monedasUsuario = 0;
 		int monedas = usuario.getMonedas();

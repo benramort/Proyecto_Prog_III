@@ -28,7 +28,7 @@ import comportamientos.CartaAEntrenar;
 import comportamientos.Datos;
 import comportamientos.Usuario;
 
-public class VentaCartas extends JFrame{
+public class VentanaVentaCartas extends JFrame{
 	/**
 	 * 
 	 */
@@ -55,7 +55,7 @@ public class VentaCartas extends JFrame{
 	List<Carta> cartasNoMostradas = new ArrayList<>();
 	
 	
-	public VentaCartas(JFrame ventanaAnterior, Usuario usuario, Datos datos) {
+	public VentanaVentaCartas(JFrame ventanaAnterior, Usuario usuario, Datos datos) {
 		this.usuario = usuario;
 		this.datos = datos;
 		for(Entry<Carta, Integer> e : usuario.getCartas().entrySet()) {
@@ -171,7 +171,7 @@ public class VentaCartas extends JFrame{
 					
 					@Override
 					public void run() {
-						new VentanaSeleccionVender(VentaCartas.this, usuario, datos, 1, cartasNoMostradas);
+						new VentanaSeleccionVender(VentanaVentaCartas.this, usuario, datos, 1, cartasNoMostradas);
 					}
 				});
 			}
@@ -184,7 +184,7 @@ public class VentaCartas extends JFrame{
 					
 					@Override
 					public void run() {
-						new VentanaSeleccionVender(VentaCartas.this, usuario, datos, 2, cartasNoMostradas);
+						new VentanaSeleccionVender(VentanaVentaCartas.this, usuario, datos, 2, cartasNoMostradas);
 					}
 				});
 			}
@@ -198,7 +198,7 @@ public class VentaCartas extends JFrame{
 					
 					@Override
 					public void run() {
-						new VentanaSeleccionVender(VentaCartas.this, usuario, datos, 3, cartasNoMostradas);
+						new VentanaSeleccionVender(VentanaVentaCartas.this, usuario, datos, 3, cartasNoMostradas);
 					}
 				});
 			}

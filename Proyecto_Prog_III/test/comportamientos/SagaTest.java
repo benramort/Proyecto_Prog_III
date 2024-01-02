@@ -18,8 +18,9 @@ public class SagaTest {
 		assertEquals(saga.getNombreInterno(), "SuperMario");
 	}
 	
+	@Test
 	public void testGetNombreVisible() {
-		assertEquals(saga.getNombreVisible(), "Super Mario");
+		assertEquals("Super Mario", saga.getNombreVisible());
 	}
 	
 	//TODO test recurso grafico

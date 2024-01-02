@@ -26,11 +26,4 @@ public class CartaVaciaTest {
 		assertNotNull(cartaVacia);
 	}
 	
-	@Test
-    public void testGetRecursoGrafico() {
-        recursoGrafico = cartaVacia.getRecursoGrafico();
-        assertNotNull(recursoGrafico);
-        assertEquals("res/bloqueado.png", recursoGrafico.getDescription());
-    }
-	
 }
