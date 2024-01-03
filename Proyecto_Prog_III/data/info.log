@@ -96,3 +96,39 @@ ene 02, 2024 8:18:57 P. M. comportamientos.BasesDeDatos <init>
 INFO: Conexión exitosa con la base de datos
 ene 02, 2024 8:18:58 P. M. comportamientos.BasesDeDatos cerrarConexion
 INFO: Cierre de la conexión a la base de datos
+ene 03, 2024 12:57:02 P. M. comportamientos.BasesDeDatos <init>
+INFO: Conexión exitosa con la base de datos
+ene 03, 2024 12:57:02 P. M. comportamientos.BasesDeDatos cerrarConexion
+INFO: Cierre de la conexión a la base de datos
+ene 03, 2024 12:57:55 P. M. comportamientos.BasesDeDatos <init>
+INFO: Conexión exitosa con la base de datos
+ene 03, 2024 12:57:55 P. M. comportamientos.BasesDeDatos cerrarConexion
+INFO: Cierre de la conexión a la base de datos
+ene 03, 2024 1:06:12 P. M. comportamientos.BasesDeDatos <init>
+INFO: Conexión exitosa con la base de datos
+ene 03, 2024 1:06:13 P. M. comportamientos.BasesDeDatos cerrarConexion
+INFO: Cierre de la conexión a la base de datos
+ene 03, 2024 1:06:49 P. M. comportamientos.BasesDeDatos <init>
+INFO: Conexión exitosa con la base de datos
+ene 03, 2024 1:06:50 P. M. comportamientos.BasesDeDatos cerrarConexion
+INFO: Cierre de la conexión a la base de datos
+ene 03, 2024 1:08:20 P. M. comportamientos.BasesDeDatos <init>
+INFO: Conexión exitosa con la base de datos
+ene 03, 2024 1:08:20 P. M. comportamientos.BasesDeDatos cerrarConexion
+INFO: Cierre de la conexión a la base de datos
+ene 03, 2024 1:45:17 P. M. comportamientos.BasesDeDatos <init>
+INFO: Conexión exitosa con la base de datos
+ene 03, 2024 1:45:32 P. M. comportamientos.BasesDeDatos <init>
+INFO: Conexión exitosa con la base de datos
+ene 03, 2024 1:45:34 P. M. comportamientos.BasesDeDatos cerrarConexion
+INFO: Cierre de la conexión a la base de datos
+ene 03, 2024 1:45:37 P. M. comportamientos.BasesDeDatos <init>
+INFO: Conexión exitosa con la base de datos
+ene 03, 2024 1:45:45 P. M. comportamientos.BasesDeDatos cerrarConexion
+INFO: Cierre de la conexión a la base de datos
+ene 03, 2024 1:48:59 P. M. comportamientos.BasesDeDatos <init>
+INFO: Conexión exitosa con la base de datos
+ene 03, 2024 1:48:59 P. M. comportamientos.BasesDeDatos cargarModeloCartas
+WARNING: No se han podido cargar los modelos de cartas
+ene 03, 2024 1:48:59 P. M. comportamientos.BasesDeDatos cerrarConexion
+INFO: Cierre de la conexión a la base de datos

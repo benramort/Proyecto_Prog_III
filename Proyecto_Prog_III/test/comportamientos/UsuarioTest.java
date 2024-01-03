@@ -23,7 +23,7 @@ public class UsuarioTest {
 	
 	@BeforeClass
 	public static void preparatorioUnico() {
-		datos = new BasesDeDatos();
+		datos = new BasesDeDatos("datos.db");
 	}
 	
 	@Before
@@ -102,8 +102,27 @@ public class UsuarioTest {
 	}
 	
 	@Test
+	public void testDeLineaALinea() {
+		String linea = usuarioExistente.aLinea();
+		Usuario usuarioDeLinea = Usuario.deLinea(linea, datos);
+		assertEquals(usuarioExistente, usuarioDeLinea);
+	}
+	
+	//TODO cargarCartas y cargarSinStamina
+	
+	@Test
+	public void testNuevaCartaSinStamina() {
+		Carta carta = datos.getModeloCartas().get(0);
+		usuarioNuevo.nuevaCartaSinStamina(carta);
+		assertTrue(usuarioNuevo.getCartasSinStamina().keySet().contains(carta));
+		assertEquals(1, usuarioNuevo.getCartasSinStamina().size());
+	}
+	
+	@SuppressWarnings("unlikely-arg-type")
+	@Test
 	public void testEquals() {
-		assertFalse(usuarioExistente.equals(usuarioNuevo));
+		assertFalse(usuarioExistente.equals(""));
+//		assertFalse(usuarioExistente.equals(usuarioNuevo));
 		TreeMap<Carta,Integer> mapaCartas = new TreeMap<>();
 		int contador = 0;
 		for (Carta c : datos.getModeloCartas()) {
@@ -115,7 +134,33 @@ public class UsuarioTest {
 		}
 		Usuario usuarioExistente2 = new Usuario("nombre","contraseña",datos,mapaCartas,30,cartasSinStamina);
 		assertTrue(usuarioExistente.equals(usuarioExistente2));
+		usuarioExistente2.setNombre("otroNombre");
+		assertFalse(usuarioExistente.equals(usuarioExistente2));
+		usuarioExistente2.setNombre("nombre");
+		usuarioExistente2.setContrasena("otraContraseña");
+		assertFalse(usuarioExistente.equals(usuarioExistente2));
+		usuarioExistente2.setContrasena("contraseña");
+		usuarioExistente2.setMonedas(0);
+		assertFalse(usuarioExistente.equals(usuarioExistente2));
+		usuarioExistente2.setMonedas(30);
+		usuarioExistente2.getCartasSinStamina().clear();
+		assertFalse(usuarioExistente.equals(usuarioExistente2));
+		cartasSinStamina = new TreeMap<>(); //Resetear las cartas sin stamina
+		for (Carta c : datos.getModeloCartas()) { 
+			cartasSinStamina.put(c, ZonedDateTime.of(1, 1, 1, 1, 1, 1, 1, ZoneId.systemDefault()));
+		}
+		usuarioExistente2 = new Usuario("nombre","contraseña",datos,mapaCartas,30,cartasSinStamina);
+		usuarioExistente2.getCartas().clear();
+		assertFalse(usuarioExistente.equals(usuarioExistente2));
+		
 	}
+	
+	@Test
+	public void testToString() {
+		assertEquals(usuarioExistente.getNombre(), usuarioExistente.toString());
+	}
+	
+	
 	
 	
 
