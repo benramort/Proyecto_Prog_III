@@ -111,7 +111,15 @@ public class Carta implements Comparable<Carta>{
 	@Override
 	public boolean equals(Object o) { //TODO igual hay que completar
 		if (o instanceof Carta) {
-			return id == ((Carta) o).getId();
+			Carta c = (Carta) o;
+			if (id != c.getId()) return false;
+			if (!nombreInterno.equals(c.getNombreInterno())) return false;
+			if (!nombreVisible.equals(c.getNombreVisible())) return false;
+			if (!saga.equals(c.getSaga())) return false;
+			if (monedasPorMinuto != c.getMonedasPorMinuto()) return false;
+			if (resistencia != c.getResistencia()) return false;
+			if (recuperacion != c.getRecuperacion()) return false;
+			return true;
 		}
 		return false;
 	}

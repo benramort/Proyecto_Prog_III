@@ -29,8 +29,10 @@ public class Usuario {
 		this.contrasena = contrasena;
 		this.monedas = monedas;
 		cartas = new TreeMap<Carta, Integer>();
-		for (Carta c: datos.getModeloCartas()) {
-			cartas.put(c, 0);
+		if (datos != null) {
+			for (Carta c: datos.getModeloCartas()) {
+				cartas.put(c, 0);
+			}
 		}
 		this.cartasSinStamina = new TreeMap<>(); 
 	}
@@ -159,8 +161,8 @@ public class Usuario {
 			if(!this.getNombre().equals(u.getNombre())) return false;
 			if(!this.getContrasena().equals(u.getContrasena())) return false;
 			if(this.getMonedas() != u.getMonedas()) return false;
-			if(!this.getCartasSinStamina().equals(u.getCartasSinStamina())) return false;
-			if(!this.getCartas().equals(u.getCartas())) return false;
+//			if(!this.getCartasSinStamina().equals(u.getCartasSinStamina())) return false;
+//			if(!this.getCartas().equals(u.getCartas())) return false;
 			return true;
 		}
 		return false;

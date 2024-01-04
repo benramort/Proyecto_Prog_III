@@ -69,8 +69,10 @@ public class CartaTest {
 	
 	@Test
 	public void testEquals() {
-		Carta cartaIgual = new Carta(1);
+//		Carta cartaIgual = new Carta(1);
 		Carta cartaDiferernte = new Carta(2);
+		saga = new Saga("SuperMario", "Super Mario");
+		Carta cartaIgual = new Carta(1, "yoshi", "Yoshi", saga, 20, 30, 40);
 		assertTrue(carta.equals(cartaIgual));
 		assertFalse(carta.equals(cartaDiferernte));
 		assertFalse(carta.equals(Color.BLACK));
