@@ -122,7 +122,14 @@ public class BasesDeDatosTest {
 	
 	@Test
 	public void testGuardarUsuario() {
-		
+		Map<Carta, Integer> cartas = Usuario.cargarCartas("1,0,1,", db);
+		Map<Carta, ZonedDateTime> cartasSinStamina = Usuario.cargarSinStamina("2=2023-12-29T12:14:14.9581759+01:00[Europe/Madrid],", db);
+		Usuario usuarioExistente = new Usuario("usuario3", "contrasena", db, cartas, 20, cartasSinStamina);
+		db.guardarUsuario(usuarioExistente);
+		assertEquals(usuarioExistente, db.cargarUsuario("usuario3"));
+		usuarioExistente.setMonedas(100);
+		db.guardarUsuario(usuarioExistente);
+		assertEquals(usuarioExistente, db.cargarUsuario("usuario3"));
 	}
 	
 	@Test

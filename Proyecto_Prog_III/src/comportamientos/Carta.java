@@ -16,9 +16,9 @@ public class Carta implements Comparable<Carta>{
 	private ImageIcon recursoGrafico;
 	
 	int id;
-	int monedasPorMinuto = 100;
-	int resistencia = 10;
-	int recuperacion = 25;
+	int monedasPorMinuto = 0;
+	int resistencia = 0;
+	int recuperacion = 0;
 
 	public Carta(int id) {
 		this.id = id;

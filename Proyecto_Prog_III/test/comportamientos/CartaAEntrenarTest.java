@@ -15,7 +15,7 @@ public class CartaAEntrenarTest {
 	
 	@Before
 	public void preparatorio(){
-		carta = new Carta(0, null, null, new Saga("", ""), 0,0,0);
+		carta = new Carta(0, "", "", new Saga("", ""), 0,0,0);
 		cartaAEntrenar = new CartaAEntrenar();
 		
 	}

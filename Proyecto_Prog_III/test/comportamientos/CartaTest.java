@@ -102,7 +102,7 @@ public class CartaTest {
 	
 	@Test
 	public void testDeLinea() {
-		String str = "1;yoshi;Yoshi;SuperMario;Super Mario;25;60;80";
+		String str = "1;yoshi;Yoshi;SuperMario;Super Mario;20;30;40";
 		Carta carta2 = Carta.deLinea(str);
 		assertEquals(carta, carta2);
 	}
