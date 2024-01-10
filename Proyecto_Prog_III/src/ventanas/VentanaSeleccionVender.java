@@ -175,17 +175,7 @@ public class VentanaSeleccionVender extends JFrame{
 						p.setOpaque(true);
 						revalidate();
 						repaint();
-						bAceptar.addActionListener(new ActionListener() {
-							
-							@Override
-							public void actionPerformed(ActionEvent e) {
-//								((VentaCartas) ventanaAnterior).cambiarCartaVendiendo(cartaSeleccionada, spPrecio.getValue());
-//								((VentaCartas) ventanaAnterior).revalidate();
-//								((VentaCartas) ventanaAnterior).repaint();
-								
-								dispose();
-							}
-						});
+
 					}
 					
 				});

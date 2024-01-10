@@ -28,11 +28,11 @@ public class BasesDeDatos implements Datos {
 	
 	private Connection conn;
 	
-	public BasesDeDatos() {
+	public BasesDeDatos(String nombre) {
 		configurarLogger();
 		try {
 			Class.forName("org.sqlite.JDBC");
-			conn = DriverManager.getConnection("jdbc:sqlite:data/datos.db");
+			conn = DriverManager.getConnection("jdbc:sqlite:data/"+nombre);
 			logger.info("Conexión exitosa con la base de datos");
 		} catch (ClassNotFoundException ex) {
 			logger.warning("No se ha podido cargar el driver de la base de datos");
@@ -59,7 +59,9 @@ public class BasesDeDatos implements Datos {
 				Saga saga = new Saga(sagaInterno, sagaVisible);
 				Carta carta = new Carta(id, nombreInterno, nombreVisible, saga, monedasPorMinuto, resistencia, recuperacion);
 				modeloCartas.add(carta);
+				
 			}
+//			System.out.println("El tamaño de la lista es: "+modeloCartas.size());
 			stmt.close();
 		} catch (SQLException e) {
 			logger.warning("No se han podido cargar los modelos de cartas");
@@ -198,6 +200,7 @@ public class BasesDeDatos implements Datos {
 	public void cerrarConexion() {
 		try {
 			conn.close();
+			logger.info("Cierre de la conexión a la base de datos");
 		} catch (SQLException e) {
 			logger.info("Error en el cierre de la conexión a la base de datos, probablemente queden recursos abiertos");
 		}
@@ -205,7 +208,7 @@ public class BasesDeDatos implements Datos {
 	
 	public static void main(String[] args) {
 		
-		BasesDeDatos bd = new BasesDeDatos();
+		BasesDeDatos bd = new BasesDeDatos("datos.db");
 		System.out.println(bd.getModeloCartas());
 		Usuario usuario = new Usuario("Benaat", "aaaaa", bd, 10);
 		usuario.nuevaCartaSinStamina(bd.getModeloCartas().get(6));

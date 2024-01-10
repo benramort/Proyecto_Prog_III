@@ -19,12 +19,11 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import comportamientos.Datos;
 import comportamientos.Saga;
 import comportamientos.Usuario;
 import comportamientos.Venta;
 import comportamientos.Carta;
-import comportamientos.CompraCarta;
+import comportamientos.Datos;
 
 
 public class Mercado extends JFrame {
@@ -150,6 +149,7 @@ public class Mercado extends JFrame {
 		
 		AbstractTableModel modeloTabla = new ModeloJTableCartas(ventas);
 		for (int i = 0; i < 10 ; i++) {
+			datos.cargarUsuarios();
 			Venta venta = new Venta();
 			venta.setCarta(datos.getModeloCartas().get(r.nextInt(datos.getModeloCartas().size())));
 			venta.setPrecio(r.nextInt(100, 200));
@@ -216,6 +216,8 @@ public class Mercado extends JFrame {
 					@Override
 					public void run() {
 						new VentanaSeleccionVender(Mercado.this, usuario, datos, null);
+
+
 					}
 				});
 				
