@@ -33,4 +33,5 @@ public class VentaTest {
 	public void testGetUsuario() {
 		assertEquals(usuario, venta.getUsuario());
 	}
+	
 }
