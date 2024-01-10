@@ -1,0 +1,24 @@
+ene 10, 2024 2:32:04 P. M. comportamientos.BasesDeDatos <init>
+INFO: Conexión exitosa con la base de datos
+ene 10, 2024 2:32:04 P. M. comportamientos.BasesDeDatos cargarModeloCartas
+WARNING: No se han podido cargar los modelos de cartas
+ene 10, 2024 2:32:14 P. M. comportamientos.BasesDeDatos <init>
+INFO: Conexión exitosa con la base de datos
+ene 10, 2024 2:32:14 P. M. comportamientos.BasesDeDatos cargarModeloCartas
+WARNING: No se han podido cargar los modelos de cartas
+ene 10, 2024 2:32:35 P. M. comportamientos.BasesDeDatos cerrarConexion
+INFO: Cierre de la conexión a la base de datos
+ene 10, 2024 2:38:45 P. M. comportamientos.BasesDeDatos <init>
+INFO: Conexión exitosa con la base de datos
+ene 10, 2024 2:38:45 P. M. comportamientos.BasesDeDatos cargarModeloCartas
+WARNING: No se han podido cargar los modelos de cartas
+ene 10, 2024 2:39:19 P. M. comportamientos.BasesDeDatos <init>
+INFO: Conexión exitosa con la base de datos
+ene 10, 2024 2:39:19 P. M. comportamientos.BasesDeDatos cargarModeloCartas
+WARNING: No se han podido cargar los modelos de cartas
+ene 10, 2024 2:41:45 P. M. comportamientos.BasesDeDatos <init>
+INFO: Conexión exitosa con la base de datos
+ene 10, 2024 2:41:59 P. M. comportamientos.BasesDeDatos <init>
+INFO: Conexión exitosa con la base de datos
+ene 10, 2024 2:42:05 P. M. comportamientos.BasesDeDatos cerrarConexion
+INFO: Cierre de la conexión a la base de datos
