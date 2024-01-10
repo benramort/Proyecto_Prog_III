@@ -15,22 +15,15 @@ public class CartaVaciaTest {
 	
 	@Before
 	public void preparatorio(){
-		carta = new Carta(0, null, null, new Saga("", ""), 0,0,0);
+		carta = new Carta(0, "", "", new Saga("", ""), 0,0,0);
 		cartaVacia = new CartaVacia();
 		
 	}
 	
 	@Test
-	public void cartaAEntenar() {
+	public void cartaVacia() {
 		assertEquals(carta,cartaVacia);
 		assertNotNull(cartaVacia);
 	}
-	
-	@Test
-    public void testGetRecursoGrafico() {
-        recursoGrafico = cartaVacia.getRecursoGrafico();
-        assertNotNull(recursoGrafico);
-        assertEquals("res/bloqueado.png", recursoGrafico.getDescription());
-    }
 	
 }

@@ -20,7 +20,7 @@ public class DatosFactory {
 				return new Ficheros();
 			}
 			if (fuente.equals("BaseDeDatos")) {
-				
+				return new BasesDeDatos("datos.db");
 			}
 			throw new DataException();
 			

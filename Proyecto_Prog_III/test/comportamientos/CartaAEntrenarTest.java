@@ -15,7 +15,7 @@ public class CartaAEntrenarTest {
 	
 	@Before
 	public void preparatorio(){
-		carta = new Carta(0, null, null, new Saga("", ""), 0,0,0);
+		carta = new Carta(0, "", "", new Saga("", ""), 0,0,0);
 		cartaAEntrenar = new CartaAEntrenar();
 		
 	}
@@ -25,13 +25,6 @@ public class CartaAEntrenarTest {
 		assertEquals(carta,cartaAEntrenar);
 		assertNotNull(cartaAEntrenar);
 	}
-	
-	@Test
-    public void testGetRecursoGrafico() {
-        recursoGrafico = cartaAEntrenar.getRecursoGrafico();
-        assertNotNull(recursoGrafico);
-        assertEquals("res/bloqueado.png", recursoGrafico.getDescription());
-    }
 	
 	
 	

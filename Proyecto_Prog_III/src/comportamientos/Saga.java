@@ -28,6 +28,14 @@ public class Saga {
 	public ImageIcon getRecursoGrafico() {
 		return recursoGrafico;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Saga) {
+			return nombreInterno.equals(((Saga) o).getNombreInterno());
+		}
+		return false;
+	}
 
 	
 }

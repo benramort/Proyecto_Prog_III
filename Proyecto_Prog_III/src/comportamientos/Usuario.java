@@ -1,8 +1,10 @@
 package comportamientos;
 
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -19,7 +21,7 @@ public class Usuario {
 	private int monedas;
 	private Map<Carta,Integer> cartas; //Las cartas se ordenan naturalmente, y se almacena el número de cartas que tiene ese usuario. Si no tiene esa carta hay que añadirla con 0
 //	private RegistroTemporal registroTemporal;
-	private Map<Carta,ZonedDateTime> cartasSinStamina = new TreeMap<>();
+	private Map<Carta,ZonedDateTime> cartasSinStamina;
 
 	
 	public Usuario(String nombre, String contrasena, Datos datos, int monedas) {
@@ -27,16 +29,20 @@ public class Usuario {
 		this.contrasena = contrasena;
 		this.monedas = monedas;
 		cartas = new TreeMap<Carta, Integer>();
-		for (Carta c: datos.getModeloCartas()) {
-			cartas.put(c, 0);
+		if (datos != null) {
+			for (Carta c: datos.getModeloCartas()) {
+				cartas.put(c, 0);
+			}
 		}
+		this.cartasSinStamina = new TreeMap<>(); 
 	}
 	
-	public Usuario(String nombre, String contrasena, Datos datos, Map<Carta, Integer> cartas,int monedas) {
+	public Usuario(String nombre, String contrasena, Datos datos, Map<Carta, Integer> cartas,int monedas, Map<Carta, ZonedDateTime> cartasSinStamina) {
 		this.nombre = nombre;
 		this.contrasena = contrasena;
 		this.monedas = monedas;
 		this.cartas = cartas;
+		this.cartasSinStamina = cartasSinStamina;
 	}
 
 
@@ -76,7 +82,7 @@ public class Usuario {
 	public static Usuario deLinea(String s, Datos datos) {
 		String[] tokens = s.split(";");
 //		System.out.println(s);
-		return new Usuario(tokens[0], tokens[1], datos, cargarCartas(tokens[2], datos), Integer.parseInt(tokens[3])); //TODO gestionar excepciones
+		return new Usuario(tokens[0], tokens[1], datos, cargarCartas(tokens[2], datos), Integer.parseInt(tokens[3]), cargarSinStamina(tokens[4], datos)); //TODO gestionar excepciones
 		
 	}
 	
@@ -94,16 +100,38 @@ public class Usuario {
 		return mapa;
 	}
 	
+	public static Map<Carta, ZonedDateTime> cargarSinStamina(String s, Datos datos) {
+		Map<Carta, ZonedDateTime> mapa = new TreeMap<>();
+		if(s.isEmpty()) {
+			return mapa;
+		}
+		String[] tokens = s.split(",");
+		
+//		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		for (String token : tokens) {
+			String[] splitToken = token.split("=");
+			int indiceCarta = Integer.parseInt(splitToken[0]);
+			ZonedDateTime fechaHora = ZonedDateTime.parse(splitToken[1], DateTimeFormatter.ISO_ZONED_DATE_TIME);
+			mapa.put(datos.getModeloCartas().get(indiceCarta-1), fechaHora);  //Solución un poco cogido por pinzas
+		}
+		return mapa;
+	}
+	
 	public String aLinea() {
 		String nombre = this.getNombre() + ";";
 		String contrasena = this.getContrasena() + ";";
-		String monedas = this.getMonedas() + "";
+		String monedas = this.getMonedas() + ";";
 		String cartasObtenidas = "";
 		for(Integer cantidadCarta : cartas.values()) {
 			cartasObtenidas += cantidadCarta + ",";
 		}
 		cartasObtenidas += ";";
-		return nombre + contrasena + cartasObtenidas + monedas;
+//		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		String cartasSinStamina = "";
+		for (Entry<Carta, ZonedDateTime> entry : this.cartasSinStamina.entrySet()) {
+			cartasSinStamina += entry.getKey().getId() + "=" + entry.getValue().format(DateTimeFormatter.ISO_ZONED_DATE_TIME)+",";
+		}
+		return nombre + contrasena + cartasObtenidas + monedas + cartasSinStamina;
 	}
 	
 	public void nuevaCartaSinStamina(Carta carta) {
@@ -115,7 +143,7 @@ public class Usuario {
 		for (Entry<Carta, ZonedDateTime> entry : cartasSinStamina.entrySet()) {
 			long minutos = entry.getValue().until(ZonedDateTime.now(), ChronoUnit.MINUTES);
 			System.out.println(entry.getKey() + ":" + minutos);
-			if (minutos >= entry.getKey().getRecuperacion()) { //1 de estamina equivale a 20 minutos TODO poner por 20
+			if (minutos >= (100-entry.getKey().getRecuperacion()*1)) { //1 de estamina equivale a 20 minutos TODO poner por 20
 //				cartasSinStamina.remove(entry.getKey());
 				aEliminar.add(entry.getKey());
 			}
@@ -130,7 +158,12 @@ public class Usuario {
 	public boolean equals(Object o) {
 		if (o instanceof Usuario) {
 			Usuario u = (Usuario) o;
-			return this.getNombre().equals(u.getNombre());
+			if(!this.getNombre().equals(u.getNombre())) return false;
+			if(!this.getContrasena().equals(u.getContrasena())) return false;
+			if(this.getMonedas() != u.getMonedas()) return false;
+//			if(!this.getCartasSinStamina().equals(u.getCartasSinStamina())) return false;
+//			if(!this.getCartas().equals(u.getCartas())) return false;
+			return true;
 		}
 		return false;
 	}
@@ -151,23 +184,30 @@ public class Usuario {
 //		System.out.println(cartasSinStamina);
 //	}
 	
+//	public static void main(String[] args) {
+//		Datos datos = new Ficheros();
+//		Usuario usuario = new Usuario(null, null, datos, 0);
+//		usuario.nuevaCartaSinStamina(datos.getModeloCartas().get(0));
+//		usuario.nuevaCartaSinStamina(datos.getModeloCartas().get(1));
+//		ZonedDateTime inicio = ZonedDateTime.now();
+//		while (true) {
+//			usuario.actualizarCartasSinStamina();
+//			System.out.println(inicio.until(ZonedDateTime.now(), ChronoUnit.SECONDS));
+//			System.out.println(usuario.getCartasSinStamina());
+//			try {
+//				Thread.sleep(1000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+//	}
+	
 	public static void main(String[] args) {
-		Datos datos = new Ficheros();
-		Usuario usuario = new Usuario(null, null, datos, 0);
-		usuario.nuevaCartaSinStamina(datos.getModeloCartas().get(0));
-		usuario.nuevaCartaSinStamina(datos.getModeloCartas().get(1));
-		ZonedDateTime inicio = ZonedDateTime.now();
-		while (true) {
-			usuario.actualizarCartasSinStamina();
-			System.out.println(inicio.until(ZonedDateTime.now(), ChronoUnit.SECONDS));
-			System.out.println(usuario.getCartasSinStamina());
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		ZonedDateTime ahora = ZonedDateTime.now();
+		String s = ahora.format(DateTimeFormatter.ISO_ZONED_DATE_TIME);
+		ZonedDateTime ahora2 = ZonedDateTime.parse(s, DateTimeFormatter.ISO_ZONED_DATE_TIME);
+//		syso
 	}
 
 

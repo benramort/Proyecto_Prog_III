@@ -249,6 +249,7 @@ Datos datos;
 		    System.exit(0);
 		} catch (IOException ex) {
 			
+			
 		}
 		
 	}

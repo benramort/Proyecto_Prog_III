@@ -69,8 +69,10 @@ public class CartaTest {
 	
 	@Test
 	public void testEquals() {
-		Carta cartaIgual = new Carta(1);
+//		Carta cartaIgual = new Carta(1);
 		Carta cartaDiferernte = new Carta(2);
+		saga = new Saga("SuperMario", "Super Mario");
+		Carta cartaIgual = new Carta(1, "yoshi", "Yoshi", saga, 20, 30, 40);
 		assertTrue(carta.equals(cartaIgual));
 		assertFalse(carta.equals(cartaDiferernte));
 		assertFalse(carta.equals(Color.BLACK));
@@ -100,7 +102,7 @@ public class CartaTest {
 	
 	@Test
 	public void testDeLinea() {
-		String str = "1;yoshi;Yoshi;SuperMario;Super Mario;25;60;80";
+		String str = "1;yoshi;Yoshi;SuperMario;Super Mario;20;30;40";
 		Carta carta2 = Carta.deLinea(str);
 		assertEquals(carta, carta2);
 	}

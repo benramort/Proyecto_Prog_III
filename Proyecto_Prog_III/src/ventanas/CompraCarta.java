@@ -1,10 +1,12 @@
-package comportamientos;
+package ventanas;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import ventanas.Mercado;
+import comportamientos.Carta;
+import comportamientos.Datos;
+import comportamientos.Usuario;
 
 
 public class CompraCarta {
