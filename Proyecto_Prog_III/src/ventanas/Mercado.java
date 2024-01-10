@@ -153,6 +153,7 @@ public class Mercado extends JFrame {
 			Venta venta = new Venta();
 			venta.setCarta(datos.getModeloCartas().get(r.nextInt(datos.getModeloCartas().size())));
 			venta.setPrecio(r.nextInt(100, 200));
+			datos.cargarUsuarios();
 			venta.setUsuario(datos.getUsuarios().get(r.nextInt(datos.getUsuarios().size())));
 			ventas.add(venta);
 		}			
@@ -214,7 +215,9 @@ public class Mercado extends JFrame {
 					
 					@Override
 					public void run() {
-						new VentanaVentaCartas(Mercado.this, usuario, datos);
+						new VentanaSeleccionVender(Mercado.this, usuario, datos, null);
+
+
 					}
 				});
 				
