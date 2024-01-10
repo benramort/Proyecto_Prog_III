@@ -84,10 +84,6 @@ public class Carta implements Comparable<Carta>{
 		return monedasPorMinuto;
 	}
 
-	public void setMonedasPorMinuto(int monedasPorMinuto) {
-		 this.monedasPorMinuto = monedasPorMinuto;
-	}
-
 	
 
 	public int getResistencia() {
