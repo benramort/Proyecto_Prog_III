@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +25,7 @@ public class BasesDeDatos implements Datos {
 	
 	private List<Carta> modeloCartas = new ArrayList<>();
 	private List<Usuario> usuarios = new ArrayList<>();
+	private List<Venta> ventas = new ArrayList<>();
 //	private Set<Saga> sagas = new HashSet<>(); TODO optimizar creación de sagasxddd
 	
 	private Connection conn;
@@ -76,11 +78,11 @@ public class BasesDeDatos implements Datos {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM USUARIOS");
 			while (rs.next()) {
 //				int id = rs.getInt(1);
-				String nom = rs.getString(2);
-				String pass = rs.getString(3);
-				String cartasString = rs.getString(4);
-				int monedas = rs.getInt(5);
-				String sinStaminaString = rs.getString(6);
+				String nom = rs.getString(1);
+				String pass = rs.getString(2);
+				String cartasString = rs.getString(3);
+				int monedas = rs.getInt(4);
+				String sinStaminaString = rs.getString(5);
 				Map<Carta, Integer> cartas = Usuario.cargarCartas(cartasString, this);
 				Map<Carta, ZonedDateTime> cartasSinStamina = Usuario.cargarSinStamina(sinStaminaString, this);
 				Usuario usuario = new Usuario(nom, pass, this, cartas, monedas, cartasSinStamina);
@@ -114,12 +116,17 @@ public class BasesDeDatos implements Datos {
 	public List<Carta> getModeloCartas() {
 		return modeloCartas;
 	}
+	
+	@Override
+	public List<Venta> getVentas() {
+		return ventas;
+	}
 
 	@Override
 	public void guardarUsuario(Usuario usuario) {
 		try {
 			if(cargarUsuario(usuario.getNombre())==null) {
-				PreparedStatement insert = conn.prepareStatement("INSERT INTO usuarios (USERNAME, PASSWORD, CARTAS, MONEDAS, CARTAS_SIN_STAMINA) VALUES (?, ?, ?, ?, ?)");
+				PreparedStatement insert = conn.prepareStatement("INSERT INTO usuarios (USERNAME, PASSWORD, CARTAS, MONEDAS, SIN_STAMINA) VALUES (?, ?, ?, ?, ?)");
 				//insert.setInt(1,0);
 				String cartasObtenidas = "";
 				for(Integer cantidadCarta : usuario.getCartas().values()) {
@@ -141,7 +148,7 @@ public class BasesDeDatos implements Datos {
 				insert.executeUpdate();
 				insert.close();
 			} else {
-				PreparedStatement update = conn.prepareStatement("UPDATE usuarios SET CARTAS= ?, MONEDAS= ?, CARTAS_SIN_STAMINA = ? WHERE USERNAME= ?");
+				PreparedStatement update = conn.prepareStatement("UPDATE usuarios SET CARTAS= ?, MONEDAS= ?, SIN_STAMINA = ? WHERE USERNAME= ?");
 				String cartasObtenidas = "";
 				for(Integer cantidadCarta : usuario.getCartas().values()) {
 					cartasObtenidas += cantidadCarta + ",";
@@ -178,11 +185,11 @@ public class BasesDeDatos implements Datos {
 			if (rs.next()) {
 //				System.out.println(rs.getString(2));
 //				int id = rs.getInt(1);
-				String nom = rs.getString(2);
-				String pass = rs.getString(3);
-				String cartasString = rs.getString(4);
-				int monedas = rs.getInt(5);
-				String sinStaminaString = rs.getString(6);
+				String nom = rs.getString(1);
+				String pass = rs.getString(2);
+				String cartasString = rs.getString(3);
+				int monedas = rs.getInt(4);
+				String sinStaminaString = rs.getString(5);
 				System.out.println(cartasString);
 				Map<Carta, Integer> cartas = Usuario.cargarCartas(cartasString, this);
 				Map<Carta, ZonedDateTime> cartasSinStamina = Usuario.cargarSinStamina(sinStaminaString, this);
@@ -197,6 +204,49 @@ public class BasesDeDatos implements Datos {
 		return null;
 	}
 	
+	@Override
+	public void cargarVentas() {
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM VENTAS");
+			while (rs.next()) {
+				Carta carta = modeloCartas.get(rs.getInt("ID_CARTA")-1);
+				Usuario usuario = cargarUsuario(rs.getString("USERNAME"));
+//				for (Usuario u : usuarios) {
+//					if (u.getNombre().equals()) {
+//						usuario = u;
+//					}
+//				}
+				int precio = rs.getInt("PRECIO");
+				String fechaHoraS = rs.getString("FECHA_HORA");
+				ZonedDateTime fechaHora = ZonedDateTime.parse(fechaHoraS, DateTimeFormatter.ISO_ZONED_DATE_TIME);
+				ventas.add(new Venta(carta, precio, usuario, fechaHora));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void guardarVenta(Venta v) {
+		try {
+			PreparedStatement stmt = conn.prepareStatement("INSERT INTO VENTAS VALUES(?,?,?,?)");
+			stmt.setInt(1, v.getCarta().getId());
+			stmt.setString(2, v.getUsuario().getNombre());
+			stmt.setInt(3, v.getPrecio());
+			DateTimeFormatter format = DateTimeFormatter.ISO_ZONED_DATE_TIME;
+			stmt.setString(4, format.format(v.getFechaHora()));
+			stmt.executeUpdate();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	public void borrarVenta(Venta v) {
+		//TODO
+	}
+	
 	public void cerrarConexion() {
 		try {
 			conn.close();
@@ -206,8 +256,7 @@ public class BasesDeDatos implements Datos {
 		}
 	}
 	
-	public static void main(String[] args) {
-		
+	public static void main(String[] args) {		
 		BasesDeDatos bd = new BasesDeDatos("datos.db");
 		System.out.println(bd.getModeloCartas());
 		Usuario usuario = new Usuario("Benaat", "aaaaa", bd, 10);

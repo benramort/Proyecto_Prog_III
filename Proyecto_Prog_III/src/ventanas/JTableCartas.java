@@ -12,6 +12,7 @@ import comportamientos.Carta;
 import comportamientos.Datos;
 
 public class JTableCartas{
+	//TODO esto se usa?
 	static Random r = new Random();
 	String[] cabeceras = {"Carta", "Precio", "Usuario"};
 	

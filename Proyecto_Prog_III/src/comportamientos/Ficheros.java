@@ -16,6 +16,7 @@ public class Ficheros implements Datos {
 
 	private List<Carta> modeloCartas = new ArrayList<>();
 	private List<Usuario> usuarios = new ArrayList<Usuario>(); //Igual un mapa es más eficiente
+	private List<Venta> ventas; //TODO serialización nativa
 	
 	private static Logger logger = Logger.getLogger(Ficheros.class.getName());
 	
@@ -32,6 +33,11 @@ public class Ficheros implements Datos {
 	
 	public List<Usuario> getUsuarios() {
 		return usuarios;
+	}
+	
+	@Override
+	public List<Venta> getVentas() {
+		return ventas;
 	}
 	
 //	public static List<Venta> cargarMercado() {
@@ -119,6 +125,14 @@ public class Ficheros implements Datos {
 		} catch (IOException e) {
 			logger.warning("No se pudo guardar el usuario");
 		}
+	}
+	
+	public void cargarVentas() {
+		
+	}
+	
+	public void guardarVenta(Venta v) {
+		
 	}
 	
 	public void configurarLogger() {

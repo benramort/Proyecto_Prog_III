@@ -33,7 +33,9 @@ import javax.swing.border.Border;
 
 import comportamientos.Carta;
 import comportamientos.Datos;
+import comportamientos.GestorMercado;
 import comportamientos.Usuario;
+import comportamientos.Venta;
 
 public class VentanaSeleccionVender extends JFrame{
 	/**
@@ -45,7 +47,7 @@ public class VentanaSeleccionVender extends JFrame{
 	JFrame ventanaAnterior;
 	JPanel pCartas;
 	
-	public VentanaSeleccionVender(JFrame ventanaAnterior, Usuario usuario, Datos datos, List<Carta> cartasNoMostradas) {
+	public VentanaSeleccionVender(Mercado ventanaAnterior, Usuario usuario, Datos datos, List<Carta> cartasNoMostradas) {
 		
 		this.ventanaAnterior = ventanaAnterior;
 		
@@ -147,7 +149,6 @@ public class VentanaSeleccionVender extends JFrame{
 		});
 		
 		//Gestion de cartas
-		 
 		for (Carta c: usuario.getCartas().keySet()) {
 			
 			if (usuario.getCartas().get(c) != 0) {
@@ -181,6 +182,11 @@ public class VentanaSeleccionVender extends JFrame{
 				});
 			}
 		}
+		
+		bAceptar.addActionListener((e) -> {Venta v = new Venta(cartaSeleccionada, (int) spPrecio.getValue(), usuario);
+			v.venderCarta(datos);
+			ventanaAnterior.actualizar();
+			dispose();});
 		
 
 		

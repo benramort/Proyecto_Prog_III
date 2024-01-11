@@ -38,8 +38,7 @@ public class BasesDeDatosTest {
 		try (Connection conn = DriverManager.getConnection("jdbc:sqlite:data/prueba.db")) {
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("CREATE TABLE USUARIOS(\r\n"
-					+ "	ID INTEGER PRIMARY KEY AUTOINCREMENT,\r\n"
-					+ "	USERNAME TEXT NOT NULL,\r\n"
+					+ "	USERNAME TEXT PRIMARY KEY NOT NULL,\r\n"
 					+ "	PASSWORD TEXT,\r\n"
 					+ "	CARTAS TEXT,\r\n"
 					+ "	MONEDAS INTEGER,\r\n"

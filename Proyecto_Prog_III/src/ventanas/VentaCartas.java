@@ -28,11 +28,13 @@ import comportamientos.CartaAEntrenar;
 import comportamientos.Datos;
 import comportamientos.Usuario;
 
+//TODO esta clase no se usa
 public class VentaCartas extends JFrame{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	
 	CartaAEntrenar carta1 = new CartaAEntrenar();
 
@@ -162,7 +164,7 @@ public class VentaCartas extends JFrame{
 					
 					@Override
 					public void run() {
-						new VentanaSeleccionVender(VentaCartas.this, usuario, datos, cartasNoMostradas);
+//						new VentanaSeleccionVender(VentaCartas.this, usuario, datos, cartasNoMostradas);
 					}
 				});
 			}

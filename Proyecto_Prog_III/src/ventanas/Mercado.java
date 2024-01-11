@@ -24,6 +24,7 @@ import comportamientos.Usuario;
 import comportamientos.Venta;
 import comportamientos.Carta;
 import comportamientos.Datos;
+import comportamientos.GestorMercado;
 
 
 public class Mercado extends JFrame {
@@ -31,11 +32,14 @@ public class Mercado extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	JLabel lMonedas;
+	JTable jTable;
 
 	public Mercado(JFrame ventanaAnterior, Datos datos, Usuario usuario) {
 //		Venta venta = new Venta();
-		List<Venta> ventas = new ArrayList<>();
-		Random r = new Random();
+//		GestorMercado gestorMercado = new GestorMercado(datos);
+//		List<Venta> ventas = new ArrayList<>();
+		datos.cargarVentas();
+		System.out.println(datos.getVentas());
 		//Formato ventana
 		setTitle("Mercado");
 		setSize(1500,1000);
@@ -147,22 +151,15 @@ public class Mercado extends JFrame {
 		
 		pInferior.add(botonVender);
 		
-		AbstractTableModel modeloTabla = new ModeloJTableCartas(ventas);
-		for (int i = 0; i < 10 ; i++) {
-			datos.cargarUsuarios();
-			Venta venta = new Venta();
-			venta.setCarta(datos.getModeloCartas().get(r.nextInt(datos.getModeloCartas().size())));
-			venta.setPrecio(r.nextInt(100, 200));
-			datos.cargarUsuarios();
-			venta.setUsuario(datos.getUsuarios().get(r.nextInt(datos.getUsuarios().size())));
-			ventas.add(venta);
-		}			
+		//TODO no se muestran todas las cartas, solo las primeras 10
+		AbstractTableModel modeloTabla = new ModeloJTableCartas(datos.getVentas());
+			
 //		System.out.println(ventas);
 		
 
 		//Para insertar imagenes en una tabla nos hemos basado en este video:
 		//https://www.youtube.com/watch?v=oLksi_fsRHo&t=567s
-		JTable jTable = new JTable(modeloTabla);
+		jTable = new JTable(modeloTabla);
 		JScrollPane spTabla = new JScrollPane(jTable);
 		spTabla.getVerticalScrollBar().setUnitIncrement(20);
 		spTabla.setPreferredSize(new Dimension(500, 500));
@@ -174,13 +171,13 @@ public class Mercado extends JFrame {
 		jTable.addMouseListener(new MouseAdapter() {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) { //TODO hacer esto en gestorMercado
 				int fila = jTable.rowAtPoint(e.getPoint());
-				CompraCarta compra = new CompraCarta((Carta) ventas.get(fila).getCarta(), ventas.get(fila).getPrecio(), datos, usuario, Mercado.this);
+				CompraCarta compra = new CompraCarta((Carta) datos.getVentas().get(fila).getCarta(), datos.getVentas().get(fila).getPrecio(), datos, usuario, Mercado.this);
+				System.out.println(compra);
 				compra.gestionarCompra();
-				usuario.getCartas().put((Carta) ventas.get(fila).getCarta(), usuario.getCartas().get((Carta) ventas.get(fila).getCarta()) + 1);
+				usuario.getCartas().put((Carta) datos.getVentas().get(fila).getCarta(), usuario.getCartas().get((Carta) datos.getVentas().get(fila).getCarta()) + 1);
 				lMonedas.setText(String.valueOf(usuario.getMonedas()));
-				
 			}
 		});
 		
@@ -226,6 +223,13 @@ public class Mercado extends JFrame {
 		
 
 		
+	}
+	
+	public void actualizar() { //TODO no se acutaliza
+		revalidate();
+		jTable.revalidate();
+		repaint();
+		System.out.println("actualizado");
 	}
 	
 //	public static void main(String[] args) {

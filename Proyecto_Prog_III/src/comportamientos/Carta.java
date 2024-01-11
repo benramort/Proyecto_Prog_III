@@ -68,7 +68,7 @@ public class Carta implements Comparable<Carta>{
 
 
 	public ImageIcon getRecursoGrafico() {
-		System.out.println("Solicitando recurso grafico de " + nombreVisible);
+//		System.out.println("Solicitando recurso grafico de " + nombreVisible);
 		return recursoGrafico;
 	}
 
