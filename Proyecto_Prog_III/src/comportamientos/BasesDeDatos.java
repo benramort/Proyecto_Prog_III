@@ -88,7 +88,9 @@ public class BasesDeDatos implements Datos {
 				Usuario usuario = new Usuario(nom, pass, this, cartas, monedas, cartasSinStamina);
 				usuarios.add(usuario);
 			}
+			rs.close();
 			stmt.close();
+			
 		} catch (SQLException e) {
 			logger.warning("No se han podido cargar los modelos de cartas");
 		}
@@ -194,9 +196,10 @@ public class BasesDeDatos implements Datos {
 				Map<Carta, Integer> cartas = Usuario.cargarCartas(cartasString, this);
 				Map<Carta, ZonedDateTime> cartasSinStamina = Usuario.cargarSinStamina(sinStaminaString, this);
 				Usuario usuario = new Usuario(nom, pass, this, cartas, monedas, cartasSinStamina);
-				prepStmt.close();
 				return usuario;
 			}
+			prepStmt.close();
+			rs.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -222,6 +225,8 @@ public class BasesDeDatos implements Datos {
 				ZonedDateTime fechaHora = ZonedDateTime.parse(fechaHoraS, DateTimeFormatter.ISO_ZONED_DATE_TIME);
 				ventas.add(new Venta(carta, precio, usuario, fechaHora));
 			}
+			rs.close();
+			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -238,6 +243,7 @@ public class BasesDeDatos implements Datos {
 			DateTimeFormatter format = DateTimeFormatter.ISO_ZONED_DATE_TIME;
 			stmt.setString(4, format.format(v.getFechaHora()));
 			stmt.executeUpdate();
+			stmt.close();
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
