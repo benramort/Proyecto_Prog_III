@@ -164,7 +164,7 @@ public class Mercado extends JFrame {
 		spTabla.getVerticalScrollBar().setUnitIncrement(20);
 		spTabla.setPreferredSize(new Dimension(500, 500));
 		jTable.setRowHeight(350);
-		jTable.setPreferredSize(new Dimension(1000, 3500));
+//		jTable.setPreferredSize(new Dimension(1000, 3500));
 		jTable.setDefaultRenderer(Object.class, new RendererJTableCartas());
 		pDerecho.add(spTabla);
 		
