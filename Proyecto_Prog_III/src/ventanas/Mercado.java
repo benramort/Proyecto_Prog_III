@@ -15,6 +15,7 @@ import javax.swing.table.AbstractTableModel;
 
 import comportamientos.Saga;
 import comportamientos.Usuario;
+import comportamientos.Venta;
 import comportamientos.Carta;
 import comportamientos.Datos;
 
@@ -164,11 +165,13 @@ public class Mercado extends JFrame {
 
 			@Override
 			public void mouseClicked(MouseEvent e) { //TODO hacer esto en gestorMercado
-				int fila = jTable.rowAtPoint(e.getPoint());
-				CompraCarta compra = new CompraCarta((Carta) datos.getVentas().get(fila).getCarta(), datos.getVentas().get(fila).getPrecio(), datos, usuario, Mercado.this);
+//				int fila = ;
+				Venta venta = (Venta) jTable.getValueAt(jTable.rowAtPoint(e.getPoint()), jTable.columnAtPoint(e.getPoint()));
+				CompraCarta compra = new CompraCarta(venta.getCarta(), venta.getPrecio(), datos, usuario, Mercado.this);
 				System.out.println(compra);
 				compra.gestionarCompra();
-				usuario.getCartas().put((Carta) datos.getVentas().get(fila).getCarta(), usuario.getCartas().get((Carta) datos.getVentas().get(fila).getCarta()) + 1);
+				datos.getVentas().remove(venta);
+				usuario.getCartas().put(venta.getCarta(), usuario.getCartas().get(venta.getCarta()) + 1);
 				lMonedas.setText(String.valueOf(usuario.getMonedas()));
 			}
 		});

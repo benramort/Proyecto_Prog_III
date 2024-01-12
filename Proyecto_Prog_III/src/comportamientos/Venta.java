@@ -66,5 +66,16 @@ public class Venta {
 	public String toString() {
 		return carta.toString() +"-"+ usuario.toString() +"-"+ precio;
 	}
+	
+//	@Override
+//	public boolean equals(Object o) {
+//		if (o instanceof Venta) {
+//			Venta v = (Venta) o;
+//			if (!carta.equals(v.getCarta())) return false;
+//			if (!usuario.equals(v.getUsuario())) return false;
+//			if (precio != v.getPrecio()) return false;
+//			if (!usuario.)
+//		}
+//	}
 
 }
