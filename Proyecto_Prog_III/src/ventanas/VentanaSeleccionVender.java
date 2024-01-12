@@ -167,7 +167,11 @@ public class VentanaSeleccionVender extends JFrame{
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						cartaSeleccionada = p.getCarta();
+						pInferior.setVisible(false);
 						pInferior.setVisible(true);
+//						p.setOpaque(true);
+						p.revalidate();
+						p.repaint();
 						p.setOpaque(true);
 						for(Component panelCarta : pCartas.getComponents()) {
 							PanelCarta p2 = (PanelCarta)panelCarta;
