@@ -474,3 +474,9 @@ ene 05, 2024 2:19:39 P. M. comportamientos.BasesDeDatos <init>
 INFO: Conexión exitosa con la base de datos
 ene 05, 2024 2:19:39 P. M. comportamientos.BasesDeDatos cerrarConexion
 INFO: Cierre de la conexión a la base de datos
+ene 10, 2024 7:50:11 P. M. comportamientos.BasesDeDatos <init>
+INFO: Conexión exitosa con la base de datos
+ene 10, 2024 7:50:29 P. M. comportamientos.BasesDeDatos <init>
+INFO: Conexión exitosa con la base de datos
+ene 10, 2024 7:52:36 P. M. comportamientos.BasesDeDatos cerrarConexion
+INFO: Cierre de la conexión a la base de datos
