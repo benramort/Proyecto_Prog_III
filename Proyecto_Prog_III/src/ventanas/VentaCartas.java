@@ -28,23 +28,20 @@ import comportamientos.CartaAEntrenar;
 import comportamientos.Datos;
 import comportamientos.Usuario;
 
-public class VentanaVentaCartas extends JFrame{
+//TODO esta clase no se usa
+public class VentaCartas extends JFrame{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	CartaAEntrenar carta1 = new CartaAEntrenar();
-	CartaAEntrenar carta2 = new CartaAEntrenar();
-	CartaAEntrenar carta3 = new CartaAEntrenar();
-
-	CartaVendiendo cartaIzq = new CartaVendiendo(carta1, "");
-	CartaVendiendo cartaCen = new CartaVendiendo(carta2, "");
-	CartaVendiendo cartaDer = new CartaVendiendo(carta3, "");
 	
-	CartaVendiendo cartaVen1 = cartaIzq;
-	CartaVendiendo cartaVen2 = cartaCen;
-	CartaVendiendo cartaVen3 = cartaDer;
+	CartaAEntrenar carta1 = new CartaAEntrenar();
+
+	CartaVendiendo carta = new CartaVendiendo(carta1, "");
+
+	CartaVendiendo cartaVen = carta;
+
 	Datos datos;
 	Usuario usuario;
 	
@@ -55,7 +52,7 @@ public class VentanaVentaCartas extends JFrame{
 	List<Carta> cartasNoMostradas = new ArrayList<>();
 	
 	
-	public VentanaVentaCartas(JFrame ventanaAnterior, Usuario usuario, Datos datos) {
+	public VentaCartas(JFrame ventanaAnterior, Usuario usuario, Datos datos) {
 		this.usuario = usuario;
 		this.datos = datos;
 		for(Entry<Carta, Integer> e : usuario.getCartas().entrySet()) {
@@ -119,11 +116,7 @@ public class VentanaVentaCartas extends JFrame{
 		// boxLayoutCartasV.add(Box.createVerticalGlue());
 		// boxLayoutCartasV.setBackground(Color.BLUE);
 		boxLayoutCartasV.add(flowLayoutCartasH);
-		flowLayoutCartasH.add(cartaVen1);
-		flowLayoutCartasH.add(Box.createHorizontalStrut(50));
-		flowLayoutCartasH.add(cartaVen2);
-		flowLayoutCartasH.add(Box.createHorizontalStrut(50));
-		flowLayoutCartasH.add(cartaVen3);
+		flowLayoutCartasH.add(cartaVen);
 //		pBotonRecogerMonedas.add(bRecogerMonedas);
 //		pBotonEntrenar.add(bRecogerMonedas);
 		pBotonMercado.add(bMercado);
@@ -163,7 +156,7 @@ public class VentanaVentaCartas extends JFrame{
 //			}
 //		});
 		
-		cartaVen1.addMouseListener(new MouseAdapter() {
+		cartaVen.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -171,38 +164,12 @@ public class VentanaVentaCartas extends JFrame{
 					
 					@Override
 					public void run() {
-						new VentanaSeleccionVender(VentanaVentaCartas.this, usuario, datos, 1, cartasNoMostradas);
-					}
-				});
-			}
-		});
-		cartaVen2.addMouseListener(new MouseAdapter() {
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				SwingUtilities.invokeLater(new Runnable() {
-					
-					@Override
-					public void run() {
-						new VentanaSeleccionVender(VentanaVentaCartas.this, usuario, datos, 2, cartasNoMostradas);
+//						new VentanaSeleccionVender(VentaCartas.this, usuario, datos, cartasNoMostradas);
 					}
 				});
 			}
 		});
 		
-		cartaVen3.addMouseListener(new MouseAdapter() {
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				SwingUtilities.invokeLater(new Runnable() {
-					
-					@Override
-					public void run() {
-						new VentanaSeleccionVender(VentanaVentaCartas.this, usuario, datos, 3, cartasNoMostradas);
-					}
-				});
-			}
-		});
 		
 		bMercado.addActionListener(new ActionListener() {
 			
@@ -225,15 +192,10 @@ public class VentanaVentaCartas extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				cartaVen1 = cartaIzq;
-				cartaVen2 = cartaCen;
-				cartaVen3 = cartaDer;
+				cartaVen = carta;
+;
 				flowLayoutCartasH.removeAll();
-				flowLayoutCartasH.add(cartaVen1);
-//				flowLayoutCartasH.add(Box.createHorizontalStrut(10));
-				flowLayoutCartasH.add(cartaVen2);
-//				flowLayoutCartasH.add(Box.createHorizontalStrut(10));
-				flowLayoutCartasH.add(cartaVen3);
+				flowLayoutCartasH.add(cartaVen);
 //				flowLayoutCartasH.add(new JLabel("Hol"));
 				revalidate();
 				repaint();
@@ -263,41 +225,17 @@ public class VentanaVentaCartas extends JFrame{
 
 	}
 	
-	public CartaVendiendo getCartaEnt1() {
-		return cartaVen1;
+	public CartaVendiendo getCartaVen() {
+		return cartaVen;
 	}
 
-	public CartaVendiendo getCartaEnt2() {
-		return cartaVen2;
-	}
 
-	public CartaVendiendo getCartaEnt3() {
-		return cartaVen3;
-	}
+	public void cambiarCartaVendiendo(Carta carta, Object precio) {
+		cartaVen = new CartaVendiendo(carta, precio);
+		repaint();
 
-	public void cambiarCartaVendiendo(Carta carta, int indice, Object precio) {
-		switch (indice) {
-		case 1: 
-			cartaVen1 = new CartaVendiendo(carta, precio);
-			repaint();
-			break;
-		case 2: 
-			cartaVen2 = new CartaVendiendo(carta, precio);
-			repaint();
-			break;
-		case 3: 
-			cartaVen3 = new CartaVendiendo(carta, precio);
-			repaint();
-			break;
-		default: 
-		//TODO hacer una excepcion
-		}
 		flowLayoutCartasH.removeAll();
-		flowLayoutCartasH.add(cartaVen1);
-//		flowLayoutCartasH.add(Box.createHorizontalStrut(10));
-		flowLayoutCartasH.add(cartaVen2);
-//		flowLayoutCartasH.add(Box.createHorizontalStrut(10));
-		flowLayoutCartasH.add(cartaVen3);
+		flowLayoutCartasH.add(cartaVen);
 //		flowLayoutCartasH.add(new JLabel("Hol"));
 		revalidate();
 		repaint();

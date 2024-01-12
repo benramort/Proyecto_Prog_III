@@ -12,5 +12,8 @@ public interface Datos {
 	public void guardarUsuario(Usuario usuario);
 	public Usuario cargarUsuario(String nombre);
 //	public Usuario comprobarUsuario(String nombre);
+	public List<Venta> getVentas();
+	public void guardarVenta(Venta v);
+	void cargarVentas();
 
 }

@@ -68,7 +68,7 @@ public class CartaTest {
 	}
 	
 	@Test
-	public void testEquals() {
+	public void testEquals() { //TODO hacer el test bien
 //		Carta cartaIgual = new Carta(1);
 		Carta cartaDiferernte = new Carta(2);
 		saga = new Saga("SuperMario", "Super Mario");

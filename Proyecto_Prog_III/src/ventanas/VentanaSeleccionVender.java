@@ -2,6 +2,7 @@ package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -13,7 +14,9 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -30,7 +33,9 @@ import javax.swing.border.Border;
 
 import comportamientos.Carta;
 import comportamientos.Datos;
+import comportamientos.GestorMercado;
 import comportamientos.Usuario;
+import comportamientos.Venta;
 
 public class VentanaSeleccionVender extends JFrame{
 	/**
@@ -42,14 +47,21 @@ public class VentanaSeleccionVender extends JFrame{
 	JFrame ventanaAnterior;
 	JPanel pCartas;
 	
-	public VentanaSeleccionVender(JFrame ventanaAnterior, Usuario usuario, Datos datos, int indice, List<Carta> cartasNoMostradas) {
+	public VentanaSeleccionVender(Mercado ventanaAnterior, Usuario usuario, Datos datos, List<Carta> cartasNoMostradas) {
 		
 		this.ventanaAnterior = ventanaAnterior;
+		
+		cartasNoMostradas = new ArrayList<>();
 		
 		double escala = 1;
 //		this.usuario = usuario;
 //		this.datos = datos;
 //		int cartasObtenidas = 0;
+		for(Entry<Carta, Integer> e : usuario.getCartas().entrySet()) {
+			if(e.getValue() == 1) {
+				cartasNoMostradas.add(e.getKey());
+			}
+		}
 		
 		//Formato ventana
 		setTitle("Universal Cards Collection");
@@ -137,7 +149,6 @@ public class VentanaSeleccionVender extends JFrame{
 		});
 		
 		//Gestion de cartas
-		 
 		for (Carta c: usuario.getCartas().keySet()) {
 			
 			if (usuario.getCartas().get(c) != 0) {
@@ -161,21 +172,25 @@ public class VentanaSeleccionVender extends JFrame{
 //						p.setOpaque(true);
 						p.revalidate();
 						p.repaint();
-						bAceptar.addActionListener(new ActionListener() {
-							
-							@Override
-							public void actionPerformed(ActionEvent e) {
-								((VentanaVentaCartas) ventanaAnterior).cambiarCartaVendiendo(cartaSeleccionada, indice, spPrecio.getValue());
-								((VentanaVentaCartas) ventanaAnterior).revalidate();
-								((VentanaVentaCartas) ventanaAnterior).repaint();
-								dispose();
-							}
-						});
+						p.setOpaque(true);
+						for(Component panelCarta : pCartas.getComponents()) {
+							PanelCarta p2 = (PanelCarta)panelCarta;
+							p2.setOpaque(false);
+						}
+						p.setOpaque(true);
+						revalidate();
+						repaint();
+
 					}
 					
 				});
 			}
 		}
+		
+		bAceptar.addActionListener((e) -> {Venta v = new Venta(cartaSeleccionada, (int) spPrecio.getValue(), usuario);
+			v.venderCarta(datos);
+			ventanaAnterior.actualizar();
+			dispose();});
 		
 
 		

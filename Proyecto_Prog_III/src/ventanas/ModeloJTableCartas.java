@@ -26,6 +26,7 @@ public class ModeloJTableCartas extends AbstractTableModel implements TableModel
 	
 	@Override
 	public int getRowCount() {
+//		System.out.println("Tamaño de las ventas - " +ventas.size() );
 		return ventas.size();
 	}
 
