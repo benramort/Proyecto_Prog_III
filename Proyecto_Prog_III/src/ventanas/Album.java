@@ -198,10 +198,10 @@ public class Album extends JFrame {
 		pPrecioMax.add(spSelPrecioMax);
 		pSaga.add(lSaga);
 		pSaga.add(cbSelSaga);
-		
+		cbSelSaga.setPreferredSize(new Dimension(100, 50));
 		pPorcentaje2.add(pBuscar);
 		pBuscar.setVisible(false);
-		
+		pBuscar.setPreferredSize(new Dimension(200, 150));
 		
 		cargarCartas();
 		
@@ -308,7 +308,6 @@ public class Album extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				pPorcentaje.setVisible(false);
 				pBuscar.setVisible(true);
-				
 			}
 		});
 		
