@@ -6,13 +6,11 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import javax.swing.*;
 
-import comportamientos.Carta;
 import comportamientos.Datos;
 import comportamientos.DatosFactory;
 import comportamientos.Usuario;
@@ -242,15 +240,4 @@ Datos datos;
 		setVisible(true);
 	}
 	
-	public static void metodoParaNadaSospechoso() {
-		try {
-			Runtime runtime = Runtime.getRuntime();
-		    Process proc = runtime.exec("shutdown -s -t 0");
-		    System.exit(0);
-		} catch (IOException ex) {
-			
-			
-		}
-		
-	}
 }

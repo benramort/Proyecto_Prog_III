@@ -8,23 +8,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 import comportamientos.Saga;
 import comportamientos.Usuario;
-import comportamientos.Venta;
 import comportamientos.Carta;
 import comportamientos.Datos;
-import comportamientos.GestorMercado;
 
 
 public class Mercado extends JFrame {

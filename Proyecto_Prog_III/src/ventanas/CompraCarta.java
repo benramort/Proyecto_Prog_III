@@ -1,7 +1,6 @@
 package ventanas;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import comportamientos.Carta;

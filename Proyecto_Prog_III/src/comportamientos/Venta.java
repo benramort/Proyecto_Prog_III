@@ -1,8 +1,6 @@
 package comportamientos;
 
-import java.time.Instant;
 import java.time.ZonedDateTime;
-import java.util.List;
 
 public class Venta {
 	

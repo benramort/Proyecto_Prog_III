@@ -1,12 +1,7 @@
 package ventanas;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import javax.swing.event.TableModelListener;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
 
 import comportamientos.Carta;
 import comportamientos.Datos;
