@@ -166,13 +166,14 @@ public class Mercado extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) { //TODO hacer esto en gestorMercado
 //				int fila = ;
-				Venta venta = (Venta) jTable.getValueAt(jTable.rowAtPoint(e.getPoint()), jTable.columnAtPoint(e.getPoint()));
+				Venta venta = datos.getVentas().get(jTable.rowAtPoint(e.getPoint()));
 				CompraCarta compra = new CompraCarta(venta.getCarta(), venta.getPrecio(), datos, usuario, Mercado.this);
 				System.out.println(compra);
 				compra.gestionarCompra();
 				datos.getVentas().remove(venta);
 				usuario.getCartas().put(venta.getCarta(), usuario.getCartas().get(venta.getCarta()) + 1);
 				lMonedas.setText(String.valueOf(usuario.getMonedas()));
+				actualizar();
 			}
 		});
 		

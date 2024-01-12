@@ -46,7 +46,6 @@ public class ModeloJTableCartas extends AbstractTableModel implements TableModel
 			default: return null;
 		}
 	}
-	
 	@Override
 	public String getColumnName(int column) {
 		return cabeceras[column];
