@@ -107,7 +107,21 @@ public class CartaTest {
 		assertEquals(carta, carta2);
 	}
 	
-	
+	@Test
+	public void testALinea() {
+		String nombreInterno = "nombre1;";
+		String nombreVisible = "Nombre1;";
+		String id = "1;";
+		String saganombreInterno = "saga1;";
+		String saganombreVisible = "Saga1;";
+		String monedasPorMinuto = "33;";
+		String resistencia = "33;";
+		String recuperacion = "33;";
+		String carta = id + nombreInterno + nombreVisible + saganombreInterno + saganombreVisible + monedasPorMinuto + resistencia + recuperacion;
+		Carta prueba = new Carta(1, "nombre1", "Nombre1", new Saga("saga1", "Saga1"), 33, 33, 33);
+		String stringPrueba = Carta.aLinea(prueba);
+		assertEquals(carta, stringPrueba);
+	}
 	
 	
 }
