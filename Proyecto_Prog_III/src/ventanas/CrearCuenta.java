@@ -11,6 +11,8 @@ import excepciones.DataException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CrearCuenta extends JFrame {
 
@@ -113,23 +115,32 @@ public class CrearCuenta extends JFrame {
 					public void run() {
 						String contrasena = String.valueOf(pfContrasena.getPassword());
 						String confirmarContrasena = String.valueOf(pfContrasena2.getPassword());
+						Pattern patronNum = Pattern.compile("[0-9]");
+						Pattern patronMayus = Pattern.compile("[A-Z]");
+						Matcher matcherNum = patronNum.matcher(contrasena);
+						Matcher matcherMayus = patronMayus.matcher(contrasena);
 						if(!contrasena.isEmpty() && !confirmarContrasena.isEmpty() && contrasena.equals(confirmarContrasena)) {
 							try {
 								Datos datos;
 								datos = DatosFactory.getDatos();
 								if(datos.cargarUsuario(tfNombre.getText()) == null) {
 									if(contrasena.length() >= 6 && contrasena.length() <= 16) {
-//										if(Pattern.matches(patron1, contrasena) && Pattern.matches(patron2, contrasena)) {
-										Usuario usuario = new Usuario(tfNombre.getText(), String.valueOf( pfContrasena.getPassword()), datos, 100000);
-										for(int i = 1; i <= 13; i++) {
-											usuario.getCartas().put(new Carta(1), 0);											
-										}
-											new Album(null, usuario, datos);
+											if(matcherNum.find() && matcherMayus.find()) {
+												Usuario usuario = new Usuario(tfNombre.getText(), String.valueOf( pfContrasena.getPassword()), datos, 100000);
+												for(int i = 1; i <= 13; i++) {
+													usuario.getCartas().put(new Carta(1), 0);											
+												}
+												new Album(null, usuario, datos);
 //										for (Carta c: usuario.getCartas().keySet()) {
 //											System.out.println(c.toString() + usuario.getCartas().get(c));
 //										}	
-										
-										dispose();
+												
+												dispose();	
+											} else {
+												lIncorrecto.setText("La contraseña debe tener al menos 1 dígito y 1 letra mayúscula");
+												lIncorrecto.setVisible(true);
+											}
+											
 									} else {
 										lIncorrecto.setText("La contraseña debe tener entre 6 y 16 caracteres");
 										lIncorrecto.setVisible(true);
