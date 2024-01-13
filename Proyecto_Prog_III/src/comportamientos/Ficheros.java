@@ -21,6 +21,12 @@ public class Ficheros implements Datos {
 	private static Logger logger = Logger.getLogger(Ficheros.class.getName());
 	
 	
+	public Ficheros(String nombreCartas, String nombreUsuarios) {
+		cargarModeloCartas(nombreCartas);
+//		configurarLogger();
+		cargarUsuarios(nombreUsuarios);
+	}
+	
 	public Ficheros() {
 		cargarModeloCartas();
 //		configurarLogger();
@@ -62,8 +68,43 @@ public class Ficheros implements Datos {
 		}
 	}
 	
+	public void cargarModeloCartas(String nombre) {
+		try (Scanner scanner = new Scanner(new FileInputStream("data/"+nombre+".csv"))) {
+			while (scanner.hasNextLine()) {
+				String linea = scanner.nextLine();
+				try {
+					Carta c = Carta.deLinea(linea);
+					modeloCartas.add(c);
+				} catch (NumberFormatException ex) {
+					ex.printStackTrace();
+				}
+			}
+			modeloCartas.sort(null);
+		} catch (FileNotFoundException ex) {
+//			ex.printStackTrace();
+			logger.severe("No se han podido cargar las cartas modelo");
+		}
+	}
+	
 	public void cargarUsuarios() {
 		try (Scanner scanner = new Scanner(new FileInputStream("data/usuarios.csv"))) {
+			usuarios.clear();
+			while (scanner.hasNextLine()) {
+				String linea = scanner.nextLine();
+				try {
+					Usuario u = Usuario.deLinea(linea, this);
+					usuarios.add(u);
+				} catch (NumberFormatException ex) {
+					ex.printStackTrace();
+				}
+			}
+		} catch (FileNotFoundException ex) {
+			logger.warning("No se han podido cargar los usuarios");
+		}
+	}
+	
+	public void cargarUsuarios(String nombre) {
+		try (Scanner scanner = new Scanner(new FileInputStream("data/"+nombre+".csv"))) {
 			usuarios.clear();
 			while (scanner.hasNextLine()) {
 				String linea = scanner.nextLine();

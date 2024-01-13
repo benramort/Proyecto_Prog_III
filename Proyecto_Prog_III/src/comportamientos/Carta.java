@@ -3,6 +3,9 @@ package comportamientos;
 
 
 import java.nio.file.Path;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Map.Entry;
 
 import javax.swing.ImageIcon;
 
@@ -137,5 +140,18 @@ public class Carta implements Comparable<Carta>{
 		String[] tokens = s.split(";");
 		Saga saga = new Saga(tokens[3],tokens[4]); //TODO esto crea una saga por carta, se puede optimizar
 		return new Carta(Integer.parseInt(tokens[0]), tokens[1], tokens[2], saga, Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]), Integer.parseInt(tokens[7]));
+	}
+	
+	public String aLinea() {
+		String nombreInterno = this.getNombreInterno() + ";";
+		String nombreVisible = this.getNombreVisible() + ";";
+		String id = this.getId() + ";";
+		String saganombreInterno = this.getSaga().getNombreInterno() + ";";
+		String saganombreVisible = this.getSaga().getNombreVisible() + ";";
+		String monedasPorMinuto = this.getMonedasPorMinuto() + ";";
+		String resistencia = this.getResistencia() + ";";
+		String recuperacion = this.getRecuperacion() + ";";
+		
+		return id + nombreInterno + nombreVisible + saganombreInterno + saganombreVisible + monedasPorMinuto + resistencia + recuperacion;
 	}
 }
