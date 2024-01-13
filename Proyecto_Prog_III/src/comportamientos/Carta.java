@@ -142,15 +142,15 @@ public class Carta implements Comparable<Carta>{
 		return new Carta(Integer.parseInt(tokens[0]), tokens[1], tokens[2], saga, Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]), Integer.parseInt(tokens[7]));
 	}
 	
-	public String aLinea() {
-		String nombreInterno = this.getNombreInterno() + ";";
-		String nombreVisible = this.getNombreVisible() + ";";
-		String id = this.getId() + ";";
-		String saganombreInterno = this.getSaga().getNombreInterno() + ";";
-		String saganombreVisible = this.getSaga().getNombreVisible() + ";";
-		String monedasPorMinuto = this.getMonedasPorMinuto() + ";";
-		String resistencia = this.getResistencia() + ";";
-		String recuperacion = this.getRecuperacion() + ";";
+	public static String aLinea(Carta s) {
+		String nombreInterno = s.getNombreInterno() + ";";
+		String nombreVisible = s.getNombreVisible() + ";";
+		String id = s.getId() + ";";
+		String saganombreInterno = s.getSaga().getNombreInterno() + ";";
+		String saganombreVisible = s.getSaga().getNombreVisible() + ";";
+		String monedasPorMinuto = s.getMonedasPorMinuto() + ";";
+		String resistencia = s.getResistencia() + ";";
+		String recuperacion = s.getRecuperacion() + ";";
 		
 		return id + nombreInterno + nombreVisible + saganombreInterno + saganombreVisible + monedasPorMinuto + resistencia + recuperacion;
 	}

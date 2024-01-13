@@ -68,7 +68,7 @@ public class Ficheros implements Datos {
 		}
 	}
 	
-	public void cargarModeloCartas(String nombre) {
+	public List<Carta> cargarModeloCartas(String nombre) {
 		try (Scanner scanner = new Scanner(new FileInputStream("data/"+nombre+".csv"))) {
 			while (scanner.hasNextLine()) {
 				String linea = scanner.nextLine();
@@ -80,9 +80,11 @@ public class Ficheros implements Datos {
 				}
 			}
 			modeloCartas.sort(null);
+			return modeloCartas;
 		} catch (FileNotFoundException ex) {
 //			ex.printStackTrace();
 			logger.severe("No se han podido cargar las cartas modelo");
+			return null;
 		}
 	}
 	
@@ -103,7 +105,7 @@ public class Ficheros implements Datos {
 		}
 	}
 	
-	public void cargarUsuarios(String nombre) {
+	public List<Usuario> cargarUsuarios(String nombre) {
 		try (Scanner scanner = new Scanner(new FileInputStream("data/"+nombre+".csv"))) {
 			usuarios.clear();
 			while (scanner.hasNextLine()) {
@@ -115,8 +117,10 @@ public class Ficheros implements Datos {
 					ex.printStackTrace();
 				}
 			}
+			return usuarios;
 		} catch (FileNotFoundException ex) {
 			logger.warning("No se han podido cargar los usuarios");
+			return null;
 		}
 	}
 	

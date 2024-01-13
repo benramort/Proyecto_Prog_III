@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
-import comportamientos.Ficheros;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +42,7 @@ public class FicherosTest {
 		try {
 			PrintStream ps = new PrintStream(new FileOutputStream("data/ficherosmodelocartastest.csv"));
 			for (Carta c : modeloCartas) {
-				String linea = c.aLinea();
+				String linea = Carta.aLinea(c);
 				ps.println(linea);
 			}
 			ps.close();
@@ -75,5 +74,29 @@ public class FicherosTest {
 		usuarios.add(new Usuario("nombre2", "contrasena2", null, 20));
 		usuarios.add(new Usuario("nombre3", "contrasena3", null, 30));
 		assertEquals(usuarios, f.getUsuarios());
+	}
+	
+	@Test
+	public void testCargarModeloCartas() {
+		List<Carta> cartas;
+		cartas = new ArrayList<Carta>();
+		Saga saga1 = new Saga("nombreInternoSaga1", "nombreVisibleSaga1");
+		Saga saga2 = new Saga("nombreInternoSaga2", "nombreVisibleSaga2");
+		Saga saga3 = new Saga("nombreInternoSaga3", "nombreVisibleSaga3");
+		cartas.add(new Carta(1, "nombreInterno1", "nombreVisible1", saga1, 1,1,1));
+		cartas.add(new Carta(2, "nombreInterno2", "nombreVisible2", saga2, 2,2,2));
+		cartas.add(new Carta(3, "nombreInterno3", "nombreVisible3", saga3, 3,3,3));
+		List<Carta> listaCartas = f.cargarModeloCartas("ficherosmodelocartastest");
+		assertEquals(cartas, listaCartas);
+	}
+	
+	@Test
+	public void testCargarUsuarios() {
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		usuarios.add(new Usuario("nombre1", "contrasena1", null, 10));
+		usuarios.add(new Usuario("nombre2", "contrasena2", null, 20));
+		usuarios.add(new Usuario("nombre3", "contrasena3", null, 30));
+		List<Usuario> listaUsuarios = f.cargarUsuarios("ficherosusuariostest");;
+		assertEquals(listaUsuarios, usuarios);
 	}
 }
