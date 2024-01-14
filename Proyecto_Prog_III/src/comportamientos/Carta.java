@@ -3,9 +3,6 @@ package comportamientos;
 
 
 import java.nio.file.Path;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Map.Entry;
 
 import javax.swing.ImageIcon;
 

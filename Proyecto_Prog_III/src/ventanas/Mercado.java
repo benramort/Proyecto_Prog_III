@@ -3,7 +3,8 @@ package ventanas;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -16,7 +17,6 @@ import javax.swing.table.AbstractTableModel;
 import comportamientos.Saga;
 import comportamientos.Usuario;
 import comportamientos.Venta;
-import comportamientos.Carta;
 import comportamientos.Datos;
 
 
@@ -91,7 +91,33 @@ public class Mercado extends JFrame {
 //		ArrayList<Saga> lSagas = new ArrayList<Saga>();
 //		lSagas.add(new Saga("Super Mario"));
 //		lSagas.add(new Saga("God of War"));
-		JComboBox<Saga> cbSelSaga = new JComboBox<Saga>();
+
+		Saga[] listaSagas = {
+				new Saga("",""),
+				new Saga("GodOfWar", "God Of War"),
+				new Saga("SuperMario", "Super Mario"),
+				new Saga("TheLegendOfZelda", "The Legend Of Zelda"),
+				new Saga("Portal", "Portal"),
+				new Saga("TheLastOfUs", "The Last Of Us")	
+		};
+		ComboBoxModel<Saga> comboBoxModel = new DefaultComboBoxModel<>(listaSagas);
+		JComboBox<Saga> cbSelSaga = new JComboBox<Saga>(comboBoxModel);
+		
+		cbSelSaga.addItemListener(new ItemListener() {
+
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                // se comprueba si se ha seleccionado o deseleccionado
+                // un elemento de la lista
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                	
+                } else {
+                	
+                }
+            }
+
+        });
+		
 		JButton botonVender = new JButton("VENDER");
 		
 		ImageIcon imagen1 = new ImageIcon(getClass().getResource("/moneda.png"));
@@ -144,7 +170,7 @@ public class Mercado extends JFrame {
 		
 		pInferior.add(botonVender);
 		
-		//TODO no se muestran todas las cartas, solo las primeras 10
+		
 		AbstractTableModel modeloTabla = new ModeloJTableCartas(datos.getVentas());
 			
 //		System.out.println(ventas);

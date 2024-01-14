@@ -36,6 +36,10 @@ public class Saga {
 		}
 		return false;
 	}
-
+	
+	@Override
+	public String toString() {
+		return String.format("%s",nombreVisible);
+	}
 	
 }
