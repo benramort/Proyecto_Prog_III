@@ -178,7 +178,7 @@ public class Ficheros implements Datos {
 	}
 
 	public void guardarVenta(Venta v) { //Sería más óptimo guardar todo al final, pero funciona mejor así para bases de datos
-		try (PrintStream ps = new PrintStream("data/ventas.csv")) {
+		try (PrintStream ps = new PrintStream(new FileOutputStream("data/ventas.csv", true))) {
 			ps.println(v.aLinea());
 		} catch (IOException ex) {
 			logger.info("No se ha podido guardar la venta");

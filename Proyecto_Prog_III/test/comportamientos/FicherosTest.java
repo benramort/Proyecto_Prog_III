@@ -14,6 +14,7 @@ import org.junit.Test;
 public class FicherosTest {
 	Ficheros f;
 	
+	//TODO esto es un poco trampa, pero se cambia fácil
 	@Before
 	public void preparatorio() {
 		List<Carta> modeloCartas = new ArrayList<>();
