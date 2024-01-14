@@ -103,7 +103,9 @@ public class Tienda extends JFrame {
 			//Crear Componentes
 			JLabel lNombreSobre = new JLabel(nombres.get(i));
 			JLabel lPrecioSobre = new JLabel(precios.get(i));
-			JLabel lImagenSobre = new JLabel(new ImageIcon("img/logo.png"));
+			ImageIcon imagenSobre = new ImageIcon(getClass().getResource("/sobre.png"));
+			ImageIcon imagenSobre2 = new ImageIcon(imagenSobre.getImage().getScaledInstance(400, 550, Image.SCALE_DEFAULT));
+			JLabel lImagenSobre = new JLabel(imagenSobre2);
 			ImageIcon imagenMoneda2 = new ImageIcon(imagen7.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 			//Formato Componentes
 			lImagenMonedas2.setIcon(imagenMoneda2);
@@ -117,6 +119,7 @@ public class Tienda extends JFrame {
 			pSobre.add(lImagenSobre, BorderLayout.CENTER);
 			pSobre.add(pPrecioSobre,BorderLayout.SOUTH);
 			pCentro.add(pSobre);
+			pCentro.add(Box.createHorizontalStrut(100));
 			//Añadir ActionListener
 			lImagenSobre.addMouseListener(new MouseAdapter() {
 
