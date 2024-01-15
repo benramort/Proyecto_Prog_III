@@ -6,20 +6,19 @@ import javax.swing.JOptionPane;
 import comportamientos.Carta;
 import comportamientos.Datos;
 import comportamientos.Usuario;
+import comportamientos.Venta;
 
 
 public class CompraCarta {
-	Carta carta;
-	int precio;
+	Venta venta;
 	Datos datos;
 	Usuario usuario;
 	JFrame ventana;
 
 	
 	
-	public CompraCarta(Carta carta, int precio, Datos datos, Usuario usuario, JFrame ventana) {
-		this.carta = carta;
-		this.precio = precio;
+	public CompraCarta(Venta venta, Datos datos, Usuario usuario, JFrame ventana) {
+		this.venta = venta;
 		this.datos = datos;
 		this.usuario = usuario;
 		this.ventana = ventana;
@@ -30,12 +29,14 @@ public class CompraCarta {
 		int monedas = usuario.getMonedas();
 		int respuesta = JOptionPane.showConfirmDialog(((Mercado) ventana), "¿Seguro que quieres comprar esta carta?", "Confirmar compra", JOptionPane.YES_NO_OPTION);
 		if(respuesta == JOptionPane.OK_OPTION) {
-			int monedasRestantes = monedas - precio;
+			int monedasRestantes = monedas - venta.getPrecio();
 			if (monedasRestantes < 0) {
 				 JOptionPane.showMessageDialog(((Mercado) ventana), "No tienes monedas suficientes", "Error", JOptionPane.ERROR_MESSAGE);
 			} else {
-				monedasUsuario = usuario.getMonedas() - precio;
+				monedasUsuario = usuario.getMonedas() - venta.getPrecio();
 				usuario.setMonedas(monedasUsuario);
+				datos.getVentas().remove(venta);
+				usuario.getCartas().put(venta.getCarta(), usuario.getCartas().get(venta.getCarta()) + 1);
 			} 									
 		}
 	}

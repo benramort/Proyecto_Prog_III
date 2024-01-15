@@ -101,11 +101,12 @@ public class Mercado extends JFrame {
 		Saga[] listaSagas = {
 				new Saga("",""),
 				new Saga("GodOfWar", "God Of War"),
-				new Saga("SuperMario", "Super Mario"),
-				new Saga("TheLegendOfZelda", "The Legend Of Zelda"),
 				new Saga("Portal", "Portal"),
-				new Saga("TheLastOfUs", "The Last Of Us")	
+				new Saga("SuperMario", "Super Mario"),
+				new Saga("TheLastOfUs", "The Last Of Us"),	
+				new Saga("TheLegendOfZelda", "The Legend Of Zelda")
 		};
+		
 		ComboBoxModel<Saga> comboBoxModel = new DefaultComboBoxModel<>(listaSagas);
 		JComboBox<Saga> cbSelSaga = new JComboBox<Saga>(comboBoxModel);
 		
@@ -126,14 +127,13 @@ public class Mercado extends JFrame {
                 	}
                 	AbstractTableModel modeloTabla1 = new ModeloJTableCartas(ventasPorSaga);
                 	jTable = new JTable(modeloTabla1);
-                	jTable.repaint();
+                	actualizar();
                 } else {
                 	
                 }
             }
 
         });
-		
 		
 		
 		JButton botonVender = new JButton("VENDER");
@@ -209,14 +209,14 @@ public class Mercado extends JFrame {
 		jTable.addMouseListener(new MouseAdapter() {
 
 			@Override
-			public void mouseClicked(MouseEvent e) { //TODO hacer esto en gestorMercado
+			public void mouseClicked(MouseEvent e) { 
 //				int fila = ;
 				Venta venta = datos.getVentas().get(jTable.rowAtPoint(e.getPoint()));
-				CompraCarta compra = new CompraCarta(venta.getCarta(), venta.getPrecio(), datos, usuario, Mercado.this);
+				CompraCarta compra = new CompraCarta(venta, datos, usuario, Mercado.this);
 				System.out.println(compra);
 				compra.gestionarCompra();
-				datos.getVentas().remove(venta);
-				usuario.getCartas().put(venta.getCarta(), usuario.getCartas().get(venta.getCarta()) + 1);
+//				datos.getVentas().remove(venta);
+//				usuario.getCartas().put(venta.getCarta(), usuario.getCartas().get(venta.getCarta()) + 1);
 				lMonedas.setText(String.valueOf(usuario.getMonedas()));
 				actualizar();
 			}
@@ -273,7 +273,7 @@ public class Mercado extends JFrame {
 		
 	}
 	
-	public void actualizar() { //TODO no se acutaliza
+	public void actualizar() {
 		revalidate();
 		jTable.revalidate();
 		repaint();
