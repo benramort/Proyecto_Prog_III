@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -173,6 +172,7 @@ public class Ficheros implements Datos {
 			logger.warning("No se pudo guardar el usuario");
 		}
 	}
+
 	
 	public void cargarVentas() {
 		try (Scanner scanner = new Scanner(new FileInputStream("data/ventas.csv"))){
