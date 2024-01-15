@@ -1,6 +1,7 @@
 package comportamientos;
 
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Venta {
 	
@@ -60,6 +61,11 @@ public class Venta {
 		datos.guardarVenta(this);
 		usuario.getCartas().replace(carta, usuario.getCartas().get(carta)-1);
 //		System.out.println(u.getCartas().get(c));
+	}
+	
+	public String aLinea() {
+		
+		return carta.getId()+";"+precio+";"+usuario.getNombre()+";"+DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(fechaHora);
 	}
 	
 	@Override

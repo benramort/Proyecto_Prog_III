@@ -3,10 +3,11 @@ import java.util.Random;
 import comportamientos.BasesDeDatos;
 import comportamientos.Venta;
 import comportamientos.Datos;
+import comportamientos.Ficheros;
 
 public class VentasAlAzar {
 	
-	private static Datos datos = new BasesDeDatos("datos.db");
+	private static Datos datos = new Ficheros();
 	
 	public static void main(String[] args) {
 		datos.cargarUsuarios();
@@ -29,6 +30,7 @@ public class VentasAlAzar {
 			datos.getVentas().add(venta);
 			datos.guardarVenta(venta);
 		}
+		
 	}
 
 }

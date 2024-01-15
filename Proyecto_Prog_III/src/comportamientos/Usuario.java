@@ -100,7 +100,7 @@ public class Usuario {
 	
 	public static Map<Carta, ZonedDateTime> cargarSinStamina(String s, Datos datos) {
 		Map<Carta, ZonedDateTime> mapa = new TreeMap<>();
-		if(s.isEmpty()) {
+		if(s.equals("empty")) {
 			return mapa;
 		}
 		String[] tokens = s.split(",");
@@ -126,8 +126,12 @@ public class Usuario {
 		cartasObtenidas += ";";
 //		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		String cartasSinStamina = "";
-		for (Entry<Carta, ZonedDateTime> entry : this.cartasSinStamina.entrySet()) {
-			cartasSinStamina += entry.getKey().getId() + "=" + entry.getValue().format(DateTimeFormatter.ISO_ZONED_DATE_TIME)+",";
+		if (this.cartasSinStamina.size() == 0) {
+			cartasSinStamina = "empty";
+		} else {
+			for (Entry<Carta, ZonedDateTime> entry : this.cartasSinStamina.entrySet()) {
+				cartasSinStamina += entry.getKey().getId() + "=" + entry.getValue().format(DateTimeFormatter.ISO_ZONED_DATE_TIME)+",";
+			}
 		}
 		return nombre + contrasena + cartasObtenidas + monedas + cartasSinStamina;
 	}

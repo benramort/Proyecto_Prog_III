@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class Ficheros implements Datos {
 
 	private List<Carta> modeloCartas = new ArrayList<>();
 	private List<Usuario> usuarios = new ArrayList<Usuario>(); //Igual un mapa es más eficiente
-	private List<Venta> ventas; //TODO serialización nativa
+	private List<Venta> ventas = new ArrayList<Venta>();
 	
 	private static Logger logger = Logger.getLogger(Ficheros.class.getName());
 	
@@ -175,9 +176,13 @@ public class Ficheros implements Datos {
 	public void cargarVentas() {
 		
 	}
-	
-	public void guardarVenta(Venta v) {
-		
+
+	public void guardarVenta(Venta v) { //Sería más óptimo guardar todo al final, pero funciona mejor así para bases de datos
+		try (PrintStream ps = new PrintStream(new FileOutputStream("data/ventas.csv", true))) {
+			ps.println(v.aLinea());
+		} catch (IOException ex) {
+			logger.info("No se ha podido guardar la venta");
+		}
 	}
 	
 	public void configurarLogger() {
