@@ -17,6 +17,7 @@ import javax.swing.table.AbstractTableModel;
 import comportamientos.Saga;
 import comportamientos.Usuario;
 import comportamientos.Venta;
+import comportamientos.Carta;
 import comportamientos.Datos;
 
 
@@ -117,6 +118,8 @@ public class Mercado extends JFrame {
             }
 
         });
+		
+		
 		
 		JButton botonVender = new JButton("VENDER");
 		
@@ -243,7 +246,13 @@ public class Mercado extends JFrame {
 			}
 		});
 		
-
+		for(int i = 0; i<jTable.getRowCount(); i++ ) {
+			if(!tfBuscar.getText().isEmpty() && tfBuscar.getText().startsWith(((Carta) jTable.getValueAt(i, 0)).getNombreVisible())) {			
+		} else {
+			
+		}
+			
+		}
 		
 	}
 	
