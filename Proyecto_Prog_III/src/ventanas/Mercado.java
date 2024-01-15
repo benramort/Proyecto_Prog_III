@@ -29,6 +29,9 @@ public class Mercado extends JFrame {
 	JLabel lMonedas;
 	JTable jTable;
 
+	List<Venta> ventasTotales;
+	List<Venta> ventasCondicionales;
+	
 	public Mercado(JFrame ventanaAnterior, Datos datos, Usuario usuario) {
 //		Venta venta = new Venta();
 //		GestorMercado gestorMercado = new GestorMercado(datos);
@@ -42,7 +45,9 @@ public class Mercado extends JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.getContentPane().setLayout(new BorderLayout());
 		
-		List<Venta> ventas = datos.getVentas();
+		ventasTotales = datos.getVentas();
+		ventasCondicionales = ventasTotales;
+//		List<Venta> ventas = datos.getVentas();
 		
 		//Crear contenedores
 		JPanel pIzquierdo = new JPanel();
@@ -123,9 +128,10 @@ public class Mercado extends JFrame {
                 			ventasPorSaga.add(v);
                 		}
                 	}
-                	AbstractTableModel modeloTabla1 = new ModeloJTableCartas(ventasPorSaga);
-                	jTable = new JTable(modeloTabla1);
-                	actualizar();
+
+//                	AbstractTableModel modeloTabla1 = new ModeloJTableCartas(ventasPorSaga);
+//                	jTable = new JTable(modeloTabla1);
+                	jTable.repaint();
                 } else {
                 	
                 }
@@ -188,7 +194,7 @@ public class Mercado extends JFrame {
 		
 		
 		
-		AbstractTableModel modeloTabla = new ModeloJTableCartas(ventas);
+		AbstractTableModel modeloTabla = new ModeloJTableCartas(ventasCondicionales);
 			
 //		System.out.println(ventas);
 		

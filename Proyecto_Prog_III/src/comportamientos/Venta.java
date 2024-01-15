@@ -68,6 +68,19 @@ public class Venta {
 		return carta.getId()+";"+precio+";"+usuario.getNombre()+";"+DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(fechaHora);
 	}
 	
+	public static Venta deLinea(Datos datos, String s) throws NumberFormatException {
+		String[] tokens = s.split(";");
+		Carta carta = datos.getModeloCartas().get(Integer.parseInt(tokens[0])-1);
+		Usuario usuario = null;
+		for (Usuario u : datos.getUsuarios()) {
+			if (u.getNombre().equals(tokens[2])) {
+				usuario = u;
+				break;
+			}
+		}
+		return new Venta(carta, Integer.parseInt(tokens[1]), usuario, ZonedDateTime.parse(tokens[3], DateTimeFormatter.ISO_ZONED_DATE_TIME));
+	}
+	
 	@Override
 	public String toString() {
 		return carta.toString() +"-"+ usuario.toString() +"-"+ precio;
