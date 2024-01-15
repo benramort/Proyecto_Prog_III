@@ -101,11 +101,12 @@ public class Mercado extends JFrame {
 		Saga[] listaSagas = {
 				new Saga("",""),
 				new Saga("GodOfWar", "God Of War"),
-				new Saga("SuperMario", "Super Mario"),
-				new Saga("TheLegendOfZelda", "The Legend Of Zelda"),
 				new Saga("Portal", "Portal"),
-				new Saga("TheLastOfUs", "The Last Of Us")	
+				new Saga("SuperMario", "Super Mario"),
+				new Saga("TheLastOfUs", "The Last Of Us"),	
+				new Saga("TheLegendOfZelda", "The Legend Of Zelda")
 		};
+		
 		ComboBoxModel<Saga> comboBoxModel = new DefaultComboBoxModel<>(listaSagas);
 		JComboBox<Saga> cbSelSaga = new JComboBox<Saga>(comboBoxModel);
 		
