@@ -43,6 +43,8 @@ AQUÍ ESTÁN LOS PASOS PARA USAR LA APLICACIÓN:
 	- Al pulsar el botón entrenar, en su lugar aparecerá un nuevo botón de "RECOGER MONEDAS". Al pulsar este botón, detendrá la sesión de entrenamiento y se sumarán las monedas generadas a su indicador de monedas.
 
 	- Si pulsa el botón "CLEAR" se vaciarán todos los slots de cartas y podrá poner cartas nuevas a entrenar.
+	
+	- - - NOTA - - - PARA FACILITAR LAS PRUEBAS TANTO EL ENTRENAMIENTO COMO LA RECUPERACIÓN DE CARTAS ESTÁN ACELERADOS
 
 5. BOTÓN MERCADO (símbolo del puesto de venta):
 	
