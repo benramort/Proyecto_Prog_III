@@ -48,7 +48,7 @@ public class Mercado extends JFrame {
 		this.getContentPane().setLayout(new BorderLayout());
 		
 		ventasTotales = datos.getVentas();
-		ventasCondicionales = ventasTotales;
+		ventasCondicionales = new ArrayList<>(ventasTotales);
 //		List<Venta> ventas = datos.getVentas();
 		
 		//Crear contenedores
@@ -115,31 +115,7 @@ public class Mercado extends JFrame {
 		ComboBoxModel<Saga> comboBoxModel = new DefaultComboBoxModel<>(listaSagas);
 		JComboBox<Saga> cbSelSaga = new JComboBox<Saga>(comboBoxModel);
 		
-		cbSelSaga.addItemListener(new ItemListener() {
 
-            private List<Venta> ventasPorSaga;
-
-			@Override
-            public void itemStateChanged(ItemEvent e) {
-                // se comprueba si se ha seleccionado o deseleccionado
-                // un elemento de la lista
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                	for (Venta v :datos.getVentas()) {
-                		String nombreInterno = v.getCarta().getSaga().getNombreInterno();
-						if (e.equals(nombreInterno)) {
-                			ventasPorSaga.add(v);
-                		}
-                	}
-
-//                	AbstractTableModel modeloTabla1 = new ModeloJTableCartas(ventasPorSaga);
-//                	jTable = new JTable(modeloTabla1);
-                	jTable.repaint();
-                } else {
-                	
-                }
-            }
-
-        });
 		
 		
 		JButton botonVender = new JButton("VENDER");
@@ -195,12 +171,28 @@ public class Mercado extends JFrame {
 		pInferior.add(botonVender);
 		
 		
+		cbSelSaga.addItemListener(new ItemListener() {
+
+
+			@Override
+            public void itemStateChanged(ItemEvent e) {
+                // se comprueba si se ha seleccionado o deseleccionado
+                // un elemento de la lista
+				for (Venta v : datos.getVentas()) {
+					if (((Saga)cbSelSaga.getSelectedItem()).equals(v.getCarta().getSaga())) {
+                			ventasCondicionales.add(v);
+					}
+                }
+				actualizar();
+            }
+
+        });
+		
 		
 		AbstractTableModel modeloTabla = new ModeloJTableCartas(ventasCondicionales);
 			
-//		System.out.println(ventas);
 		
-
+		
 		//Para insertar imagenes en una tabla nos hemos basado en este video:
 		//https://www.youtube.com/watch?v=oLksi_fsRHo&t=567s
 		jTable = new JTable(modeloTabla);
@@ -211,6 +203,7 @@ public class Mercado extends JFrame {
 //		jTable.setPreferredSize(new Dimension(1000, 3500));
 		jTable.setDefaultRenderer(Object.class, new RendererJTableCartas());
 		pDerecho.add(spTabla);
+		
 		
 		jTable.addMouseListener(new MouseAdapter() {
 
