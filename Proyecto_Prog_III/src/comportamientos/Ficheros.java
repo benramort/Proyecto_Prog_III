@@ -176,8 +176,12 @@ public class Ficheros implements Datos {
 	public void cargarVentas() {
 		try (Scanner scanner = new Scanner(new FileInputStream("data/ventas.csv"))){
 			while (scanner.hasNextLine()) {
-				String line = scanner.nextLine();
-//				Venta.deLinea(this, line);
+				try {
+					String line = scanner.nextLine();
+					Venta.deLinea(this, line);
+				} catch (NumberFormatException ex) {
+					logger.info("La venta no se ha podido cargar");
+				}
 			}
 		} catch (IOException ex) {
 			
