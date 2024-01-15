@@ -201,7 +201,7 @@ public class Album extends JFrame {
 		cbSelSaga.setPreferredSize(new Dimension(100, 50));
 		pPorcentaje2.add(pBuscar);
 		pBuscar.setVisible(false);
-		pBuscar.setPreferredSize(new Dimension(200, 150));
+		pBuscar.setPreferredSize(new Dimension(200, 120));
 		
 		cargarCartas();
 		
