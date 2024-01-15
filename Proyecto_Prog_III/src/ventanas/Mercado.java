@@ -135,6 +135,8 @@ public class Mercado extends JFrame {
 
         });
 		
+		
+		
 		JButton botonVender = new JButton("VENDER");
 		
 		ImageIcon imagen1 = new ImageIcon(getClass().getResource("/moneda.png"));
@@ -261,7 +263,13 @@ public class Mercado extends JFrame {
 			}
 		});
 		
-
+		for(int i = 0; i<jTable.getRowCount(); i++ ) {
+			if(!tfBuscar.getText().isEmpty() && tfBuscar.getText().startsWith(((Carta) jTable.getValueAt(i, 0)).getNombreVisible())) {			
+		} else {
+			
+		}
+			
+		}
 		
 	}
 	

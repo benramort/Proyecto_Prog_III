@@ -174,7 +174,14 @@ public class Ficheros implements Datos {
 	}
 	
 	public void cargarVentas() {
-		
+		try (Scanner scanner = new Scanner(new FileInputStream("data/ventas.csv"))){
+			while (scanner.hasNextLine()) {
+				String line = scanner.nextLine();
+//				Venta.deLinea(this, line);
+			}
+		} catch (IOException ex) {
+			
+		}
 	}
 
 	public void guardarVenta(Venta v) { //Sería más óptimo guardar todo al final, pero funciona mejor así para bases de datos

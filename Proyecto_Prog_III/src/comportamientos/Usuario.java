@@ -100,7 +100,7 @@ public class Usuario {
 	
 	public static Map<Carta, ZonedDateTime> cargarSinStamina(String s, Datos datos) {
 		Map<Carta, ZonedDateTime> mapa = new TreeMap<>();
-		if(s.equals("empty")) {
+		if(s.equals("empty") || s.isEmpty()) {
 			return mapa;
 		}
 		String[] tokens = s.split(",");
