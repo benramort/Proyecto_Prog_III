@@ -7,8 +7,11 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -17,6 +20,7 @@ import javax.swing.table.AbstractTableModel;
 import comportamientos.Saga;
 import comportamientos.Usuario;
 import comportamientos.Venta;
+import comportamientos.Carta;
 import comportamientos.Datos;
 
 
@@ -39,6 +43,8 @@ public class Mercado extends JFrame {
 		setLocationRelativeTo(ventanaAnterior);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.getContentPane().setLayout(new BorderLayout());
+		
+		List<Venta> ventas = datos.getVentas();
 		
 		//Crear contenedores
 		JPanel pIzquierdo = new JPanel();
@@ -105,12 +111,22 @@ public class Mercado extends JFrame {
 		
 		cbSelSaga.addItemListener(new ItemListener() {
 
-            @Override
+            private List<Venta> ventasPorSaga;
+
+			@Override
             public void itemStateChanged(ItemEvent e) {
                 // se comprueba si se ha seleccionado o deseleccionado
                 // un elemento de la lista
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                	
+                	for (Venta v :datos.getVentas()) {
+                		String nombreInterno = v.getCarta().getSaga().getNombreInterno();
+						if (e.equals(nombreInterno)) {
+                			ventasPorSaga.add(v);
+                		}
+                	}
+                	AbstractTableModel modeloTabla1 = new ModeloJTableCartas(ventasPorSaga);
+                	jTable = new JTable(modeloTabla1);
+                	jTable.repaint();
                 } else {
                 	
                 }
@@ -171,7 +187,8 @@ public class Mercado extends JFrame {
 		pInferior.add(botonVender);
 		
 		
-		AbstractTableModel modeloTabla = new ModeloJTableCartas(datos.getVentas());
+		
+		AbstractTableModel modeloTabla = new ModeloJTableCartas(ventas);
 			
 //		System.out.println(ventas);
 		
