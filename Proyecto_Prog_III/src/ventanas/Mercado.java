@@ -127,14 +127,13 @@ public class Mercado extends JFrame {
                 	}
                 	AbstractTableModel modeloTabla1 = new ModeloJTableCartas(ventasPorSaga);
                 	jTable = new JTable(modeloTabla1);
-                	jTable.repaint();
+                	actualizar();
                 } else {
                 	
                 }
             }
 
         });
-		
 		
 		
 		JButton botonVender = new JButton("VENDER");
