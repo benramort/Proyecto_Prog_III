@@ -2,8 +2,6 @@ package ventanas;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
-import comportamientos.Carta;
 import comportamientos.Datos;
 import comportamientos.Usuario;
 import comportamientos.Venta;
