@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.PrintStream;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -154,7 +155,7 @@ public class Ficheros implements Datos {
 			usuarios.add(usuario);
 			System.out.println(usuarios);
 		} catch (NullPointerException ex) {
-			ex.printStackTrace();
+			logger.warning("No se ha podido guardar el usuario");
 		}
 		guardarUsuarios();
 		
@@ -178,13 +179,14 @@ public class Ficheros implements Datos {
 			while (scanner.hasNextLine()) {
 				try {
 					String line = scanner.nextLine();
-					Venta.deLinea(this, line);
-				} catch (NumberFormatException ex) {
+					ventas.add(Venta.deLinea(this, line));
+				} catch (NumberFormatException | DateTimeParseException ex) {
 					logger.info("La venta no se ha podido cargar");
+					ex.printStackTrace();
 				}
 			}
 		} catch (IOException ex) {
-			
+			logger.warning("No se han podido cargar las ventas");
 		}
 	}
 
