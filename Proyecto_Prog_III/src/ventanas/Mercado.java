@@ -209,14 +209,14 @@ public class Mercado extends JFrame {
 		jTable.addMouseListener(new MouseAdapter() {
 
 			@Override
-			public void mouseClicked(MouseEvent e) { //TODO hacer esto en gestorMercado
+			public void mouseClicked(MouseEvent e) { 
 //				int fila = ;
 				Venta venta = datos.getVentas().get(jTable.rowAtPoint(e.getPoint()));
-				CompraCarta compra = new CompraCarta(venta.getCarta(), venta.getPrecio(), datos, usuario, Mercado.this);
+				CompraCarta compra = new CompraCarta(venta, datos, usuario, Mercado.this);
 				System.out.println(compra);
 				compra.gestionarCompra();
-				datos.getVentas().remove(venta);
-				usuario.getCartas().put(venta.getCarta(), usuario.getCartas().get(venta.getCarta()) + 1);
+//				datos.getVentas().remove(venta);
+//				usuario.getCartas().put(venta.getCarta(), usuario.getCartas().get(venta.getCarta()) + 1);
 				lMonedas.setText(String.valueOf(usuario.getMonedas()));
 				actualizar();
 			}
@@ -272,7 +272,7 @@ public class Mercado extends JFrame {
 		
 	}
 	
-	public void actualizar() { //TODO no se acutaliza
+	public void actualizar() {
 		revalidate();
 		jTable.revalidate();
 		repaint();
