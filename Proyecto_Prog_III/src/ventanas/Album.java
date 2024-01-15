@@ -132,8 +132,17 @@ public class Album extends JFrame {
 		JSpinner spSelPrecioMin = new JSpinner();
 		JLabel lPrecioMax = new JLabel("Precio máximo:");
 		JSpinner spSelPrecioMax = new JSpinner();
-		JLabel lSaga = new JLabel("Saga");
-		JComboBox<Saga> cbSelSaga = new JComboBox<Saga>();
+		JLabel lSaga = new JLabel("Saga");		
+		Saga[] listaSagas = {
+				new Saga("",""),
+				new Saga("GodOfWar", "God Of War"),
+				new Saga("SuperMario", "Super Mario"),
+				new Saga("TheLegendOfZelda", "The Legend Of Zelda"),
+				new Saga("Portal", "Portal"),
+				new Saga("TheLastOfUs", "The Last Of Us")	
+		};
+		ComboBoxModel<Saga> comboBoxModel = new DefaultComboBoxModel<>(listaSagas);
+		JComboBox<Saga> cbSelSaga = new JComboBox<Saga>(comboBoxModel);
 		JLabel lCerrarFiltros = new JLabel("X");
 		
 		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
@@ -161,7 +170,7 @@ public class Album extends JFrame {
 		spSelPrecioMax.setPreferredSize(new Dimension(100, 25));
 		spSelPrecioMin.setModel(new SpinnerNumberModel(0, 0, 999999999, 100));
 		spSelPrecioMax.setModel(new SpinnerNumberModel(0, 0, 999999999, 100));
-		cbSelSaga.setMinimumSize(new Dimension(200, 200));
+		cbSelSaga.setMinimumSize(new Dimension(500, 100));
 		
 		//Añadir componentes a contenedores
 		setIconImage(logoPequeño.getImage());
