@@ -264,9 +264,10 @@ public class Mercado extends JFrame {
 		
 		for(int i = 0; i<jTable.getRowCount(); i++ ) {
 			if(!tfBuscar.getText().isEmpty() && tfBuscar.getText().startsWith(((Carta) jTable.getValueAt(i, 0)).getNombreVisible())) {			
-		} else {
 			
-		}
+			} else {
+			
+			}
 			
 		}
 		
