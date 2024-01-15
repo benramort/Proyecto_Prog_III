@@ -209,6 +209,7 @@ public class BasesDeDatos implements Datos {
 	@Override
 	public void cargarVentas() {
 		try {
+//			ventas = new ArrayList<Venta>(); TODO esto hace falta
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM VENTAS");
 			while (rs.next()) {

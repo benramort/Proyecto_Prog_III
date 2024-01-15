@@ -5,6 +5,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 public class Venta {
 	
@@ -57,9 +58,10 @@ public class Venta {
 		this.usuario = usuario;
 	}
 	
-	public void venderCarta(Datos datos) {
+	public void venderCarta(Datos datos, List<Venta> ventasCondicionales) {
 //		System.out.println(""+c+"-"+u+"-"+precio);
 //		Venta v = new Venta(c, precio, u);
+		ventasCondicionales.add(this);
 		datos.getVentas().add(this);
 		datos.guardarVenta(this);
 		usuario.getCartas().replace(carta, usuario.getCartas().get(carta)-1);

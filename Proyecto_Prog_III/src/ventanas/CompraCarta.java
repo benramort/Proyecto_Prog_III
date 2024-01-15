@@ -1,5 +1,7 @@
 package ventanas;
 
+import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import comportamientos.Datos;
@@ -8,18 +10,21 @@ import comportamientos.Venta;
 
 
 public class CompraCarta {
+	
 	Venta venta;
 	Datos datos;
 	Usuario usuario;
 	JFrame ventana;
+	List<Venta> ventasParciales;
 
 	
 	
-	public CompraCarta(Venta venta, Datos datos, Usuario usuario, JFrame ventana) {
+	public CompraCarta(List<Venta> ventasParciales, Venta venta, Datos datos, Usuario usuario, JFrame ventana) {
 		this.venta = venta;
 		this.datos = datos;
 		this.usuario = usuario;
 		this.ventana = ventana;
+		this.ventasParciales = ventasParciales;
 	}
 	
 	public void gestionarCompra() {
@@ -34,6 +39,7 @@ public class CompraCarta {
 				monedasUsuario = usuario.getMonedas() - venta.getPrecio();
 				usuario.setMonedas(monedasUsuario);
 				datos.getVentas().remove(venta);
+				ventasParciales.remove(venta);
 				usuario.getCartas().put(venta.getCarta(), usuario.getCartas().get(venta.getCarta()) + 1);
 			} 									
 		}

@@ -3,13 +3,17 @@ import java.util.Random;
 import comportamientos.BasesDeDatos;
 import comportamientos.Venta;
 import comportamientos.Datos;
+import comportamientos.Ficheros;
 
 public class VentasAlAzar {
 	
-	private static Datos datos = new BasesDeDatos("datos.db");
+	private static Datos datos = new Ficheros("modeloCartas","usuarios");
 	
 	public static void main(String[] args) {
 		datos.cargarUsuarios();
+		datos.cargarModeloCartas();
+		System.out.println(datos.getUsuarios());
+		System.out.println(datos.getModeloCartas());
 		generarCartasAlAzar();
 		datos.cargarVentas();
 		System.out.println(datos.getVentas());
