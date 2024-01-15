@@ -172,6 +172,7 @@ public class Ficheros implements Datos {
 			logger.warning("No se pudo guardar el usuario");
 		}
 	}
+
 	
 	public void cargarVentas() {
 		try (Scanner scanner = new Scanner(new FileInputStream("data/ventas.csv"))){
