@@ -125,7 +125,7 @@ public class Album extends JFrame {
 		ImageIcon imagen5 = new ImageIcon(path5.toAbsolutePath().toString());
 		ImageIcon imagenTienda = new ImageIcon(imagen5.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
 		
-		Path path6 = Path.of("Resources/img/salir.png");
+		Path path6 = Path.of("resources/img/salir.png");
 		ImageIcon imagen6 = new ImageIcon(path6.toAbsolutePath().toString());
 		ImageIcon imagenSalir = new ImageIcon(imagen6.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
 		
