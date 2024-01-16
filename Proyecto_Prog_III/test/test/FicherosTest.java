@@ -54,7 +54,7 @@ public class FicherosTest {
 		ventas.add(venta3);
 		
 		try {
-			PrintStream ps = new PrintStream(new FileOutputStream("data/ficherosusuariostest.csv"));
+			PrintStream ps = new PrintStream(new FileOutputStream("resources/data/ficherosusuariostest.csv"));
 			for (Usuario u : usuarios) {
 				String linea = u.aLinea();
 				ps.println(linea);
@@ -65,7 +65,7 @@ public class FicherosTest {
 		}
 		
 		try {
-			PrintStream ps = new PrintStream(new FileOutputStream("data/ficherosmodelocartastest.csv"));
+			PrintStream ps = new PrintStream(new FileOutputStream("resources/data/ficherosmodelocartastest.csv"));
 			for (Carta c : modeloCartas) {
 				String linea = Carta.aLinea(c);
 				ps.println(linea);
@@ -76,7 +76,7 @@ public class FicherosTest {
 		}
 		
 		try {
-			PrintStream ps = new PrintStream(new FileOutputStream("data/ficherosventastest.csv"));
+			PrintStream ps = new PrintStream(new FileOutputStream("resources/data/ficherosventastest.csv"));
 			for (Venta v : ventas) {
 				String linea = v.aLinea();
 				ps.println(linea);
@@ -91,11 +91,11 @@ public class FicherosTest {
 	
 	@After
 	public void destruirFicheros() {
-			File file = new File("data/ficherosmodelocartastest.csv");
+			File file = new File("resources/data/ficherosmodelocartastest.csv");
 			file.delete();
-			file = new File("data/ficherosusuariostest.csv");
+			file = new File("resources/data/ficherosusuariostest.csv");
 			file.delete();
-			file = new File("data/ficherosventastest.csv");
+			file = new File("resources/data/ficherosventastest.csv");
 			file.delete();	
 	}
 	
