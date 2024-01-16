@@ -14,6 +14,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import db.BasesDeDatos;
+import domain.Carta;
+import domain.Usuario;
+
 public class UsuarioTest {
 	
 	private Usuario usuarioNuevo;

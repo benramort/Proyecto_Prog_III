@@ -8,6 +8,10 @@ import javax.swing.ImageIcon;
 import org.junit.Before;
 import org.junit.Test;
 
+import domain.Carta;
+import domain.CartaVacia;
+import domain.Saga;
+
 public class CartaVaciaTest {
 	CartaVacia cartaVacia;
 	Carta carta;
