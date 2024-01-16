@@ -175,15 +175,17 @@ public class BasesDeDatosTest {
 		db.cargarVentas();
 		List<Venta>ventasCargadas = db.getVentas();
 		List<Venta> ventas = new ArrayList<>();
-		ventas.add(new Venta(new Carta(2),200,new Usuario("usuario1", "contrasena", null, 10),ZonedDateTime.parse("2023-12-29T12:14:14.9581759+01:00[Europe/Madrid]", DateTimeFormatter.ISO_ZONED_DATE_TIME)));
-		
-		
+		ventas.add(new Venta(db.getModeloCartas().get(1),200,db.cargarUsuario("usuario1"),ZonedDateTime.parse("2023-12-29T12:14:14.9581759+01:00[Europe/Madrid]", DateTimeFormatter.ISO_ZONED_DATE_TIME)));
 		assertEquals(ventas,ventasCargadas);
+		
 	}
+	
 	@Test
 	public void testGuardarVenta() {
-		Venta venta = new Venta(new Carta(6),100,new Usuario("usuario2", "contrasena", null, 20),ZonedDateTime.parse("2023-12-29T12:14:14.9581759+01:00[Europe/Madrid]", DateTimeFormatter.ISO_ZONED_DATE_TIME));
+		
+		Venta venta = new Venta(db.getModeloCartas().get(2),100,db.cargarUsuario("usuario2"),ZonedDateTime.parse("2023-12-29T12:14:14.9581759+01:00[Europe/Madrid]", DateTimeFormatter.ISO_ZONED_DATE_TIME));
 		db.guardarVenta(venta);
+		db.cargarVentas();
 		assertTrue(db.getVentas().contains(venta));
 	}
 	
