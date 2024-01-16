@@ -106,8 +106,7 @@ Datos datos;
 		JButton btIniciarSesion = new JButton("Iniciar sesión");
 		JButton btNuevaCuenta = new JButton("Crear cuenta");
 		Path path = Paths.get("");
-//		System.out.println(path.toAbsolutePath().toString());
-		JLabel lLogo = new JLabel(new ImageIcon(path.toAbsolutePath().toString() + "/img/logo.png"));
+		JLabel lLogo = new JLabel(new ImageIcon(path.toAbsolutePath().toString() + "/resources/img/logo.png"));
 		JCheckBox cbMostrarContrasena = new JCheckBox("Mostrar contraseña");
 		JLabel lIncorrecto = new JLabel("Usuario o contraseña incorrectos");
 		

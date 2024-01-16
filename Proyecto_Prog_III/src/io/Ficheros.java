@@ -66,7 +66,7 @@ public class Ficheros implements Datos {
 //	}
 	
 	public void cargarModeloCartas() {
-		try (Scanner scanner = new Scanner(new FileInputStream("data/"+nombreFicheroCartas+".csv"))) {
+		try (Scanner scanner = new Scanner(new FileInputStream("resources/data/"+nombreFicheroCartas+".csv"))) {
 			while (scanner.hasNextLine()) {
 				String linea = scanner.nextLine();
 				try {
@@ -104,7 +104,7 @@ public class Ficheros implements Datos {
 //	}
 	
 	public void cargarUsuarios() {
-		try (Scanner scanner = new Scanner(new FileInputStream("data/"+nombreFicheroUsuarios+".csv"))) {
+		try (Scanner scanner = new Scanner(new FileInputStream("resources/data/"+nombreFicheroUsuarios+".csv"))) {
 			usuarios.clear();
 			while (scanner.hasNextLine()) {
 				String linea = scanner.nextLine();
@@ -176,7 +176,7 @@ public class Ficheros implements Datos {
 	
 	public void guardarUsuarios() {
 		try {
-			PrintStream ps = new PrintStream(new FileOutputStream("data/usuarios.csv"));
+			PrintStream ps = new PrintStream(new FileOutputStream("resources/data/usuarios.csv"));
 			for (Usuario u : usuarios) {
 				String linea = u.aLinea();
 				ps.println(linea);
@@ -189,7 +189,7 @@ public class Ficheros implements Datos {
 
 	
 	public void cargarVentas() {
-		try (Scanner scanner = new Scanner(new FileInputStream("data/"+nombreFicheroVentas+".csv"))){
+		try (Scanner scanner = new Scanner(new FileInputStream("resources/data/"+nombreFicheroVentas+".csv"))){
 			ventas = new ArrayList<Venta>();
 			while (scanner.hasNextLine()) {
 				try {
@@ -206,7 +206,7 @@ public class Ficheros implements Datos {
 	}
 
 	public void guardarVenta(Venta v) { //Sería más óptimo guardar todo al final, pero funciona mejor así para bases de datos
-		try (PrintStream ps = new PrintStream(new FileOutputStream("data/ventas.csv", true))) {
+		try (PrintStream ps = new PrintStream(new FileOutputStream("resources/data/ventas.csv", true))) {
 			ps.println(v.aLinea());
 		} catch (IOException ex) {
 			logger.info("No se ha podido guardar la venta");
@@ -214,7 +214,7 @@ public class Ficheros implements Datos {
 	}
 	
 	public void configurarLogger() {
-		try (FileInputStream is = new FileInputStream("data/logger.properties")) {
+		try (FileInputStream is = new FileInputStream("conf/logger.properties")) {
 			LogManager.getLogManager().readConfiguration(is);
 		} catch (FileNotFoundException ex) {
 			logger.info("No se ha encontrado la configuracion del logger. Usando configuracion por defercto");

@@ -39,7 +39,7 @@ public class BasesDeDatos implements Datos {
 		configurarLogger();
 		try {
 			Class.forName("org.sqlite.JDBC");
-			conn = DriverManager.getConnection("jdbc:sqlite:data/"+nombre);
+			conn = DriverManager.getConnection("jdbc:sqlite:resources/db/"+nombre);
 			logger.info("Conexión exitosa con la base de datos");
 		} catch (ClassNotFoundException ex) {
 			logger.warning("No se ha podido cargar el driver de la base de datos");
@@ -103,7 +103,7 @@ public class BasesDeDatos implements Datos {
 
 	@Override
 	public void configurarLogger() {
-		try (FileInputStream is = new FileInputStream("data/logger.properties")) {
+		try (FileInputStream is = new FileInputStream("conf/logger.properties")) {
 			LogManager.getLogManager().readConfiguration(is);
 		} catch (FileNotFoundException ex) {
 			logger.info("No se ha encontrado la configuracion del logger. Usando configuracion por defercto");

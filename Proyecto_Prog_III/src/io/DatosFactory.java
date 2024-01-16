@@ -12,7 +12,7 @@ import interfaces.Datos;
 public class DatosFactory {
 	
 	public static Datos getDatos() throws DataException {
-		Path path = Path.of("data/datos.properties");
+		Path path = Path.of("conf/datos.properties");
 		try (FileInputStream is = new FileInputStream(path.toAbsolutePath().toString())){
 			Properties properties = new Properties();
 			properties.load(is);
