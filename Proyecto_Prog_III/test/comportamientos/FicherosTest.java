@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Before;
@@ -145,7 +146,7 @@ public class FicherosTest {
 	}
 
 	@Test
-	public void testGuardarVentas() {
+	public void testGuardarVenta() {
 		List<Venta> ventas = new ArrayList<>();
 		Saga saga1 = new Saga("nombreInternoSaga1", "nombreVisibleSaga1");
 		Saga saga2 = new Saga("nombreInternoSaga2", "nombreVisibleSaga2");
@@ -168,6 +169,8 @@ public class FicherosTest {
 		f.guardarVenta(venta1);
 		f.guardarVenta(venta1);
 		f.guardarVenta(venta1);
+		f.cargarUsuarios();
+		f.cargarModeloCartas();
 		f.cargarVentas();
 		assertEquals(ventas, f.getVentas());
 		
