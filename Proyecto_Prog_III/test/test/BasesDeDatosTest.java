@@ -80,14 +80,14 @@ public class BasesDeDatosTest {
 //			Saga saga1 = new Saga("saga1", "Saga 1");
 //			cartas.add(new Carta(0, "carta1", "Carta 1", saga1, 50,50,50));
 			stmt.executeUpdate("INSERT INTO MODELO_CARTAS (ID, NOMBRE_INTERNO, NOMBRE_VISIBLE, SAGA_INTERNO, SAGA_VISIBLE, MONEDAS_MINUTO, RESISTENCIA, RECUPERACION) "
-					+ "VALUES (0, 'carta1', 'Carta 1', 'saga1', 'Saga 1', 50,50,50)");
+					+ "VALUES (1, 'carta1', 'Carta 1', 'saga1', 'Saga 1', 50,50,50)");
 //			Saga saga2 = new Saga("saga2", "Saga 2");
 //			cartas.add(new Carta(1, "carta2", "Carta 2", saga2, 5,5,5));
 			stmt.executeUpdate("INSERT INTO MODELO_CARTAS (ID, NOMBRE_INTERNO, NOMBRE_VISIBLE, SAGA_INTERNO, SAGA_VISIBLE, MONEDAS_MINUTO, RESISTENCIA, RECUPERACION) "
-					+ "VALUES (1, 'carta2', 'Carta 2', 'saga2', 'Saga 2', 5,5,5)");
+					+ "VALUES (2, 'carta2', 'Carta 2', 'saga2', 'Saga 2', 5,5,5)");
 //			cartas.add(new Carta(2, "carta3", "Carta 3", saga1, 90,90,90));
 			stmt.executeUpdate("INSERT INTO MODELO_CARTAS (ID, NOMBRE_INTERNO, NOMBRE_VISIBLE, SAGA_INTERNO, SAGA_VISIBLE, MONEDAS_MINUTO, RESISTENCIA, RECUPERACION) "
-					+ "VALUES (2, 'carta3', 'Carta 3', 'saga1', 'Saga 1', 90,90,90)");
+					+ "VALUES (3, 'carta3', 'Carta 3', 'saga1', 'Saga 1', 90,90,90)");
 			
 			
 			stmt.executeUpdate("INSERT INTO USUARIOS (USERNAME, PASSWORD, CARTAS, MONEDAS, SIN_STAMINA) "
@@ -127,9 +127,9 @@ public class BasesDeDatosTest {
 		cartas = new ArrayList<Carta>();
 		Saga saga1 = new Saga("saga1", "Saga 1");
 		Saga saga2 = new Saga("saga2", "Saga 2");
-		cartas.add(new Carta(0, "carta1", "Carta 1", saga1, 50,50,50));
-		cartas.add(new Carta(1, "carta2", "Carta 2", saga2, 5,5,5));
-		cartas.add(new Carta(2, "carta3", "Carta 3", saga1, 90,90,90));
+		cartas.add(new Carta(1, "carta1", "Carta 1", saga1, 50,50,50));
+		cartas.add(new Carta(2, "carta2", "Carta 2", saga2, 5,5,5));
+		cartas.add(new Carta(3, "carta3", "Carta 3", saga1, 90,90,90));
 		
 		assertEquals(cartas, db.getModeloCartas());
 	}
@@ -168,7 +168,7 @@ public class BasesDeDatosTest {
 		
 	}
 	
-	//TODO guardarUsuarios???
+
 	
 	@Test
 	public void testCargarVentas() {
@@ -188,8 +188,11 @@ public class BasesDeDatosTest {
 		Venta venta = new Venta(db.getModeloCartas().get(2),100,db.cargarUsuario("usuario2"),ZonedDateTime.parse("2023-12-29T12:14:14.9581759+01:00[Europe/Madrid]", DateTimeFormatter.ISO_ZONED_DATE_TIME));
 		db.guardarVenta(venta);
 		db.cargarVentas();
-		System.out.println(db.getVentas().get(1).getUsuario().equals(db.cargarUsuario("usuario2")));
-		assertTrue(db.getVentas().contains(venta));
+//		System.out.println(db.getVentas().get(1).getUsuario().equals(db.cargarUsuario("usuario2")));
+		System.out.println(db.getVentas());
+//		List<Venta> ventas = new ArrayList<Venta>();
+//		ventas.add(venta);
+		assertEquals(venta, db.getVentas().get(1));
 	}
 	
 

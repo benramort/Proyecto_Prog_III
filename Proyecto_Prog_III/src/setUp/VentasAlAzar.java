@@ -34,7 +34,23 @@ public class VentasAlAzar {
 //			ventas.add(venta);
 			ficheros.getVentas().add(venta);
 			ficheros.guardarVenta(venta);
+			
 		}
+		
+		for (int i = 0; i < 10 ; i++) {
+			baseDeDatos.cargarUsuarios();
+			Venta venta = new Venta();
+			venta.setCarta(baseDeDatos.getModeloCartas().get(r.nextInt(baseDeDatos.getModeloCartas().size())));
+			venta.setPrecio(r.nextInt(100, 200));
+			baseDeDatos.cargarUsuarios();
+			System.out.println(baseDeDatos.getUsuarios());
+			venta.setUsuario(baseDeDatos.getUsuarios().get(r.nextInt(baseDeDatos.getUsuarios().size())));
+//			ventas.add(venta);
+			baseDeDatos.getVentas().add(venta);
+			baseDeDatos.guardarVenta(venta);
+			
+		}
+		
 		
 	}
 

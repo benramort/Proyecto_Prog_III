@@ -224,6 +224,7 @@ public class BasesDeDatos implements Datos {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM VENTAS");
 			while (rs.next()) {
+				System.out.println("id"+rs.getInt("ID_CARTA"));
 				Carta carta = modeloCartas.get(rs.getInt("ID_CARTA")-1);
 				Usuario usuario = cargarUsuario(rs.getString("USERNAME"));
 //				for (Usuario u : usuarios) {
