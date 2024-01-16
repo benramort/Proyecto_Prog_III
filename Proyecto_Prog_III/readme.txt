@@ -1,14 +1,10 @@
 AQUÍ ESTÁN LOS PASOS PARA USAR LA APLICACIÓN:
 
-0. Ejecutar la clase ConversorFicherosDB en el paquete default
+1. Inicie la aplicación
 
-1. Ejecutar la clase VentasAlAzar en el paquete default
+2. Al iniciarla, tendrá dos opciones: "INICIAR SESIÓN" o "CREAR CUENTA". Si no tiene cuenta, cree una nueva.
 
-2. Inicie la aplicación
-
-3. Al iniciarla, tendrá dos opciones: "INICIAR SESIÓN" o "CREAR CUENTA". Si no tiene cuenta, cree una nueva.
-
-5. Ahora habrá entrado en la ventana principal de la aplicación, el álbum. Aquí verá varias cosas:
+3. Ahora habrá entrado en la ventana principal de la aplicación, el álbum. Aquí verá varias cosas:
 	
 	- Por un lado están sus cartas coleccionadas, que si ha creado una cuenta nueva, estarán todas bloqueadas
 	
@@ -20,7 +16,7 @@ AQUÍ ESTÁN LOS PASOS PARA USAR LA APLICACIÓN:
 	
 	- Al pulsar en alguno de esos botones, accederá a otras ventanas de la aplicación. Cada una de esas ventanas dispone de un botón "ÁLBUM" que si lo pulsa volverá a su álbum.
 
-6. BOTÓN ENTRENAR (símbolo de la mancuerna):
+4. BOTÓN ENTRENAR (símbolo de la mancuerna):
 		
 	- Al pulsarlo, entrará en la ventana de entrenamiento.	
 
@@ -50,7 +46,7 @@ AQUÍ ESTÁN LOS PASOS PARA USAR LA APLICACIÓN:
 	
 	- - - NOTA - - - PARA FACILITAR LAS PRUEBAS TANTO EL ENTRENAMIENTO COMO LA RECUPERACIÓN DE CARTAS ESTÁN ACELERADOS
 
-7. BOTÓN MERCADO (símbolo del puesto de venta):
+5. BOTÓN MERCADO (símbolo del puesto de venta):
 	
 	- Al pulsarlo, entrará en la ventana de mercado. Aquí podrá comprar y vender cartas.
 
@@ -62,28 +58,31 @@ AQUÍ ESTÁN LOS PASOS PARA USAR LA APLICACIÓN:
 
 	- En la parte izquierda hay filtros con los que podrá buscar la carta que quiera comprar, siempre que esté disponible para comprar.
 
-8. BOTÓN TIENDA (símbolo del carro de la compra):
+6. BOTÓN TIENDA (símbolo del carro de la compra):
 
 	- Al pulsarlo, accederá a la tienda de sobres.
 
 	- Aquí podrá comprar sobres para desbloquear cartas. Hay 4 sobres disponibles. En el más barato solo hay 1 carta, y en el más caro hay 4.
 
 
-9. BOTÓN FILTROS (símbolo de la lupa):
+7. BOTÓN FILTROS (símbolo de la lupa):
 	
 	- Al pulsar este botón, cambiará el porcentaje de colección por unos filtros, con los que podrá buscar una carta en su álbum.
 
 	- Para cerrar estos filtros, haga clic en la x de la parte superior derecha de los filtros.
 
-10. BOTÓN AJUSTES (símbolo del engranaje):
+8. BOTÓN AJUSTES (símbolo del engranaje):
 
 	- Todavía sin programar
 
-11. BOTÓN SALIR (símbolo de la puerta y la flecha):
+9. BOTÓN SALIR (símbolo de la puerta y la flecha):
 	
 	- Al pulsarlo aparecerá un mensaje para salir de la aplicación.
 	
-
+Programas auxiliares ubicados dentro de la carpeta src en la carpeta setUp:
+    - ConversorFicheroDB: esta clase se encarga de cargar el contenido del fichero modeloCartas.csv en la base de datos.
+    - VentasAlAzar: esta clase se encarga de añadir tanto a la base de datos como a ficheros varias ventas al azar.
+    
 
 
 
