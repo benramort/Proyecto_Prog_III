@@ -2,6 +2,7 @@ package comportamientos;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -9,14 +10,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class FicherosTest {
 	Ficheros f;
 	private List<Venta> ventas;
-	
-	//TODO esto es un poco trampa, pero se cambia fácil
+
 	@Before
 	public void preparatorio() {
 		List<Carta> modeloCartas = new ArrayList<>();
@@ -81,6 +82,16 @@ public class FicherosTest {
 		}
 		
 		f = new Ficheros("ficherosmodelocartastest", "ficherosusuariostest", "ficherosventastest");
+	}
+	
+	@After
+	public void destruirFicheros() {
+			File file = new File("data/ficherosmodelocartastest.csv");
+			file.delete();
+			file = new File("data/ficherosusuariostest.csv");
+			file.delete();
+			file = new File("data/ficherosventastest.csv");
+			file.delete();	
 	}
 	
 	@Test
