@@ -74,7 +74,9 @@ public class Venta {
 	}
 	
 	public static Venta deLinea(Datos datos, String s) throws NumberFormatException, DateTimeParseException {
+//		System.out.println(s);
 		String[] tokens = s.split(";");
+//		System.out.println("la carta a cargar es:" + tokens[0]);
 		Carta carta = datos.getModeloCartas().get(Integer.parseInt(tokens[0])-1);
 		Usuario usuario = null;
 		for (Usuario u : datos.getUsuarios()) {
@@ -90,6 +92,19 @@ public class Venta {
 	@Override
 	public String toString() {
 		return carta.toString() +"-"+ usuario.toString() +"-"+ precio;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Venta) {
+			Venta v= (Venta) o;
+			if (!carta.equals(v.getCarta())) return false;
+			if (!usuario.equals(v.getUsuario())) return false;
+			if (precio != v.getPrecio()) return false;
+			if (!fechaHora.equals(v.getFechaHora())) return false;
+			return true;
+		}
+		return false;
 	}
 	
 //	@Override
