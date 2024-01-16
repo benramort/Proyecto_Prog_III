@@ -78,10 +78,15 @@ AQUÍ ESTÁN LOS PASOS PARA USAR LA APLICACIÓN:
 9. BOTÓN SALIR (símbolo de la puerta y la flecha):
 	
 	- Al pulsarlo aparecerá un mensaje para salir de la aplicación.
-	
-Programas auxiliares ubicados dentro de la carpeta src en la carpeta setUp:
-    - ConversorFicheroDB: esta clase se encarga de cargar el contenido del fichero modeloCartas.csv en la base de datos.
-    - VentasAlAzar: esta clase se encarga de añadir tanto a la base de datos como a ficheros varias ventas al azar.
+
+Existen tres programas ejecutables:
+	1. El propio juego.
+	2. y 3. Programas auxiliares :
+    	2. ConversorFicheroDB: esta clase se encarga de cargar el contenido del fichero modeloCartas.csv en la base de datos.
+    	3. VentasAlAzar: esta clase se encarga de añadir tanto a la base de datos como a ficheros varias ventas al azar.
+
+Cambio de método de guardado entre base de datos y ficheros ubicado en la carpeta conf:
+Dentro del fichero si asignamos a la variable FuenteDatos la palabra Ficheros, todos los datos del programa se guardarán en ficheros pero si ponemos BaseDeDatos, se guardarán en la base de datos.
     
 
 
