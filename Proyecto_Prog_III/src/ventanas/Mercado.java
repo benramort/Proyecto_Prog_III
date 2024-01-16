@@ -187,11 +187,13 @@ public class Mercado extends JFrame {
 		bBuscar.addActionListener(new ActionListener() {
 			
 			@Override
+
 			public void actionPerformed(ActionEvent e) {
 				actualizarLista();
 				
 			}
 		});
+
 		
 		AbstractTableModel modeloTabla = new ModeloJTableCartas(ventasCondicionales);
 			
@@ -323,7 +325,7 @@ public class Mercado extends JFrame {
 			ventasCondicionales.addAll(ventasTotales);
 			ventasCondicionales.removeIf(v -> (!v.getCarta().getNombreVisible().toUpperCase().startsWith(tfBuscar.getText().toUpperCase())));
 			ventasCondicionales.removeIf(v -> (!v.getCarta().getSaga().equals(cbSelSaga.getSelectedItem())));
-			ventasCondicionales.removeIf(v -> !(v.getPrecio() >= ((int) spSelPrecioMin.getValue()) && v.getPrecio() <= ((int) spSelPrecioMax.getValue())));
+//			ventasCondicionales.removeIf(v -> !(v.getPrecio() >= ((int) spSelPrecioMin.getValue()) && v.getPrecio() <= ((int) spSelPrecioMax.getValue())));
 			System.out.println("NO null");
 		}
 		actualizar();

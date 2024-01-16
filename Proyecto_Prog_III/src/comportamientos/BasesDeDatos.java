@@ -60,8 +60,8 @@ public class BasesDeDatos implements Datos {
 				Saga saga = new Saga(sagaInterno, sagaVisible);
 				Carta carta = new Carta(id, nombreInterno, nombreVisible, saga, monedasPorMinuto, resistencia, recuperacion);
 				modeloCartas.add(carta);
-				
 			}
+			modeloCartas = Recursividad.getCartasOrdenadas(modeloCartas);
 //			System.out.println("El tamaño de la lista es: "+modeloCartas.size());
 			stmt.close();
 		} catch (SQLException e) {
