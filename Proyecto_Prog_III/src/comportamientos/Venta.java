@@ -102,7 +102,7 @@ public class Venta {
 			if (!carta.equals(v.getCarta())) return false;
 			if (!usuario.equals(v.getUsuario())) return false;
 			if (precio != v.getPrecio()) return false;
-			if (!fechaHora.equals(v.getFechaHora())) return false;
+//			if (!fechaHora.equals(v.getFechaHora())) return false;
 			return true;
 		}
 		return false;

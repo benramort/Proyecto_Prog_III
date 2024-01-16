@@ -316,15 +316,22 @@ public class Mercado extends JFrame {
 
 		System.out.println((spSelPrecioMax.getValue()).equals(0));
 		
-		if((((Saga)cbSelSaga.getSelectedItem()).getNombreInterno().equals("")) && (tfBuscar.getText().isEmpty()) && (spSelPrecioMax.getValue().equals(0))) {
+		if((((Saga)cbSelSaga.getSelectedItem()).getNombreInterno().equals("")) && (tfBuscar.getText().isEmpty()) && (spSelPrecioMax.getValue().equals(0) && spSelPrecioMin.getValue().equals(0))) {
 			ventasCondicionales.removeIf(v -> true);
 			ventasCondicionales.addAll(ventasTotales);
 			System.out.println("hola que ase");
 		} else {
 			ventasCondicionales.removeIf(v -> true);
 			ventasCondicionales.addAll(ventasTotales);
-			ventasCondicionales.removeIf(v -> (!v.getCarta().getNombreVisible().toUpperCase().startsWith(tfBuscar.getText().toUpperCase())));
-			ventasCondicionales.removeIf(v -> (!v.getCarta().getSaga().equals(cbSelSaga.getSelectedItem())));
+			if (!tfBuscar.getText().isBlank()) {
+				ventasCondicionales.removeIf(v ->(!v.getCarta().getNombreVisible().toUpperCase().startsWith(tfBuscar.getText().toUpperCase())));
+			}
+			if (!(((Saga)cbSelSaga.getSelectedItem()).getNombreInterno().equals(""))) {
+				ventasCondicionales.removeIf(v -> (!v.getCarta().getSaga().equals(cbSelSaga.getSelectedItem())));
+			}
+			if (!(spSelPrecioMax.getValue().equals(0) && spSelPrecioMin.getValue().equals(0))) {
+				ventasCondicionales.removeIf(v -> !(v.getPrecio() >= ((int) spSelPrecioMin.getValue()) && v.getPrecio() <= ((int) spSelPrecioMax.getValue())));
+			}
 //			ventasCondicionales.removeIf(v -> !(v.getPrecio() >= ((int) spSelPrecioMin.getValue()) && v.getPrecio() <= ((int) spSelPrecioMax.getValue())));
 			System.out.println("NO null");
 		}
