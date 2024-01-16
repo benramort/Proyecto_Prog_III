@@ -7,6 +7,7 @@ import io.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -39,7 +40,9 @@ public class BasesDeDatos implements Datos {
 		configurarLogger();
 		try {
 			Class.forName("org.sqlite.JDBC");
-			conn = DriverManager.getConnection("jdbc:sqlite:resources/db/"+nombre);
+			Path path = Path.of("resources/data/"+nombre);
+			System.out.println(path.toAbsolutePath());
+			conn = DriverManager.getConnection("jdbc:sqlite:"+path.toAbsolutePath().toString());
 			logger.info("Conexión exitosa con la base de datos");
 		} catch (ClassNotFoundException ex) {
 			logger.warning("No se ha podido cargar el driver de la base de datos");
