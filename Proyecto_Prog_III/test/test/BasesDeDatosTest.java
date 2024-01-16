@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.sql.Connection;
@@ -42,7 +43,7 @@ public class BasesDeDatosTest {
 	
 	@Before
 	public void preparatorio() {
-		try (Connection conn = DriverManager.getConnection("jdbc:sqlite:data/prueba.db")) {
+		try (Connection conn = DriverManager.getConnection("jdbc:sqlite:resources/db/prueba.db")) {
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("CREATE TABLE USUARIOS(\r\n"
 					+ "	USERNAME TEXT PRIMARY KEY NOT NULL,\r\n"
@@ -50,7 +51,7 @@ public class BasesDeDatosTest {
 					+ "	CARTAS TEXT,\r\n"
 					+ "	MONEDAS INTEGER,\r\n"
 					+ "	SIN_STAMINA TEXT\r\n"
-					+ ");");
+					+ ")");
 			
 			stmt.executeUpdate("CREATE TABLE MODELO_CARTAS (\r\n"
 					+ "ID INTEGER PRIMARY KEY NOT NULL,\r\n"
@@ -68,7 +69,8 @@ public class BasesDeDatosTest {
 					+ "USERNAME TEXT NOT NULL,\r\n"
 					+ "PRECIO INTEGER,\r\n"
 					+ "FECHA_HORA TEXT NOT NULL,\r\n"
-					+ "PRIMARY KEY (USERNAME, FECHA_HORA)	FOREIGN KEY (ID_CARTA) REFERENCES MODELO_CARTAS(ID),\r\n"
+					+ "PRIMARY KEY (USERNAME, FECHA_HORA),\r\n"
+					+ "FOREIGN KEY (ID_CARTA) REFERENCES MODELO_CARTAS(ID),\r\n"
 					+ "FOREIGN KEY (USERNAME) REFERENCES USUARIOS(USERNAME)\r\n"
 					+ ");");
 			
@@ -96,10 +98,8 @@ public class BasesDeDatosTest {
 			stmt.executeUpdate("INSERT INTO VENTAS (ID_CARTA, USERNAME, PRECIO, FECHA_HORA) "
 					+ "VALUES (2,'usuario1',200,'2023-12-29T12:14:14.9581759+01:00[Europe/Madrid]')");
 			
-			
-			
-			
 			stmt.close();
+			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
@@ -111,7 +111,7 @@ public class BasesDeDatosTest {
 	public void cierre() {
 		db.cerrarConexion();
 		
-		File myObj = new File("data/prueba.db"); 
+		File myObj = new File("resources/db/prueba.db"); 
 	    if (myObj.delete()) { 
 	      System.out.println("Deleted the file: " + myObj.getName());
 	    } else {
@@ -171,7 +171,7 @@ public class BasesDeDatosTest {
 	//TODO guardarUsuarios???
 	
 	@Test
-	public void testCargarVenta() {
+	public void testCargarVentas() {
 		db.cargarVentas();
 		List<Venta>ventasCargadas = db.getVentas();
 		List<Venta> ventas = new ArrayList<>();
@@ -179,11 +179,12 @@ public class BasesDeDatosTest {
 		
 		
 		assertEquals(ventas,ventasCargadas);
-		
 	}
-	
-	public void testGuardarVentas() {
-		
+	@Test
+	public void testGuardarVenta() {
+		Venta venta = new Venta(new Carta(6),100,new Usuario("usuario2", "contrasena", null, 20),ZonedDateTime.parse("2023-12-29T12:14:14.9581759+01:00[Europe/Madrid]", DateTimeFormatter.ISO_ZONED_DATE_TIME));
+		db.guardarVenta(venta);
+		assertTrue(db.getVentas().contains(venta));
 	}
 	
 
