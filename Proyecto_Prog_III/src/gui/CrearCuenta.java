@@ -66,7 +66,7 @@ public class CrearCuenta extends JFrame {
 		JButton bCrearCuenta = new JButton("Crear cuenta");
 		JCheckBox cbMostrarContrasena = new JCheckBox("Mostrar contraseña");
 		JLabel lIncorrecto = new JLabel();
-		Path pathLogo = Path.of("src/res/logo chiquito.png");
+		Path pathLogo = Path.of("resources/img/logo chiquito.png");
 		ImageIcon logoPequeño = new ImageIcon(pathLogo.toAbsolutePath().toString());
 		//Formato componentes
 		lPrincipal.setFont(new Font("Arial" ,Font.BOLD, 25));

@@ -40,7 +40,7 @@ public class VentanaSobres extends JFrame{
 		//Crear Componentes
 		JButton bCerrar = new JButton("CERRAR");
 		
-		Path pathLogo = Path.of("src/res/logo chiquito.png");
+		Path pathLogo = Path.of("resources/img/logo chiquito.png");
 		ImageIcon logoPequeño = new ImageIcon(pathLogo.toAbsolutePath().toString());
 		///Añadir componentes a contenedores
 		setIconImage(logoPequeño.getImage());
