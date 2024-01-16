@@ -81,11 +81,10 @@ AQUÍ ESTÁN LOS PASOS PARA USAR LA APLICACIÓN:
 
 Existen tres programas ejecutables:
 	1. El propio juego.
-	2. y 3. Programas auxiliares :
-    	2. ConversorFicheroDB: esta clase se encarga de cargar el contenido del fichero modeloCartas.csv en la base de datos.
-    	3. VentasAlAzar: esta clase se encarga de añadir tanto a la base de datos como a ficheros varias ventas al azar.
+	Un programa auxiliar:
+    	2. VentasAlAzar: esta clase se encarga de añadir tanto a la base de datos como a ficheros varias ventas al azar.
 
-Cambio de método de guardado entre base de datos y ficheros ubicado en la carpeta conf:
+Cambio de método de guardado entre base de datos y ficheros ubicado en la carpeta datos.properties:
 Dentro del fichero si asignamos a la variable FuenteDatos la palabra Ficheros, todos los datos del programa se guardarán en ficheros pero si ponemos BaseDeDatos, se guardarán en la base de datos.
     
 

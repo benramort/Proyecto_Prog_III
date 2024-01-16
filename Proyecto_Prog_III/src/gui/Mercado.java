@@ -124,7 +124,7 @@ public class Mercado extends JFrame {
 		
 		JButton botonVender = new JButton("VENDER");
 		
-		Path path = Path.of("src/res/moneda.png");
+		Path path = Path.of("resources/img/moneda.png");
 
 		ImageIcon imagen1 = new ImageIcon(path.toAbsolutePath().toString());
 		ImageIcon imagenMoneda = new ImageIcon(imagen1.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
