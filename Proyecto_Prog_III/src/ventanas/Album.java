@@ -36,7 +36,6 @@ public class Album extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	private Usuario usuario;
-	private Datos datos;
 	private PanelPorcentaje pPorcentaje;
 	private JPanel pCartas;
 	public JLabel lMonedasAlbum;
@@ -46,7 +45,6 @@ public class Album extends JFrame {
 		double escala = 1;
 		this.usuario = usuario;
 //		this.datos = datos;
-		int cartasObtenidas = 0;
 		
 		//Formato ventana
 		setTitle("Universal Cards Collection");
