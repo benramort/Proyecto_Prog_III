@@ -65,7 +65,6 @@ private static final long serialVersionUID = 1L;
 	public void setCarta(Carta carta) {
 		this.carta = carta;
 		pCarta = new PanelCarta(carta);
-		System.out.println("hola que ase");
 		repaint();
 	}
 	

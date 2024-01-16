@@ -208,7 +208,6 @@ private static final long serialVersionUID = 1L;
 				if(modoIdle.isInterrupted()) {
 					bClear.setEnabled(true);
 				}
-//				System.out.println("Está interrumpido? " + modoIdle.isInterrupted());
 			}
 		});
 		
@@ -284,7 +283,6 @@ private static final long serialVersionUID = 1L;
 				flowLayoutCartasH.add(cartaEnt2);
 				flowLayoutCartasH.add(Box.createHorizontalStrut(50));
 				flowLayoutCartasH.add(cartaEnt3);
-//				flowLayoutCartasH.add(new JLabel("Hol"));
 				revalidate();
 				repaint();
 				bEntrenar.setEnabled(false);
@@ -350,7 +348,6 @@ private static final long serialVersionUID = 1L;
 		flowLayoutCartasH.add(cartaEnt2);
 		flowLayoutCartasH.add(Box.createHorizontalStrut(50));
 		flowLayoutCartasH.add(cartaEnt3);
-//		flowLayoutCartasH.add(new JLabel("Hol"));
 		revalidate();
 		repaint();
 		bEntrenar.setEnabled(true);

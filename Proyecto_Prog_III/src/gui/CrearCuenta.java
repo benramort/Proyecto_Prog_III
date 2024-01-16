@@ -11,6 +11,8 @@ import io.DatosFactory;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -65,7 +67,7 @@ public class CrearCuenta extends JFrame {
 		JButton bCrearCuenta = new JButton("Crear cuenta");
 		JCheckBox cbMostrarContrasena = new JCheckBox("Mostrar contraseña");
 		JLabel lIncorrecto = new JLabel();
-		
+		Path path = Paths.get("");
 		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
 		//Formato componentes
 		lPrincipal.setFont(new Font("Arial" ,Font.BOLD, 25));
@@ -182,11 +184,6 @@ public class CrearCuenta extends JFrame {
 			}
 		});
 	}
-	
-
-	
-
-
-	}
+}
 	
 
