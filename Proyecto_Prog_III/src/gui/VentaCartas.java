@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -94,7 +95,8 @@ public class VentaCartas extends JFrame{
 		//Creacion componentes
 		JButton bMercado = new JButton("MERCADO");
 		bClear = new JButton("CLEAR");
-		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
+		Path pathLogo = Path.of("src/res/logo chiquito.png");
+		ImageIcon logoPequeño = new ImageIcon(pathLogo.toAbsolutePath().toString());
 		//Formato componentes
 		bMercado.setPreferredSize(new Dimension(100, 40));
 		//Añadir componentes a contenedores
