@@ -95,7 +95,7 @@ public class VentaCartas extends JFrame{
 		//Creacion componentes
 		JButton bMercado = new JButton("MERCADO");
 		bClear = new JButton("CLEAR");
-		Path pathLogo = Path.of("resources/img/logo chiquito.png");
+		Path pathLogo = Path.of("src/res/logo chiquito.png");
 		ImageIcon logoPequeño = new ImageIcon(pathLogo.toAbsolutePath().toString());
 		//Formato componentes
 		bMercado.setPreferredSize(new Dimension(100, 40));

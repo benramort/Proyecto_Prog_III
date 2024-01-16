@@ -90,7 +90,7 @@ public class VentanaSeleccionVender extends JFrame{
 		pPrecio.setLayout(new FlowLayout(FlowLayout.CENTER));
 		//Crear componentes
 		JScrollPane spCartas = new JScrollPane();
-		Path pathLogo = Path.of("resources/img/logo chiquito.png");
+		Path pathLogo = Path.of("src/res/logo chiquito.png");
 		ImageIcon logoPequeño = new ImageIcon(pathLogo.toAbsolutePath().toString());
 		JLabel lPrecioCarta = new JLabel("Precio: ");
 		JSpinner spPrecio = new JSpinner();

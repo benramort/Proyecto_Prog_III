@@ -31,7 +31,7 @@ public class Carta implements Comparable<Carta>{
 		this.nombreVisible = nombreVisible;
 		this.saga = saga;
 		Path path = Path.of("resources/img/"+nombreInterno+".png");
-//		System.out.println(path.toString());
+//		System.out.println(path.toAbsolutePath().toString());
 		this.recursoGrafico = new ImageIcon(path.toAbsolutePath().toString());
 		this.id = id;
 		this.monedasPorMinuto = monedasPorMinuto;

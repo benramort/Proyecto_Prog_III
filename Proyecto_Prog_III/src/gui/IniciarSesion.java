@@ -105,13 +105,14 @@ Datos datos;
 		JPasswordField pfContrasena = new JPasswordField(15);
 		JButton btIniciarSesion = new JButton("Iniciar sesión");
 		JButton btNuevaCuenta = new JButton("Crear cuenta");
-		Path path = Paths.get("/resources/img/logo.png");
-		Path absolutePath = path.toAbsolutePath();
-		System.out.println(path.toAbsolutePath());
+		Path path = Paths.get("resources/img/logo.png");
+		System.out.println(path.isAbsolute());
+//		Path absolutePath = path.toAbsolutePath();
+		System.out.println(path.toAbsolutePath().toFile());
 		JLabel lLogo = new JLabel(new ImageIcon(path.toAbsolutePath().toString()));
 		JCheckBox cbMostrarContrasena = new JCheckBox("Mostrar contraseña");
 		JLabel lIncorrecto = new JLabel("Usuario o contraseña incorrectos");
-		Path path1 = Path.of("/resources/img/logo chiquito.png");
+		Path path1 = Path.of("resources/img/logo chiquito.png");
 		ImageIcon logoPequeño = new ImageIcon(path1.toAbsolutePath().toString());
 		//Formato componentes
 		Font fuente = new Font("Arial", Font.BOLD, 15);
