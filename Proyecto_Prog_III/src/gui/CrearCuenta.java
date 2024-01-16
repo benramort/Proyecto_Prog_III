@@ -12,7 +12,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -67,8 +66,8 @@ public class CrearCuenta extends JFrame {
 		JButton bCrearCuenta = new JButton("Crear cuenta");
 		JCheckBox cbMostrarContrasena = new JCheckBox("Mostrar contraseña");
 		JLabel lIncorrecto = new JLabel();
-		Path path = Paths.get("");
-		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
+		Path pathLogo = Path.of("src/res/logo chiquito.png");
+		ImageIcon logoPequeño = new ImageIcon(pathLogo.toAbsolutePath().toString());
 		//Formato componentes
 		lPrincipal.setFont(new Font("Arial" ,Font.BOLD, 25));
 		lPrincipal.setForeground(Color.WHITE);

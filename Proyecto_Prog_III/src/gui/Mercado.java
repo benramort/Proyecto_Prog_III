@@ -125,10 +125,11 @@ public class Mercado extends JFrame {
 		JButton botonVender = new JButton("VENDER");
 		
 		Path path = Path.of("src/res/moneda.png");
+
 		ImageIcon imagen1 = new ImageIcon(path.toAbsolutePath().toString());
 		ImageIcon imagenMoneda = new ImageIcon(imagen1.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 		
-		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
+		ImageIcon logoChiquito = new ImageIcon(getClass().getResource("/logo chiquito.png"));
 		//Formato componentes
 		lImagenMonedas.setIcon(imagenMoneda);
 		tfBuscar.setMaximumSize(new Dimension(200,100));
@@ -149,7 +150,7 @@ public class Mercado extends JFrame {
 //		pSaga.setOpaque(true);
 //		pSaga.setBackground(Color.GREEN);
 		//Añadir componentes a contenedores
-		setIconImage(logoPequeño.getImage());
+		setIconImage(logoChiquito.getImage());
 		getContentPane().add(pIzquierdo,BorderLayout.WEST);
 		getContentPane().add(pDerecho, BorderLayout.CENTER);
 		

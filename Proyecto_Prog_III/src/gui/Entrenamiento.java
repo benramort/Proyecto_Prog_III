@@ -12,6 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,7 +110,8 @@ private static final long serialVersionUID = 1L;
 		JLabel lImagenMonedasGeneradas = new JLabel();
 		JLabel lImagenMonedasPorMinuto = new JLabel();
 		bClear = new JButton("CLEAR");
-		ImageIcon imagen = new ImageIcon(getClass().getResource("/moneda.png"));
+		Path path = Path.of("src/res/moneda.png");
+		ImageIcon imagen = new ImageIcon(path.toAbsolutePath().toString());
 		ImageIcon imagenMoneda = new ImageIcon(imagen.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 		bEntrenar = new JButton("ENTRENAR");
 		JButton bRecogerMonedas = new JButton("RECOGER MONEDAS");
