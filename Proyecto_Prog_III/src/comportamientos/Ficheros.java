@@ -21,7 +21,7 @@ public class Ficheros implements Datos {
 	
 	private String nombreFicheroUsuarios = "usuarios";
 	private String nombreFicheroCartas = "modeloCartas";
-	private String nombreFicheroVentas = "";
+	private String nombreFicheroVentas = "ventas";
 	
 	private static Logger logger = Logger.getLogger(Ficheros.class.getName());
 	
@@ -182,7 +182,7 @@ public class Ficheros implements Datos {
 
 	
 	public void cargarVentas() {
-		try (Scanner scanner = new Scanner(new FileInputStream("data/ventas.csv"))){
+		try (Scanner scanner = new Scanner(new FileInputStream("data/"+nombreFicheroVentas+".csv"))){
 			ventas = new ArrayList<Venta>();
 			while (scanner.hasNextLine()) {
 				try {

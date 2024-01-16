@@ -181,6 +181,7 @@ public class Mercado extends JFrame {
 				ventasCondicionales.addAll(ventasTotales);
 //				ventasCondicionales = new ArrayList<Venta>();
 				ventasCondicionales.removeIf(v -> !v.getCarta().getSaga().equals((Saga)cbSelSaga.getSelectedItem()));
+				
 //				for (Venta v : datos.getVentas()) {
 //					if (().equals(v.getCarta().getSaga())) {
 ////                			ventasCondicionales.add(v);
