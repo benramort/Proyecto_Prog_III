@@ -129,7 +129,9 @@ public class Mercado extends JFrame {
 		ImageIcon imagen1 = new ImageIcon(path.toAbsolutePath().toString());
 		ImageIcon imagenMoneda = new ImageIcon(imagen1.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 		
-		ImageIcon logoChiquito = new ImageIcon(getClass().getResource("/logo chiquito.png"));
+		Path pathLogo = Path.of("resources/img/logo chiquito.png");
+		ImageIcon logoChiquito = new ImageIcon(pathLogo.toAbsolutePath().toString());
+//		ImageIcon logoChiquito = new ImageIcon(getClass().getResource("/logo chiquito.png"));
 		//Formato componentes
 		lImagenMonedas.setIcon(imagenMoneda);
 		tfBuscar.setMaximumSize(new Dimension(200,100));

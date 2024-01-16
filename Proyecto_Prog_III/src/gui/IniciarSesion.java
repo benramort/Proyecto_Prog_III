@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.swing.*;
 
@@ -104,7 +105,9 @@ Datos datos;
 		JPasswordField pfContrasena = new JPasswordField(15);
 		JButton btIniciarSesion = new JButton("Iniciar sesión");
 		JButton btNuevaCuenta = new JButton("Crear cuenta");
-		Path path = Path.of("/resources/img/logo.png");
+		Path path = Paths.get("/resources/img/logo.png");
+		Path absolutePath = path.toAbsolutePath();
+		System.out.println(path.toAbsolutePath());
 		JLabel lLogo = new JLabel(new ImageIcon(path.toAbsolutePath().toString()));
 		JCheckBox cbMostrarContrasena = new JCheckBox("Mostrar contraseña");
 		JLabel lIncorrecto = new JLabel("Usuario o contraseña incorrectos");
