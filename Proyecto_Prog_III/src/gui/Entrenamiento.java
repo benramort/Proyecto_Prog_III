@@ -110,12 +110,13 @@ private static final long serialVersionUID = 1L;
 		JLabel lImagenMonedasGeneradas = new JLabel();
 		JLabel lImagenMonedasPorMinuto = new JLabel();
 		bClear = new JButton("CLEAR");
-		Path path = Path.of("src/res/moneda.png");
+		Path path = Path.of("resources/img/moneda.png");
 		ImageIcon imagen = new ImageIcon(path.toAbsolutePath().toString());
 		ImageIcon imagenMoneda = new ImageIcon(imagen.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 		bEntrenar = new JButton("ENTRENAR");
 		JButton bRecogerMonedas = new JButton("RECOGER MONEDAS");
-		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
+		path = Path.of("resources/img/logo chiquito.png");
+		ImageIcon logoPequeño = new ImageIcon(path.toAbsolutePath().toString());
 		lError = new JLabel("Todas las cartas están sin stamina");
 		//Formato componentes
 		bAlbum.setPreferredSize(new Dimension(90, 40));

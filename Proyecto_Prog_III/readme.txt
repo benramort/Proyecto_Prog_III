@@ -1,12 +1,12 @@
 AQUÍ ESTÁN LOS PASOS PARA USAR LA APLICACIÓN:
 
-1. Ejecutar la clase ConversorFicherosDB en el paquete default
+0. Ejecutar la clase ConversorFicherosDB en el paquete default
 
-2. Ejecutar la clase VentasAlAzar en el paquete default
+1. Ejecutar la clase VentasAlAzar en el paquete default
 
-3. Inicie la aplicación
+2. Inicie la aplicación
 
-4. Al iniciarla, tendrá dos opciones: "INICIAR SESIÓN" o "CREAR CUENTA". Si no tiene cuenta, cree una nueva.
+3. Al iniciarla, tendrá dos opciones: "INICIAR SESIÓN" o "CREAR CUENTA". Si no tiene cuenta, cree una nueva.
 
 5. Ahora habrá entrado en la ventana principal de la aplicación, el álbum. Aquí verá varias cosas:
 	
