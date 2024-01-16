@@ -61,6 +61,17 @@ public class BasesDeDatosTest {
 					+ "RECUPERACION INTEGER\r\n"
 					+ ");");
 			
+			stmt.executeUpdate("CREATE TABLE VENTAS (\r\n"
+					+ "ID_CARTA INTEGER NOT NULL,\r\n"
+					+ "USERNAME TEXT NOT NULL,\r\n"
+					+ "PRECIO INTEGER,\r\n"
+					+ "FECHA_HORA TEXT NOT NULL,\r\n"
+					+ "PRIMARY KEY (USERNAME, FECHA_HORA)	FOREIGN KEY (ID_CARTA) REFERENCES MODELO_CARTAS(ID),\r\n"
+					+ "FOREIGN KEY (USERNAME) REFERENCES USUARIOS(USERNAME))\r\n"
+					+ ");");
+			
+								
+			
 //			cartas = new ArrayList<Carta>();
 //			Saga saga1 = new Saga("saga1", "Saga 1");
 //			cartas.add(new Carta(0, "carta1", "Carta 1", saga1, 50,50,50));
@@ -150,6 +161,11 @@ public class BasesDeDatosTest {
 	}
 	
 	//TODO guardarUsuarios???
+	
+	@Test
+	public void testCargarVenta() {
+		
+	}
 	
 
 }
