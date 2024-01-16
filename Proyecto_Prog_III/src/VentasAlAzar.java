@@ -1,6 +1,4 @@
 import java.util.Random;
-
-import comportamientos.BasesDeDatos;
 import comportamientos.Venta;
 import comportamientos.Datos;
 import comportamientos.Ficheros;

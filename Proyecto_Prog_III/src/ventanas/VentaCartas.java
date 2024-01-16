@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -76,7 +75,6 @@ public class VentaCartas extends JFrame{
 		flowLayoutCartasH = new JPanel();
 		JPanel boxLayoutCartasV = new JPanel();
 		JPanel pBotonMercado = new JPanel();
-		JPanel pBotonRecogerMonedas = new JPanel();
 		//Formato contenedores
 		pInferior.setLayout(new BorderLayout());
 		pTextos.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -96,8 +94,6 @@ public class VentaCartas extends JFrame{
 		//Creacion componentes
 		JButton bMercado = new JButton("MERCADO");
 		bClear = new JButton("CLEAR");
-		ImageIcon imagen = new ImageIcon(getClass().getResource("/moneda.png"));
-		ImageIcon imagenMoneda = new ImageIcon(imagen.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
 		//Formato componentes
 		bMercado.setPreferredSize(new Dimension(100, 40));

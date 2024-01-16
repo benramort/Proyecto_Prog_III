@@ -206,9 +206,6 @@ public class Usuario {
 //	}
 	
 	public static void main(String[] args) {
-		ZonedDateTime ahora = ZonedDateTime.now();
-		String s = ahora.format(DateTimeFormatter.ISO_ZONED_DATE_TIME);
-		ZonedDateTime ahora2 = ZonedDateTime.parse(s, DateTimeFormatter.ISO_ZONED_DATE_TIME);
 //		syso
 	}
 
