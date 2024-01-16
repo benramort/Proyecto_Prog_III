@@ -40,7 +40,7 @@ public class BasesDeDatos implements Datos {
 		configurarLogger();
 		try {
 			Class.forName("org.sqlite.JDBC");
-			Path path = Path.of("data/"+nombre);
+			Path path = Path.of("resources/data/"+nombre);
 			System.out.println(path.toAbsolutePath());
 			conn = DriverManager.getConnection("jdbc:sqlite:"+path.toAbsolutePath().toString());
 			logger.info("Conexión exitosa con la base de datos");
