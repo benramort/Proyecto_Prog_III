@@ -96,7 +96,7 @@ public class FicherosTest {
 			file = new File("resources/data/ficherosusuariostest.csv");
 			file.delete();
 			file = new File("resources/data/ficherosventastest.csv");
-			file.delete();	 c       
+			file.delete();	        
 	}
 	
 	@Test
