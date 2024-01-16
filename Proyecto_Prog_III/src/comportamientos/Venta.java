@@ -70,7 +70,7 @@ public class Venta {
 	
 	public String aLinea() {
 		
-		return carta.getId()+";"+precio+";"+usuario.getNombre()+";"+DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(fechaHora);
+		return carta.getId()+";"+precio+";"+usuario.getNombre()+";"+DateTimeFormatter.ISO_ZONED_DATE_TIME.format(fechaHora);
 	}
 	
 	public static Venta deLinea(Datos datos, String s) throws NumberFormatException, DateTimeParseException {
@@ -85,8 +85,9 @@ public class Venta {
 				break;
 			}
 		}
-		LocalDateTime localTime = LocalDateTime.parse(tokens[3], DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-		return new Venta(carta, Integer.parseInt(tokens[1]), usuario, ZonedDateTime.of(localTime, ZoneId.systemDefault()));
+//		ZonedDateTime fechaHora = DateTimeFormatter.ISO_ZONED_DATE_TIME.format();
+		ZonedDateTime fechaHora = ZonedDateTime.parse(tokens[3], DateTimeFormatter.ISO_ZONED_DATE_TIME);
+		return new Venta(carta, Integer.parseInt(tokens[1]), usuario, fechaHora);
 	}
 	
 	@Override

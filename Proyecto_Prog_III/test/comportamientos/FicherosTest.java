@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -159,6 +160,7 @@ public class FicherosTest {
 	@Test
 	public void testGuardarVenta() {
 		List<Venta> ventas = new ArrayList<>();
+		ZonedDateTime fechaHora = ZonedDateTime.now();
 		Saga saga1 = new Saga("nombreInternoSaga1", "nombreVisibleSaga1");
 		Saga saga2 = new Saga("nombreInternoSaga2", "nombreVisibleSaga2");
 		Saga saga3 = new Saga("nombreInternoSaga3", "nombreVisibleSaga3");
@@ -171,18 +173,25 @@ public class FicherosTest {
 		Usuario usuario1 = new Usuario("nombre1", "contrasena1", null, 10);
 		Usuario usuario2 = new Usuario("nombre2", "contrasena2", null, 20);
 		Usuario usuario3 = new Usuario("nombre3", "contrasena3", null, 30);
-		Venta venta1 = new Venta(carta1,precio1,usuario1);
-		Venta venta2 = new Venta(carta2,precio2,usuario2);
-		Venta venta3 = new Venta(carta3,precio3,usuario3);
+		Venta venta1 = new Venta(carta1,precio1,usuario1, fechaHora);
+		Venta venta2 = new Venta(carta2,precio2,usuario2, fechaHora);
+		Venta venta3 = new Venta(carta3,precio3,usuario3, fechaHora);
 		ventas.add(venta1);
 		ventas.add(venta2);
 		ventas.add(venta3);
 		f.guardarVenta(venta1);
-		f.guardarVenta(venta1);
-		f.guardarVenta(venta1);
+		f.guardarVenta(venta2);
+		f.guardarVenta(venta3);
 		f.cargarUsuarios();
 		f.cargarModeloCartas();
 		f.cargarVentas();
+		System.out.println(fechaHora);
+		System.out.println(f.getVentas().get(0));
+		System.out.println(venta1.getFechaHora());
+		System.out.println(f.getVentas().get(0).getFechaHora());
+//		System.out.println(venta1.equals(f.getVentas().get(0)));
+//		System.out.println(venta2.equals(f.getVentas().get(1)));
+//		System.out.println(venta3.equals(f.getVentas().get(2)));
 		assertEquals(ventas, f.getVentas());
 		
 	}
