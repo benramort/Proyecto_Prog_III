@@ -26,9 +26,10 @@ public class Ficheros implements Datos {
 	private static Logger logger = Logger.getLogger(Ficheros.class.getName());
 	
 	
-	public Ficheros(String nombreCartas, String nombreUsuarios) {
+	public Ficheros(String nombreCartas, String nombreUsuarios, String nombreVentas) {
 		nombreFicheroCartas = nombreCartas;
 		nombreFicheroUsuarios = nombreUsuarios;
+		nombreFicheroVentas = nombreVentas;
 		
 //		cargarModeloCartas();
 //		configurarLogger();
@@ -69,7 +70,7 @@ public class Ficheros implements Datos {
 					ex.printStackTrace();
 				}
 			}
-			modeloCartas.sort(null);
+			modeloCartas = Recursividad.getCartasOrdenadas(modeloCartas);
 		} catch (FileNotFoundException ex) {
 //			ex.printStackTrace();
 			logger.severe("No se han podido cargar las cartas modelo");

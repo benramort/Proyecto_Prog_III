@@ -7,7 +7,7 @@ import comportamientos.Ficheros;
 
 public class VentasAlAzar {
 	
-	private static Datos datos = new Ficheros("modeloCartas","usuarios");
+	private static Datos datos = new Ficheros("modeloCartas","usuarios", "ventas");
 	
 	public static void main(String[] args) {
 		datos.cargarUsuarios();

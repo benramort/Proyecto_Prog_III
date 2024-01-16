@@ -13,13 +13,14 @@ import org.junit.Test;
 
 public class FicherosTest {
 	Ficheros f;
+	private List<Venta> ventas;
 	
 	//TODO esto es un poco trampa, pero se cambia fácil
 	@Before
 	public void preparatorio() {
 		List<Carta> modeloCartas = new ArrayList<>();
 		List<Usuario> usuarios = new ArrayList<>();
-		List<Venta> ventas = new ArrayList<>();
+		ventas = new ArrayList<>();
 		Saga saga1 = new Saga("nombreInternoSaga1", "nombreVisibleSaga1");
 		Saga saga2 = new Saga("nombreInternoSaga2", "nombreVisibleSaga2");
 		Saga saga3 = new Saga("nombreInternoSaga3", "nombreVisibleSaga3");
@@ -78,7 +79,7 @@ public class FicherosTest {
 			e.printStackTrace();
 		}
 		
-		f = new Ficheros("ficherosmodelocartastest", "ficherosusuariostest");
+		f = new Ficheros("ficherosmodelocartastest", "ficherosusuariostest", "ficherosventastest");
 	}
 	
 	@Test
@@ -117,26 +118,29 @@ public class FicherosTest {
 	
 	@Test
 	public void testGetVentas() {
-		List<Venta> ventas = new ArrayList<>();
-		Saga saga1 = new Saga("nombreInternoSaga1", "nombreVisibleSaga1");
-		Saga saga2 = new Saga("nombreInternoSaga2", "nombreVisibleSaga2");
-		Saga saga3 = new Saga("nombreInternoSaga3", "nombreVisibleSaga3");
-		Carta carta1 = new Carta(1, "nombreInterno1", "nombreVisible1", saga1, 1, 1, 1);
-		Carta carta2 = new Carta(2, "nombreInterno2", "nombreVisible2", saga2, 2, 2, 2);
-		Carta carta3 = new Carta(3, "nombreInterno3", "nombreVisible3", saga3, 3, 3, 3);
-		int precio1 = 5;
-		int precio2 = 33;
-		int precio3 = 10;
-		Usuario usuario1 = new Usuario("nombre1", "contrasena1", null, 10);
-		Usuario usuario2 = new Usuario("nombre2", "contrasena2", null, 20);
-		Usuario usuario3 = new Usuario("nombre3", "contrasena3", null, 30);
-		Venta venta1 = new Venta(carta1,precio1,usuario1);
-		Venta venta2 = new Venta(carta2,precio2,usuario2);
-		Venta venta3 = new Venta(carta3,precio3,usuario3);
-		ventas.add(venta1);
-		ventas.add(venta2);
-		ventas.add(venta3);
+//		List<Venta> ventas = new ArrayList<>();
+//		Saga saga1 = new Saga("nombreInternoSaga1", "nombreVisibleSaga1");
+//		Saga saga2 = new Saga("nombreInternoSaga2", "nombreVisibleSaga2");
+//		Saga saga3 = new Saga("nombreInternoSaga3", "nombreVisibleSaga3");
+//		Carta carta1 = new Carta(1, "nombreInterno1", "nombreVisible1", saga1, 1, 1, 1);
+//		Carta carta2 = new Carta(2, "nombreInterno2", "nombreVisible2", saga2, 2, 2, 2);
+//		Carta carta3 = new Carta(3, "nombreInterno3", "nombreVisible3", saga3, 3, 3, 3);
+//		int precio1 = 5;
+//		int precio2 = 33;
+//		int precio3 = 10;
+//		Usuario usuario1 = new Usuario("nombre1", "contrasena1", null, 10);
+//		Usuario usuario2 = new Usuario("nombre2", "contrasena2", null, 20);
+//		Usuario usuario3 = new Usuario("nombre3", "contrasena3", null, 30);
+//		Venta venta1 = new Venta(carta1,precio1,usuario1);
+//		Venta venta2 = new Venta(carta2,precio2,usuario2);
+//		Venta venta3 = new Venta(carta3,precio3,usuario3);
+//		ventas.add(venta1);
+//		ventas.add(venta2);
+//		ventas.add(venta3);
+		f.cargarModeloCartas();
+		f.cargarUsuarios();
 		f.cargarVentas();
+//		f.getVentas();
 		assertEquals(ventas, f.getVentas());
 	}
 
