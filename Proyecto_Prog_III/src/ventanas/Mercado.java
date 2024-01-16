@@ -27,8 +27,12 @@ public class Mercado extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	
-	JLabel lMonedas;
+	private JTextField tfBuscar;
+	private JLabel lMonedas;
 	private JTable jTable;
+	private JComboBox<Saga> cbSelSaga;
+	private JSpinner spSelPrecioMin;
+	private JSpinner spSelPrecioMax;
 
 	private List<Venta> ventasTotales;
 	private List<Venta> ventasCondicionales;
@@ -62,6 +66,7 @@ public class Mercado extends JFrame {
 		JPanel pPrecio1 = new JPanel();
 		JPanel pPrecio2 = new JPanel();
 		JPanel pSaga = new JPanel();
+		JPanel pBotonBuscar = new JPanel();
 		//Formato contenedores
 		Border bordePanelIzquierdo = BorderFactory.createLineBorder(Color.BLACK);
 		pIzquierdo.setBorder(bordePanelIzquierdo);
@@ -92,18 +97,19 @@ public class Mercado extends JFrame {
 		JButton bBotonHome = new JButton("ÁLBUM");
 		lMonedas = new JLabel(usuario.getMonedas() + "");
 		JLabel lImagenMonedas = new JLabel();
-		JTextField tfBuscar = new JTextField("Buscar:");
+		tfBuscar = new JTextField();
 		JLabel lPrecioMin = new JLabel("Precio mínimo: ");
-		JSpinner spSelPrecioMin = new JSpinner();
+		spSelPrecioMin = new JSpinner();
 		JLabel lPrecioMax = new JLabel("Precio máximo:");
-		JSpinner spSelPrecioMax = new JSpinner();
+		spSelPrecioMax = new JSpinner();
 		JLabel lSaga = new JLabel("Saga");
+		JButton bBuscar = new JButton("BUSCAR");
 //		ArrayList<Saga> lSagas = new ArrayList<Saga>();
 //		lSagas.add(new Saga("Super Mario"));
 //		lSagas.add(new Saga("God of War"));
 
 		Saga[] listaSagas = {
-				new Saga("",""),
+				new Saga("", ""),
 				new Saga("GodOfWar", "God Of War"),
 				new Saga("Portal", "Portal"),
 				new Saga("SuperMario", "Super Mario"),
@@ -112,7 +118,7 @@ public class Mercado extends JFrame {
 		};
 		
 		ComboBoxModel<Saga> comboBoxModel = new DefaultComboBoxModel<>(listaSagas);
-		JComboBox<Saga> cbSelSaga = new JComboBox<Saga>(comboBoxModel);
+		cbSelSaga = new JComboBox<Saga>(comboBoxModel);
 		
 
 		
@@ -134,8 +140,14 @@ public class Mercado extends JFrame {
 		bBotonHome.setPreferredSize(new Dimension(100,30));
 		cbSelSaga.setMinimumSize(new Dimension(200, 200));
 		bBotonHome.setPreferredSize(new Dimension(90, 40));
-		
-		
+		bBuscar.setPreferredSize(new Dimension(120, 50));
+		pSaga.setPreferredSize(new Dimension(220, 100));
+//		pBotonBuscar.setBackground(Color.BLUE);
+//		pBotonBuscar.setOpaque(true);
+//		pCentral.setBackground(Color.RED);
+//		pCentral.setOpaque(true);
+//		pSaga.setOpaque(true);
+//		pSaga.setBackground(Color.GREEN);
 		//Añadir componentes a contenedores
 		setIconImage(logoPequeño.getImage());
 		getContentPane().add(pIzquierdo,BorderLayout.WEST);
@@ -159,6 +171,7 @@ public class Mercado extends JFrame {
 		pCentral.add(pPrecio1);
 		pCentral.add(pPrecio2);
 		pCentral.add(pSaga);
+
 		
 		pPrecio1.add(lPrecioMin);
 		pPrecio1.add(spSelPrecioMin);
@@ -166,38 +179,19 @@ public class Mercado extends JFrame {
 		pPrecio2.add(spSelPrecioMax);
 		pSaga.add(lSaga);
 		pSaga.add(cbSelSaga);
+		pSaga.add(Box.createVerticalStrut(30));
+		pSaga.add(bBuscar);
 		
 		pInferior.add(botonVender);
 		
-		
-		cbSelSaga.addItemListener(new ItemListener() {
+		bBuscar.addActionListener(new ActionListener() {
+			
 			@Override
-            public void itemStateChanged(ItemEvent e) {
-                // se comprueba si se ha seleccionado o deseleccionado
-                // un elemento de la lista
-				if (e.getStateChange() == ItemEvent.DESELECTED) return; //Cancela el evento si se ha deseleccionado
-//				System.out.println(jTable.getRowCount());
-				ventasCondicionales.removeIf(v -> true);
-				ventasCondicionales.addAll(ventasTotales);
-//				ventasCondicionales = new ArrayList<Venta>();
-				ventasCondicionales.removeIf(v -> !v.getCarta().getSaga().equals((Saga)cbSelSaga.getSelectedItem()));
-//				for (Venta v : datos.getVentas()) {
-//					if (().equals(v.getCarta().getSaga())) {
-////                			ventasCondicionales.add(v);
-//					} else {
-//						ventasCondicionales.remove(v);
-//					}
-//                }
-//				System.out.println(ventasCondicionales.size());
-//				System.out.println(jTable.getRowCount());
-				actualizar();
-//				System.out.println("Evento");
-            }
-
-        });
-		
-//		cbSelSaga.addItemListener(e -> System.out.println(e.getItem()));
-		
+			public void actionPerformed(ActionEvent e) {
+				actualizarLista();
+				
+			}
+		});
 		
 		AbstractTableModel modeloTabla = new ModeloJTableCartas(ventasCondicionales);
 			
@@ -315,5 +309,32 @@ public class Mercado extends JFrame {
 //		});
 //		
 //	}
+	
+	public void actualizarLista() {
+
+		System.out.println((spSelPrecioMax.getValue()).equals(0));
+		
+		if((((Saga)cbSelSaga.getSelectedItem()).getNombreInterno().equals("")) && (tfBuscar.getText().isEmpty()) && (spSelPrecioMax.getValue().equals(0))) {
+			ventasCondicionales.removeIf(v -> true);
+			ventasCondicionales.addAll(ventasTotales);
+			System.out.println("hola que ase");
+		} else {
+			ventasCondicionales.removeIf(v -> true);
+			ventasCondicionales.addAll(ventasTotales);
+			ventasCondicionales.removeIf(v -> (!v.getCarta().getNombreVisible().toUpperCase().startsWith(tfBuscar.getText().toUpperCase())));
+			ventasCondicionales.removeIf(v -> (!v.getCarta().getSaga().equals(cbSelSaga.getSelectedItem())));
+			ventasCondicionales.removeIf(v -> !(v.getPrecio() >= ((int) spSelPrecioMin.getValue()) && v.getPrecio() <= ((int) spSelPrecioMax.getValue())));
+			System.out.println("NO null");
+		}
+		actualizar();
+//			for(Venta v : ventasTotales) {
+//				if(!ventasCondicionales.contains(v)) {
+//					if((v.getCarta().getSaga().equals(cbSelSaga.getSelectedItem())) && (!tfBuscar.getText().isEmpty() && v.getCarta().getNombreVisible().startsWith(tfBuscar.getText()))) {
+//						ventasCondicionales.add(v);
+//					}
+//				}
+//			}
+		
+	}
 	
 }

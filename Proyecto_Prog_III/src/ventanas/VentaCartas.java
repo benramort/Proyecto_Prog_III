@@ -175,7 +175,7 @@ public class VentaCartas extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				((Mercado) ventanaAnterior).lMonedas.setText(String.valueOf(usuario.getMonedas()));
+				((Mercado) ventanaAnterior).getlMonedas().setText(String.valueOf(usuario.getMonedas()));
 			}
 		});
 
@@ -183,7 +183,7 @@ public class VentaCartas extends JFrame{
 
 			@Override
 			public void windowClosing(WindowEvent e) {
-				((Mercado) ventanaAnterior).lMonedas.setText(String.valueOf(usuario.getMonedas()));
+				((Mercado) ventanaAnterior).getlMonedas().setText(String.valueOf(usuario.getMonedas()));
 			}
 		});
 
