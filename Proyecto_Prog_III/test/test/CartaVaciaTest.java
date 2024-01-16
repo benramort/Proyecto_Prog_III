@@ -1,4 +1,4 @@
-package comportamientos;
+package test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -9,27 +9,25 @@ import org.junit.Before;
 import org.junit.Test;
 
 import domain.Carta;
-import domain.CartaAEntrenar;
+import domain.CartaVacia;
 import domain.Saga;
 
-public class CartaAEntrenarTest {
-	CartaAEntrenar cartaAEntrenar;
+public class CartaVaciaTest {
+	CartaVacia cartaVacia;
 	Carta carta;
 	ImageIcon recursoGrafico;
 	
 	@Before
 	public void preparatorio(){
 		carta = new Carta(0, "", "", new Saga("", ""), 0,0,0);
-		cartaAEntrenar = new CartaAEntrenar();
+		cartaVacia = new CartaVacia();
 		
 	}
 	
 	@Test
-	public void cartaAEntenar() {
-		assertEquals(carta,cartaAEntrenar);
-		assertNotNull(cartaAEntrenar);
+	public void cartaVacia() {
+		assertEquals(carta,cartaVacia);
+		assertNotNull(cartaVacia);
 	}
-	
-	
 	
 }
