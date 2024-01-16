@@ -22,6 +22,7 @@ import db.BasesDeDatos;
 import domain.Carta;
 import domain.Saga;
 import domain.Usuario;
+import domain.Venta;
 
 public class BasesDeDatosTest {
 	
@@ -47,7 +48,7 @@ public class BasesDeDatosTest {
 					+ "	PASSWORD TEXT,\r\n"
 					+ "	CARTAS TEXT,\r\n"
 					+ "	MONEDAS INTEGER,\r\n"
-					+ "	CARTAS_SIN_STAMINA TEXT\r\n"
+					+ "	SIN_STAMINA TEXT\r\n"
 					+ ")");
 			
 			stmt.executeUpdate("CREATE TABLE MODELO_CARTAS (\r\n"
@@ -67,7 +68,7 @@ public class BasesDeDatosTest {
 					+ "PRECIO INTEGER,\r\n"
 					+ "FECHA_HORA TEXT NOT NULL,\r\n"
 					+ "PRIMARY KEY (USERNAME, FECHA_HORA)	FOREIGN KEY (ID_CARTA) REFERENCES MODELO_CARTAS(ID),\r\n"
-					+ "FOREIGN KEY (USERNAME) REFERENCES USUARIOS(USERNAME))\r\n"
+					+ "FOREIGN KEY (USERNAME) REFERENCES USUARIOS(USERNAME)\r\n"
 					+ ");");
 			
 								
@@ -86,10 +87,16 @@ public class BasesDeDatosTest {
 					+ "VALUES (2, 'carta3', 'Carta 3', 'saga1', 'Saga 1', 90,90,90)");
 			
 			
-			stmt.executeUpdate("INSERT INTO USUARIOS (USERNAME, PASSWORD, CARTAS, MONEDAS,CARTAS_SIN_STAMINA) "
+			stmt.executeUpdate("INSERT INTO USUARIOS (USERNAME, PASSWORD, CARTAS, MONEDAS, SIN_STAMINA) "
 					+ "VALUES ('usuario1', 'contrasena', '1,0,0,',10, '')");
-			stmt.executeUpdate("INSERT INTO USUARIOS (USERNAME, PASSWORD, CARTAS, MONEDAS, CARTAS_SIN_STAMINA) "
+			stmt.executeUpdate("INSERT INTO USUARIOS (USERNAME, PASSWORD, CARTAS, MONEDAS, SIN_STAMINA) "
 					+ "VALUES ('usuario2', 'contrasena', '1,1,1,',20, '1=2023-12-29T12:14:14.9581759+01:00[Europe/Madrid],2=2023-12-29T12:14:14.9581759+01:00[Europe/Madrid],')");
+			
+			stmt.executeUpdate("INSERT INTO VENTAS (ID_CARTA, USERNAME, PRECIO, FECHA_HORA) "
+					+ "VALUES (2,'',200,'2023-12-29T12:14:14.9581759+01:00[Europe/Madrid]')");
+			
+			
+			
 			
 			stmt.close();
 		} catch (SQLException ex) {
@@ -164,7 +171,9 @@ public class BasesDeDatosTest {
 	
 	@Test
 	public void testCargarVenta() {
-		
+		Usuario usuarioExistente = new Usuario("usuario2", "contrasena", db, 20);
+		db.cargarVentas();
+		List<Venta>ventasCargadas = db.getVentas();
 	}
 	
 

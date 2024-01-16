@@ -16,6 +16,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.nio.file.Path;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -104,25 +105,39 @@ public class Album extends JFrame {
 		lMonedasAlbum = new JLabel(String.valueOf(usuario.getMonedas())); //TODO cambiar cuando se cierra el modo idle
 		JLabel lImagenMonedas = new JLabel();
 		
-		ImageIcon imagen = new ImageIcon(getClass().getResource("/idle.png"));
-		ImageIcon imagenIdle = new ImageIcon(imagen.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
+		Path path1 = Path.of("src/res/idle.png");
+		new ImageIcon(path1.toAbsolutePath().toString());
+		ImageIcon imagen1 = new ImageIcon(path1.toAbsolutePath().toString());
+		ImageIcon imagenIdle = new ImageIcon(imagen1.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
 		
-		ImageIcon imagen2 = new ImageIcon(getClass().getResource("/ajustes.png"));
+		Path path2 = Path.of("src/res/ajustes.png");
+		new ImageIcon(path2.toAbsolutePath().toString());
+		ImageIcon imagen2 = new ImageIcon(path2.toAbsolutePath().toString());
 		ImageIcon imagenAjustes = new ImageIcon(imagen2.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
 		
-		ImageIcon imagen3 = new ImageIcon(getClass().getResource("/lupa.png"));
+		Path path3 = Path.of("src/res/lupa.png");
+		new ImageIcon(path3.toAbsolutePath().toString());
+		ImageIcon imagen3 = new ImageIcon(path3.toAbsolutePath().toString());
 		ImageIcon imagenLupa = new ImageIcon(imagen3.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
 		
-		ImageIcon imagen4 = new ImageIcon(getClass().getResource("/mercado.png"));
+		Path path4 = Path.of("src/res/mercado.png");
+		new ImageIcon(path4.toAbsolutePath().toString());
+		ImageIcon imagen4 = new ImageIcon(path4.toAbsolutePath().toString());
 		ImageIcon imagenMercado = new ImageIcon(imagen4.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
 		
-		ImageIcon imagen5 = new ImageIcon(getClass().getResource("/tienda.png"));
+		Path path5 = Path.of("src/res/tienda.png");
+		new ImageIcon(path5.toAbsolutePath().toString());
+		ImageIcon imagen5 = new ImageIcon(path5.toAbsolutePath().toString());
 		ImageIcon imagenTienda = new ImageIcon(imagen5.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
 		
-		ImageIcon imagen6 = new ImageIcon(getClass().getResource("/salir.png"));
+		Path path6 = Path.of("src/res/salir.png");
+		new ImageIcon(path6.toAbsolutePath().toString());
+		ImageIcon imagen6 = new ImageIcon(path6.toAbsolutePath().toString());
 		ImageIcon imagenSalir = new ImageIcon(imagen6.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
 		
-		ImageIcon imagen7 = new ImageIcon(getClass().getResource("/moneda.png"));
+		Path path7 = Path.of("src/res/moneda.png");
+		new ImageIcon(path7.toAbsolutePath().toString());
+		ImageIcon imagen7 = new ImageIcon(path7.toAbsolutePath().toString());
 		ImageIcon imagenMoneda = new ImageIcon(imagen7.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 		
 		JTextField tfBuscar = new JTextField("Buscar:");
@@ -143,7 +158,9 @@ public class Album extends JFrame {
 		JComboBox<Saga> cbSelSaga = new JComboBox<Saga>(comboBoxModel);
 		JLabel lCerrarFiltros = new JLabel("X");
 		
-		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
+		Path pathLogo = Path.of("src/res//logo chiquito.png");
+		new ImageIcon(pathLogo.toAbsolutePath().toString());
+		ImageIcon logoPequeño = new ImageIcon(pathLogo.toAbsolutePath().toString());
 		
 		//Formato componentes
 		lImagenMonedas.setIcon(imagenMoneda);
