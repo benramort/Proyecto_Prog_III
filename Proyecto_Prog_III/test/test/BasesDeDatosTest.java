@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +50,7 @@ public class BasesDeDatosTest {
 					+ "	CARTAS TEXT,\r\n"
 					+ "	MONEDAS INTEGER,\r\n"
 					+ "	SIN_STAMINA TEXT\r\n"
-					+ ")");
+					+ ");");
 			
 			stmt.executeUpdate("CREATE TABLE MODELO_CARTAS (\r\n"
 					+ "ID INTEGER PRIMARY KEY NOT NULL,\r\n"
@@ -90,10 +91,10 @@ public class BasesDeDatosTest {
 			stmt.executeUpdate("INSERT INTO USUARIOS (USERNAME, PASSWORD, CARTAS, MONEDAS, SIN_STAMINA) "
 					+ "VALUES ('usuario1', 'contrasena', '1,0,0,',10, '')");
 			stmt.executeUpdate("INSERT INTO USUARIOS (USERNAME, PASSWORD, CARTAS, MONEDAS, SIN_STAMINA) "
-					+ "VALUES ('usuario2', 'contrasena', '1,1,1,',20, '1=2023-12-29T12:14:14.9581759+01:00[Europe/Madrid],2=2023-12-29T12:14:14.9581759+01:00[Europe/Madrid],')");
+					+ "VALUES ('usuario2', 'contrasena', '1,1,1,',20, '1=2023-12-29T12:14:14.9581759+01:00[Europe/Madrid],2=2023-12-29T12:14:14.9581759+01:00[Europe/Madrid]')");
 			
 			stmt.executeUpdate("INSERT INTO VENTAS (ID_CARTA, USERNAME, PRECIO, FECHA_HORA) "
-					+ "VALUES (2,'',200,'2023-12-29T12:14:14.9581759+01:00[Europe/Madrid]')");
+					+ "VALUES (2,'usuario1',200,'2023-12-29T12:14:14.9581759+01:00[Europe/Madrid]')");
 			
 			
 			
@@ -171,9 +172,18 @@ public class BasesDeDatosTest {
 	
 	@Test
 	public void testCargarVenta() {
-		Usuario usuarioExistente = new Usuario("usuario2", "contrasena", db, 20);
 		db.cargarVentas();
 		List<Venta>ventasCargadas = db.getVentas();
+		List<Venta> ventas = new ArrayList<>();
+		ventas.add(new Venta(new Carta(2),200,new Usuario("usuario1", "contrasena", null, 10),ZonedDateTime.parse("2023-12-29T12:14:14.9581759+01:00[Europe/Madrid]", DateTimeFormatter.ISO_ZONED_DATE_TIME)));
+		
+		
+		assertEquals(ventas,ventasCargadas);
+		
+	}
+	
+	public void testGuardarVentas() {
+		
 	}
 	
 
