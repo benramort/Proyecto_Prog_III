@@ -134,6 +134,7 @@ public class Carta implements Comparable<Carta>{
 
 	
 	public static Carta deLinea(String s) {
+//		System.out.println("Carta a convertir:" + s);
 		String[] tokens = s.split(";");
 		Saga saga = new Saga(tokens[3],tokens[4]); //TODO esto crea una saga por carta, se puede optimizar
 		return new Carta(Integer.parseInt(tokens[0]), tokens[1], tokens[2], saga, Integer.parseInt(tokens[5]), Integer.parseInt(tokens[6]), Integer.parseInt(tokens[7]));

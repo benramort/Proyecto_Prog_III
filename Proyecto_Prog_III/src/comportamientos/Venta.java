@@ -1,7 +1,11 @@
 package comportamientos;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.List;
 
 public class Venta {
 	
@@ -54,9 +58,10 @@ public class Venta {
 		this.usuario = usuario;
 	}
 	
-	public void venderCarta(Datos datos) {
+	public void venderCarta(Datos datos, List<Venta> ventasCondicionales) {
 //		System.out.println(""+c+"-"+u+"-"+precio);
 //		Venta v = new Venta(c, precio, u);
+		ventasCondicionales.add(this);
 		datos.getVentas().add(this);
 		datos.guardarVenta(this);
 		usuario.getCartas().replace(carta, usuario.getCartas().get(carta)-1);
@@ -68,7 +73,7 @@ public class Venta {
 		return carta.getId()+";"+precio+";"+usuario.getNombre()+";"+DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(fechaHora);
 	}
 	
-	public static Venta deLinea(Datos datos, String s) throws NumberFormatException {
+	public static Venta deLinea(Datos datos, String s) throws NumberFormatException, DateTimeParseException {
 		String[] tokens = s.split(";");
 		Carta carta = datos.getModeloCartas().get(Integer.parseInt(tokens[0])-1);
 		Usuario usuario = null;
@@ -78,7 +83,8 @@ public class Venta {
 				break;
 			}
 		}
-		return new Venta(carta, Integer.parseInt(tokens[1]), usuario, ZonedDateTime.parse(tokens[3], DateTimeFormatter.ISO_ZONED_DATE_TIME));
+		LocalDateTime localTime = LocalDateTime.parse(tokens[3], DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+		return new Venta(carta, Integer.parseInt(tokens[1]), usuario, ZonedDateTime.of(localTime, ZoneId.systemDefault()));
 	}
 	
 	@Override

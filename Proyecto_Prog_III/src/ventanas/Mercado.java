@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
@@ -27,10 +28,10 @@ public class Mercado extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	JLabel lMonedas;
-	JTable jTable;
+	private JTable jTable;
 
-	List<Venta> ventasTotales;
-	List<Venta> ventasCondicionales;
+	private List<Venta> ventasTotales;
+	private List<Venta> ventasCondicionales;
 	
 	public Mercado(JFrame ventanaAnterior, Datos datos, Usuario usuario) {
 //		Venta venta = new Venta();
@@ -170,21 +171,32 @@ public class Mercado extends JFrame {
 		
 		
 		cbSelSaga.addItemListener(new ItemListener() {
-
-
 			@Override
             public void itemStateChanged(ItemEvent e) {
                 // se comprueba si se ha seleccionado o deseleccionado
                 // un elemento de la lista
-				for (Venta v : datos.getVentas()) {
-					if (((Saga)cbSelSaga.getSelectedItem()).equals(v.getCarta().getSaga())) {
-                			ventasCondicionales.add(v);
-					}
-                }
+				if (e.getStateChange() == ItemEvent.DESELECTED) return; //Cancela el evento si se ha deseleccionado
+//				System.out.println(jTable.getRowCount());
+				ventasCondicionales.removeIf(v -> true);
+				ventasCondicionales.addAll(ventasTotales);
+//				ventasCondicionales = new ArrayList<Venta>();
+				ventasCondicionales.removeIf(v -> !v.getCarta().getSaga().equals((Saga)cbSelSaga.getSelectedItem()));
+//				for (Venta v : datos.getVentas()) {
+//					if (().equals(v.getCarta().getSaga())) {
+////                			ventasCondicionales.add(v);
+//					} else {
+//						ventasCondicionales.remove(v);
+//					}
+//                }
+//				System.out.println(ventasCondicionales.size());
+//				System.out.println(jTable.getRowCount());
 				actualizar();
+//				System.out.println("Evento");
             }
 
         });
+		
+//		cbSelSaga.addItemListener(e -> System.out.println(e.getItem()));
 		
 		
 		AbstractTableModel modeloTabla = new ModeloJTableCartas(ventasCondicionales);
@@ -208,8 +220,9 @@ public class Mercado extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) { 
 //				int fila = ;
-				Venta venta = datos.getVentas().get(jTable.rowAtPoint(e.getPoint()));
-				CompraCarta compra = new CompraCarta(venta, datos, usuario, Mercado.this);
+				Venta venta = ventasCondicionales.get(jTable.rowAtPoint(e.getPoint()));
+//				System.out.println(venta.getCarta());
+				CompraCarta compra = new CompraCarta(ventasCondicionales, venta, datos, usuario, Mercado.this);
 				System.out.println(compra);
 				compra.gestionarCompra();
 //				datos.getVentas().remove(venta);
@@ -274,8 +287,22 @@ public class Mercado extends JFrame {
 		revalidate();
 		jTable.revalidate();
 		repaint();
-		System.out.println("actualizado");
+//		System.out.println("actualizado");
 	}
+
+	public JLabel getlMonedas() {
+		return lMonedas;
+	}
+
+	public List<Venta> getVentasTotales() {
+		return ventasTotales;
+	}
+
+	public List<Venta> getVentasCondicionales() {
+		return ventasCondicionales;
+	}
+	
+	
 	
 //	public static void main(String[] args) {
 //		SwingUtilities.invokeLater(new Runnable() {

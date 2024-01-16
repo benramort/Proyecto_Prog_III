@@ -184,7 +184,7 @@ public class VentanaSeleccionVender extends JFrame{
 		}
 		
 		bAceptar.addActionListener((e) -> {Venta v = new Venta(cartaSeleccionada, (int) spPrecio.getValue(), usuario);
-			v.venderCarta(datos);
+			v.venderCarta(datos, ventanaAnterior.getVentasCondicionales());
 			ventanaAnterior.actualizar();
 			dispose();});
 		
