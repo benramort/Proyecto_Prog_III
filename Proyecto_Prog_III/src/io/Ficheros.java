@@ -66,9 +66,10 @@ public class Ficheros implements Datos {
 //		
 //	}
 	
-	Path path1 = Path.of("resources/data/"+nombreFicheroCartas+".csv");
-	String path1String = path1.toAbsolutePath().toString();
+	
 	public void cargarModeloCartas() {
+		Path path1 = Path.of("resources/data/"+nombreFicheroCartas+".csv");
+		String path1String = path1.toAbsolutePath().toString();
 		try (Scanner scanner = new Scanner(new FileInputStream(path1String))) {
 			while (scanner.hasNextLine()) {
 				String linea = scanner.nextLine();
@@ -106,9 +107,10 @@ public class Ficheros implements Datos {
 //		}
 //	}
 	
-	Path path2 = Path.of("resources/data/"+nombreFicheroUsuarios+".csv");
-	String path2String = path2.toAbsolutePath().toString();
+	
 	public void cargarUsuarios() {
+		Path path2 = Path.of("resources/data/"+nombreFicheroUsuarios+".csv");
+		String path2String = path2.toAbsolutePath().toString();
 		try (Scanner scanner = new Scanner(new FileInputStream(path2String))) {
 			usuarios.clear();
 			while (scanner.hasNextLine()) {
@@ -179,9 +181,10 @@ public class Ficheros implements Datos {
 		
 	}
 	
-	Path path3 = Path.of("resources/data/usuarios.csv");
-	String path3String = path3.toAbsolutePath().toString();
+	
 	public void guardarUsuarios() {
+		Path path3 = Path.of("resources/data/usuarios.csv");
+		String path3String = path3.toAbsolutePath().toString();
 		try {
 			PrintStream ps = new PrintStream(new FileOutputStream(path3String));
 			for (Usuario u : usuarios) {
@@ -194,9 +197,10 @@ public class Ficheros implements Datos {
 		}
 	}
 
-	Path path4 = Path.of("resources/data/"+nombreFicheroVentas+".csv");
-	String path4String = path4.toAbsolutePath().toString();
+	
 	public void cargarVentas() {
+		Path path4 = Path.of("resources/data/"+nombreFicheroVentas+".csv");
+		String path4String = path4.toAbsolutePath().toString();
 		try (Scanner scanner = new Scanner(new FileInputStream(path4String))){
 			ventas = new ArrayList<Venta>();
 			while (scanner.hasNextLine()) {
@@ -213,9 +217,10 @@ public class Ficheros implements Datos {
 		}
 	}
 	
-	Path path5 = Path.of("resources/data/ventas.csv");
-	String path5String = path5.toAbsolutePath().toString();
+	
 	public void guardarVenta(Venta v) { //Sería más óptimo guardar todo al final, pero funciona mejor así para bases de datos
+		Path path5 = Path.of("resources/data/ventas.csv");
+		String path5String = path5.toAbsolutePath().toString();
 		try (PrintStream ps = new PrintStream(new FileOutputStream(path5String, true))) {
 			ps.println(v.aLinea());
 		} catch (IOException ex) {
@@ -237,7 +242,7 @@ public class Ficheros implements Datos {
 	
 	public static void main(String[] args) {
 		Datos datos = new Ficheros();
-//		datos.cargarUsuarios();
+		datos.cargarUsuarios();
 		for (Carta u: datos.getModeloCartas()) {
 			System.out.println(u);
 		}
