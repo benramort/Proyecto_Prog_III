@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.file.Path;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,8 +66,10 @@ public class Ficheros implements Datos {
 //		
 //	}
 	
+	Path path1 = Path.of("resources/data/"+nombreFicheroCartas+".csv");
+	String path1String = path1.toAbsolutePath().toString();
 	public void cargarModeloCartas() {
-		try (Scanner scanner = new Scanner(new FileInputStream("resources/data/"+nombreFicheroCartas+".csv"))) {
+		try (Scanner scanner = new Scanner(new FileInputStream(path1String))) {
 			while (scanner.hasNextLine()) {
 				String linea = scanner.nextLine();
 				try {
@@ -103,8 +106,10 @@ public class Ficheros implements Datos {
 //		}
 //	}
 	
+	Path path2 = Path.of("resources/data/"+nombreFicheroUsuarios+".csv");
+	String path2String = path2.toAbsolutePath().toString();
 	public void cargarUsuarios() {
-		try (Scanner scanner = new Scanner(new FileInputStream("resources/data/"+nombreFicheroUsuarios+".csv"))) {
+		try (Scanner scanner = new Scanner(new FileInputStream(path2String))) {
 			usuarios.clear();
 			while (scanner.hasNextLine()) {
 				String linea = scanner.nextLine();
@@ -174,9 +179,11 @@ public class Ficheros implements Datos {
 		
 	}
 	
+	Path path3 = Path.of("resources/data/usuarios.csv");
+	String path3String = path3.toAbsolutePath().toString();
 	public void guardarUsuarios() {
 		try {
-			PrintStream ps = new PrintStream(new FileOutputStream("resources/data/usuarios.csv"));
+			PrintStream ps = new PrintStream(new FileOutputStream(path3String));
 			for (Usuario u : usuarios) {
 				String linea = u.aLinea();
 				ps.println(linea);
@@ -187,9 +194,10 @@ public class Ficheros implements Datos {
 		}
 	}
 
-	
+	Path path4 = Path.of("resources/data/"+nombreFicheroVentas+".csv");
+	String path4String = path4.toAbsolutePath().toString();
 	public void cargarVentas() {
-		try (Scanner scanner = new Scanner(new FileInputStream("resources/data/"+nombreFicheroVentas+".csv"))){
+		try (Scanner scanner = new Scanner(new FileInputStream(path4String))){
 			ventas = new ArrayList<Venta>();
 			while (scanner.hasNextLine()) {
 				try {
@@ -204,9 +212,11 @@ public class Ficheros implements Datos {
 			logger.warning("No se han podido cargar las ventas");
 		}
 	}
-
+	
+	Path path5 = Path.of("resources/data/ventas.csv");
+	String path5String = path5.toAbsolutePath().toString();
 	public void guardarVenta(Venta v) { //Sería más óptimo guardar todo al final, pero funciona mejor así para bases de datos
-		try (PrintStream ps = new PrintStream(new FileOutputStream("resources/data/ventas.csv", true))) {
+		try (PrintStream ps = new PrintStream(new FileOutputStream(path5String, true))) {
 			ps.println(v.aLinea());
 		} catch (IOException ex) {
 			logger.info("No se ha podido guardar la venta");
