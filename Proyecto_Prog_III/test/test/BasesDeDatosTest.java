@@ -43,7 +43,7 @@ public class BasesDeDatosTest {
 	
 	@Before
 	public void preparatorio() {
-		try (Connection conn = DriverManager.getConnection("jdbc:sqlite:resources/db/prueba.db")) {
+		try (Connection conn = DriverManager.getConnection("jdbc:sqlite:resources/data/prueba.db")) {
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("CREATE TABLE USUARIOS(\r\n"
 					+ "	USERNAME TEXT PRIMARY KEY NOT NULL,\r\n"
@@ -111,7 +111,7 @@ public class BasesDeDatosTest {
 	public void cierre() {
 		db.cerrarConexion();
 		
-		File myObj = new File("resources/db/prueba.db"); 
+		File myObj = new File("resources/data/prueba.db"); 
 	    if (myObj.delete()) { 
 	      System.out.println("Deleted the file: " + myObj.getName());
 	    } else {
@@ -183,9 +183,12 @@ public class BasesDeDatosTest {
 	@Test
 	public void testGuardarVenta() {
 		
+//		System.out.println(db.getModeloCartas());
+//		System.out.println(db.cargarUsuario("usuario2").getCartas());
 		Venta venta = new Venta(db.getModeloCartas().get(2),100,db.cargarUsuario("usuario2"),ZonedDateTime.parse("2023-12-29T12:14:14.9581759+01:00[Europe/Madrid]", DateTimeFormatter.ISO_ZONED_DATE_TIME));
 		db.guardarVenta(venta);
 		db.cargarVentas();
+		System.out.println(db.getVentas().get(1).getUsuario().equals(db.cargarUsuario("usuario2")));
 		assertTrue(db.getVentas().contains(venta));
 	}
 	

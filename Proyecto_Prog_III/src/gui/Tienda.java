@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
-import domain.Compra;
 import domain.Usuario;
 import interfaces.Datos;
 public class Tienda extends JFrame {

@@ -13,7 +13,7 @@ public class ConversorFicheroDB {
 	public static void main(String[] args) {
 		try {
 			Class.forName("org.sqlite.JDBC");
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:data/datos.db");
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:resources/data/datos.db");
 			Ficheros ficheros = new Ficheros();
 			conn.setAutoCommit(false);
 			Statement stmt = conn.createStatement();

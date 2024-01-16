@@ -1,11 +1,10 @@
-package domain;
+package gui;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import gui.Tienda;
-import gui.VentanaSobres;
+import domain.Usuario;
 import interfaces.Datos;
 
 public class Compra {

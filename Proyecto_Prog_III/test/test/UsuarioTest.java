@@ -35,6 +35,7 @@ public class UsuarioTest {
 		usuarioNuevo = new Usuario("nombre","contraseña",datos,30);
 		TreeMap<Carta,Integer> mapaCartas = new TreeMap<>();
 		int contador = 0;
+		System.out.println(datos.getModeloCartas());
 		for (Carta c : datos.getModeloCartas()) {
 			mapaCartas.put(c, contador++);
 		}

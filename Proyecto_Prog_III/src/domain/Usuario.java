@@ -168,6 +168,7 @@ public class Usuario {
 //			if(!this.getCartas().equals(u.getCartas())) return false;
 			return true;
 		}
+		System.out.println("No es un usuario");
 		return false;
 	}
 	

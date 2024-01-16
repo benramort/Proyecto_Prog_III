@@ -204,8 +204,10 @@ public class BasesDeDatos implements Datos {
 				Map<Carta, Integer> cartas = Usuario.cargarCartas(cartasString, this);
 				Map<Carta, ZonedDateTime> cartasSinStamina = Usuario.cargarSinStamina(sinStaminaString, this);
 				Usuario usuario = new Usuario(nom, pass, this, cartas, monedas, cartasSinStamina);
+//				usuarios.add(usuario);
 				return usuario;
 			}
+			
 			prepStmt.close();
 			rs.close();
 		} catch (SQLException e) {
