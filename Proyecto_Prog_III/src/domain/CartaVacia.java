@@ -1,5 +1,7 @@
 package domain;
 
+import java.nio.file.Path;
+
 import javax.swing.ImageIcon;
 
 public class CartaVacia extends Carta {
@@ -10,7 +12,8 @@ public class CartaVacia extends Carta {
 	
 	@Override
 	public ImageIcon getRecursoGrafico() {
-		return new ImageIcon("img/bloqueado.png");
+		Path path = Path.of("resources/img/bloqueado.png");
+		return new ImageIcon(path.toAbsolutePath().toString());
 	}
 
 }
