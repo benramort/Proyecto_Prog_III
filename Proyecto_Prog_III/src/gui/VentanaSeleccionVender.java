@@ -12,6 +12,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -89,7 +90,8 @@ public class VentanaSeleccionVender extends JFrame{
 		pPrecio.setLayout(new FlowLayout(FlowLayout.CENTER));
 		//Crear componentes
 		JScrollPane spCartas = new JScrollPane();
-		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
+		Path pathLogo = Path.of("src/res/logo chiquito.png");
+		ImageIcon logoPequeño = new ImageIcon(pathLogo.toAbsolutePath().toString());
 		JLabel lPrecioCarta = new JLabel("Precio: ");
 		JSpinner spPrecio = new JSpinner();
 		JButton bAceptar = new JButton("ACEPTAR");

@@ -9,6 +9,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.nio.file.Path;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -57,8 +58,8 @@ public class VentanaSeleccionEntrenar extends JFrame{
 		//Crear componentes
 		JScrollPane spCartas = new JScrollPane();
 
-		
-		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
+		Path pathLogo = Path.of("src/res/logo chiquito.png");
+		ImageIcon logoPequeño = new ImageIcon(pathLogo.toAbsolutePath().toString());
 		
 		//Formato componentes
 		spCartas.setViewportView(pCartas);

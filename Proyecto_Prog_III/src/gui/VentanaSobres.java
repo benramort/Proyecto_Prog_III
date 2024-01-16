@@ -3,6 +3,7 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -39,7 +40,8 @@ public class VentanaSobres extends JFrame{
 		//Crear Componentes
 		JButton bCerrar = new JButton("CERRAR");
 		
-		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
+		Path pathLogo = Path.of("src/res/logo chiquito.png");
+		ImageIcon logoPequeño = new ImageIcon(pathLogo.toAbsolutePath().toString());
 		///Añadir componentes a contenedores
 		setIconImage(logoPequeño.getImage());
 		pCerrar.add(bCerrar);
