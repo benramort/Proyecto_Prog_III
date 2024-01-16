@@ -106,37 +106,30 @@ public class Album extends JFrame {
 		JLabel lImagenMonedas = new JLabel();
 		
 		Path path1 = Path.of("src/res/idle.png");
-		new ImageIcon(path1.toAbsolutePath().toString());
 		ImageIcon imagen1 = new ImageIcon(path1.toAbsolutePath().toString());
 		ImageIcon imagenIdle = new ImageIcon(imagen1.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
 		
 		Path path2 = Path.of("src/res/ajustes.png");
-		new ImageIcon(path2.toAbsolutePath().toString());
 		ImageIcon imagen2 = new ImageIcon(path2.toAbsolutePath().toString());
 		ImageIcon imagenAjustes = new ImageIcon(imagen2.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
 		
 		Path path3 = Path.of("src/res/lupa.png");
-		new ImageIcon(path3.toAbsolutePath().toString());
 		ImageIcon imagen3 = new ImageIcon(path3.toAbsolutePath().toString());
 		ImageIcon imagenLupa = new ImageIcon(imagen3.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
 		
 		Path path4 = Path.of("src/res/mercado.png");
-		new ImageIcon(path4.toAbsolutePath().toString());
 		ImageIcon imagen4 = new ImageIcon(path4.toAbsolutePath().toString());
 		ImageIcon imagenMercado = new ImageIcon(imagen4.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
 		
 		Path path5 = Path.of("src/res/tienda.png");
-		new ImageIcon(path5.toAbsolutePath().toString());
 		ImageIcon imagen5 = new ImageIcon(path5.toAbsolutePath().toString());
 		ImageIcon imagenTienda = new ImageIcon(imagen5.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
 		
 		Path path6 = Path.of("src/res/salir.png");
-		new ImageIcon(path6.toAbsolutePath().toString());
 		ImageIcon imagen6 = new ImageIcon(path6.toAbsolutePath().toString());
 		ImageIcon imagenSalir = new ImageIcon(imagen6.getImage().getScaledInstance(70, 70, Image.SCALE_DEFAULT));
 		
 		Path path7 = Path.of("src/res/moneda.png");
-		new ImageIcon(path7.toAbsolutePath().toString());
 		ImageIcon imagen7 = new ImageIcon(path7.toAbsolutePath().toString());
 		ImageIcon imagenMoneda = new ImageIcon(imagen7.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 		
@@ -158,8 +151,7 @@ public class Album extends JFrame {
 		JComboBox<Saga> cbSelSaga = new JComboBox<Saga>(comboBoxModel);
 		JLabel lCerrarFiltros = new JLabel("X");
 		
-		Path pathLogo = Path.of("src/res//logo chiquito.png");
-		new ImageIcon(pathLogo.toAbsolutePath().toString());
+		Path pathLogo = Path.of("src/res/logo chiquito.png");
 		ImageIcon logoPequeño = new ImageIcon(pathLogo.toAbsolutePath().toString());
 		
 		//Formato componentes

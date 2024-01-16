@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -69,10 +70,12 @@ public class Tienda extends JFrame {
 		lMonedas = new JLabel(String.valueOf(usuario.getMonedas()));
 		JLabel lImagenMonedas = new JLabel();
 
-		ImageIcon imagen7 = new ImageIcon(getClass().getResource("/moneda.png"));
+		Path path7 = Path.of("src/res/moneda.png");
+		ImageIcon imagen7 = new ImageIcon(path7.toAbsolutePath().toString());
 		ImageIcon imagenMoneda = new ImageIcon(imagen7.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 
-		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
+		Path pathLogo = Path.of("src/res//logo chiquito.png");
+		ImageIcon logoPequeño = new ImageIcon(pathLogo.toAbsolutePath().toString());
 		///Formato componentes
 		lImagenMonedas.setIcon(imagenMoneda);
 		Font fuenteNombre = new Font("Arial",Font.BOLD, 32);
@@ -104,7 +107,8 @@ public class Tienda extends JFrame {
 			//Crear Componentes
 			JLabel lNombreSobre = new JLabel(nombres.get(i));
 			JLabel lPrecioSobre = new JLabel(precios.get(i));
-			ImageIcon imagenSobre = new ImageIcon(getClass().getResource("/sobre.png"));
+			Path pathSobre = Path.of("src/res/sobre.png");
+			ImageIcon imagenSobre = new ImageIcon(pathSobre.toAbsolutePath().toString());
 			ImageIcon imagenSobre2 = new ImageIcon(imagenSobre.getImage().getScaledInstance(400, 550, Image.SCALE_DEFAULT));
 			JLabel lImagenSobre = new JLabel(imagenSobre2);
 			ImageIcon imagenMoneda2 = new ImageIcon(imagen7.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));

@@ -7,6 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -123,8 +124,9 @@ public class Mercado extends JFrame {
 		
 		JButton botonVender = new JButton("VENDER");
 		
-		ImageIcon imagen1 = new ImageIcon(getClass().getResource("/moneda.png"));
-		ImageIcon imagenMoneda = new ImageIcon(imagen1.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
+		Path path = Path.of("src/res/moneda.png");
+		ImageIcon imagen = new ImageIcon(path.toAbsolutePath().toString());
+		ImageIcon imagenMoneda = new ImageIcon(imagen.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 		
 		ImageIcon logoPequeño = new ImageIcon(getClass().getResource("/logo chiquito.png"));
 		//Formato componentes
