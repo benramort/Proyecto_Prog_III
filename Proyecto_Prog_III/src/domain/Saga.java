@@ -13,7 +13,7 @@ public class Saga {
 	public Saga(String nombreInterno, String nombreVisible) { //TODO todas las cartas crean un objeto saga
 		this.nombreInterno = nombreInterno;
 		this.nombreVisible = nombreVisible;
-		Path path = Path.of("img/logo"+nombreInterno+".png");
+		Path path = Path.of("resources/img/logo"+nombreInterno+".png");
 		this.recursoGrafico = new ImageIcon(path.toAbsolutePath().toString());
 	}
 
