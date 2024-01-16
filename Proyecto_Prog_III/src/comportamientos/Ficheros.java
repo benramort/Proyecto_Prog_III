@@ -69,7 +69,7 @@ public class Ficheros implements Datos {
 					ex.printStackTrace();
 				}
 			}
-			modeloCartas.sort(null);
+			modeloCartas = Recursividad.getCartasOrdenadas(modeloCartas);
 		} catch (FileNotFoundException ex) {
 //			ex.printStackTrace();
 			logger.severe("No se han podido cargar las cartas modelo");
