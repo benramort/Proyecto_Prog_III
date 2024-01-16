@@ -13,6 +13,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import domain.Carta;
+import domain.Saga;
+import domain.Usuario;
+import domain.Venta;
+import io.Ficheros;
+
 public class FicherosTest {
 	Ficheros f;
 	private List<Venta> ventas;

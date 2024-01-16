@@ -7,6 +7,12 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import domain.Carta;
+import domain.Saga;
+import domain.Usuario;
+import domain.Venta;
+import interfaces.Datos;
+
 public class VentaTest {
 
 	Venta venta;

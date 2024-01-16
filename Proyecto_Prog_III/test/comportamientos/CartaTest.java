@@ -11,6 +11,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import domain.Carta;
+import domain.Saga;
+
 public class CartaTest {
 	
 	private Carta carta;
