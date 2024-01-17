@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
-import domain.Compra;
 import domain.Usuario;
 import interfaces.Datos;
 public class Tienda extends JFrame {
@@ -74,7 +73,7 @@ public class Tienda extends JFrame {
 		ImageIcon imagen7 = new ImageIcon(path7.toAbsolutePath().toString());
 		ImageIcon imagenMoneda = new ImageIcon(imagen7.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT));
 
-		Path pathLogo = Path.of("resources/img/logo chiquito.png");
+		Path pathLogo = Path.of("resoruces/img/logo chiquito.png");
 		ImageIcon logoPequeño = new ImageIcon(pathLogo.toAbsolutePath().toString());
 		///Formato componentes
 		lImagenMonedas.setIcon(imagenMoneda);

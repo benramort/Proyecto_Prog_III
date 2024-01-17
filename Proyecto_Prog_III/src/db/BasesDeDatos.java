@@ -7,6 +7,7 @@ import io.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -39,7 +40,9 @@ public class BasesDeDatos implements Datos {
 		configurarLogger();
 		try {
 			Class.forName("org.sqlite.JDBC");
-			conn = DriverManager.getConnection("jdbc:sqlite:resources/db/"+nombre);
+			Path path = Path.of("resources/data/"+nombre);
+			System.out.println(path.toAbsolutePath());
+			conn = DriverManager.getConnection("jdbc:sqlite:"+path.toAbsolutePath().toString());
 			logger.info("Conexión exitosa con la base de datos");
 		} catch (ClassNotFoundException ex) {
 			logger.warning("No se ha podido cargar el driver de la base de datos");
@@ -201,8 +204,10 @@ public class BasesDeDatos implements Datos {
 				Map<Carta, Integer> cartas = Usuario.cargarCartas(cartasString, this);
 				Map<Carta, ZonedDateTime> cartasSinStamina = Usuario.cargarSinStamina(sinStaminaString, this);
 				Usuario usuario = new Usuario(nom, pass, this, cartas, monedas, cartasSinStamina);
+//				usuarios.add(usuario);
 				return usuario;
 			}
+			
 			prepStmt.close();
 			rs.close();
 		} catch (SQLException e) {
@@ -219,6 +224,7 @@ public class BasesDeDatos implements Datos {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM VENTAS");
 			while (rs.next()) {
+				System.out.println("id"+rs.getInt("ID_CARTA"));
 				Carta carta = modeloCartas.get(rs.getInt("ID_CARTA")-1);
 				Usuario usuario = cargarUsuario(rs.getString("USERNAME"));
 //				for (Usuario u : usuarios) {

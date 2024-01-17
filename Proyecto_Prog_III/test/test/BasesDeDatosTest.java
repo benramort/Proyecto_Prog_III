@@ -42,7 +42,7 @@ public class BasesDeDatosTest {
 	
 	@Before
 	public void preparatorio() {
-		try (Connection conn = DriverManager.getConnection("jdbc:sqlite:data/prueba.db")) {
+		try (Connection conn = DriverManager.getConnection("jdbc:sqlite:resources/data/prueba.db")) {
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("CREATE TABLE USUARIOS(\r\n"
 					+ "	USERNAME TEXT PRIMARY KEY NOT NULL,\r\n"
@@ -50,7 +50,7 @@ public class BasesDeDatosTest {
 					+ "	CARTAS TEXT,\r\n"
 					+ "	MONEDAS INTEGER,\r\n"
 					+ "	SIN_STAMINA TEXT\r\n"
-					+ ");");
+					+ ")");
 			
 			stmt.executeUpdate("CREATE TABLE MODELO_CARTAS (\r\n"
 					+ "ID INTEGER PRIMARY KEY NOT NULL,\r\n"
@@ -68,7 +68,8 @@ public class BasesDeDatosTest {
 					+ "USERNAME TEXT NOT NULL,\r\n"
 					+ "PRECIO INTEGER,\r\n"
 					+ "FECHA_HORA TEXT NOT NULL,\r\n"
-					+ "PRIMARY KEY (USERNAME, FECHA_HORA)	FOREIGN KEY (ID_CARTA) REFERENCES MODELO_CARTAS(ID),\r\n"
+					+ "PRIMARY KEY (USERNAME, FECHA_HORA),\r\n"
+					+ "FOREIGN KEY (ID_CARTA) REFERENCES MODELO_CARTAS(ID),\r\n"
 					+ "FOREIGN KEY (USERNAME) REFERENCES USUARIOS(USERNAME)\r\n"
 					+ ");");
 			
@@ -78,14 +79,14 @@ public class BasesDeDatosTest {
 //			Saga saga1 = new Saga("saga1", "Saga 1");
 //			cartas.add(new Carta(0, "carta1", "Carta 1", saga1, 50,50,50));
 			stmt.executeUpdate("INSERT INTO MODELO_CARTAS (ID, NOMBRE_INTERNO, NOMBRE_VISIBLE, SAGA_INTERNO, SAGA_VISIBLE, MONEDAS_MINUTO, RESISTENCIA, RECUPERACION) "
-					+ "VALUES (0, 'carta1', 'Carta 1', 'saga1', 'Saga 1', 50,50,50)");
+					+ "VALUES (1, 'carta1', 'Carta 1', 'saga1', 'Saga 1', 50,50,50)");
 //			Saga saga2 = new Saga("saga2", "Saga 2");
 //			cartas.add(new Carta(1, "carta2", "Carta 2", saga2, 5,5,5));
 			stmt.executeUpdate("INSERT INTO MODELO_CARTAS (ID, NOMBRE_INTERNO, NOMBRE_VISIBLE, SAGA_INTERNO, SAGA_VISIBLE, MONEDAS_MINUTO, RESISTENCIA, RECUPERACION) "
-					+ "VALUES (1, 'carta2', 'Carta 2', 'saga2', 'Saga 2', 5,5,5)");
+					+ "VALUES (2, 'carta2', 'Carta 2', 'saga2', 'Saga 2', 5,5,5)");
 //			cartas.add(new Carta(2, "carta3", "Carta 3", saga1, 90,90,90));
 			stmt.executeUpdate("INSERT INTO MODELO_CARTAS (ID, NOMBRE_INTERNO, NOMBRE_VISIBLE, SAGA_INTERNO, SAGA_VISIBLE, MONEDAS_MINUTO, RESISTENCIA, RECUPERACION) "
-					+ "VALUES (2, 'carta3', 'Carta 3', 'saga1', 'Saga 1', 90,90,90)");
+					+ "VALUES (3, 'carta3', 'Carta 3', 'saga1', 'Saga 1', 90,90,90)");
 			
 			
 			stmt.executeUpdate("INSERT INTO USUARIOS (USERNAME, PASSWORD, CARTAS, MONEDAS, SIN_STAMINA) "
@@ -96,10 +97,8 @@ public class BasesDeDatosTest {
 			stmt.executeUpdate("INSERT INTO VENTAS (ID_CARTA, USERNAME, PRECIO, FECHA_HORA) "
 					+ "VALUES (2,'usuario1',200,'2023-12-29T12:14:14.9581759+01:00[Europe/Madrid]')");
 			
-			
-			
-			
 			stmt.close();
+			
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
@@ -111,7 +110,7 @@ public class BasesDeDatosTest {
 	public void cierre() {
 		db.cerrarConexion();
 		
-		File myObj = new File("data/prueba.db"); 
+		File myObj = new File("resources/data/prueba.db"); 
 	    if (myObj.delete()) { 
 	      System.out.println("Deleted the file: " + myObj.getName());
 	    } else {
@@ -127,9 +126,9 @@ public class BasesDeDatosTest {
 		cartas = new ArrayList<Carta>();
 		Saga saga1 = new Saga("saga1", "Saga 1");
 		Saga saga2 = new Saga("saga2", "Saga 2");
-		cartas.add(new Carta(0, "carta1", "Carta 1", saga1, 50,50,50));
-		cartas.add(new Carta(1, "carta2", "Carta 2", saga2, 5,5,5));
-		cartas.add(new Carta(2, "carta3", "Carta 3", saga1, 90,90,90));
+		cartas.add(new Carta(1, "carta1", "Carta 1", saga1, 50,50,50));
+		cartas.add(new Carta(2, "carta2", "Carta 2", saga2, 5,5,5));
+		cartas.add(new Carta(3, "carta3", "Carta 3", saga1, 90,90,90));
 		
 		assertEquals(cartas, db.getModeloCartas());
 	}
@@ -168,22 +167,31 @@ public class BasesDeDatosTest {
 		
 	}
 	
-	//TODO guardarUsuarios???
+
 	
 	@Test
-	public void testCargarVenta() {
+	public void testCargarVentas() {
 		db.cargarVentas();
 		List<Venta>ventasCargadas = db.getVentas();
 		List<Venta> ventas = new ArrayList<>();
-		ventas.add(new Venta(new Carta(2),200,new Usuario("usuario1", "contrasena", null, 10),ZonedDateTime.parse("2023-12-29T12:14:14.9581759+01:00[Europe/Madrid]", DateTimeFormatter.ISO_ZONED_DATE_TIME)));
-		
-		
+		ventas.add(new Venta(db.getModeloCartas().get(1),200,db.cargarUsuario("usuario1"),ZonedDateTime.parse("2023-12-29T12:14:14.9581759+01:00[Europe/Madrid]", DateTimeFormatter.ISO_ZONED_DATE_TIME)));
 		assertEquals(ventas,ventasCargadas);
 		
 	}
 	
-	public void testGuardarVentas() {
+	@Test
+	public void testGuardarVenta() {
 		
+//		System.out.println(db.getModeloCartas());
+//		System.out.println(db.cargarUsuario("usuario2").getCartas());
+		Venta venta = new Venta(db.getModeloCartas().get(2),100,db.cargarUsuario("usuario2"),ZonedDateTime.parse("2023-12-29T12:14:14.9581759+01:00[Europe/Madrid]", DateTimeFormatter.ISO_ZONED_DATE_TIME));
+		db.guardarVenta(venta);
+		db.cargarVentas();
+//		System.out.println(db.getVentas().get(1).getUsuario().equals(db.cargarUsuario("usuario2")));
+		System.out.println(db.getVentas());
+//		List<Venta> ventas = new ArrayList<Venta>();
+//		ventas.add(venta);
+		assertEquals(venta, db.getVentas().get(1));
 	}
 	
 
